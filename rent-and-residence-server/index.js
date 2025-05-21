@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const { ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 5000;
 
@@ -32,11 +33,102 @@ async function run() {
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
+
+    // Property Related Api's
+    const propertiesCollection = client
+      .db("wp_residence_DB")
+      .collection("properties");
+
+    const usersCollection = client.db("wp_residence_DB").collection("users");
+
+    // Get all the properties
+    app.get("/api/properties", async (req, res) => {
+      const result = await propertiesCollection.find().toArray();
+      res.send(result);
+    });
+
+    // Get an individual Property
+    app.get("/api/properties/:id", async (req, res) => {
+      const id = req.params.id;
+      // console.log(id);
+
+      const query = { _id: new ObjectId(id) };
+
+      const result = await propertiesCollection.find(query).toArray();
+
+      res.send(result);
+    });
+
+    // Get all the users
+    app.get("/api/users", async (req, res) => {
+      const result = await usersCollection.find().toArray();
+      res.send(result);
+    });
+
+    // Get an individual user
+    app.get("/api/users/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+
+      const query = { _id: new ObjectId(id) };
+
+      const result = await usersCollection.find(query).toArray();
+
+      res.send(result);
+    });
+
+    // Add a Property
+    app.post("/api/properties", async (req, res) => {
+      const property = req.body;
+
+      const result = await propertiesCollection.insertOne(property);
+
+      res.send(result);
+    });
+
+    // Update user info
+    app.patch("/api/users/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const updatedText = req.body;
+
+      const filter = { _id: new ObjectId(id) };
+
+      const options = { upsert: true };
+
+      const updatedProfile = {
+        $set: {
+          name: updatedText.name,
+          phone: updatedText.phone,
+          profileImage: updatedText.profileImage,
+        },
+      };
+
+      const result = await usersCollection.updateOne(
+        filter,
+        updatedProfile,
+        options
+      );
+
+      res.send(result);
+    });
+
+    // Delete a Property
+    app.delete("/api/properties/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const query = { _id: new ObjectId(id) };
+
+      const result = await propertiesCollection.deleteOne(query);
+
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
+
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
