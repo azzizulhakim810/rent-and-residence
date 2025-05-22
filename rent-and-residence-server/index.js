@@ -65,6 +65,12 @@ async function run() {
       res.send(result);
     });
 
+    // Get all the saved properties
+    app.get("/api/savedProperties", async (req, res) => {
+      const result = await propertiesCollection.find().toArray();
+      res.send(result);
+    });
+
     // Get an individual user
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
