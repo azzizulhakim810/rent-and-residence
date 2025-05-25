@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@theme {
+  --color-C_purple: #7854f6;
+}
+
+.nav-item:hover {
+  color: #7854f6;
+  /* border: 2px solid #7854f6; */
+  border-radius: 0;
+}

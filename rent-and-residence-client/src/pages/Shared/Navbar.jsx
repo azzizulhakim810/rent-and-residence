@@ -1,20 +1,18 @@
+import { BsCart2 } from "react-icons/bs";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const btnColor = {
-    color: "#7854f6",
-  };
-
   const navOptions = (
     <>
       <li>
         <NavLink
           to="/"
-          style={({ isActive, isPending }) => ({
-            color: isActive ? "#7854f6" : isPending ? "blue" : "black",
-            backgroundColor: isActive ? "blue" : "red",
-          })}
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : " nav-item text-[##222222] font-medium tracking-wide "
+          }
         >
           Home
         </NavLink>
@@ -23,9 +21,11 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/properties"
-          style={({ isActive, isPending }) => ({
-            color: isActive ? "red" : isPending ? "blue" : "black",
-          })}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] font-medium tracking-wide"
+          }
         >
           Properties
         </NavLink>
@@ -34,9 +34,11 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/agents"
-          style={({ isActive, isPending }) => ({
-            color: isActive ? "red" : isPending ? "blue" : "black",
-          })}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] font-medium tracking-wide"
+          }
         >
           Agents
         </NavLink>
@@ -44,9 +46,11 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/blogs"
-          style={({ isActive, isPending }) => ({
-            color: isActive ? "red" : isPending ? "blue" : "black",
-          })}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] font-medium tracking-wide"
+          }
         >
           Blogs
         </NavLink>
@@ -54,17 +58,20 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/contact"
-          style={({ isActive, isPending }) => ({
-            color: isActive ? "red" : isPending ? "blue" : "black",
-          })}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] font-medium tracking-wide"
+          }
         >
           Contact Us
         </NavLink>
       </li>
     </>
   );
+
   return (
-    <div className="navbar bg-white shadow-sm">
+    <div className="navbar bg-white shadow-sm py-6 px-20 w">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -107,40 +114,29 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link className="btn btn-ghost text-xl">daisyUI</Link>
+        <Link to="/">
+          <img
+            className="w-[80%]"
+            src="https://i.ibb.co/vxgxQBtr/beijing-logo.webp"
+            alt="logo"
+          />
+        </Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
 
-      <div className="navbar-end">
+      <div className="navbar-end gap-5">
         <div className="flex-none">
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
+            <div tabIndex={0} role="button" className="">
               <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {" "}
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />{" "}
-                </svg>
+                <BsCart2 className="text-[#222222] text-3xl " />
                 <span className="badge badge-sm indicator-item">8</span>
               </div>
             </div>
+            {/* Dropdown */}
             <div
               tabIndex={0}
               className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
@@ -171,7 +167,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Link className="btn">Button</Link>
+        <Link className="btn bg-C_purple">Add Housing</Link>
       </div>
     </div>
   );
