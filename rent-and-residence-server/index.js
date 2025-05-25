@@ -12,7 +12,6 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Setup
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@atlascluster.sztfigr.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -65,16 +64,10 @@ async function run() {
       res.send(result);
     });
 
-    // Get all the saved properties
-    app.get("/api/savedProperties", async (req, res) => {
-      const result = await propertiesCollection.find().toArray();
-      res.send(result);
-    });
-
     // Get an individual user
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
+      // console.log(id);
 
       const query = { _id: new ObjectId(id) };
 
@@ -82,6 +75,12 @@ async function run() {
 
       res.send(result);
     });
+
+    // Get all the saved properties
+    /* app.get("/api/savedProperties", async (req, res) => {
+      const result = await propertiesCollection.find().toArray();
+      res.send(result);
+    }); */
 
     // Add a Property
     app.post("/api/properties", async (req, res) => {
@@ -92,7 +91,38 @@ async function run() {
       res.send(result);
     });
 
-    // Update user info
+    // Update a property Info
+    app.patch("/api/properties/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const updatedText = req.body;
+
+      const filter = { _id: new ObjectId(id) };
+
+      const options = { upsert: true };
+
+      const updatedProperty = {
+        $set: {
+          title: updatedText.title,
+          description: updatedText.description,
+          price: updatedText.price,
+          listingType: updatedText.listingType,
+          images: updatedText.images,
+          status: updatedText.status,
+          isFeatured: updatedText.isFeatured,
+        },
+      };
+
+      const result = await propertiesCollection.updateOne(
+        filter,
+        updatedProperty,
+        options
+      );
+
+      res.send(result);
+    });
+
+    // Update an user Info
     app.patch("/api/users/:id", async (req, res) => {
       const id = req.params.id;
 
@@ -126,6 +156,17 @@ async function run() {
       const query = { _id: new ObjectId(id) };
 
       const result = await propertiesCollection.deleteOne(query);
+
+      res.send(result);
+    });
+
+    // Delete an User
+    app.delete("/api/user/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const query = { _id: new ObjectId(id) };
+
+      const result = await usersCollection.deleteOne(query);
 
       res.send(result);
     });
