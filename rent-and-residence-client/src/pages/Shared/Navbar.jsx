@@ -1,4 +1,5 @@
 import { BsCart2 } from "react-icons/bs";
+import { FaPhoneAlt } from "react-icons/fa";
 import { RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
@@ -43,6 +44,7 @@ const Navbar = () => {
           Agents
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/blogs"
@@ -55,6 +57,7 @@ const Navbar = () => {
           Blogs
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/contact"
@@ -73,9 +76,85 @@ const Navbar = () => {
   const navOptionsMobile = (
     <>
       <li>
-        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded">
-          Add Housing
+        <Link to="tel:+34 912 123 678">
+          <span className="flex items-center bg-transparent hover:bg-transparent text-white hover:text-C_purple text-lg gap-3 pt-1 font-semibold">
+            <FaPhoneAlt />
+
+            <p>+34 912 123 678</p>
+          </span>
         </Link>
+      </li>
+
+      {/* Add Listing Button  */}
+      <li>
+        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded border-0 py-6 text-[18px] my-6">
+          Add Listing
+        </Link>
+      </li>
+      {/* Add Nav Item  */}
+      <li className="py-4 border-gray-600 border-b-1">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white hover:text-C_purple  "
+              : " nav-item text-white "
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+
+      <li className="py-4  border-gray-600 border-b-1">
+        <NavLink
+          to="/properties"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white hover:text-C_purple "
+              : " nav-item text-white  "
+          }
+        >
+          Properties
+        </NavLink>
+      </li>
+
+      <li className="py-4  border-gray-600 border-b-1">
+        <NavLink
+          to="/agents"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white hover:text-C_purple "
+              : " nav-item text-white "
+          }
+        >
+          Agents
+        </NavLink>
+      </li>
+
+      <li className="py-4  border-gray-600 border-b-1">
+        <NavLink
+          to="/blogs"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white hover:text-C_purple "
+              : " nav-item text-white  "
+          }
+        >
+          Blogs
+        </NavLink>
+      </li>
+
+      <li className="py-4  border-gray-600 border-b-1">
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white hover:text-C_purple "
+              : " nav-item text-white "
+          }
+        >
+          Contact Us
+        </NavLink>
       </li>
     </>
   );
@@ -102,7 +181,7 @@ const Navbar = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-black text-white min-h-full w-80 p-4">
+            <ul className="menu bg-C_gray hover:bg-C_gray text-white min-h-full w-80 p-6  hover:text-C_purple text-[17px] font-normal leading-6 me-5">
               {/* Sidebar content here */}
               {navOptionsMobile}
             </ul>
