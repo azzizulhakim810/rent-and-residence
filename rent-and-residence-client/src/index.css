@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @theme {
   --color-C_purple: #7854f6;
+  --color-C_gray: #222222;
+  --color-C_blue: #101e2c;
 }
 
 @plugin "daisyui" {

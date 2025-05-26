@@ -1,7 +1,7 @@
 import { BsCart2 } from "react-icons/bs";
+import { RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
-
 const Navbar = () => {
   const navOptions = (
     <>
@@ -70,58 +70,72 @@ const Navbar = () => {
     </>
   );
 
+  const navOptionsMobile = (
+    <>
+      <li>
+        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded">
+          Add Housing
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <div className=" bg-white border-b-gray-200 border-b-2">
-      <div className="navbar py-6 w-10/12 mx-auto ">
+    <div id="top" className=" bg-white border-b-gray-200 border-b-2">
+      <div className="navbar py-6 lg:w-10/12 w-11/12 mx-auto ">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          <div className="flex-none lg:hidden">
+            <label
+              htmlFor="my-drawer-3"
+              aria-label="open sidebar"
+              className="btn bg-transparent border-none p-2 text-2xl"
             >
-              {navOptions}
+              <RiMenu2Line />
+            </label>
+          </div>
+          {/* Sidebar - Mobile  */}
+          <div className="drawer-side">
+            <label
+              htmlFor="my-drawer-3"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu bg-black text-white min-h-full w-80 p-4">
+              {/* Sidebar content here */}
+              {navOptionsMobile}
             </ul>
           </div>
 
-          {/* Logo  */}
+          {/* Logo-Desktop  */}
           <Link to="/">
             <img
-              className="w-[90%]"
+              className="lg:w-[90%] w-full hidden lg:flex"
               src="https://i.ibb.co/vxgxQBtr/beijing-logo.webp"
               alt="logo"
             />
           </Link>
         </div>
 
-        {/* Nav Items  */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-10 text-[15px] gap-2">
+        {/* Nav Items - Desktop | Logo - Mobile */}
+        <div className="navbar-center  ">
+          <ul className="menu menu-horizontal px-10 text-[15px] gap-2 hidden lg:flex">
             {navOptions}
           </ul>
+          <Link to="/">
+            <img
+              className="w-[90%] lg:hidden"
+              src="https://i.ibb.co/vxgxQBtr/beijing-logo.webp"
+              alt="logo"
+            />
+          </Link>
         </div>
 
         {/* Cart + Profile + Add Housing Btn  */}
-        <div className="navbar-end gap-4">
+        <div className="navbar-end flex items-center content-center gap-4">
           {/* Number  */}
-          <div>
+          <div className="lg:flex hidden">
             <Link mailto="+88012345678">
               <p className="nav-item text-[15px] font-semibold">
                 +88 0124 56789
@@ -131,11 +145,11 @@ const Navbar = () => {
 
           {/* Cart  */}
           <div className="flex-none">
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end mt-2">
               {/* Cart  */}
               <div tabIndex={0} role="button" className="">
                 <div className="indicator">
-                  <BsCart2 className="text-[#222222] text-3xl " />
+                  <BsCart2 className="text-[#222222] text-2xl" />
                   <span className="badge badge-sm indicator-item">8</span>
                 </div>
               </div>
@@ -171,8 +185,8 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Btn  */}
-          <Link className="btn bg-C_purple text-white hover:bg-[#40384B]">
+          {/* Btn - Desktop  */}
+          <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded hidden lg:flex">
             Add Housing
           </Link>
         </div>
