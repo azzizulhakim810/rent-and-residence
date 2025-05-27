@@ -1,8 +1,11 @@
-import { BsCart2 } from "react-icons/bs";
+import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
-import { RiMenu2Line } from "react-icons/ri";
+import { GoHome } from "react-icons/go";
+import { PiNewspaperLight } from "react-icons/pi";
+import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const navOptions = (
     <>
@@ -76,13 +79,13 @@ const Navbar = () => {
   const navOptionsMobile = (
     <>
       <li>
-        <Link to="tel:+34 912 123 678">
-          <span className="flex items-center bg-transparent hover:bg-transparent text-white hover:text-C_purple text-lg gap-3 pt-1 font-semibold">
+        <div className="  bg-transparent  text-white hover:text-C_purple text-lg  pt-1 font-semibold">
+          <Link to="tel:+34 912 123 678" className="flex items-center gap-3">
             <FaPhoneAlt />
 
             <p>+34 912 123 678</p>
-          </span>
-        </Link>
+          </Link>
+        </div>
       </li>
 
       {/* Add Listing Button  */}
@@ -97,10 +100,11 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple  "
-              : " nav-item text-white "
+              ? " text-white hover:text-C_purple gap-3"
+              : " nav-item text-white gap-3"
           }
         >
+          <GoHome className="text-xl" />
           Home
         </NavLink>
       </li>
@@ -110,10 +114,11 @@ const Navbar = () => {
           to="/properties"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple "
-              : " nav-item text-white  "
+              ? " text-white hover:text-C_purple gap-3"
+              : " nav-item text-white gap-3"
           }
         >
+          <BsBuilding className="text-xl" />
           Properties
         </NavLink>
       </li>
@@ -123,10 +128,11 @@ const Navbar = () => {
           to="/agents"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple "
-              : " nav-item text-white "
+              ? " text-white hover:text-C_purple  gap-3"
+              : " nav-item text-white  gap-3"
           }
         >
+          <BsPerson className="text-xl" />
           Agents
         </NavLink>
       </li>
@@ -136,10 +142,11 @@ const Navbar = () => {
           to="/blogs"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple "
-              : " nav-item text-white  "
+              ? " text-white hover:text-C_purple  gap-3"
+              : " nav-item text-white  gap-3"
           }
         >
+          <PiNewspaperLight className="text-xl" />
           Blogs
         </NavLink>
       </li>
@@ -149,10 +156,11 @@ const Navbar = () => {
           to="/contact"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple "
-              : " nav-item text-white "
+              ? " text-white hover:text-C_purple  gap-3"
+              : " nav-item text-white  gap-3"
           }
         >
+          <RiContactsLine className="text-xl" />
           Contact Us
         </NavLink>
       </li>
@@ -199,7 +207,7 @@ const Navbar = () => {
 
         {/* Nav Items - Desktop | Logo - Mobile */}
         <div className="navbar-center  ">
-          <ul className="menu menu-horizontal px-10 text-[15px] gap-2 hidden lg:flex">
+          <ul className="menu menu-horizontal px-10 text-[16px] gap-2 hidden lg:flex">
             {navOptions}
           </ul>
           <Link to="/">
@@ -216,7 +224,7 @@ const Navbar = () => {
           {/* Number  */}
           <div className="lg:flex hidden">
             <Link mailto="+88012345678">
-              <p className="nav-item text-[15px] font-semibold">
+              <p className="nav-item text-[16px] font-semibold">
                 +88 0124 56789
               </p>
             </Link>
@@ -265,7 +273,7 @@ const Navbar = () => {
           </div>
 
           {/* Btn - Desktop  */}
-          <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded hidden lg:flex">
+          <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-lg hidden lg:flex">
             Add Housing
           </Link>
         </div>
