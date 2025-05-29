@@ -1,7 +1,7 @@
 const Agents = () => {
   return (
     <div>
-      <h1>Agents</h1>
+      <h1>Our Agents</h1>
     </div>
   );
 };
