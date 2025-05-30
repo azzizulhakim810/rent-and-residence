@@ -3,6 +3,10 @@
   --color-C_purple: #7854f6;
   --color-C_gray: #222222;
   --color-C_blue: #101e2c;
+  --color-title_color: #222;
+  --color-paragraph_color: #9b9b9b;
+  --color-bg_color: #f0f5ff;
+  --color-footer_color: #f0f5ff;
 }
 
 @plugin "daisyui" {
