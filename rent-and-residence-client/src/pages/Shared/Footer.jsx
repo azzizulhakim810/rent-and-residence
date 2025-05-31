@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div className="bg-[#F7F4FB] text-C_gray py-5">
+      <div className=" bg-footer_color text-C_gray py-5">
         <footer className="footer sm:footer-horizontal py-10 w-10/12 mx-auto">
           <nav>
             <h6 className=" font-semibold text-lg text-C_gray">About Us</h6>

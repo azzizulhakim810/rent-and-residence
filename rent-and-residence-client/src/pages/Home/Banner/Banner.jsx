@@ -39,11 +39,11 @@ const Banner = () => {
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
       <div className=" col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left  py-16">
         <div className="lg:text-left text-center">
-          <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-18 leading-13 font-semibold lg:-me-14">
+          <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-16 leading-13 font-[700] lg:-me-15 font-Nunito">
             Find your next <br />
             Perfect home in Madrid
           </h1>
-          <p className="py-6 font-normal text-xl text-[#9b9b9b]">
+          <p className=" py-6 font-Nunito_Sans font-normal text-xl text-[#9b9b9b]">
             Through our proprietary platform, WpResidence is changing how agents
             and clients navigate the process of finding or selling a home.
           </p>
