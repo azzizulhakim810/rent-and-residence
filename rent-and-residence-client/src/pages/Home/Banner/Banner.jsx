@@ -37,20 +37,22 @@ const Banner = () => {
 
   return (
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
-      <div className=" col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left text-center py-16">
-        <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-18 leading-13 font-semibold lg:-me-14">
-          Find your next <br />
-          Perfect home in Madrid
-        </h1>
-        <p className="py-6 font-normal text-xl text-[#9b9b9b]">
-          Through our proprietary platform, WpResidence is changing how agents
-          and clients navigate the process of finding or selling a home.
-        </p>
+      <div className=" col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left  py-16">
+        <div className="lg:text-left text-center">
+          <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-18 leading-13 font-semibold lg:-me-14">
+            Find your next <br />
+            Perfect home in Madrid
+          </h1>
+          <p className="py-6 font-normal text-xl text-[#9b9b9b]">
+            Through our proprietary platform, WpResidence is changing how agents
+            and clients navigate the process of finding or selling a home.
+          </p>
+        </div>
 
         {/* Search Field  */}
-        <div className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex block items-center justify-around lg:gap-5 gap-12 -me-75 z-10">
+        <div className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10">
           {/* Location  */}
-          <div className="w-1/4  ">
+          <div className="lg:w-1/4 w-full ">
             <label
               htmlFor="division"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
@@ -73,7 +75,7 @@ const Banner = () => {
           </div>
 
           {/* Property Type  */}
-          <div className="w-1/4 ">
+          <div className="lg:w-1/4 w-full">
             <label
               htmlFor="propertyType"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
@@ -96,7 +98,7 @@ const Banner = () => {
           </div>
 
           {/* Transactional Type  */}
-          <div className="w-1/4 ">
+          <div className="lg:w-1/4 w-full ">
             <label
               htmlFor="transactionType"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
@@ -118,8 +120,9 @@ const Banner = () => {
             </select>
           </div>
 
-          <div className="w-1/4 ">
-            <button className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 py-8 gap-3">
+          {/* Search Button  */}
+          <div className="lg:w-1/4 w-full">
+            <button className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3">
               <FiSearch />
               <p>Search</p>
             </button>

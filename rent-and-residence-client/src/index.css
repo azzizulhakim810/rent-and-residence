@@ -17,4 +17,11 @@
   color: #7854f6;
   /* border: 2px solid #7854f6; */
   border-radius: 0;
+  background-color: transparent !important;
+}
+.nav-item:target {
+  color: #7854f6;
+  /* border: 2px solid #7854f6; */
+  border-radius: 0;
+  background-color: transparent !important;
 }

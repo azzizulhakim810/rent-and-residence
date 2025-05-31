@@ -14,8 +14,8 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
-              : " nav-item text-[##222222] font-medium tracking-wide "
+              ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
           }
         >
           Home
@@ -27,8 +27,8 @@ const Navbar = () => {
           to="/properties"
           className={({ isActive }) =>
             isActive
-              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
-              : "nav-item  text-[#222222] font-medium tracking-wide"
+              ? "text-[#7854f6] font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
           Properties
@@ -40,8 +40,8 @@ const Navbar = () => {
           to="/agents"
           className={({ isActive }) =>
             isActive
-              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
-              : "nav-item  text-[#222222] font-medium tracking-wide"
+              ? "text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
           Agents
@@ -53,8 +53,8 @@ const Navbar = () => {
           to="/blogs"
           className={({ isActive }) =>
             isActive
-              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
-              : "nav-item  text-[#222222] font-medium tracking-wide"
+              ? "text-[#7854f6] hover:bg-transparent font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
           Blogs
@@ -66,8 +66,8 @@ const Navbar = () => {
           to="/contact"
           className={({ isActive }) =>
             isActive
-              ? "text-[#7854f6] font-medium tracking-wide border-t-[#7854f6] rounded-none"
-              : "nav-item  text-[#222222] font-medium tracking-wide"
+              ? "text-[#7854f6] hover:bg-transparent font-medium tracking-wide border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
           Contact Us
@@ -79,8 +79,11 @@ const Navbar = () => {
   const navOptionsMobile = (
     <>
       <li>
-        <div className="  bg-transparent  text-white hover:text-C_purple text-lg  pt-1 font-semibold">
-          <Link to="tel:+34 912 123 678" className="flex items-center gap-3">
+        <div className=" text-white bg-transparent text-lg pt-1 font-semibold">
+          <Link
+            to="tel:+34 912 123 678"
+            className="flex items-center gap-3 hover:text-C_purple "
+          >
             <FaPhoneAlt />
 
             <p>+34 912 123 678</p>
@@ -90,17 +93,18 @@ const Navbar = () => {
 
       {/* Add Listing Button  */}
       <li>
-        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded border-0 py-6 text-[18px] my-6">
+        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded border-0 py-5 text-[16px] my-6 shadow-none">
           Add Listing
         </Link>
       </li>
+
       {/* Add Nav Item  */}
       <li className="py-4 border-gray-600 border-b-1">
         <NavLink
           to="/"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple gap-3"
+              ? " text-C_purple hover:text-C_purple gap-3"
               : " nav-item text-white gap-3"
           }
         >
@@ -114,7 +118,7 @@ const Navbar = () => {
           to="/properties"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple gap-3"
+              ? " text-C_purple hover:text-C_purple gap-3"
               : " nav-item text-white gap-3"
           }
         >
@@ -128,7 +132,7 @@ const Navbar = () => {
           to="/agents"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple  gap-3"
+              ? " text-C_purple hover:text-C_purple  gap-3"
               : " nav-item text-white  gap-3"
           }
         >
@@ -142,7 +146,7 @@ const Navbar = () => {
           to="/blogs"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple  gap-3"
+              ? " text-C_purple hover:text-C_purple  gap-3"
               : " nav-item text-white  gap-3"
           }
         >
@@ -156,7 +160,7 @@ const Navbar = () => {
           to="/contact"
           className={({ isActive }) =>
             isActive
-              ? " text-white hover:text-C_purple  gap-3"
+              ? " text-C_purple hover:text-C_purple  gap-3"
               : " nav-item text-white  gap-3"
           }
         >
@@ -168,7 +172,7 @@ const Navbar = () => {
   );
 
   return (
-    <div id="top" className=" bg-white border-b-gray-200 border-b-2">
+    <div id="top" className=" bg-white ">
       <div className="navbar py-6 lg:w-10/12 w-11/12 mx-auto ">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
@@ -183,7 +187,7 @@ const Navbar = () => {
             </label>
           </div>
           {/* Sidebar - Mobile  */}
-          <div className="drawer-side">
+          <div className="drawer-side z-11">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"
@@ -207,7 +211,7 @@ const Navbar = () => {
 
         {/* Nav Items - Desktop | Logo - Mobile */}
         <div className="navbar-center  ">
-          <ul className="menu menu-horizontal px-10 text-[16px] gap-2 hidden lg:flex">
+          <ul className="menu menu-horizontal px-10 text-[16px]  gap-2 hidden lg:flex">
             {navOptions}
           </ul>
           <Link to="/">
