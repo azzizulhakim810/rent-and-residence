@@ -6,7 +6,8 @@
 @theme {
   /* Custom Colors  */
   --color-C_purple: #7854f6;
-  --color-C_gray: #222222;
+  --color-C_DarkGray: #222222;
+  --color-C_LightGray: #696969;
   --color-C_blue: #101e2c;
   --color-title_color: #222;
   --color-paragraph_color: #9b9b9b;
