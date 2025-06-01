@@ -56,7 +56,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div className="shadow-[0px_0px_150px_rgba(119,84,246,0.2)] flex flex-col justify-center items-center gap-5 p-6 ">
+        <div className="shadow-[0px_0px_150px_rgba(119,84,246,0.2)] flex flex-col justify-center items-center gap-5 p-6 px-20 ">
           <figure className="p-5 text-4xl bg-[#FDE2CD] rounded-full w-20 h-20">
             <TbGavel className="" />
           </figure>
@@ -64,7 +64,9 @@ const Services = () => {
             <h2 className=" font-Nunito font-[600] text-[20px]">
               Legal services
             </h2>
-            <p>Expert legal help for all related property items</p>
+            <p className=" font-Nunito_Sans font-[500] text-[18px]">
+              Expert legal help for all related property items
+            </p>
             <div className="">
               <button className="btn ">Learn more</button>
             </div>
