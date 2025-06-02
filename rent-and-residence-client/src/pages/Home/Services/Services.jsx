@@ -4,12 +4,13 @@ import { TbGavel } from "react-icons/tb";
 
 const Services = () => {
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-1 rotate-270 py-20 text-center flex  items-center gap-5">
-        <div className="w-[70px] h-[40px] bg-C_purple text-white">
+    <div className="grid grid-cols-12  py-28">
+      <div className="col-span-1  -ms-15  h-[15vw] rotate-270 text-center   flex justify-center items-center gap-5">
+        {/*  <div className="w-[50px] h-[14px] bg-C_purple text-white">
           <hr />
-        </div>
-        <h1 className="text-lg font-Nunito_Sans tracking-wider uppercase text-title_color">
+        </div> */}
+        <span className="relative w-[50px] inline-block before:absolute h-[3px] before:-inset-0  before:block  before:bg-C_purple "></span>
+        <h1 className="text-[13px] font-[600] font-Nunito_Sans tracking-[5px] uppercase text-title_color">
           Services
         </h1>
       </div>
