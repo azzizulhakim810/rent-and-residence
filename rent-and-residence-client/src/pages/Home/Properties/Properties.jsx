@@ -1,7 +1,3 @@
-import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
-import { IoHomeOutline } from "react-icons/io5";
-import { PiGavelLight } from "react-icons/pi";
-
 const Properties = () => {
   return (
     <div className="grid grid-cols-12 lg:py-28 py-20">
@@ -19,7 +15,7 @@ const Properties = () => {
         </h1>
 
         <div className="flex lg:flex-row flex-col justify-start gap-6 py-5">
-          <div className="shadow-[0px_0px_30px_rgba(100,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl ">
+          {/* <div className="shadow-[0px_0px_30px_rgba(100,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl ">
             <figure className="p-5 text-4xl bg-[#E0F0FD] text-[#959AF4] rounded-full w-20 h-20">
               <HiOutlineClipboardDocumentList />
             </figure>
@@ -72,6 +68,75 @@ const Properties = () => {
                 <button className="btn border-b-2 border-b-C_purple hover:bg-transparent text-C_purple hover:text-C_purple rounded text-[16px] px-5 py-5">
                   Learn more
                 </button>
+              </div>
+            </div>
+          </div> */}
+          <div className="card bg-base-100 w-96 shadow-sm">
+            <figure className="bg-[url(https://i.ibb.co/q33Q7qm4/pexels-fotoaibe-813692.jpg)] h-full w-full bg-cover bg-no-repeat  relative">
+              {/* <span className="indicator-item indicator-top indicator-end badge"></span> */}
+              <span className="bg-C_purple text-white rounded  px-6  py-1 absolute top-0 right-0 mr-3 mt-3">
+                Hello
+              </span>
+            </figure>
+
+            <div className="card-body">
+              <h2 className="card-title">
+                Card Title
+                <div className="badge badge-secondary">NEW</div>
+              </h2>
+              <p>
+                A card component has a figure, a body part, and inside body
+                there are title and actions parts
+              </p>
+              <div className="card-actions justify-end">
+                <div className="badge badge-outline">Fashion</div>
+                <div className="badge badge-outline">Products</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card bg-base-100 w-96 shadow-sm">
+            <figure>
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">
+                Card Title
+                <div className="badge badge-secondary">NEW</div>
+              </h2>
+              <p>
+                A card component has a figure, a body part, and inside body
+                there are title and actions parts
+              </p>
+              <div className="card-actions justify-end">
+                <div className="badge badge-outline">Fashion</div>
+                <div className="badge badge-outline">Products</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card bg-base-100 w-96 shadow-sm">
+            <figure>
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Shoes"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">
+                Card Title
+                <div className="badge badge-secondary">NEW</div>
+              </h2>
+              <p>
+                A card component has a figure, a body part, and inside body
+                there are title and actions parts
+              </p>
+              <div className="card-actions justify-end">
+                <div className="badge badge-outline">Fashion</div>
+                <div className="badge badge-outline">Products</div>
               </div>
             </div>
           </div>
