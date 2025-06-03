@@ -93,7 +93,7 @@ const Navbar = () => {
 
       {/* Add Listing Button  */}
       <li>
-        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded border-0 py-5 text-[16px] my-6 shadow-none">
+        <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md border-0 py-5 text-[16px] my-6 shadow-none">
           Add Listing
         </Link>
       </li>
@@ -277,7 +277,7 @@ const Navbar = () => {
           </div>
 
           {/* Btn - Desktop  */}
-          <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-lg hidden lg:flex">
+          <Link className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex">
             Add Housing
           </Link>
         </div>

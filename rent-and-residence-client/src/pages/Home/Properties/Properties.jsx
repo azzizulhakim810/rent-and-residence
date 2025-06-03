@@ -4,13 +4,14 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 const Properties = () => {
   return (
-    <div className="grid grid-cols-12 lg:py-8 py-20">
+    <div className="grid grid-cols-12 lg:py-8 py-20 relative">
       {/* Section Title Desktop | Hidden on Mobile */}
-      <div className="col-span-1 lg:flex hidden -ms-15  h-[15vw] rotate-270 text-center justify-center items-center gap-5">
-        <span className="relative w-[50px] inline-block before:absolute h-[3px] before:-inset-0  before:block  before:bg-C_purple "></span>
+      <div className="col-span-1 lg:flex hidden -ms-15 h-[15vw] rotate-270 text-center justify-center items-center gap-5 relative ">
+        <span className="relative w-[50px] inline-block before:absolute h-[3px] before:-inset-0  before:block before:bg-C_purple "></span>
         <h1 className="text-[13px] font-[600] font-Nunito_Sans tracking-[5px] uppercase text-title_color">
           PROPERTIES
         </h1>
@@ -536,6 +537,10 @@ const Properties = () => {
             </div>
           </div>
         </div>
+
+        <Link className="btn w-1/6 mx-auto my-5 bg-C_purple text-white hover:bg-transparent hover:border-2 hover:border-C_purple hover:text-C_purple border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-5">
+          load more listings
+        </Link>
       </div>
     </div>
   );
