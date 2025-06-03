@@ -1,11 +1,3 @@
-import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus, FaRegHeart } from "react-icons/fa6";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtub } from "react-icons/pi";
-import { VscHome } from "react-icons/vsc";
-import { Link } from "react-router-dom";
-
 const Featured = () => {
   return (
     <div className="grid grid-cols-12 lg:py-8 py-20 relative">
@@ -21,6 +13,186 @@ const Featured = () => {
         <h1 className="lg:w-5/12 w-full py-6 text-[30px] font-[600] font-Nunito text-title_color lg:text-left text-center">
           Explore the featured properties in our list to find your perfect home
         </h1>
+
+        {/* Carousel  */}
+        <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
+          {/* <div className=" bg-white w-full ">
+           
+            <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+              <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                5.500.000 €
+              </span>
+            </figure>
+
+            <div className=" py-4 ">
+              <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                Villa with Amazing View
+              </button>
+            </div>
+          </div>
+
+          <div className=" bg-white w-full ">
+           
+            <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+              <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                5.500.000 €
+              </span>
+            </figure>
+
+            <div className=" py-4 ">
+              <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                Villa with Amazing View
+              </button>
+            </div>
+          </div>
+
+          <div className=" bg-white w-full ">
+            
+            <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+              <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                5.500.000 €
+              </span>
+            </figure>
+
+            <div className=" py-4 ">
+              <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                Villa with Amazing View
+              </button>
+            </div>
+          </div>
+
+          <div className=" bg-white w-full ">
+            
+            <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+              <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                5.500.000 €
+              </span>
+            </figure>
+
+            <div className=" py-4 ">
+              <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                Villa with Amazing View
+              </button>
+            </div>
+          </div> */}
+
+          <div className="carousel w-full">
+            <div
+              id="slide1"
+              className="carousel-item relative w-full flex gap-5"
+            >
+              <div className=" bg-white w-full ">
+                <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+                  <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                    5.500.000 €
+                  </span>
+                </figure>
+
+                <div className=" py-4 ">
+                  <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                    Villa with Amazing View
+                  </button>
+                </div>
+              </div>
+
+              <div className=" bg-white w-full ">
+                <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+                  <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                    5.500.000 €
+                  </span>
+                </figure>
+
+                <div className=" py-4 ">
+                  <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                    Villa with Amazing View
+                  </button>
+                </div>
+              </div>
+
+              <div className=" bg-white w-full ">
+                <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+                  <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                    5.500.000 €
+                  </span>
+                </figure>
+
+                <div className=" py-4 ">
+                  <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                    Villa with Amazing View
+                  </button>
+                </div>
+              </div>
+
+              <div className=" bg-white w-full ">
+                <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
+                  <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
+                    5.500.000 €
+                  </span>
+                </figure>
+
+                <div className=" py-4 ">
+                  <button className="btn p-0 bg-transparent hover:shadow-none border-none font-Nunito font-[700] text-[18px] text-C_DarkGray hover:text-C_purple">
+                    Villa with Amazing View
+                  </button>
+                </div>
+              </div>
+
+              <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <a href="#slide4" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide2" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
+            </div>
+
+            <div id="slide2" className="carousel-item relative w-full">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+                className="w-full"
+              />
+              <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <a href="#slide1" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide3" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
+            </div>
+
+            <div id="slide3" className="carousel-item relative w-full">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+                className="w-full"
+              />
+              <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <a href="#slide2" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide4" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
+            </div>
+
+            <div id="slide4" className="carousel-item relative w-full">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+                className="w-full"
+              />
+              <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <a href="#slide3" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide1" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
