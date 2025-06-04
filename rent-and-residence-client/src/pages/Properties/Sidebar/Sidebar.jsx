@@ -89,6 +89,49 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
+
+      <div className="shadow-sm  p-8 w-full rounded-md bg-white">
+        <label
+          htmlFor="propertyType"
+          className="block text-[16px] font-[700] font-Nunito tracking-wider text-C_DarkGray mb-5"
+        >
+          Latest Listings
+        </label>
+
+        <nav className="flex flex-col gap-2">
+          <div className="flex justify-between items-center gap-3 pt-2">
+            <img
+              className="w-[40%] rounded"
+              src="https://i.ibb.co/BHpKRtMm/pexels-fotoaibe-1743229.jpg"
+              alt=""
+            />
+            <span className="w-full flex flex-col gap-2">
+              <h4 className="font-Nunito font-[700] text-C_gray text-[16px] leading-6">
+                Villa with Amazing View
+              </h4>
+              <p className=" text-C_purple font-Nunito_Sans font-[600] text-[16px] leading-6">
+                5.500.000 €
+              </p>
+            </span>
+          </div>
+
+          <div className="flex justify-between items-center gap-3 mt-3">
+            <img
+              className="w-[40%] rounded"
+              src="https://i.ibb.co/9H0hN0Hh/pexels-fotoaibe-1643383.jpg"
+              alt=""
+            />
+            <span className="w-full flex flex-col gap-2">
+              <h4 className="font-Nunito font-[700] text-C_gray text-[16px] leading-6">
+                Townhouse for Rent
+              </h4>
+              <p className=" text-C_purple font-Nunito_Sans font-[600] text-[16px] leading-6">
+                2.100 € / month
+              </p>
+            </span>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 };
