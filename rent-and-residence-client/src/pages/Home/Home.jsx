@@ -3,6 +3,7 @@ import Featured from "./Featured/Featured";
 import Location from "./Location/Location";
 import Properties from "./Properties/Properties";
 import Services from "./Services/Services";
+import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
 
       <div className="w-10/12 mx-auto ">
         <Location />
+        <Testimonials />
       </div>
     </div>
   );

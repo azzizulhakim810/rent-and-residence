@@ -87,7 +87,7 @@ const Location = () => {
 
           <div className="lg:col-span-4 col-span-6 w-full shadow-md">
             {/* Image  */}
-            <figure className="bg-[url(https://i.ibb.co/7dk9Q5sZ/house-4-1.webp)] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-lg">
+            <figure className="bg-[url(https://i.ibb.co/spFLSFLq/house6-1.webp)] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-lg">
               <div className="absolute top-0 left-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
                 <h1 className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
                   Castellana
