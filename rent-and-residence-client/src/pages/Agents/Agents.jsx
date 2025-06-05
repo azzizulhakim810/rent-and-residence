@@ -47,16 +47,16 @@ const Agents = () => {
 
                     {/* Social Icons  */}
                     <div className="bg-gray-500 mx-auto flex justify-center align-middle items-center gap-4 ">
-                      <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaFacebookF />
                       </button>
-                      <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaLinkedinIn />
                       </button>
-                      <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaXTwitter />
                       </button>
-                      <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaYoutube />
                       </button>
                     </div>
