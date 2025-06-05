@@ -23,17 +23,17 @@ const Properties = () => {
         </div>
 
         {/* Rest  */}
-        <div className="grid grid-cols-12 gap-10 ">
-          <div className="col-span-8 ">
+        <div className="grid grid-cols-12 gap-10">
+          <div className="lg:col-span-8 col-span-10 ">
             <h1 className="font-Nunito text-[34px] font-[700]">
               Properties Standard List
             </h1>
 
             {/* Filter  */}
-            <div className="flex gap-3 bg-white px-3 py-2 rounded-md shadow-sm mt-6 mb-3">
+            <div className="lg:flex-row flex flex-col lg:gap-3 gap-5 bg-white lg:px-3 px-8 lg:py-4 py-8 rounded-md shadow-sm mt-6 mb-3 ">
               <select
                 defaultValue="Types"
-                className="select select-ghost  join-item block w-[15%] px-4 py-0 bg-white border border-none rounded-full focus:outline-none focus:ring-0 focus:ring-none focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Types</option>
                 <option>Rentals</option>
@@ -42,7 +42,7 @@ const Properties = () => {
 
               <select
                 defaultValue="Cities"
-                className="select select-ghost  join-item block w-[15%] px-4 py-0 bg-white border border-none rounded-full focus:outline-none focus:ring-0 focus:ring-none focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Cities</option>
                 <option>Madrid</option>
@@ -50,7 +50,7 @@ const Properties = () => {
 
               <select
                 defaultValue="Categories"
-                className="select select-ghost  join-item block w-[20%] px-4 py-0 bg-white border border-none rounded-full focus:outline-none focus:ring-0 focus:ring-none focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Categories</option>
                 <option>Apartments</option>
@@ -60,7 +60,7 @@ const Properties = () => {
 
               <select
                 defaultValue="Areas"
-                className="select select-ghost  join-item block w-[25%] px-4 py-0 bg-white border border-none rounded-full focus:outline-none focus:ring-0 focus:ring-none focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Areas</option>
                 <option>Calle De Embajadores</option>
@@ -70,7 +70,7 @@ const Properties = () => {
 
               <select
                 defaultValue="States"
-                className="select select-ghost  join-item block w-[25%] px-4 py-0 bg-white border border-none rounded-full focus:outline-none focus:ring-0 focus:ring-none focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Price/Date/Quantity</option>
                 <option>Price High to Low</option>
@@ -480,7 +480,7 @@ const Properties = () => {
           </div>
 
           {/* Sidebar  */}
-          <div className="col-span-4">
+          <div className="lg:col-span-4 col-span-10">
             <Sidebar />
           </div>
         </div>
