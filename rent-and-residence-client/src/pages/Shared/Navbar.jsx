@@ -41,27 +41,45 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          onClick={() => handleSubmenu(setShowSubmenu(!showSubmenu))}
-          to="/agents"
-          className={({ isActive }) =>
-            isActive
-              ? " relative text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-              : " relative nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
-          }
+          onMouseEnter={() => handleSubmenu(setShowSubmenu(true))}
+          onMouseLeave={() => handleSubmenu(setShowSubmenu(false))}
+          to="#"
+          className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
         >
           Agents
           {showSubmenu ? (
-            <ul className="hover:bg-transparent absolute w-[150px] shadow-sm top-11 sub-menu p-2">
+            <ul className="bg-white absolute w-[150px] shadow-sm top-9 sub-menu p-2">
               <li>
-                <a>Submenu 1</a>
+                <Link
+                  to="/agents"
+                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+                >
+                  Agents
+                </Link>
               </li>
               <li>
-                <a>Submenu 2</a>
+                <Link
+                  to="/allAgents"
+                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+                >
+                  All Agents
+                </Link>
               </li>
             </ul>
           ) : (
             " "
           )}
+          {/* <ul
+            id="submenu"
+            className="hover:bg-transparent absolute w-[150px] shadow-sm top-11 sub-menu p-2"
+          >
+            <li>
+              <a>Submenu 1</a>
+            </li>
+            <li>
+              <a>Submenu 2</a>
+            </li>
+          </ul> */}
         </NavLink>
       </li>
 
@@ -146,15 +164,57 @@ const Navbar = () => {
 
       <li className="py-4  border-gray-600 border-b-1">
         <NavLink
-          to="/agents"
-          className={({ isActive }) =>
+          onMouseEnter={() => handleSubmenu(setShowSubmenu(true))}
+          onMouseLeave={() => handleSubmenu(setShowSubmenu(false))}
+          to="#"
+          /* className={({ isActive }) =>
             isActive
-              ? " text-C_purple hover:text-C_purple  gap-3"
-              : " nav-item text-white  gap-3"
-          }
+              ? "relative text-C_purple hover:text-C_purple  gap-3"
+              : "relative nav-item text-white  gap-3"
+          } */
         >
           <BsPerson className="text-xl" />
           Agents
+          {/* <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
+            <li>
+              <Link
+                to="/agents"
+                className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              >
+                Agents
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/allAgents"
+                className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              >
+                All Agents
+              </Link>
+            </li>
+          </ul> */}
+          {showSubmenu ? (
+            <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
+              <li>
+                <Link
+                  to="/agents"
+                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+                >
+                  Agents
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/allAgents"
+                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+                >
+                  All Agents
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            " "
+          )}
         </NavLink>
       </li>
 
