@@ -39,23 +39,28 @@ const Agents = () => {
               <nav className="flex flex-col  gap-2">
                 <div className="flex justify-start items-top gap-8">
                   <div className=" w-[50%]">
-                    <img
-                      className="rounded-md"
-                      src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
-                      alt=""
-                    />
+                    <div className="mb-0">
+                      <img
+                        className="rounded-md "
+                        src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                        alt=""
+                      />
+                    </div>
 
                     {/* Social Icons  */}
-                    <div className="bg-gray-500 mx-auto flex justify-center align-middle items-center gap-4 ">
+                    <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 ">
                       <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaFacebookF />
                       </button>
+
                       <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaLinkedinIn />
                       </button>
+
                       <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaXTwitter />
                       </button>
+
                       <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaYoutube />
                       </button>
