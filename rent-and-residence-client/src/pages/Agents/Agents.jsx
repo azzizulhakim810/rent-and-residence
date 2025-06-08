@@ -14,7 +14,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import Sidebar from "../Properties/Sidebar/Sidebar";
+import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Agents = () => {
   return (
@@ -35,20 +35,18 @@ const Agents = () => {
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             {/* Profile  */}
-            <div className="shadow-sm p-8 mb-5 w-full rounded-md bg-white">
-              <nav className="flex flex-col  gap-2">
-                <div className="flex justify-start items-top gap-8">
-                  <div className=" w-[50%]">
-                    <div className="mb-0">
-                      <img
-                        className="rounded-md "
-                        src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
-                        alt=""
-                      />
-                    </div>
+            <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
+              <nav className="flex flex-col gap-2">
+                <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
+                  <div className=" lg:w-[50%] w-full">
+                    <img
+                      className="rounded-md "
+                      src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                      alt=""
+                    />
 
                     {/* Social Icons  */}
-                    <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 ">
+                    <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
                       <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                         <FaFacebookF />
                       </button>
@@ -70,15 +68,15 @@ const Agents = () => {
                   {/* Details  */}
                   <span className=" w-auto flex flex-col gap-2 ps-3 ">
                     <div>
-                      <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-1">
+                      <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
                         Michaela Roja
                       </h4>
-                      <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] leading-6">
+                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6">
                         real estate broker
                       </p>
                     </div>
 
-                    <nav className="flex flex-col gap-2 text-gray-600 font-Nunito_Sans">
+                    <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
                       <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
                         <FaPhoneAlt className="text-lg" />
 
@@ -114,10 +112,77 @@ const Agents = () => {
                     </nav>
                   </span>
                 </div>
+
+                {/* About Me */}
+                <div className="pt-10 p-2">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    About Me
+                  </h4>
+
+                  <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
+                    <span>
+                      Michaela’s sociability, independent spirit, and incredible
+                      customer service set him apart as a top agent in the New
+                      York real estate market. He works with a range of clients
+                      – national and international, as well as investors and
+                      local residents.
+                    </span>
+
+                    <span>
+                      Whether a client is in the market for a single-family home
+                      or a luxury penthouse, Michael is there to help out.
+                      Between his time in the hospitality and real estate
+                      industries, he knows what good service is all about.
+                    </span>
+                  </p>
+                </div>
+
+                {/* Contact Me */}
+                <div className="pt-10">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Contact Me
+                  </h4>
+
+                  {/* <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
+
+                  </p> */}
+                  <div className="flex flex-col gap-5 pt-2">
+                    <div className="flex lg:flex-row flex-col gap-3">
+                      <input
+                        type="text"
+                        className="input"
+                        placeholder="Your Name"
+                      />
+                      <input
+                        type="email"
+                        className="input"
+                        placeholder="Your Email"
+                      />
+                      <input
+                        type="tel"
+                        className="input"
+                        placeholder="Your Phone"
+                      />
+                    </div>
+
+                    <textarea className="textarea w-full h-40 "></textarea>
+
+                    <label className="label">
+                      <input type="checkbox" className="checkbox" />I consent to
+                      the GDPR Terms
+                    </label>
+
+                    <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                      Send Email
+                    </button>
+                  </div>
+                </div>
               </nav>
             </div>
 
-            <h1 className="font-Nunito text-[34px] font-[700]">My Listings</h1>
+            <h1 className="font-Nunito text-[30px] font-[700] pt-5">
+              My Listings
+            </h1>
 
             {/* Filter  */}
             <div className="lg:flex-row flex flex-col lg:gap-0 gap-5 bg-white lg:px-0 px-8 lg:py-0 py-10 rounded-md shadow-sm mt-6 mb-3 ">

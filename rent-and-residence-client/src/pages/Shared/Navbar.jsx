@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
@@ -7,6 +8,9 @@ import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [showSubmenu, setShowSubmenu] = useState(false);
+
+  const handleSubmenu = () => {};
   const navOptions = (
     <>
       <li>
@@ -37,14 +41,27 @@ const Navbar = () => {
 
       <li>
         <NavLink
+          onClick={() => handleSubmenu(setShowSubmenu(!showSubmenu))}
           to="/agents"
           className={({ isActive }) =>
             isActive
-              ? "text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
+              ? " relative text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : " relative nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
           Agents
+          {showSubmenu ? (
+            <ul className="hover:bg-transparent absolute w-[150px] shadow-sm top-11 sub-menu p-2">
+              <li>
+                <a>Submenu 1</a>
+              </li>
+              <li>
+                <a>Submenu 2</a>
+              </li>
+            </ul>
+          ) : (
+            " "
+          )}
         </NavLink>
       </li>
 
@@ -187,13 +204,13 @@ const Navbar = () => {
             </label>
           </div>
           {/* Sidebar - Mobile  */}
-          <div className="drawer-side z-11">
+          <div className="drawer-side  z-11">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"
-              className="drawer-overlay"
+              className="drawer-overlay bg-white"
             ></label>
-            <ul className="menu bg-C_gray hover:bg-C_gray text-white min-h-full w-80 p-6  hover:text-C_purple text-[17px] font-normal leading-6 me-5">
+            <ul className="menu bg-black hover:bg-C_gray text-white min-h-full w-80 p-6  hover:text-C_purple text-[17px] font-normal leading-6 me-5">
               {/* Sidebar content here */}
               {navOptionsMobile}
             </ul>

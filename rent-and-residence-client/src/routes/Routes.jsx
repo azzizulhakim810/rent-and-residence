@@ -6,6 +6,7 @@ import Blogs from "../pages/Blogs/Blogs";
 import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
+import AllAgents from "../pages/Agents/AllAgents/AllAgents";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ export const router = createBrowserRouter([
       {
         path: "/agents",
         element: <Agents />,
+      },
+
+      {
+        path: "/allAgents",
+        element: <AllAgents />,
       },
       {
         path: "/blogs",

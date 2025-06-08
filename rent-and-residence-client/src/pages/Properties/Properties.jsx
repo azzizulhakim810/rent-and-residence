@@ -5,7 +5,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Properties = () => {
   return (
