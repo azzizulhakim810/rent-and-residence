@@ -32,7 +32,7 @@ const Blogs = () => {
                     {/* Details  */}
                     <div className=" w-auto flex flex-col gap-2 p-2">
                       <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-8 py-1">
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[23px] leading-7 py-1">
                           Top 10 best appreciating condos in Madrid
                         </h4>
                         <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
@@ -65,7 +65,7 @@ const Blogs = () => {
                     {/* Details  */}
                     <div className=" w-auto flex flex-col gap-2 p-2">
                       <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-8 py-1">
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[23px] leading-7 py-1">
                           The top 5 most livable Madrid neighbourhoods
                         </h4>
                         <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
@@ -101,7 +101,7 @@ const Blogs = () => {
                     {/* Details  */}
                     <div className=" w-auto flex flex-col gap-2 p-2">
                       <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-8 py-1">
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[23px] leading-7 py-1">
                           Top 10 best appreciating condos in Madrid
                         </h4>
                         <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
@@ -134,7 +134,7 @@ const Blogs = () => {
                     {/* Details  */}
                     <div className=" w-auto flex flex-col gap-2 p-2">
                       <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-8 py-1">
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[23px] leading-7 py-1">
                           The top 5 most livable Madrid neighbourhoods
                         </h4>
                         <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
