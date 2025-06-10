@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import NotFound from "../layout/NotFound";
-import Agents from "../pages/Agents/Agents";
-import AllAgents from "../pages/Agents/AllAgents/AllAgents";
+
+import Agent from "../pages/Agent/Agent";
+
+import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";
 import Contact from "../pages/Contact/Contact";
@@ -24,8 +26,8 @@ export const router = createBrowserRouter([
         element: <Properties />,
       },
       {
-        path: "/agents",
-        element: <Agents />,
+        path: "/agent",
+        element: <Agent />,
       },
 
       {

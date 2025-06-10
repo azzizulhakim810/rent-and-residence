@@ -51,10 +51,10 @@ const Navbar = () => {
             <ul className="bg-white absolute w-[150px] shadow-sm top-9 sub-menu p-2">
               <li>
                 <Link
-                  to="/agents"
+                  to="/agent"
                   className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
                 >
-                  Agents
+                  Agent
                 </Link>
               </li>
               <li>
@@ -69,17 +69,6 @@ const Navbar = () => {
           ) : (
             " "
           )}
-          {/* <ul
-            id="submenu"
-            className="hover:bg-transparent absolute w-[150px] shadow-sm top-11 sub-menu p-2"
-          >
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul> */}
         </NavLink>
       </li>
 

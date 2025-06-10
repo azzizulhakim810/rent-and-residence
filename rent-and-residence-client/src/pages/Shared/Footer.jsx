@@ -23,16 +23,16 @@ const Footer = () => {
               sales of luxury real estate, and rental properties.
             </p>
             <div className="flex justify-between align-middle items-center gap-4 pt-5">
-              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer transition-colors duration-500">
                 <FaFacebookF />
               </button>
-              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer transition-colors duration-500">
                 <FaLinkedinIn />
               </button>
-              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer transition-colors duration-500">
                 <FaXTwitter />
               </button>
-              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer">
+              <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer transition-colors duration-500">
                 <FaYoutube />
               </button>
             </div>

@@ -16,7 +16,7 @@ import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
-const Agents = () => {
+const Agent = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
@@ -143,24 +143,21 @@ const Agents = () => {
                     Contact Me
                   </h4>
 
-                  {/* <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
-
-                  </p> */}
                   <div className="flex flex-col gap-5 pt-2">
                     <div className="flex lg:flex-row flex-col gap-3">
                       <input
                         type="text"
-                        className="input"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
                         placeholder="Your Name"
                       />
                       <input
                         type="email"
-                        className="input"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
                         placeholder="Your Email"
                       />
                       <input
                         type="tel"
-                        className="input"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
                         placeholder="Your Phone"
                       />
                     </div>
@@ -608,4 +605,4 @@ const Agents = () => {
   );
 };
 
-export default Agents;
+export default Agent;

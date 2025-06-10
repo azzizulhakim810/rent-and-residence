@@ -1,14 +1,7 @@
-import { FaChevronRight, FaRegComments } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaRegComments, FaXTwitter } from "react-icons/fa6";
 import { LuCalendarDays } from "react-icons/lu";
 import { TbCategory } from "react-icons/tb";
-import {
-  FaEnvelope,
-  FaFacebookF,
-  FaLinkedinIn,
-  FaPhoneAlt,
-  FaYoutube,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const BlogDetails = () => {
@@ -34,8 +27,8 @@ const BlogDetails = () => {
             <h1 className="font-Nunito text-[34px] font-[700]">Blog List</h1>
 
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
-              <div className=" bg-white w-full shadow-lg rounded-lg">
-                <div className=" p-10 mb-2 w-full rounded-md bg-white">
+              <div className=" ">
+                <div className="bg-white w-full shadow-lg p-10 mb-2  rounded-md ">
                   <nav className="flex flex-col gap-2">
                     <figure className="bg-[url(https://i.ibb.co/7dyjRcyn/interior-grey-bg-e1636449434931.jpg)] h-[400px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
@@ -109,36 +102,65 @@ const BlogDetails = () => {
                           voluptatum velit saepe natus rerum.
                         </p>
 
+                        {/* Social Share  */}
                         <div className="flex justify-between items-center pt-1">
-                          {/* Social Icons  */}
-                          <div className="flex gap-3 ">
-                            <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                          <div className="flex justify-between align-middle items-center gap-4 pt-5">
+                            <button className=" text-C_LightGray bg-C_LightGray/10 text-[16px] p-3 rounded-full hover:bg-C_purple  hover:text-white cursor-pointer transition-colors duration-500">
                               <FaFacebookF />
                             </button>
-
-                            <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <button className=" text-C_LightGray bg-C_LightGray/10 text-[16px] p-3 rounded-full hover:bg-C_purple  hover:text-white cursor-pointer transition-colors duration-500">
                               <FaLinkedinIn />
                             </button>
-
-                            <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <button className=" text-C_LightGray bg-C_LightGray/10 text-[16px] p-3 rounded-full hover:bg-C_purple  hover:text-white cursor-pointer transition-colors duration-500">
                               <FaXTwitter />
                             </button>
-
-                            <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <button className=" text-C_LightGray bg-C_LightGray/10 text-[16px] p-3 rounded-full hover:bg-C_purple  hover:text-white cursor-pointer transition-colors duration-500">
                               <FaYoutube />
                             </button>
                           </div>
                         </div>
                       </div>
-
-                      <div className="flex justify-between items-center">
-                        <button className="flex items-center gap-2 text-C_gray bg-transparent  rounded-none hover:text-C_purple cursor-pointer text-C_DarkGray font-Nunito_Sans font-[600] text-[16px] ">
-                          Continue reading
-                          <FaChevronRight className="text-sm" />
-                        </button>
-                      </div>
                     </div>
                   </nav>
+                </div>
+
+                {/* Comment Section */}
+                <div className="mt-10 bg-white w-full shadow-lg p-10 mb-2  rounded-md ">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                    Leave a Reply
+                  </h4>
+
+                  <div className="flex flex-col gap-5 pt-2">
+                    <textarea className="textarea w-full h-40 input font-Nunito_Sans text-C_LightGray"></textarea>
+
+                    <div className="flex lg:flex-row flex-col gap-3">
+                      <input
+                        type="text"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                        placeholder="Name"
+                      />
+                      <input
+                        type="email"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                        placeholder="Email"
+                      />
+                      <input
+                        type="tel"
+                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                        placeholder="Website"
+                      />
+                    </div>
+
+                    <label className="label">
+                      <input type="checkbox" className="checkbox" />
+                      Save my name, email, and website in this browser for the
+                      next time I comment.
+                    </label>
+
+                    <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                      Send Email
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
