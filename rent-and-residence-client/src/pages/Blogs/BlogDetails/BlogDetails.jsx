@@ -24,9 +24,9 @@ const BlogDetails = () => {
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
-            <h1 className="font-Nunito text-[34px] font-[700]">Blog List</h1>
+            {/* <h1 className="font-Nunito text-[34px] font-[700]">Blog List</h1> */}
 
-            <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
+            <div className="flex lg:flex-row flex-col justify-start w-full gap-6 pb-5">
               <div className=" ">
                 <div className="bg-white w-full shadow-lg p-10 mb-2  rounded-md ">
                   <nav className="flex flex-col gap-2">
@@ -126,12 +126,18 @@ const BlogDetails = () => {
 
                 {/* Comment Section */}
                 <div className="mt-10 bg-white w-full shadow-lg p-10 mb-2  rounded-md ">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-5">
                     Leave a Reply
                   </h4>
+                  <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] pb-2">
+                    Your email address will not be published.
+                  </p>
 
                   <div className="flex flex-col gap-5 pt-2">
-                    <textarea className="textarea w-full h-40 input font-Nunito_Sans text-C_LightGray"></textarea>
+                    <textarea
+                      className="textarea w-full h-40 input font-Nunito_Sans text-C_LightGray"
+                      placeholder="Comment"
+                    ></textarea>
 
                     <div className="flex lg:flex-row flex-col gap-3">
                       <input
@@ -158,7 +164,7 @@ const BlogDetails = () => {
                     </label>
 
                     <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                      Send Email
+                      Post Comment
                     </button>
                   </div>
                 </div>
