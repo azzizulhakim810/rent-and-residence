@@ -1,5 +1,5 @@
-import { BsEnvelope } from "react-icons/bs";
 import {
+  FaEnvelope,
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
@@ -19,7 +19,7 @@ const AllAgents = () => {
               <a>Home</a>
             </li>
 
-            <li className="text-C_purple">Agents</li>
+            <li className="text-C_purple">All Agents</li>
           </ul>
         </div>
 
@@ -27,13 +27,30 @@ const AllAgents = () => {
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             <h1 className="font-Nunito text-[34px] font-[700]">All Agents</h1>
+            <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
+              <span>
+                We like to think of ourselves as a small but perfectly formed
+                lettings & management agency. Working you get the exposure,
+                knowledge and expertise you would expect from a large agent, but
+                the service you will only receive from a smaller business built
+                around 100% client and tenant focus.
+              </span>
 
-            {/* Properties  */}
+              <span>
+                Whether you’re looking for property for sale in New York area or
+                property for rent, WP Residence makes searching easy. Use our
+                unique geolocation mapping feature to root-out your ideal villa,
+                townhouse or apartment and contact the owners direct. We will
+                help you find your dream house in just a few seconds.
+              </span>
+            </p>
+
+            {/* All Agents  */}
             {/* First Row  */}
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
               <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
                 {/* Profile  */}
-                <div className="shadow-sm p-2 mb-5 w-full rounded-md bg-white">
+                <div className=" p-2 mb-1 w-full rounded-md bg-white">
                   <nav className="flex flex-col  gap-2">
                     <div className="w-full">
                       <img
@@ -44,117 +61,248 @@ const AllAgents = () => {
                     </div>
 
                     {/* Details  */}
-                    <span className=" w-auto flex flex-col gap-2 p-2 mt-2">
+                    <div className=" w-auto flex flex-col gap-2 p-2 mt-2">
                       <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-1">
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px]">
                           Michaela Roja
                         </h4>
-                        <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] leading-6">
+                        <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
                           real estate broker
+                        </p>
+
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  py-4">
+                          Michaela’s sociability, independent spirit, and
+                          incredible customer service set him apart ...
                         </p>
                       </div>
 
-                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
-                        Michaela’s sociability, independent spirit, and
-                        incredible customer service set him apart ...
-                      </p>
-
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center pt-1">
                         {/* Social Icons  */}
-                        <div className="bg-transparent mx-auto flex justify-start align-middle items-center gap-0 ">
-                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                        <div className=" flex gap-3 ">
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                             <FaFacebookF />
                           </button>
-                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                             <FaLinkedinIn />
                           </button>
-                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+
+                          <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                             <FaXTwitter />
                           </button>
-                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                             <FaYoutube />
                           </button>
                         </div>
 
                         {/* Contact Info  */}
-                        <nav className="flex gap-2 text-gray-600 font-Nunito_Sans">
-                          {/*  <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                            <FaPhoneAlt className="text-lg" />
+                        <nav className="flex gap-1 text-gray-600 font-Nunito_Sans">
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaPhoneAlt />
+                          </button>
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                              <Link to="tel:+34 912 123 678">
-                                +34 912 123 678
-                              </Link>
-                            </p>
-                          </span> */}
-                          <FaPhoneAlt className="text-lg text-[16px] hover:text-C_purple" />
-
-                          <BsEnvelope className="text-lg text-[16px] hover:text-C_purple" />
-
-                          {/*  <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                            <FaPrint className="text-lg" />
-                            <p className=" text-C_gray text-[16px] leading-6  me-5">
-                              +34 912 123 678
-                            </p>
-                          </span> */}
-
-                          {/* <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                            <BsEnvelope className="text-lg" />
-
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                              <Link mailto="office@realestate.com">
-                                office@realestate.com{" "}
-                              </Link>
-                            </p>
-                          </span> */}
-
-                          {/* <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                            <FaGlobe className="text-lg" />
-
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                              <Link mailto="website.net">website.net</Link>
-                            </p>
-                          </span> */}
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaEnvelope />
+                          </button>
                         </nav>
                       </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
 
-                      {/*  <nav className="flex flex-col gap-2 text-gray-600 font-Nunito_Sans">
-                        <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                          <FaPhoneAlt className="text-lg" />
+              <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
+                {/* Profile  */}
+                <div className=" p-2 mb-1 w-full rounded-md bg-white">
+                  <nav className="flex flex-col  gap-2">
+                    <div className="w-full">
+                      <img
+                        className="rounded-md"
+                        src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                        alt=""
+                      />
+                    </div>
 
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                            <Link to="tel:+34 912 123 678">
-                              +34 912 123 678
-                            </Link>
-                          </p>
-                        </span>
+                    {/* Details  */}
+                    <div className=" w-auto flex flex-col gap-2 p-2 mt-2">
+                      <div>
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px]">
+                          Michaela Roja
+                        </h4>
+                        <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
+                          real estate broker
+                        </p>
 
-                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                          <FaPrint className="text-lg" />
-                          <p className=" text-C_gray text-[16px] leading-6  me-5">
-                            +34 912 123 678
-                          </p>
-                        </span>
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  py-4">
+                          Michaela’s sociability, independent spirit, and
+                          incredible customer service set him apart ...
+                        </p>
+                      </div>
 
-                        <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                          <BsEnvelope className="text-lg" />
+                      <div className="flex justify-between items-center pt-1">
+                        {/* Social Icons  */}
+                        <div className=" flex gap-3 ">
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaFacebookF />
+                          </button>
 
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                            <Link mailto="office@realestate.com">
-                              office@realestate.com{" "}
-                            </Link>
-                          </p>
-                        </span>
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaLinkedinIn />
+                          </button>
 
-                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                          <FaGlobe className="text-lg" />
+                          <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaXTwitter />
+                          </button>
 
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                            <Link mailto="website.net">website.net</Link>
-                          </p>
-                        </span>
-                      </nav> */}
-                    </span>
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaYoutube />
+                          </button>
+                        </div>
+
+                        {/* Contact Info  */}
+                        <nav className="flex gap-1 text-gray-600 font-Nunito_Sans">
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaPhoneAlt />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaEnvelope />
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            {/* Second Row  */}
+            <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-0">
+              <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
+                {/* Profile  */}
+                <div className=" p-2 mb-1 w-full rounded-md bg-white">
+                  <nav className="flex flex-col  gap-2">
+                    <div className="w-full">
+                      <img
+                        className="rounded-md"
+                        src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                        alt=""
+                      />
+                    </div>
+
+                    {/* Details  */}
+                    <div className=" w-auto flex flex-col gap-2 p-2 mt-2">
+                      <div>
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px]">
+                          Michaela Roja
+                        </h4>
+                        <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
+                          real estate broker
+                        </p>
+
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  py-4">
+                          Michaela’s sociability, independent spirit, and
+                          incredible customer service set him apart ...
+                        </p>
+                      </div>
+
+                      <div className="flex justify-between items-center pt-1">
+                        {/* Social Icons  */}
+                        <div className=" flex gap-3 ">
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaFacebookF />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaLinkedinIn />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaXTwitter />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaYoutube />
+                          </button>
+                        </div>
+
+                        {/* Contact Info  */}
+                        <nav className="flex gap-1 text-gray-600 font-Nunito_Sans">
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaPhoneAlt />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaEnvelope />
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+
+              <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
+                {/* Profile  */}
+                <div className=" p-2 mb-1 w-full rounded-md bg-white">
+                  <nav className="flex flex-col  gap-2">
+                    <div className="w-full">
+                      <img
+                        className="rounded-md"
+                        src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                        alt=""
+                      />
+                    </div>
+
+                    {/* Details  */}
+                    <div className=" w-auto flex flex-col gap-2 p-2 mt-2">
+                      <div>
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px]">
+                          Michaela Roja
+                        </h4>
+                        <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
+                          real estate broker
+                        </p>
+
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  py-4">
+                          Michaela’s sociability, independent spirit, and
+                          incredible customer service set him apart ...
+                        </p>
+                      </div>
+
+                      <div className="flex justify-between items-center pt-1">
+                        {/* Social Icons  */}
+                        <div className=" flex gap-3 ">
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaFacebookF />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaLinkedinIn />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaXTwitter />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaYoutube />
+                          </button>
+                        </div>
+
+                        {/* Contact Info  */}
+                        <nav className="flex gap-1 text-gray-600 font-Nunito_Sans">
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaPhoneAlt />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-2 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaEnvelope />
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
                   </nav>
                 </div>
               </div>
