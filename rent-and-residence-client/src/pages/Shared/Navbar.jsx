@@ -186,7 +186,7 @@ const Navbar = () => {
             <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
               <li>
                 <Link
-                  to="/agents"
+                  to="/agent"
                   className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
                 >
                   Agents
