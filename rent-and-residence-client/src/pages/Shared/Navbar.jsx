@@ -301,7 +301,7 @@ const Navbar = () => {
           </div>
 
           {/* Cart  */}
-          <div className="flex-none">
+          <div className="flex-none  cursor-pointer">
             <div className="dropdown dropdown-end mt-2">
               {/* Cart  */}
               <div tabIndex={0} role="button" className="">
@@ -313,7 +313,7 @@ const Navbar = () => {
               {/* Dropdown */}
               <div
                 tabIndex={0}
-                className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow-2xl"
+                className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-42 shadow-2xl"
               >
                 <div className="card-body">
                   <span className="text-lg font-bold">8 Items</span>

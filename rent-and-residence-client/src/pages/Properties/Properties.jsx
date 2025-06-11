@@ -145,6 +145,7 @@ const Properties = () => {
                     <p className="font-bold">Elena Pernía</p>
                   </div>
 
+                  {/* Share, Favourite & Compare  */}
                   <div className="flex gap-1">
                     <button
                       className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"

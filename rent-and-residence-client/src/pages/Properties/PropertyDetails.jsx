@@ -6,7 +6,8 @@ import {
   FaMapMarkerAlt,
   FaYoutube,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
+import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { LuCalendar } from "react-icons/lu";
 import { PiBathtub } from "react-icons/pi";
@@ -61,7 +62,7 @@ const PropertyDetails = () => {
 
                   {/* Features  */}
                   <div className="flex lg:flex-row flex-col justify-between items-center py-2">
-                    <p className=" font-Nunito font-[700] text-[16px] text-C_DarkGray/90">
+                    <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
                       Updated On:<br></br> May 6, 2025
                     </p>
 
@@ -91,6 +92,26 @@ const PropertyDetails = () => {
                       <LuCalendar className="text-[25px] text-[#3f3f3f]" />
                       <p className="text-[#6f6f6f]">Year Built:2000</p>
                     </div>
+                  </div>
+                </div>
+
+                {/* Description  */}
+                <div className="bg-white w-full shadow-lg p-8 my-6  rounded-md ">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Description
+                  </h4>
+
+                  {/* Features  */}
+                  <div className="flex lg:flex-row flex-col justify-between items-center">
+                    <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
+                      Just steps away from QM2 express bus to Manhattan and
+                      local buses; only minutes from the LIRR. Walking distance
+                      to the Bay Terrace Shopping Center, Baybridge Commons
+                      Shopping Center, pool clubs, movie theaters and tennis
+                      courts. 1.5 blocks away from elementary school PS 169 and
+                      Bell Academy middle school in the award-winning District
+                      25. Don’t miss this opportunity!
+                    </p>
                   </div>
                 </div>
 
@@ -243,13 +264,21 @@ const PropertyDetails = () => {
               2.100 € / <span className="text-[28px] font-[500]">month</span>
             </h1>
 
-            {/* Categories  */}
-            <div className=" flex gap-3 font-Nunito_Sans text-end">
-              <span className="bg-transparent text-title_color font-Nunito_Sans shadow-sm text-[15px] rounded  px-4  py-1 ">
+            {/* Share & Favourite Button  */}
+            <div className=" flex justify-end gap-3 font-Nunito_Sans mb-14">
+              <span
+                className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
+                data-tip="add to favourite"
+              >
+                <FaRegHeart />
                 Favourite
               </span>
 
-              <span className="bg-C_purple text-white text-[14px] rounded  px-4  py-1 ">
+              <span
+                className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
+                data-tip="share this page"
+              >
+                <IoShareSocialOutline />
                 Share
               </span>
             </div>
