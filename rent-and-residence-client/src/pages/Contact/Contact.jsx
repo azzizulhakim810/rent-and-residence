@@ -25,7 +25,7 @@ const Contact = () => {
               <div>
                 {/* Contact Info  */}
                 <div className="bg-white w-full shadow-lg p-8 mb-2  rounded-md ">
-                  <h1 className="font-Nunito text-[34px] font-[700]">
+                  <h1 className="font-Nunito lg:text-[34px] text-[32px]  font-[700]">
                     Real Estate Agency
                   </h1>
 
@@ -53,99 +53,117 @@ const Contact = () => {
                   </div>
 
                   {/* Details  */}
-                  <span className=" w-auto flex flex-col gap-2 ">
-                    <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                      <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                          Phone:
-                          <Link to="tel:+34 912 123 678">+34 912 123 678</Link>
-                        </p>
-                      </span>
+                  <div className=" w-auto flex flex-col gap-2 ">
+                    <div className="overflow-x-auto  text-gray-600  my-3">
+                      <table className=" w-4/12 text-start ">
+                        <tbody className="font-Nunito_Sans text-[16px] tracking-wide">
+                          {/* row 1  */}
+                          <tr>
+                            <td className=" text-C_gray font-[700] ">Phone:</td>
+                            <td className="text-C_DarkGray">
+                              <Link to="tel:+34 912 123 678">
+                                (305) 555-4555
+                              </Link>
+                            </td>
+                          </tr>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                        <p className=" text-C_gray text-[16px] leading-6  me-5">
-                          Mobile:
-                          <Link to="tel:+34 912 123 678">+34 912 123 678</Link>
-                        </p>
-                      </span>
+                          {/* row 2  */}
+                          <tr>
+                            <td className=" text-C_gray font-[700]  ">
+                              Mobile:
+                            </td>
+                            <td className="text-C_DarkGray">
+                              <Link to="tel:+34 912 123 678">
+                                (305) 555-4555
+                              </Link>
+                            </td>
+                          </tr>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          Email:
-                          <Link mailto="office@realestate.com">
-                            office@realestate.com{" "}
-                          </Link>
-                        </p>
-                      </span>
+                          {/* row 3  */}
+                          <tr>
+                            <td className=" text-C_gray font-[700]  ">
+                              Email:
+                            </td>
+                            <td className="text-C_DarkGray">
+                              <Link to="tel:+34 912 123 678">
+                                realestate@inc.com
+                              </Link>
+                            </td>
+                          </tr>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          Skype:
-                          <Link mailto="website.net">website.net</Link>
-                        </p>
-                      </span>
-                    </nav>
+                          {/* row 4 */}
+                          <tr>
+                            <td className=" text-C_gray font-[700]  ">
+                              LinkedIn
+                            </td>
+                            <td className="text-C_DarkGray">
+                              <Link to="tel:+34 912 123 678">realestate</Link>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
 
                     <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
                       <span>
-                        Michaela’s sociability, independent spirit, and
-                        incredible customer service set him apart as a top agent
-                        in the New York real estate market. He works with a
-                        range of clients – national and international, as well
-                        as investors and local residents.
+                        Whether you’re looking for property for sale in New York
+                        area or property for rent, WP Residence makes searching
+                        easy. Use our unique geolocation mapping feature to
+                        root-out your ideal villa, townhouse or apartment and
+                        contact the owners direct. We will help you find your
+                        dream house in just a few seconds.
                       </span>
 
                       <span>
-                        Whether a client is in the market for a single-family
-                        home or a luxury penthouse, Michael is there to help
-                        out. Between his time in the hospitality and real estate
-                        industries, he knows what good service is all about.
+                        We offer our clients a wealth of knowledge regarding all
+                        aspects of purchasing or selling a home. Whether it is
+                        helping you search for your dream home, discussing new
+                        New York real estate developments, or assisting with the
+                        sale of your property, we would love the opportunity to
+                        help. Please feel free to contact us with any questions!
                       </span>
                     </p>
-                  </span>
+                  </div>
+
+                  <div className=" mt-10 w-full">
+                    <figure className="bg-[url(https://i.ibb.co/HP5SSLt/evnt-760x560.jpg)] h-[350px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
+                  </div>
                 </div>
 
-                {/* Comment Section */}
+                {/* Contact Section */}
                 <div className="mt-10 bg-white w-full shadow-lg p-8 mb-2  rounded-md ">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-5">
-                    Leave a Reply
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Contact Me
                   </h4>
-                  <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] pb-2">
-                    Your email address will not be published.
-                  </p>
 
                   <div className="flex flex-col gap-5 pt-2">
-                    <textarea
-                      className="textarea w-full h-40 input font-Nunito_Sans text-C_LightGray"
-                      placeholder="Comment"
-                    ></textarea>
-
                     <div className="flex lg:flex-row flex-col gap-3">
                       <input
                         type="text"
                         className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Name"
+                        placeholder="Your Name"
                       />
                       <input
                         type="email"
                         className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Email"
+                        placeholder="Your Email"
                       />
                       <input
                         type="tel"
                         className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Website"
+                        placeholder="Your Phone"
                       />
                     </div>
 
+                    <textarea className="textarea w-full h-40 "></textarea>
+
                     <label className="label">
-                      <input type="checkbox" className="checkbox" />
-                      Save my name, email, and website in this browser for the
-                      next time I comment.
+                      <input type="checkbox" className="checkbox" />I consent to
+                      the GDPR Terms
                     </label>
 
                     <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                      Post Comment
+                      Send Email
                     </button>
                   </div>
                 </div>

@@ -25,7 +25,7 @@ const Blogs = () => {
             {/* First Row  */}
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
               <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
-                <div className=" p-2 mb-2 w-full rounded-md bg-white">
+                <div className=" p-3 mb-2 w-full rounded-md bg-white">
                   <nav className="flex flex-col  gap-2">
                     <figure className="bg-[url(https://i.ibb.co/7dyjRcyn/interior-grey-bg-e1636449434931.jpg)] h-[250px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
@@ -58,7 +58,7 @@ const Blogs = () => {
               </div>
 
               <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
-                <div className=" p-2 mb-2 w-full rounded-md bg-white">
+                <div className=" p-3 mb-2 w-full rounded-md bg-white">
                   <nav className="flex flex-col  gap-2">
                     <figure className="bg-[url(https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg)] h-[250px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
@@ -94,7 +94,7 @@ const Blogs = () => {
             {/* Second Row  */}
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-0">
               <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
-                <div className=" p-2 mb-2 w-full rounded-md bg-white">
+                <div className=" p-3 mb-2 w-full rounded-md bg-white">
                   <nav className="flex flex-col  gap-2">
                     <figure className="bg-[url(https://i.ibb.co/7dyjRcyn/interior-grey-bg-e1636449434931.jpg)] h-[250px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
@@ -127,7 +127,7 @@ const Blogs = () => {
               </div>
 
               <div className=" bg-white lg:w-1/2 w-full shadow-lg rounded-lg">
-                <div className=" p-2 mb-2 w-full rounded-md bg-white">
+                <div className=" p-3 mb-2 w-full rounded-md bg-white">
                   <nav className="flex flex-col  gap-2">
                     <figure className="bg-[url(https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg)] h-[250px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
