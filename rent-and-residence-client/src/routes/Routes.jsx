@@ -10,6 +10,7 @@ import Blogs from "../pages/Blogs/Blogs";
 import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
+import PropertyDetails from "../pages/Properties/PropertyDetails";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/properties",
         element: <Properties />,
+      },
+      {
+        path: "/propertyDetails",
+        element: <PropertyDetails />,
       },
       {
         path: "/agent",
