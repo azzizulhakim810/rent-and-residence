@@ -73,23 +73,49 @@ const PropertyDetails = () => {
                   </span>
                 </div>
 
-                {/* Title & Subtitle  */}
-                <h1 className="font-Nunito lg:text-[38px] text-[32px] font-[700] py-2">
+                {/* Title - Desktop */}
+                <h1 className="font-Nunito lg:text-[38px] text-[32px] font-[700] pt-2">
                   Townhouse for Rent
                 </h1>
 
-                <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[18px] pb-2">
+                {/* Price - Mobile  */}
+                <h1 className="lg:hidden flex font-Nunito lg:text-[38px] text-[32px] font-[600]  text-end text-C_purple pb-1">
+                  2.100 € /{" "}
+                  <span className="text-[28px] font-[500]">month</span>
+                </h1>
+
+                {/* Subtitle - Desktop */}
+                <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[18px] lg:pb-2 ">
                   <FaMapMarkerAlt /> Nueva España, Madrid
                 </p>
 
+                {/* Share & Favourite Button - Mobile  */}
+                <div className=" lg:hidden flex justify-start gap-3 font-Nunito_Sans mb-8 pt-3">
+                  <span
+                    className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
+                    data-tip="add to favourite"
+                  >
+                    <FaRegHeart />
+                    Favourite
+                  </span>
+
+                  <span
+                    className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
+                    data-tip="share this page"
+                  >
+                    <IoShareSocialOutline />
+                    Share
+                  </span>
+                </div>
+
                 {/* Overview  */}
                 <div className="bg-white w-full shadow-lg p-8 my-6  rounded-md ">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 lg:pb-2 pb-6">
                     Overview
                   </h4>
 
                   {/* Features  */}
-                  <div className="flex lg:flex-row flex-col justify-between items-center py-2">
+                  <div className="flex lg:flex-row lg:gap-0 gap-8 justify-between lg:items-center flex-wrap items-start py-2">
                     <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
                       Updated On:<br></br> May 6, 2025
                     </p>
@@ -148,11 +174,12 @@ const PropertyDetails = () => {
 
                   {/* Info  */}
                   <div className=" w-auto flex flex-col gap-2 ">
-                    <div className="overflow-x-auto  text-gray-600  my-3">
-                      <table className="w-full h-[200px] text-start ">
-                        <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
+                    {/* Desktop  */}
+                    <div className="overflow-x-auto lg:flex hidden text-gray-600  my-3">
+                      <table className=" w-full h-[180px] text-start ">
+                        <tbody className="font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
-                          <tr className=" text-C_gray">
+                          <tr className="text-C_gray">
                             <td>
                               <strong>Property Id:</strong> 132
                             </td>
@@ -216,6 +243,76 @@ const PropertyDetails = () => {
                         </tbody>
                       </table>
                     </div>
+
+                    {/* Mobile  */}
+                    <div className="overflow-x-auto lg:hidden text-gray-600  my-3">
+                      <table className=" w-full h-[180px] text-start ">
+                        <tbody className="font-Nunito_Sans text-[16px] tracking-wide">
+                          {/* row 1  */}
+                          <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
+                            <td>
+                              <strong>Property Id:</strong> 132
+                            </td>
+                            <td>
+                              <strong>Price:</strong> 2.100 € / month
+                            </td>
+                            <td>
+                              <strong>Property Size:</strong> 150 m2
+                            </td>
+                          </tr>
+
+                          {/* row 2  */}
+                          <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
+                            <td>
+                              <strong>Property Lot Size:</strong> 200 m2
+                            </td>
+                            <td>
+                              <strong>Rooms: </strong> 10
+                            </td>
+                            <td>
+                              <strong>Bedrooms: </strong> 3
+                            </td>
+                          </tr>
+
+                          {/* row 3  */}
+                          <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
+                            <td>
+                              <strong>Bathrooms:</strong> 2
+                            </td>
+                            <td>
+                              <strong>Year Built: </strong> 2000
+                            </td>
+                            <td>
+                              <strong>Garages: </strong> 2
+                            </td>
+                          </tr>
+
+                          {/* row 4 */}
+                          <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
+                            <td>
+                              <strong>Garage Size:</strong> 2 cars
+                            </td>
+                            <td>
+                              <strong>Available from: </strong> 2021-09-02
+                            </td>
+                            <td>
+                              <strong>Basement: </strong> cement
+                            </td>
+                          </tr>
+
+                          {/* row 5 */}
+                          <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
+                            <td>
+                              <strong>External construction:</strong> No
+                            </td>
+                            <td>
+                              <strong>Roofing: </strong> No
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
 
@@ -225,16 +322,17 @@ const PropertyDetails = () => {
                     Features
                   </h4>
 
-                  {/* Info  */}
+                  {/* F Info  */}
                   <div className=" w-auto flex flex-col gap-2 ">
-                    <div className="overflow-x-auto  text-gray-600  my-3">
+                    {/* Desktop  */}
+                    <div className="overflow-x-auto lg:flex hidden text-gray-600  my-3">
                       <table className=" w-full  text-start ">
                         <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
                           <thead className="block mt-3 mb-3 font-Nunito font-[700] text-C_gray">
                             Interior Details
                           </thead>
-                          <tr className=" text-C_gray">
+                          <tr className="text-C_gray">
                             <td className="w-1/3">
                               <p className="flex gap-3">
                                 <TbToolsKitchen2 className="text-C_purple text-xl" />
@@ -385,6 +483,167 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 5 */}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile  */}
+                    <div className="overflow-x-auto lg:hidden text-gray-600  my-3">
+                      <table className=" w-full  text-start ">
+                        <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
+                          {/* row 1  */}
+                          <thead className="block  mt-3 mb-3 font-Nunito font-[700] text-C_gray">
+                            Interior Details
+                          </thead>
+                          <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                Equipped Kitchen
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <CgGym className="text-C_purple text-xl" />
+                                Gym
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                Laundry
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 2  */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Outdoor Details
+                          </thead>
+                          <tr className="flex flex-col gap-3 w-full text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineYard className="text-C_purple text-xl" />
+                                Back yard
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <PiBasketballThin className="text-C_purple text-xl" />
+                                Basketball court
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <CiParking1 className="text-C_purple text-xl" />
+                                Garage Attached
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 3  */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Utilities
+                          </thead>
+                          <tr className="flex flex-col gap-3 w-full text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GiFrozenOrb className="text-C_purple text-xl" />
+                                Central Air
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <MdElectricBolt className="text-C_purple text-xl" />
+                                Electricity
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GiHotSurface className="text-C_purple text-xl" />
+                                Heating
+                              </p>
+                            </td>
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className="flex flex-col gap-3 w-full text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                Natural Gas
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GiComputerFan className="text-C_purple text-xl" />
+                                Ventilation
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <IoWaterOutline className="text-C_purple text-xl" />
+                                Water
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 4 */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Other Features
+                          </thead>
+                          <tr className="flex flex-col gap-3 w-full text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GrWheelchair className="text-C_purple text-xl" />
+                                Chair Accessible
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <PiElevatorLight className="text-C_purple text-xl" />
+                                Elevator
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GiFireplace className="text-C_purple text-xl" />
+                                Fireplace
+                              </p>
+                            </td>
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className="flex flex-col gap-3 w-full  text-C_gray">
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                Smoke detectors
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <GiWashingMachine className="text-C_purple text-xl" />
+                                Washer and dryer
+                              </p>
+                            </td>
+
+                            <td className="lg:w-1/3">
+                              <p className="flex gap-3">
+                                <IoWifiOutline className="text-C_purple text-xl" />
+                                WiFi
+                              </p>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -542,12 +801,13 @@ const PropertyDetails = () => {
 
           {/* Sidebar  */}
           <div className="lg:col-span-4 col-span-10">
-            <h1 className="font-Nunito lg:text-[38px] text-[32px] font-[600] py-2 text-end text-C_purple">
+            {/* Price -  Desktop */}
+            <h1 className="lg:block hidden font-Nunito lg:text-[38px] text-[32px] font-[600] py-2 text-end text-C_purple">
               2.100 € / <span className="text-[28px] font-[500]">month</span>
             </h1>
 
-            {/* Share & Favourite Button  */}
-            <div className=" flex justify-end gap-3 font-Nunito_Sans mb-14">
+            {/* Share & Favourite Button - Desktop  */}
+            <div className=" lg:flex hidden justify-end gap-3 font-Nunito_Sans mb-14">
               <span
                 className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
                 data-tip="add to favourite"

@@ -16,9 +16,9 @@ const PropertySidebar = () => {
           {/* Profile  */}
           <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
             <nav className="flex flex-col gap-2">
-              <div className="flex lg:flex-row flex-col justify-start items-center gap-5">
+              <div className="flex flex-row justify-start items-center gap-5">
                 {/* Image  */}
-                <div className=" lg:w-[30%] w-full">
+                <div className="w-[30%]">
                   <img
                     className="rounded-md "
                     src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
@@ -27,14 +27,14 @@ const PropertySidebar = () => {
                 </div>
 
                 {/* Details  */}
-                <span className=" w-auto flex flex-col gap-2  ">
+                <div className=" w-auto flex flex-col  gap-2  ">
                   <h4 className=" font-Nunito font-[600] text-C_gray text-[22px] leading-6">
                     Michaela Roja
                   </h4>
                   <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]">
                     selling agent
                   </p>
-                </span>
+                </div>
               </div>
 
               {/* Contact Me */}
@@ -94,7 +94,9 @@ const PropertySidebar = () => {
         />
 
         <div className="tab-content bg-base-100 border-base-300 p-6">
-          Tab content 2
+          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]">
+            Coming Soon!
+          </p>
         </div>
       </div>
 
