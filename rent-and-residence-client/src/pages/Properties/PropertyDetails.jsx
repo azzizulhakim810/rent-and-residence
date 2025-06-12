@@ -8,16 +8,32 @@ import {
   FaMapMarkerAlt,
   FaYoutube,
 } from "react-icons/fa";
-import { GiFrozenOrb, GiHotSurface } from "react-icons/gi";
-import { MdElectricBolt, MdOutlineYard } from "react-icons/md";
-import { PiBasketballThin } from "react-icons/pi";
-
 import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
-import { IoShareSocialOutline } from "react-icons/io5";
+import {
+  GiComputerFan,
+  GiFireplace,
+  GiFrozenOrb,
+  GiHotSurface,
+  GiWashingMachine,
+} from "react-icons/gi";
+import { GrWheelchair } from "react-icons/gr";
+import {
+  IoShareSocialOutline,
+  IoWaterOutline,
+  IoWifiOutline,
+} from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { LuCalendar } from "react-icons/lu";
-import { MdOutlineLocalLaundryService } from "react-icons/md";
-import { PiBathtub } from "react-icons/pi";
+import {
+  MdElectricBolt,
+  MdOutlineGasMeter,
+  MdOutlineLocalLaundryService,
+  MdOutlineSmokeFree,
+  MdOutlineYard,
+} from "react-icons/md";
+import { PiElevatorLight } from "react-icons/pi";
+
+import { PiBasketballThin, PiBathtub } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
 import { Link } from "react-router-dom";
@@ -291,8 +307,79 @@ const PropertyDetails = () => {
                               </p>
                             </td>
                           </tr>
+                          <span className="block my-3"></span>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                Natural Gas
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GiComputerFan className="text-C_purple text-xl" />
+                                Ventilation
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <IoWaterOutline className="text-C_purple text-xl" />
+                                Water
+                              </p>
+                            </td>
+                          </tr>
 
                           {/* row 4 */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Other Features
+                          </thead>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GrWheelchair className="text-C_purple text-xl" />
+                                Chair Accessible
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <PiElevatorLight className="text-C_purple text-xl" />
+                                Elevator
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GiFireplace className="text-C_purple text-xl" />
+                                Fireplace
+                              </p>
+                            </td>
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                Smoke detectors
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GiWashingMachine className="text-C_purple text-xl" />
+                                Washer and dryer
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <IoWifiOutline className="text-C_purple text-xl" />
+                                WiFi
+                              </p>
+                            </td>
+                          </tr>
 
                           {/* row 5 */}
                         </tbody>
