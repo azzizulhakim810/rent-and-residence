@@ -1,11 +1,14 @@
-import { BsBoundingBoxCircles } from "react-icons/bs";
+import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
 import { CiParking1 } from "react-icons/ci";
 import {
   FaCar,
   FaFacebookF,
+  FaGlobe,
   FaLinkedinIn,
   FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaPrint,
   FaYoutube,
 } from "react-icons/fa";
 import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
@@ -31,13 +34,13 @@ import {
   MdOutlineSmokeFree,
   MdOutlineYard,
 } from "react-icons/md";
-import { PiElevatorLight } from "react-icons/pi";
+import { PiBathtub, PiElevatorLight } from "react-icons/pi";
 
-import { PiBasketballThin, PiBathtub } from "react-icons/pi";
+import { PiBasketballThin } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
 import { Link } from "react-router-dom";
-import Sidebar from "../Shared/Sidebar/Sidebar";
+import PropertySidebar from "./PropertySidebar";
 
 const PropertyDetails = () => {
   return (
@@ -228,7 +231,7 @@ const PropertyDetails = () => {
                       <table className=" w-full  text-start ">
                         <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
-                          <thead className="block mb-3 font-Nunito font-[700] text-C_gray">
+                          <thead className="block mt-3 mb-3 font-Nunito font-[700] text-C_gray">
                             Interior Details
                           </thead>
                           <tr className=" text-C_gray">
@@ -388,144 +391,150 @@ const PropertyDetails = () => {
                   </div>
                 </div>
 
-                <div className="bg-white w-full shadow-lg p-8 mb-2  rounded-md ">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                    Overview
+                {/* Video  */}
+                <div
+                  tabIndex={0}
+                  className="collapse collapse-plus  bg-white w-full shadow-lg p-4 my-6  rounded-md "
+                >
+                  <input type="checkbox" />
+
+                  <h4 className="collapse-title font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Video
                   </h4>
-
-                  {/* Social Icons  */}
-                  <div className="bg-white text-C_LightGray mx-auto rounded flex justify-start align-middle items-center gap-6 py-4">
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaFacebookF />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaLinkedinIn />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaXTwitter />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaYoutube />
-                    </button>
-                  </div>
-
-                  {/* Details  */}
-                  <div className=" w-auto flex flex-col gap-2 ">
-                    <div className="overflow-x-auto  text-gray-600  my-3">
-                      <table className=" w-4/12 text-start ">
-                        <tbody className="font-Nunito_Sans text-[16px] tracking-wide">
-                          {/* row 1  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700] ">Phone:</td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                (305) 555-4555
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 2  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              Mobile:
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                (305) 555-4555
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 3  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              Email:
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                realestate@inc.com
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 4 */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              LinkedIn
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">realestate</Link>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
-                      <span>
-                        Whether you’re looking for property for sale in New York
-                        area or property for rent, WP Residence makes searching
-                        easy. Use our unique geolocation mapping feature to
-                        root-out your ideal villa, townhouse or apartment and
-                        contact the owners direct. We will help you find your
-                        dream house in just a few seconds.
-                      </span>
-
-                      <span>
-                        We offer our clients a wealth of knowledge regarding all
-                        aspects of purchasing or selling a home. Whether it is
-                        helping you search for your dream home, discussing new
-                        New York real estate developments, or assisting with the
-                        sale of your property, we would love the opportunity to
-                        help. Please feel free to contact us with any questions!
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className=" mt-10 w-full">
-                    <figure className="bg-[url(https://i.ibb.co/DPynHVLF/team.jpg)] lg:h-[350px] h-[300px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
+                  <div className="collapse-content ">
+                    <iframe
+                      className="rounded-lg mt-3"
+                      width="100%"
+                      height="400"
+                      src="https://www.youtube.com/embed/wkGoES-V5Ys?si=UJHxcjwokWRqtonK"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen
+                    ></iframe>
                   </div>
                 </div>
 
-                {/* Contact Section */}
-                <div className="mt-10 bg-white w-full shadow-lg p-8 mb-2  rounded-md ">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                    Contact Me
-                  </h4>
+                {/* Profile  */}
+                <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
+                  <nav className="flex flex-col gap-2">
+                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
+                      <div className=" lg:w-[50%] w-full">
+                        <img
+                          className="rounded-md "
+                          src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                          alt=""
+                        />
 
-                  <div className="flex flex-col gap-5 pt-2">
-                    <div className="flex lg:flex-row flex-col gap-3">
-                      <input
-                        type="text"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Name"
-                      />
-                      <input
-                        type="email"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Email"
-                      />
-                      <input
-                        type="tel"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Phone"
-                      />
+                        {/* Social Icons  */}
+                        <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaFacebookF />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaLinkedinIn />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaXTwitter />
+                          </button>
+
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaYoutube />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Details  */}
+                      <span className=" w-auto flex flex-col gap-2 ps-3 ">
+                        <div>
+                          <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                            Michaela Roja
+                          </h4>
+                          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6">
+                            real estate broker
+                          </p>
+                        </div>
+
+                        <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
+                          <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
+                            <FaPhoneAlt className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                              <Link to="tel:+34 912 123 678">
+                                +34 912 123 678
+                              </Link>
+                            </p>
+                          </span>
+
+                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
+                            <FaPrint className="text-lg" />
+                            <p className=" text-C_gray text-[16px] leading-6  me-5">
+                              +34 912 123 678
+                            </p>
+                          </span>
+
+                          <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                            <BsEnvelope className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                              <Link mailto="office@realestate.com">
+                                office@realestate.com{" "}
+                              </Link>
+                            </p>
+                          </span>
+
+                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
+                            <FaGlobe className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                              <Link mailto="website.net">website.net</Link>
+                            </p>
+                          </span>
+                        </nav>
+                      </span>
                     </div>
 
-                    <textarea className="textarea w-full h-40 "></textarea>
+                    {/* Contact Me */}
+                    <div className="pt-10">
+                      <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                        Contact Me
+                      </h4>
 
-                    <label className="label">
-                      <input type="checkbox" className="checkbox" />I consent to
-                      the GDPR Terms
-                    </label>
+                      <div className="flex flex-col gap-5 pt-2">
+                        <div className="flex lg:flex-row flex-col gap-3">
+                          <input
+                            type="text"
+                            className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                            placeholder="Your Name"
+                          />
+                          <input
+                            type="email"
+                            className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                            placeholder="Your Email"
+                          />
+                          <input
+                            type="tel"
+                            className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                            placeholder="Your Phone"
+                          />
+                        </div>
 
-                    <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                      Send Email
-                    </button>
-                  </div>
+                        <textarea className="textarea w-full h-40 "></textarea>
+
+                        <label className="label">
+                          <input type="checkbox" className="checkbox" />I
+                          consent to the GDPR Terms
+                        </label>
+
+                        <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                          Send Email
+                        </button>
+                      </div>
+                    </div>
+                  </nav>
                 </div>
               </div>
             </div>
@@ -555,7 +564,7 @@ const PropertyDetails = () => {
                 Share
               </span>
             </div>
-            <Sidebar />
+            <PropertySidebar />
           </div>
         </div>
       </div>

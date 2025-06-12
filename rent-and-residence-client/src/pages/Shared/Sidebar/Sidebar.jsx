@@ -1,6 +1,7 @@
 const Sidebar = () => {
   return (
     <div className="flex flex-col gap-6">
+      {/* Change Currency */}
       <div className="shadow-sm  p-8 w-full rounded-md bg-white">
         <label
           htmlFor="propertyType"
@@ -19,6 +20,7 @@ const Sidebar = () => {
         </select>
       </div>
 
+      {/* Change Measurement */}
       <div className="shadow-sm  p-8 w-full rounded-md bg-white">
         <label
           htmlFor="propertyType"
@@ -39,6 +41,7 @@ const Sidebar = () => {
         </select>
       </div>
 
+      {/* Our Listings */}
       <div className="shadow-sm  p-8 w-full rounded-md bg-white">
         <label
           htmlFor="propertyType"
@@ -90,6 +93,7 @@ const Sidebar = () => {
         </ul>
       </div>
 
+      {/* Latest Listings */}
       <div className="shadow-sm  p-8 w-full rounded-md bg-white">
         <label
           htmlFor="propertyType"
