@@ -1,4 +1,6 @@
 import { BsBoundingBoxCircles } from "react-icons/bs";
+import { CgGym } from "react-icons/cg";
+import { CiParking1 } from "react-icons/ci";
 import {
   FaCar,
   FaFacebookF,
@@ -6,11 +8,18 @@ import {
   FaMapMarkerAlt,
   FaYoutube,
 } from "react-icons/fa";
+import { GiFrozenOrb, GiHotSurface } from "react-icons/gi";
+import { MdElectricBolt, MdOutlineYard } from "react-icons/md";
+import { PiBasketballThin } from "react-icons/pi";
+
 import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { LuCalendar } from "react-icons/lu";
+import { MdOutlineLocalLaundryService } from "react-icons/md";
 import { PiBathtub } from "react-icons/pi";
+import { TbToolsKitchen2 } from "react-icons/tb";
+
 import { Link } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
@@ -101,17 +110,194 @@ const PropertyDetails = () => {
                     Description
                   </h4>
 
-                  {/* Features  */}
-                  <div className="flex lg:flex-row flex-col justify-between items-center">
-                    <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
-                      Just steps away from QM2 express bus to Manhattan and
-                      local buses; only minutes from the LIRR. Walking distance
-                      to the Bay Terrace Shopping Center, Baybridge Commons
-                      Shopping Center, pool clubs, movie theaters and tennis
-                      courts. 1.5 blocks away from elementary school PS 169 and
-                      Bell Academy middle school in the award-winning District
-                      25. Don’t miss this opportunity!
-                    </p>
+                  <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
+                    Just steps away from QM2 express bus to Manhattan and local
+                    buses; only minutes from the LIRR. Walking distance to the
+                    Bay Terrace Shopping Center, Baybridge Commons Shopping
+                    Center, pool clubs, movie theaters and tennis courts. 1.5
+                    blocks away from elementary school PS 169 and Bell Academy
+                    middle school in the award-winning District 25. Don’t miss
+                    this opportunity!
+                  </p>
+                </div>
+
+                {/* Details  */}
+                <div className="bg-white w-full shadow-lg p-8 my-6  rounded-md ">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Details
+                  </h4>
+
+                  {/* Info  */}
+                  <div className=" w-auto flex flex-col gap-2 ">
+                    <div className="overflow-x-auto  text-gray-600  my-3">
+                      <table className="w-full h-[200px] text-start ">
+                        <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
+                          {/* row 1  */}
+                          <tr className=" text-C_gray">
+                            <td>
+                              <strong>Property Id:</strong> 132
+                            </td>
+                            <td>
+                              <strong>Price:</strong> 2.100 € / month
+                            </td>
+                            <td>
+                              <strong>Property Size:</strong> 150 m2
+                            </td>
+                          </tr>
+
+                          {/* row 2  */}
+                          <tr className=" text-C_gray  ">
+                            <td>
+                              <strong>Property Lot Size:</strong> 200 m2
+                            </td>
+                            <td>
+                              <strong>Rooms: </strong> 10
+                            </td>
+                            <td>
+                              <strong>Bedrooms: </strong> 3
+                            </td>
+                          </tr>
+
+                          {/* row 3  */}
+                          <tr className=" text-C_gray  ">
+                            <td>
+                              <strong>Bathrooms:</strong> 2
+                            </td>
+                            <td>
+                              <strong>Year Built: </strong> 2000
+                            </td>
+                            <td>
+                              <strong>Garages: </strong> 2
+                            </td>
+                          </tr>
+
+                          {/* row 4 */}
+                          <tr className=" text-C_gray  ">
+                            <td>
+                              <strong>Garage Size:</strong> 2 cars
+                            </td>
+                            <td>
+                              <strong>Available from: </strong> 2021-09-02
+                            </td>
+                            <td>
+                              <strong>Basement: </strong> cement
+                            </td>
+                          </tr>
+
+                          {/* row 5 */}
+                          <tr className=" text-C_gray  ">
+                            <td>
+                              <strong>External construction:</strong> No
+                            </td>
+                            <td>
+                              <strong>Roofing: </strong> No
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Features  */}
+                <div className="bg-white w-full shadow-lg p-8 my-6  rounded-md ">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Features
+                  </h4>
+
+                  {/* Info  */}
+                  <div className=" w-auto flex flex-col gap-2 ">
+                    <div className="overflow-x-auto  text-gray-600  my-3">
+                      <table className=" w-full  text-start ">
+                        <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
+                          {/* row 1  */}
+                          <thead className="block mb-3 font-Nunito font-[700] text-C_gray">
+                            Interior Details
+                          </thead>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                Equipped Kitchen
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <CgGym className="text-C_purple text-xl" />
+                                Gym
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                Laundry
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 2  */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Outdoor Details
+                          </thead>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <MdOutlineYard className="text-C_purple text-xl" />
+                                Back yard
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <PiBasketballThin className="text-C_purple text-xl" />
+                                Basketball court
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <CiParking1 className="text-C_purple text-xl" />
+                                Garage Attached
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 3  */}
+                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                            Utilities
+                          </thead>
+                          <tr className=" text-C_gray">
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GiFrozenOrb className="text-C_purple text-xl" />
+                                Central Air
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <MdElectricBolt className="text-C_purple text-xl" />
+                                Electricity
+                              </p>
+                            </td>
+
+                            <td className="w-1/3">
+                              <p className="flex gap-3">
+                                <GiHotSurface className="text-C_purple text-xl" />
+                                Heating
+                              </p>
+                            </td>
+                          </tr>
+
+                          {/* row 4 */}
+
+                          {/* row 5 */}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
 
