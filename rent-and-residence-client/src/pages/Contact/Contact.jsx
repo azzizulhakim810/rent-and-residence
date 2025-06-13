@@ -1,11 +1,14 @@
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Map from "../Shared/Map/Map";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Contact = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Map />
+
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
         <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
