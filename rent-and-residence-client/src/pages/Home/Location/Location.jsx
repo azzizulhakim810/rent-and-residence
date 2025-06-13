@@ -1,13 +1,10 @@
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+
 const Location = () => {
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
-      <div className="col-span-1 lg:flex hidden -ms-15 h-[15vw] rotate-270 text-center justify-center items-center gap-5 relative ">
-        <span className="relative w-[50px] inline-block before:absolute h-[3px] before:-inset-0  before:block before:bg-C_purple "></span>
-        <h1 className="text-[13px] font-[600] font-Nunito_Sans tracking-[5px] uppercase text-title_color">
-          location
-        </h1>
-      </div>
+      <SectionTitle title={"Locations"} />
 
       <div className="lg:col-span-11 col-span-12">
         <h1 className="lg:w-5/12 w-full py-6 text-[30px] font-[600] font-Nunito text-title_color lg:text-left text-center">
