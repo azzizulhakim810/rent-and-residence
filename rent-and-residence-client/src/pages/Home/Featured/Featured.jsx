@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -15,6 +17,21 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 // import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 const Featured = () => {
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5123/api/properties")
+      .then((res) => res.json())
+      .then((data) => setProperties(data));
+  }, []);
+
+  const featuredProperties = properties.filter(
+    (property) => property.isFeatured == true
+  );
+  properties.map((property) => console.log(property));
+
+  console.log("Featured Only", featuredProperties);
+
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
