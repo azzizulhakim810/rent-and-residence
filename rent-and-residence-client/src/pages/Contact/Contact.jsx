@@ -125,6 +125,7 @@ const Contact = () => {
                     </p>
                   </div>
 
+                  {/* Image  */}
                   <div className=" mt-10 w-full">
                     <figure className="bg-[url(https://i.ibb.co/DPynHVLF/team.jpg)] lg:h-[350px] h-[300px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
                   </div>

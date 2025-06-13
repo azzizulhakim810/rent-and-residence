@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { AiOutlineToTop } from "react-icons/ai";
 import { BsEnvelope } from "react-icons/bs";
 import {
@@ -11,10 +12,35 @@ import { FaBuilding, FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  // Go To Top
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 500) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const handleGoToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
+
   return (
     <>
       <div className=" bg-footer_color text-C_gray py-5">
-        <footer className="footer sm:footer-horizontal py-10 w-10/12 mx-auto">
+        <footer className=" relative footer sm:footer-horizontal py-10 w-10/12 mx-auto">
           <nav>
             <h6 className=" font-semibold text-lg text-C_gray">About Us</h6>
             <p className="w-5/6 text-C_gray text-[16px] leading-6 pt-2">
@@ -110,21 +136,25 @@ const Footer = () => {
           </nav>
         </footer>
       </div>
-      <div>
-        <footer className="footer bg-[#F7F4FB] border-base-300 border-t py-6 ">
-          <aside className="text-center w-10/12 mx-auto flex justify-between items-center">
-            <p className=" text-C_gray text-[16px] leading-6">
-              Copyright WP Estate. All Rights Reserved.
-            </p>
 
-            <button className=" hover:text-C_gray hover:bg-white text-[20px] p-3 rounded bg-C_purple text-white cursor-pointer">
-              <Link to="#top">
-                <AiOutlineToTop />
-              </Link>
+      {/* Absolute Footer  */}
+
+      <footer className="footer bg-[#F7F4FB] border-base-300 border-t py-6 ">
+        <aside className="text-center w-10/12 mx-auto flex justify-between items-center">
+          <p className=" text-C_gray text-[16px] leading-6">
+            Copyright WP Estate. All Rights Reserved.
+          </p>
+
+          {isVisible && (
+            <button
+              onClick={handleGoToTop}
+              className="fixed  bottom-5 lg:right-15 right-5 hover:text-C_purple hover:bg-transparent border-2 border-C_purple text-[20px] p-3 rounded bg-C_purple text-white cursor-pointer"
+            >
+              <AiOutlineToTop />
             </button>
-          </aside>
-        </footer>
-      </div>
+          )}
+        </aside>
+      </footer>
     </>
   );
 };
