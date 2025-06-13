@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaPlus, FaRegHeart } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
@@ -5,6 +6,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 const PropertyCard = ({ property }) => {
+  const [propertyOwner, setPropertyOwner] = useState([]);
   const {
     title,
     price,
@@ -14,8 +16,20 @@ const PropertyCard = ({ property }) => {
     size,
     bedrooms,
     bathrooms,
-    isFeatured,
+    rooms,
+    ownerId,
   } = property || {};
+
+  // Fetch the owner of each Property
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/users/${ownerId}`)
+      .then((res) => res.json())
+      .then((data) => setPropertyOwner(data));
+  }, [ownerId]);
+
+  const { name, profileImage } = propertyOwner[0] || {};
+
+  console.log(propertyOwner);
   return (
     <div className=" bg-white  w-full shadow-lg rounded-lg">
       {/* Image  */}
@@ -34,6 +48,7 @@ const PropertyCard = ({ property }) => {
           </span>
         </div>
 
+        {/* Price & Title  */}
         <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
           <span className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
             {price} €
@@ -45,13 +60,12 @@ const PropertyCard = ({ property }) => {
         </div>
       </figure>
 
+      {/* Features  */}
       <div className="card-body ">
         <div className="flex justify-between">
           <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
             <VscHome className="text-[20px] text-[#3f3f3f]" />
-            <p className="text-[#6f6f6f]">
-              {bedrooms ? bathrooms : 2 + 3} Rooms
-            </p>
+            <p className="text-[#6f6f6f]">{rooms} Rooms</p>
           </div>
 
           <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
@@ -80,9 +94,9 @@ const PropertyCard = ({ property }) => {
       <div className="px-5 py-4 flex justify-between">
         <div className="avatar flex items-center gap-4">
           <div className="w-8 rounded-full">
-            <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+            <img src={profileImage} />
           </div>
-          <p className="font-bold">Elena Pernía</p>
+          <p className="font-bold">{name}</p>
         </div>
 
         <div className="flex gap-1">

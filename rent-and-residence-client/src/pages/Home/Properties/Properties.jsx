@@ -1,10 +1,10 @@
 // import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-const Properties = () => {
+const Properties = ({ allProperties }) => {
   // const [properties, setProperties] = useState([]);
-  const allProperties = useLoaderData([]);
+  // const allProperties = useLoaderData([]);
   // setProperties(allProperties);
 
   /*   useEffect(() => {

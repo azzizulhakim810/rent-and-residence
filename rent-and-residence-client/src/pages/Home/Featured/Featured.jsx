@@ -1,36 +1,35 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
-
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // import required modules
 import { Keyboard, Pagination } from "swiper/modules";
+import FeatureCard from "../../../components/FeatureCard/FeatureCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 // import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
-const Featured = () => {
-  const [properties, setProperties] = useState([]);
+const Featured = ({ allProperties }) => {
+  // const [properties, setProperties] = useState([]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     fetch("http://localhost:5123/api/properties")
       .then((res) => res.json())
       .then((data) => setProperties(data));
-  }, []);
+  }, []); */
 
-  const featuredProperties = properties.filter(
+  const featuredProperties = allProperties.filter(
     (property) => property.isFeatured == true
   );
-  properties.map((property) => console.log(property));
+  // properties.map((property) => console.log(property));
 
-  console.log("Featured Only", featuredProperties);
+  // console.log("Featured Only", featuredProperties);
 
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
@@ -60,7 +59,13 @@ const Featured = () => {
                 clickable: true,
               }}
             >
-              <SwiperSlide>
+              {featuredProperties?.map((featuredProperty) => (
+                <SwiperSlide key={featuredProperty._id}>
+                  <FeatureCard featuredProperty={featuredProperty} />
+                </SwiperSlide>
+              ))}
+
+              {/* <SwiperSlide>
                 <div className="w-full ">
                   <figure className="bg-[url(https://i.ibb.co/1tdWzWmM/pexels-823sl-3190541.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
                     <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
@@ -74,9 +79,9 @@ const Featured = () => {
                     </button>
                   </div>
                 </div>
-              </SwiperSlide>
+              </SwiperSlide> */}
 
-              <SwiperSlide>
+              {/* <SwiperSlide>
                 <div className="w-full ">
                   <figure className="bg-[url(https://i.ibb.co/kVnwv28T/pexels-guiirossi-1755695.jpg)] h-[400px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay rounded-lg">
                     <span className="absolute bottom-0 left-0 mb-5 ms-5 font-Nunito_Sans bg-C_purple text-white text-[13px] rounded  px-4 py-1 ">
@@ -186,7 +191,7 @@ const Featured = () => {
                     </button>
                   </div>
                 </div>
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </div>
 
