@@ -6,7 +6,7 @@ const Banner = () => {
   const [selectPropertyType, setSelectPropertyType] = useState("");
   const [selectTransactionType, setSelectTransactionType] = useState("");
 
-  console.log(selectDivision, selectPropertyType, selectTransactionType);
+  // console.log(selectDivision, selectPropertyType, selectTransactionType);
   const divisions = [
     { value: "dhaka", label: "Dhaka" },
     { value: "chittagong", label: "Chittagong" },
