@@ -1,0 +1,17 @@
+[
+  {
+    "name": "My Sweet Home",
+    "position": [23.921683, 90.258871],
+    "type": "home"
+  },
+  {
+    "name": "Sena Cafe",
+    "position": [23.816, 90.4101],
+    "type": "cafe"
+  },
+  {
+    "name": "Sena Hospital",
+    "position": [23.91652, 90.26822],
+    "type": "hospital"
+  }
+]

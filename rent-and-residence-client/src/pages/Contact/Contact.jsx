@@ -6,10 +6,10 @@ import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Contact = () => {
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 pb-6 ">
       <Map />
 
-      <div className="w-10/12 mx-auto ">
+      <div className="w-10/12 mx-auto pt-4">
         {/* Breadcrumbs */}
         <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
           <ul>
