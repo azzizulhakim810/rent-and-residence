@@ -14,6 +14,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Agent = () => {
@@ -21,15 +22,8 @@ const Agent = () => {
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-        <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
-          <ul>
-            <li>
-              <a>Home</a>
-            </li>
 
-            <li className="text-C_purple">Michaela Roja</li>
-          </ul>
-        </div>
+        <Breadcrumb pageName={"Michaela Roja"} />
 
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">

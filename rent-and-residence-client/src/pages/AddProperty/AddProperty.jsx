@@ -2,22 +2,18 @@ import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import Map from "../Shared/Map/Map";
-import Sidebar from "../Shared/Sidebar/Sidebar";
 
-const Contact = () => {
+const AddProperty = () => {
   return (
     <div className="bg-C_LightGray/5 pb-6 ">
-      <Map />
-
       <div className="w-10/12 mx-auto pt-4">
         {/* Breadcrumbs */}
 
-        <Breadcrumb pageName={"Contact Us"} />
+        <Breadcrumb pageName={"Add a Property"} />
 
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
-          <div className="lg:col-span-8 col-span-10 ">
+          <div className="col-span-12 ">
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 pb-5">
               <div>
                 {/* Contact Info  */}
@@ -168,15 +164,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
-
-          {/* Sidebar  */}
-          <div className="lg:col-span-4 col-span-10">
-            <Sidebar />
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Contact;
+export default AddProperty;

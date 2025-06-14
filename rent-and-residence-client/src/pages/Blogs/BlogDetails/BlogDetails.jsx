@@ -2,6 +2,7 @@ import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaRegComments, FaXTwitter } from "react-icons/fa6";
 import { LuCalendarDays } from "react-icons/lu";
 import { TbCategory } from "react-icons/tb";
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const BlogDetails = () => {
@@ -9,17 +10,8 @@ const BlogDetails = () => {
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-        <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
-          <ul>
-            <li>
-              <a>Home</a>
-            </li>
 
-            <li className="text-C_purple">
-              Top 10 best appreciating condos in Madrid
-            </li>
-          </ul>
-        </div>
+        <Breadcrumb pageName={" Top 10 best appreciating condos in Madrid"} />
 
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">

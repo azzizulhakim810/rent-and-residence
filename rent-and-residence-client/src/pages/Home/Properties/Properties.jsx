@@ -27,8 +27,8 @@ const Properties = ({ allProperties }) => {
           Discover the latest properties available today in Madrid area
         </h1>
 
-        {/* First Row  */}
-        <div className="flex lg:grid  grid-cols-3 justify-start w-full gap-6 py-5">
+        {/* Property Cards  */}
+        <div className="grid lg:grid-cols-3 grid-cols-1 justify-start w-full gap-6 py-5">
           {allProperties?.map((property) => (
             <PropertyCard key={property._id} property={property} />
           ))}

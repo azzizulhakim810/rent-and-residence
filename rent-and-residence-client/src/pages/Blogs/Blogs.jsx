@@ -1,20 +1,14 @@
 import { FaChevronRight } from "react-icons/fa6";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
 const Blogs = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-        <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
-          <ul>
-            <li>
-              <a>Home</a>
-            </li>
 
-            <li className="text-C_purple">Blog List</li>
-          </ul>
-        </div>
+        <Breadcrumb pageName={"Blog List"} />
 
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">

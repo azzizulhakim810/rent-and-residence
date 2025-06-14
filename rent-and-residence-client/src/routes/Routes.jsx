@@ -4,6 +4,7 @@ import NotFound from "../layout/NotFound";
 
 import Agent from "../pages/Agent/Agent";
 
+import AddProperty from "../pages/AddProperty/AddProperty";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";
@@ -24,12 +25,23 @@ export const router = createBrowserRouter([
         loader: () => fetch("http://localhost:5123/api/properties"),
       },
       {
-        path: "/properties",
-        element: <Properties />,
+        path: "/addProperty",
+        element: <AddProperty />,
       },
       {
-        path: "/propertyDetails",
+        path: "/properties",
+        element: <Properties />,
+        loader: () => fetch("http://localhost:5123/api/properties"),
+      },
+      {
+        path: "/propertyDetails/:propertyId",
         element: <PropertyDetails />,
+        /* loader: ({ params }) => {
+          console.log(params.propertyId);
+          fetch(`http://localhost:5123/api/properties/${params.propertyId}`)
+            .then((res) => res.json())
+            .then((data) => console.log(data[0]));
+        }, */
       },
       {
         path: "/agent",

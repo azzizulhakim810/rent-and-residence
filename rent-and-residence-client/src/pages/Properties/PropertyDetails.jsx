@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
 import { CiParking1 } from "react-icons/ci";
@@ -39,23 +42,54 @@ import { PiBathtub, PiElevatorLight } from "react-icons/pi";
 import { PiBasketballThin } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
-import { Link } from "react-router-dom";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertySidebar from "./PropertySidebar";
 
 const PropertyDetails = () => {
+  const [property, setProperty] = useState({});
+
+  const { propertyId } = useParams();
+  // console.log(propertyId);
+
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/properties/${propertyId}`)
+      .then((res) => res.json())
+      .then((data) => setProperty(data[0]));
+  }, [propertyId]);
+
+  // Destructure Details from Property
+  const {
+    _id,
+    title,
+    price,
+    address,
+    updatedAt,
+    propertyType,
+    listingType,
+    images,
+    size,
+    bedrooms,
+    bathrooms,
+    rooms,
+    ownerId,
+  } = property || {};
+
+  const timeStamp = updatedAt;
+  const date = new Date(timeStamp);
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+  console.log(formattedDate);
+
   return (
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-        <div className="breadcrumbs text-sm font-Nunito_Sans font-[500] mb-5">
-          <ul>
-            <li>
-              <a>Home</a>
-            </li>
 
-            <li className="text-C_purple">Contact Us</li>
-          </ul>
-        </div>
+        <Breadcrumb pageName={title} />
 
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
@@ -75,18 +109,19 @@ const PropertyDetails = () => {
 
                 {/* Title - Desktop */}
                 <h1 className="font-Nunito lg:text-[38px] text-[32px] font-[700] pt-2">
-                  Townhouse for Rent
+                  {title}
                 </h1>
 
                 {/* Price - Mobile  */}
                 <h1 className="lg:hidden flex font-Nunito lg:text-[38px] text-[32px] font-[600]  text-end text-C_purple pb-1">
-                  2.100 € /{" "}
+                  {price} € /{" "}
                   <span className="text-[28px] font-[500]">month</span>
                 </h1>
 
                 {/* Subtitle - Desktop */}
                 <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[18px] lg:pb-2 ">
-                  <FaMapMarkerAlt /> Nueva España, Madrid
+                  <FaMapMarkerAlt /> {address?.locality}, {address?.city},{" "}
+                  {address?.state}
                 </p>
 
                 {/* Share & Favourite Button - Mobile  */}
@@ -117,7 +152,7 @@ const PropertyDetails = () => {
                   {/* Features  */}
                   <div className="flex lg:flex-row lg:gap-0 gap-8 justify-between lg:items-center flex-wrap items-start py-2">
                     <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
-                      Updated On:<br></br> May 6, 2025
+                      Updated On:<br></br> {formattedDate}
                     </p>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
@@ -329,9 +364,9 @@ const PropertyDetails = () => {
                       <table className=" w-full  text-start ">
                         <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
-                          <thead className="block mt-3 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-3 mb-3 font-Nunito font-[700] text-C_gray">
                             Interior Details
-                          </thead>
+                          </tr>
                           <tr className="text-C_gray">
                             <td className="w-1/3">
                               <p className="flex gap-3">
@@ -356,9 +391,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 2  */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Outdoor Details
-                          </thead>
+                          </tr>
                           <tr className=" text-C_gray">
                             <td className="w-1/3">
                               <p className="flex gap-3">
@@ -383,9 +418,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 3  */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Utilities
-                          </thead>
+                          </tr>
                           <tr className=" text-C_gray">
                             <td className="w-1/3">
                               <p className="flex gap-3">
@@ -433,9 +468,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 4 */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Other Features
-                          </thead>
+                          </tr>
                           <tr className=" text-C_gray">
                             <td className="w-1/3">
                               <p className="flex gap-3">
@@ -492,9 +527,9 @@ const PropertyDetails = () => {
                       <table className=" w-full  text-start ">
                         <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
-                          <thead className="block  mt-3 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block  mt-3 mb-3 font-Nunito font-[700] text-C_gray">
                             Interior Details
-                          </thead>
+                          </tr>
                           <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
                             <td className="lg:w-1/3">
                               <p className="flex gap-3">
@@ -519,9 +554,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 2  */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Outdoor Details
-                          </thead>
+                          </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             <td className="lg:w-1/3">
                               <p className="flex gap-3">
@@ -546,9 +581,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 3  */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Utilities
-                          </thead>
+                          </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             <td className="lg:w-1/3">
                               <p className="flex gap-3">
@@ -596,9 +631,9 @@ const PropertyDetails = () => {
                           </tr>
 
                           {/* row 4 */}
-                          <thead className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
+                          <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Other Features
-                          </thead>
+                          </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             <td className="lg:w-1/3">
                               <p className="flex gap-3">
