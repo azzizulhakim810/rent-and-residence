@@ -63,6 +63,8 @@ const PropertyDetails = () => {
     title,
     price,
     address,
+    description,
+    createdAt,
     updatedAt,
     propertyType,
     listingType,
@@ -74,15 +76,25 @@ const PropertyDetails = () => {
     ownerId,
   } = property || {};
 
-  const timeStamp = updatedAt;
-  const date = new Date(timeStamp);
+  // Created Date Format
+  const cTimeStamp = createdAt;
+  const cDate = new Date(cTimeStamp);
+
+  // Updated Date Format
+  const uTimeStamp = updatedAt;
+  const uDate = new Date(uTimeStamp);
+
   const options = {
     year: "numeric",
     month: "short",
     day: "numeric",
   };
-  const formattedDate = date.toLocaleDateString("en-US", options);
-  console.log(formattedDate);
+
+  const createdFormattedDate = cDate.toLocaleDateString("en-US", options);
+  // console.log(createdFormattedDate);
+
+  const updatedFormattedDate = uDate.toLocaleDateString("en-US", options);
+  // console.log(updatedFormattedDate);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -149,37 +161,38 @@ const PropertyDetails = () => {
                     Overview
                   </h4>
 
-                  {/* Features  */}
+                  {/* Overview Details  */}
                   <div className="flex lg:flex-row lg:gap-0 gap-8 justify-between lg:items-center flex-wrap items-start py-2">
                     <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
-                      Updated On:<br></br> {formattedDate}
+                      Updated On:<br></br>
+                      {updatedFormattedDate}
                     </p>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <LiaBedSolid className="text-[25px] text-[#3f3f3f]" />
-                      <p className="text-[#6f6f6f]">3 Bedrooms</p>
+                      <p className="text-[#6f6f6f]">{bedrooms} Bedrooms</p>
                     </div>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <PiBathtub className="text-[25px] text-[#3f3f3f]" />
-                      <p className="text-[#6f6f6f]">2 Bathrooms</p>
+                      <p className="text-[#6f6f6f]">{bathrooms} Bathrooms</p>
                     </div>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <FaCar className="text-[25px] text-[#3f3f3f]" />
-                      <p className="text-[#6f6f6f]">2 Garages</p>
+                      <p className="text-[#6f6f6f]">NAN Garages</p>
                     </div>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <BsBoundingBoxCircles className="text-[25px] text-[#3f3f3f]" />
                       <p className="text-[#6f6f6f]">
-                        250 m<sup>2</sup>
+                        {size} m<sup>2</sup>
                       </p>
                     </div>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <LuCalendar className="text-[25px] text-[#3f3f3f]" />
-                      <p className="text-[#6f6f6f]">Year Built:2000</p>
+                      <p className="text-[#6f6f6f]">Year Built: NAN</p>
                     </div>
                   </div>
                 </div>
@@ -191,13 +204,7 @@ const PropertyDetails = () => {
                   </h4>
 
                   <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
-                    Just steps away from QM2 express bus to Manhattan and local
-                    buses; only minutes from the LIRR. Walking distance to the
-                    Bay Terrace Shopping Center, Baybridge Commons Shopping
-                    Center, pool clubs, movie theaters and tennis courts. 1.5
-                    blocks away from elementary school PS 169 and Bell Academy
-                    middle school in the award-winning District 25. Don’t miss
-                    this opportunity!
+                    {description}
                   </p>
                 </div>
 
@@ -216,62 +223,65 @@ const PropertyDetails = () => {
                           {/* row 1  */}
                           <tr className="text-C_gray">
                             <td>
-                              <strong>Property Id:</strong> 132
+                              <strong>Property Id:</strong>{" "}
+                              {parseInt(_id.slice(-8))}
+                              {/* {_id} */}
                             </td>
                             <td>
-                              <strong>Price:</strong> 2.100 € / month
+                              <strong>Price:</strong> {price} € / month
                             </td>
                             <td>
-                              <strong>Property Size:</strong> 150 m2
+                              <strong>Property Size:</strong> {size} m2
                             </td>
                           </tr>
 
                           {/* row 2  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Property Lot Size:</strong> 200 m2
+                              <strong>Property Lot Size:</strong> NAN m2
                             </td>
                             <td>
-                              <strong>Rooms: </strong> 10
+                              <strong>Rooms: </strong> {rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong> 3
+                              <strong>Bedrooms: </strong> {bedrooms}
                             </td>
                           </tr>
 
                           {/* row 3  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Bathrooms:</strong> 2
+                              <strong>Bathrooms:</strong> {bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong> 2000
+                              <strong>Year Built: </strong> NAN
                             </td>
                             <td>
-                              <strong>Garages: </strong> 2
+                              <strong>Garages: </strong> NAN
                             </td>
                           </tr>
 
                           {/* row 4 */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Garage Size:</strong> 2 cars
+                              <strong>Garage Size:</strong> NAN cars
                             </td>
                             <td>
-                              <strong>Available from: </strong> 2021-09-02
+                              <strong>Available from: </strong>{" "}
+                              {createdFormattedDate}
                             </td>
                             <td>
-                              <strong>Basement: </strong> cement
+                              <strong>Basement: </strong> NAN
                             </td>
                           </tr>
 
                           {/* row 5 */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>External construction:</strong> No
+                              <strong>External construction:</strong> NAN
                             </td>
                             <td>
-                              <strong>Roofing: </strong> No
+                              <strong>Roofing: </strong> NAN
                             </td>
                             <td></td>
                           </tr>
