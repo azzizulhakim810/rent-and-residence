@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoCallOutline } from "react-icons/io5";
-const PropertySidebar = () => {
+import { Link } from "react-router-dom";
+const PropertySidebar = ({ ownerId }) => {
+  const [propertyOwner, setPropertyOwner] = useState([]);
+
+  // Fetch the owner of each Property
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/users/${ownerId}`)
+      .then((res) => res.json())
+      .then((data) => setPropertyOwner(data));
+  }, [ownerId]);
+
+  // Destructure Details from Owner
+  const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
+
   return (
     <div className="flex flex-col gap-6">
       {/* Tabs  */}
@@ -18,21 +32,17 @@ const PropertySidebar = () => {
             <nav className="flex flex-col gap-2">
               <div className="flex flex-row justify-start items-center gap-5">
                 {/* Image  */}
-                <div className="w-[30%]">
-                  <img
-                    className="rounded-md "
-                    src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
-                    alt=""
-                  />
+                <div className="w-[30%] ">
+                  <img className="rounded-md" src={profileImage} alt="" />
                 </div>
 
                 {/* Details  */}
                 <div className=" w-auto flex flex-col  gap-2  ">
                   <h4 className=" font-Nunito font-[600] text-C_gray text-[22px] leading-6">
-                    Michaela Roja
+                    {name}
                   </h4>
-                  <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]">
-                    selling agent
+                  <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] capitalize">
+                    {role}
                   </p>
                 </div>
               </div>
@@ -67,19 +77,25 @@ const PropertySidebar = () => {
                     the GDPR Terms
                   </label>
 
-                  <button className=" w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                    Send Email
-                  </button>
+                  <Link to={`mailto:${email}`}>
+                    <button className=" w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                      Send Email
+                    </button>
+                  </Link>
 
-                  <button className=" w-full btn bg-transparent hover:bg-C_purple border-2 border-C_purple  hover:text-white text-C_purple  hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                    <IoCallOutline />
-                    Call
-                  </button>
+                  <Link to={`tel:${phone}`}>
+                    <button className=" w-full btn bg-transparent hover:bg-C_purple border-2 border-C_purple  hover:text-white text-C_purple  hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                      <IoCallOutline />
+                      Call
+                    </button>
+                  </Link>
 
-                  <button className=" w-full btn bg-transparent hover:bg-C_purple border-2 border-C_purple  hover:text-white text-C_purple  hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                    <FaWhatsapp />
-                    WhatsApp
-                  </button>
+                  <Link to={`https://wa.me/${phone}`}>
+                    <button className=" w-full btn bg-transparent hover:bg-C_purple border-2 border-C_purple  hover:text-white text-C_purple  hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                      <FaWhatsapp />
+                      WhatsApp
+                    </button>
+                  </Link>
                 </div>
               </div>
             </nav>

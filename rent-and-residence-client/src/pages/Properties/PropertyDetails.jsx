@@ -47,10 +47,12 @@ import PropertySidebar from "./PropertySidebar";
 
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
+  const [propertyOwner, setPropertyOwner] = useState([]);
 
   const { propertyId } = useParams();
   // console.log(propertyId);
 
+  // Fetch the Property
   useEffect(() => {
     fetch(`http://localhost:5123/api/properties/${propertyId}`)
       .then((res) => res.json())
@@ -75,6 +77,16 @@ const PropertyDetails = () => {
     rooms,
     ownerId,
   } = property || {};
+
+  // Fetch the owner of each Property
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/users/${ownerId}`)
+      .then((res) => res.json())
+      .then((data) => setPropertyOwner(data));
+  }, [ownerId]);
+
+  // Destructure Details from Owner
+  const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
 
   // Created Date Format
   const cTimeStamp = createdAt;
@@ -111,11 +123,11 @@ const PropertyDetails = () => {
                 {/* Categories  */}
                 <div className=" flex gap-3 font-Nunito_Sans">
                   <span className="bg-C_purple text-white text-[14px] rounded  px-4  py-1 ">
-                    Sales
+                    {listingType}
                   </span>
 
                   <span className="bg-C_purple text-white text-[14px] rounded  px-4  py-1 ">
-                    Hot Offer
+                    {propertyType}
                   </span>
                 </div>
 
@@ -214,7 +226,7 @@ const PropertyDetails = () => {
                     Details
                   </h4>
 
-                  {/* Info  */}
+                  {/* D Info  */}
                   <div className=" w-auto flex flex-col gap-2 ">
                     {/* Desktop  */}
                     <div className="overflow-x-auto lg:flex hidden text-gray-600  my-3">
@@ -224,8 +236,8 @@ const PropertyDetails = () => {
                           <tr className="text-C_gray">
                             <td>
                               <strong>Property Id:</strong>{" "}
-                              {parseInt(_id.slice(-8))}
-                              {/* {_id} */}
+                              {/* {parseInt(_id?.slice(-8))} */}
+                              {_id?.slice(-5)}
                             </td>
                             <td>
                               <strong>Price:</strong> {price} € / month
@@ -296,62 +308,65 @@ const PropertyDetails = () => {
                           {/* row 1  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Property Id:</strong> 132
+                              <strong>Property Id:</strong>{" "}
+                              {/* {parseInt(_id?.slice(-8))} */}
+                              {_id?.slice(-5)}
                             </td>
                             <td>
-                              <strong>Price:</strong> 2.100 € / month
+                              <strong>Price:</strong> {price} € / month
                             </td>
                             <td>
-                              <strong>Property Size:</strong> 150 m2
+                              <strong>Property Size:</strong> {size} m2
                             </td>
                           </tr>
 
                           {/* row 2  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Property Lot Size:</strong> 200 m2
+                              <strong>Property Lot Size:</strong> NAN m2
                             </td>
                             <td>
-                              <strong>Rooms: </strong> 10
+                              <strong>Rooms: </strong> {rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong> 3
+                              <strong>Bedrooms: </strong> {bedrooms}
                             </td>
                           </tr>
 
                           {/* row 3  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Bathrooms:</strong> 2
+                              <strong>Bathrooms:</strong> {bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong> 2000
+                              <strong>Year Built: </strong> NAN
                             </td>
                             <td>
-                              <strong>Garages: </strong> 2
+                              <strong>Garages: </strong> NAN
                             </td>
                           </tr>
 
                           {/* row 4 */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Garage Size:</strong> 2 cars
+                              <strong>Garage Size:</strong> NAN cars
                             </td>
                             <td>
-                              <strong>Available from: </strong> 2021-09-02
+                              <strong>Available from: </strong>{" "}
+                              {createdFormattedDate}
                             </td>
                             <td>
-                              <strong>Basement: </strong> cement
+                              <strong>Basement: </strong> NAN
                             </td>
                           </tr>
 
                           {/* row 5 */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>External construction:</strong> No
+                              <strong>External construction:</strong> NAN
                             </td>
                             <td>
-                              <strong>Roofing: </strong> No
+                              <strong>Roofing: </strong> NAN
                             </td>
                             <td></td>
                           </tr>
@@ -724,30 +739,35 @@ const PropertyDetails = () => {
                 <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                   <nav className="flex flex-col gap-2">
                     <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
-                      <div className=" lg:w-[50%] w-full">
+                      <div className=" lg:w-[50%] w-full ">
                         <img
-                          className="rounded-md "
-                          src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
+                          className="rounded-md h-[200px] mx-auto"
+                          src={profileImage}
                           alt=""
                         />
 
                         {/* Social Icons  */}
                         <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaFacebookF />
-                          </button>
-
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaLinkedinIn />
-                          </button>
-
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaXTwitter />
-                          </button>
-
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaYoutube />
-                          </button>
+                          <Link to="#">
+                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                              <FaFacebookF />
+                            </button>
+                          </Link>
+                          <Link to="#">
+                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                              <FaLinkedinIn />
+                            </button>
+                          </Link>
+                          <Link to="#">
+                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                              <FaXTwitter />
+                            </button>
+                          </Link>
+                          <Link to="#">
+                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                              <FaYoutube />
+                            </button>
+                          </Link>
                         </div>
                       </div>
 
@@ -755,46 +775,48 @@ const PropertyDetails = () => {
                       <span className=" w-auto flex flex-col gap-2 ps-3 ">
                         <div>
                           <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
-                            Michaela Roja
+                            {name}
                           </h4>
-                          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6">
-                            real estate broker
+                          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
+                            {role}
                           </p>
                         </div>
 
                         <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                          <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                            <FaPhoneAlt className="text-lg" />
+                          <Link to={`tel:${phone}`}>
+                            <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
+                              <FaPhoneAlt className="text-lg" />
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                              <Link to="tel:+34 912 123 678">
-                                +34 912 123 678
-                              </Link>
-                            </p>
-                          </span>
+                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                                {phone}
+                              </p>
+                            </span>
+                          </Link>
 
-                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                            <FaPrint className="text-lg" />
-                            <p className=" text-C_gray text-[16px] leading-6  me-5">
-                              +34 912 123 678
-                            </p>
-                          </span>
+                          <Link to={`tel:${phone}`}>
+                            <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
+                              <FaPrint className="text-lg" />
+                              <p className=" text-C_gray text-[16px] leading-6  me-5">
+                                {phone}
+                              </p>
+                            </span>
+                          </Link>
 
-                          <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                            <BsEnvelope className="text-lg" />
+                          <Link to={`mailto:${email}`}>
+                            <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                              <BsEnvelope className="text-lg" />
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                              <Link mailto="office@realestate.com">
-                                office@realestate.com{" "}
-                              </Link>
-                            </p>
-                          </span>
+                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                                {email}
+                              </p>
+                            </span>
+                          </Link>
 
                           <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
                             <FaGlobe className="text-lg" />
 
                             <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                              <Link mailto="website.net">website.net</Link>
+                              NAN
                             </p>
                           </span>
                         </nav>
@@ -848,7 +870,7 @@ const PropertyDetails = () => {
           <div className="lg:col-span-4 col-span-10">
             {/* Price -  Desktop */}
             <h1 className="lg:block hidden font-Nunito lg:text-[38px] text-[32px] font-[600] py-2 text-end text-C_purple">
-              2.100 € / <span className="text-[28px] font-[500]">month</span>
+              {price} € / <span className="text-[28px] font-[500]">month</span>
             </h1>
 
             {/* Share & Favourite Button - Desktop  */}
@@ -869,7 +891,7 @@ const PropertyDetails = () => {
                 Share
               </span>
             </div>
-            <PropertySidebar />
+            <PropertySidebar ownerId={ownerId} />
           </div>
         </div>
       </div>
