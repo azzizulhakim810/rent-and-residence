@@ -43,6 +43,7 @@ import { PiBasketballThin } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import PropertyGallery from "../../components/PropertyGallery/PropertyGallery";
 import PropertySidebar from "./PropertySidebar";
 
 const PropertyDetails = () => {
@@ -76,6 +77,7 @@ const PropertyDetails = () => {
     bathrooms,
     rooms,
     ownerId,
+    amenities,
   } = property || {};
 
   // Fetch the owner of each Property
@@ -109,7 +111,13 @@ const PropertyDetails = () => {
   // console.log(updatedFormattedDate);
 
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 pb-6">
+      {/* Banner Image  */}
+      {/*  {images?.map((image, i) => (
+        <PropertyGallery key={i} image={image} />
+      ))} */}
+      <PropertyGallery images={images} />
+
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 
@@ -393,26 +401,38 @@ const PropertyDetails = () => {
                             Interior Details
                           </tr>
                           <tr className="text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <TbToolsKitchen2 className="text-C_purple text-xl" />
-                                Equipped Kitchen
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                  Equipped Kitchen
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <CgGym className="text-C_purple text-xl" />
-                                Gym
-                              </p>
-                            </td>
+                            {amenities?.includes("gym") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CgGym className="text-C_purple text-xl" />
+                                  Gym
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
-                                Laundry
-                              </p>
-                            </td>
+                            {amenities?.includes("laundry") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                  Laundry
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 2  */}
@@ -420,26 +440,38 @@ const PropertyDetails = () => {
                             Outdoor Details
                           </tr>
                           <tr className=" text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineYard className="text-C_purple text-xl" />
-                                Back yard
-                              </p>
-                            </td>
+                            {amenities?.includes("backYard") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineYard className="text-C_purple text-xl" />
+                                  Back yard
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <PiBasketballThin className="text-C_purple text-xl" />
-                                Basketball court
-                              </p>
-                            </td>
+                            {amenities?.includes("basketballCourt") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <PiBasketballThin className="text-C_purple text-xl" />
+                                  Basketball court
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <CiParking1 className="text-C_purple text-xl" />
-                                Garage Attached
-                              </p>
-                            </td>
+                            {amenities?.includes("garageAttached") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Garage Attached
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 3  */}
@@ -447,49 +479,73 @@ const PropertyDetails = () => {
                             Utilities
                           </tr>
                           <tr className=" text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiFrozenOrb className="text-C_purple text-xl" />
-                                Central Air
-                              </p>
-                            </td>
+                            {amenities?.includes("centralAir") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiFrozenOrb className="text-C_purple text-xl" />
+                                  Central Air
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdElectricBolt className="text-C_purple text-xl" />
-                                Electricity
-                              </p>
-                            </td>
+                            {amenities?.includes("electricity") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdElectricBolt className="text-C_purple text-xl" />
+                                  Electricity
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiHotSurface className="text-C_purple text-xl" />
-                                Heating
-                              </p>
-                            </td>
+                            {amenities?.includes("heating") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiHotSurface className="text-C_purple text-xl" />
+                                  Heating
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className=" text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineGasMeter className="text-C_purple text-xl" />
-                                Natural Gas
-                              </p>
-                            </td>
+                            {amenities?.includes("naturalGas") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                  Natural Gas
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiComputerFan className="text-C_purple text-xl" />
-                                Ventilation
-                              </p>
-                            </td>
+                            {amenities?.includes("ventilation") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiComputerFan className="text-C_purple text-xl" />
+                                  Ventilation
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <IoWaterOutline className="text-C_purple text-xl" />
-                                Water
-                              </p>
-                            </td>
+                            {amenities?.includes("water") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <IoWaterOutline className="text-C_purple text-xl" />
+                                  Water
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 4 */}
@@ -497,49 +553,73 @@ const PropertyDetails = () => {
                             Other Features
                           </tr>
                           <tr className=" text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GrWheelchair className="text-C_purple text-xl" />
-                                Chair Accessible
-                              </p>
-                            </td>
+                            {amenities?.includes("chairAccessible") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GrWheelchair className="text-C_purple text-xl" />
+                                  Chair Accessible
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <PiElevatorLight className="text-C_purple text-xl" />
-                                Elevator
-                              </p>
-                            </td>
+                            {amenities?.includes("elevator") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <PiElevatorLight className="text-C_purple text-xl" />
+                                  Elevator
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiFireplace className="text-C_purple text-xl" />
-                                Fireplace
-                              </p>
-                            </td>
+                            {amenities?.includes("fireplace") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiFireplace className="text-C_purple text-xl" />
+                                  Fireplace
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className=" text-C_gray">
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
-                                Smoke detectors
-                              </p>
-                            </td>
+                            {amenities?.includes("smokeDetector") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                  Smoke detectors
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiWashingMachine className="text-C_purple text-xl" />
-                                Washer and dryer
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiWashingMachine className="text-C_purple text-xl" />
+                                  Washer and dryer
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <IoWifiOutline className="text-C_purple text-xl" />
-                                WiFi
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <IoWifiOutline className="text-C_purple text-xl" />
+                                  WiFi
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 5 */}
@@ -556,53 +636,78 @@ const PropertyDetails = () => {
                             Interior Details
                           </tr>
                           <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <TbToolsKitchen2 className="text-C_purple text-xl" />
-                                Equipped Kitchen
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                  Equipped Kitchen
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <CgGym className="text-C_purple text-xl" />
-                                Gym
-                              </p>
-                            </td>
+                            {amenities?.includes("gym") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <CgGym className="text-C_purple text-xl" />
+                                  Gym
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
-                                Laundry
-                              </p>
-                            </td>
+                            {amenities?.includes("laundry") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                  Laundry
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 2  */}
                           <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
                             Outdoor Details
                           </tr>
+
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineYard className="text-C_purple text-xl" />
-                                Back yard
-                              </p>
-                            </td>
+                            {amenities?.includes("backYard") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineYard className="text-C_purple text-xl" />
+                                  Back yard
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <PiBasketballThin className="text-C_purple text-xl" />
-                                Basketball court
-                              </p>
-                            </td>
+                            {amenities?.includes("basketballCourt") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <PiBasketballThin className="text-C_purple text-xl" />
+                                  Basketball court
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <CiParking1 className="text-C_purple text-xl" />
-                                Garage Attached
-                              </p>
-                            </td>
+                            {amenities?.includes("garageAttached") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Garage Attached
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 3  */}
@@ -610,49 +715,73 @@ const PropertyDetails = () => {
                             Utilities
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GiFrozenOrb className="text-C_purple text-xl" />
-                                Central Air
-                              </p>
-                            </td>
+                            {amenities?.includes("centralAir") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiFrozenOrb className="text-C_purple text-xl" />
+                                  Central Air
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <MdElectricBolt className="text-C_purple text-xl" />
-                                Electricity
-                              </p>
-                            </td>
+                            {amenities?.includes("electricity") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdElectricBolt className="text-C_purple text-xl" />
+                                  Electricity
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GiHotSurface className="text-C_purple text-xl" />
-                                Heating
-                              </p>
-                            </td>
+                            {amenities?.includes("heating") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiHotSurface className="text-C_purple text-xl" />
+                                  Heating
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineGasMeter className="text-C_purple text-xl" />
-                                Natural Gas
-                              </p>
-                            </td>
+                            {amenities?.includes("naturalGas") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                  Natural Gas
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GiComputerFan className="text-C_purple text-xl" />
-                                Ventilation
-                              </p>
-                            </td>
+                            {amenities?.includes("ventilation") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiComputerFan className="text-C_purple text-xl" />
+                                  Ventilation
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <IoWaterOutline className="text-C_purple text-xl" />
-                                Water
-                              </p>
-                            </td>
+                            {amenities?.includes("water") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <IoWaterOutline className="text-C_purple text-xl" />
+                                  Water
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 4 */}
@@ -660,49 +789,73 @@ const PropertyDetails = () => {
                             Other Features
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GrWheelchair className="text-C_purple text-xl" />
-                                Chair Accessible
-                              </p>
-                            </td>
+                            {amenities?.includes("chairAccessible") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GrWheelchair className="text-C_purple text-xl" />
+                                  Chair Accessible
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <PiElevatorLight className="text-C_purple text-xl" />
-                                Elevator
-                              </p>
-                            </td>
+                            {amenities?.includes("elevator") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <PiElevatorLight className="text-C_purple text-xl" />
+                                  Elevator
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GiFireplace className="text-C_purple text-xl" />
-                                Fireplace
-                              </p>
-                            </td>
+                            {amenities?.includes("fireplace") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiFireplace className="text-C_purple text-xl" />
+                                  Fireplace
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className="flex flex-col gap-3 w-full  text-C_gray">
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
-                                Smoke detectors
-                              </p>
-                            </td>
+                            {amenities?.includes("smokeDetector") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                  Smoke detectors
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <GiWashingMachine className="text-C_purple text-xl" />
-                                Washer and dryer
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiWashingMachine className="text-C_purple text-xl" />
+                                  Washer and dryer
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
 
-                            <td className="lg:w-1/3">
-                              <p className="flex gap-3">
-                                <IoWifiOutline className="text-C_purple text-xl" />
-                                WiFi
-                              </p>
-                            </td>
+                            {amenities?.includes("equippedKitchen") ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <IoWifiOutline className="text-C_purple text-xl" />
+                                  WiFi
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                         </tbody>
                       </table>

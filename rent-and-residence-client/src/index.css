@@ -65,3 +65,14 @@
 .swiper-pagination-horizontal {
   bottom: var(--swiper-pagination-bottom, 0px) !important;
 }
+
+/* About Gallery */
+.masonry-gallery {
+  column-count: 2;
+  column-gap: 1rem;
+}
+
+.masonry-gallery a {
+  display: block;
+  break-inside: avoid;
+}
