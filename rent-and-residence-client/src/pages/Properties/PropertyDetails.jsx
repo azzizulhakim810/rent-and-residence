@@ -116,9 +116,12 @@ const PropertyDetails = () => {
       {/*  {images?.map((image, i) => (
         <PropertyGallery key={i} image={image} />
       ))} */}
-      <PropertyGallery images={images} />
 
-      <div className="w-10/12 mx-auto ">
+      <div className="w-10/12 mx-auto">
+        <div className="lg:py-8 pt-8 lg:mb-10 ">
+          <PropertyGallery className="absolute" images={images} />
+        </div>
+
         {/* Breadcrumbs */}
 
         <Breadcrumb pageName={title} />

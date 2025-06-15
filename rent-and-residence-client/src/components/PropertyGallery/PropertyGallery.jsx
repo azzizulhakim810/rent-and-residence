@@ -15,28 +15,29 @@ const PropertyGallery = ({ images }) => {
   }; */
 
   return (
-    <div>
-      <LightGallery
-        speed={500}
-        plugins={[lgThumbnail, lgZoom]}
-        elementClassNames="masonry-gallery"
-      >
-        {images?.map((image, i) => (
-          <a href={image} key={i} data-thumbnail={image}>
-            <img
-              src={image}
-              alt={i}
-              style={{
-                width: "100%",
-                marginBottom: "10px",
-                borderRadius: "8px",
-                objectFit: "cover", // Or 'contain' depending on your goal
-              }}
-            />
-          </a>
-        ))}
-      </LightGallery>
-    </div>
+    <LightGallery
+      speed={500}
+      plugins={[lgThumbnail, lgZoom]}
+      elementClassNames="masonry-gallery"
+    >
+      {images?.map((image, i) => (
+        <a href={image} key={i} data-thumbnail={image}>
+          <img
+            className="w-[100%] lg:h-[300px] h-[230px] rounded-2xl mb-10"
+            src={image}
+            alt={i}
+            /*  style={{
+              width: "100%",
+              height: "300px",
+
+              // objectFit: "cover",
+              borderRadius: "8px",
+              marginBottom: "10px",
+            }} */
+          />
+        </a>
+      ))}
+    </LightGallery>
   );
 };
 
