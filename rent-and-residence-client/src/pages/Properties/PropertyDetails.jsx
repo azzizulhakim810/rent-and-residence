@@ -81,6 +81,9 @@ const PropertyDetails = () => {
     amenities,
   } = property || {};
 
+  const propImg = images?.forEach((image, i) => console.log(image));
+  // console.log(propImg);
+
   // Fetch the owner of each Property
   useEffect(() => {
     fetch(`http://localhost:5123/api/users/${ownerId}`)

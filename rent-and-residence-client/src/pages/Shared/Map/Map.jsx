@@ -80,11 +80,11 @@ const Map = ({ lat, lng, title, propImg, price }) => {
       .addTo(map)
       .bindPopup(
         `
-        <div style="width:250px; display:flex; justify:content-between; align:items-center; column-gap:10px;">
+        <div style="width:250px; display:flex; justify-content: space-between; align-items: center; column-gap:10px;">
         <img style="width:50%" src=${propImg}/>
         <div style="width:50%">
-        <h1 style="margin-top: 10px; font-weight: 600;">${title}</h1>
-        <h1 style="margin-top: 5px; font-weight: 500; color:"#7854F6";>${price} €</h1>
+        <h1 style=" font-size:14px; font-weight: 600;">${title}</h1>
+        <h1 style="margin-top: 5px; font-size:14px; font-weight: 600; color:#7854F6"> ${price}  €</h1>
         </div> 
         </div>
         
@@ -108,7 +108,7 @@ const Map = ({ lat, lng, title, propImg, price }) => {
 
     // Cleanup on unmount
     return () => map.remove();
-  }, [lat, lng, title]);
+  }, [lat, lng, title, price, propImg]);
 
   return (
     <div
