@@ -81,8 +81,8 @@ const PropertyDetails = () => {
     amenities,
   } = property || {};
 
-  const propImg = images?.forEach((image, i) => console.log(image));
-  // console.log(propImg);
+  const propImg = property?.images?.[0];
+  console.log(propImg);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -117,7 +117,6 @@ const PropertyDetails = () => {
   // property Location
   const propLat = 23.81982;
   const propLng = 90.36654;
-  const officeImg = "https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg";
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
@@ -915,7 +914,7 @@ const PropertyDetails = () => {
                     lng={propLng}
                     title={title}
                     price={price}
-                    propImg={officeImg}
+                    propImg={propImg}
                   />
                 </div>
 

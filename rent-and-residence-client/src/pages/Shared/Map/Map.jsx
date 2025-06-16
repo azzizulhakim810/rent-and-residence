@@ -82,6 +82,7 @@ const Map = ({ lat, lng, title, propImg, price }) => {
         `
         <div style="width:250px; display:flex; justify-content: space-between; align-items: center; column-gap:10px;">
         <img style="width:50%" src=${propImg}/>
+        
         <div style="width:50%">
         <h1 style=" font-size:14px; font-weight: 600;">${title}</h1>
         <h1 style="margin-top: 5px; font-size:14px; font-weight: 600; color:#7854F6"> ${price}  €</h1>
