@@ -1,22 +1,20 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
-import customCafeMarker from "../../../assets/cafe.png";
 import customHomeMarker from "../../../assets/home.png";
-import customHospitalMarker from "../../../assets/hospital.png";
 
-const Map = () => {
+const Map = ({ lat, lng, title, propImg, price }) => {
   useEffect(() => {
     // Coordinates of your places
 
-    const homeLat = 23.921683;
-    const homeLng = 90.258871;
+    /*     const homeLat = 23.921683;
+    const homeLng = 90.258871; */
 
-    const cafeLat = 23.91197;
-    const cafeLng = 90.25432;
+    /*     const cafeLat = 23.91197;
+    const cafeLng = 90.25432; */
 
-    const hospitalLat = 23.91652;
-    const hospitalLng = 90.26822;
+    /*     const hospitalLat = 23.91652;
+    const hospitalLng = 90.26822; */
 
     /*  const places = [
       {
@@ -44,22 +42,22 @@ const Map = () => {
       popupAnchor: [0, -40],
     });
 
-    const cafeIcon = L.icon({
+    /*     const cafeIcon = L.icon({
       iconUrl: customCafeMarker,
       iconSize: [40, 40],
       iconAnchor: [20, 40],
       popupAnchor: [0, -40],
-    });
+    }); */
 
-    const hospitalIcon = L.icon({
+    /*     const hospitalIcon = L.icon({
       iconUrl: customHospitalMarker,
       iconSize: [40, 40],
       iconAnchor: [20, 40],
       popupAnchor: [0, -40],
-    });
+    }); */
 
     // Initialize the map
-    const map = L.map("map").setView([23.91628, 90.25938], 14); // (lat, lng, zoom)
+    const map = L.map("map").setView([lat, lng], 16); // (lat, lng, zoom)
 
     // Add OpenStreetMap tiles
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -68,19 +66,30 @@ const Map = () => {
 
     // Markers
 
-    L.marker([cafeLat, cafeLng], { icon: cafeIcon })
+    /*     L.marker([cafeLat, cafeLng], { icon: cafeIcon })
       .addTo(map)
       .bindPopup("Sip & Free")
-      .openPopup();
+      .openPopup(); */
 
-    L.marker([hospitalLat, hospitalLng], { icon: hospitalIcon })
+    /*     L.marker([hospitalLat, hospitalLng], { icon: hospitalIcon })
       .addTo(map)
       .bindPopup("Health Care")
-      .openPopup();
+      .openPopup(); */
 
-    L.marker([homeLat, homeLng], { icon: homeIcon })
+    L.marker([lat, lng], { icon: homeIcon })
       .addTo(map)
-      .bindPopup("My Sweet Home")
+      .bindPopup(
+        `
+        <div style="width:250px; display:flex; justify:content-between; align:items-center; column-gap:10px;">
+        <img style="width:50%" src=${propImg}/>
+        <div style="width:50%">
+        <h1 style="margin-top: 10px; font-weight: 600;">${title}</h1>
+        <h1 style="margin-top: 5px; font-weight: 500; color:"#7854F6";>${price} €</h1>
+        </div> 
+        </div>
+        
+        `
+      )
       .openPopup();
 
     /* places.forEach((place) => {
@@ -99,7 +108,7 @@ const Map = () => {
 
     // Cleanup on unmount
     return () => map.remove();
-  }, []);
+  }, [lat, lng, title]);
 
   return (
     <div

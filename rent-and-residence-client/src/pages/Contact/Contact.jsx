@@ -1,16 +1,30 @@
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Map from "../Shared/Map/Map";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Contact = () => {
+  const homeLat = 23.921683;
+  const homeLng = 90.258871;
+  const title = "Our Arena is here";
+  const officeImg = "https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg";
+  const price = "";
+
   return (
     <div className="bg-C_LightGray/5 pb-6 ">
-      <Map />
+      {/* Map  */}
+      <Map
+        lat={homeLat}
+        lng={homeLng}
+        title={title}
+        propImg={officeImg}
+        price={price}
+      />
 
-      <div className="w-10/12 mx-auto pt-4">
+      <div className="w-10/12 mx-auto pt-4 ">
         {/* Breadcrumbs */}
 
         <Breadcrumb pageName={"Contact Us"} />

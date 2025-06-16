@@ -44,6 +44,7 @@ import { TbToolsKitchen2 } from "react-icons/tb";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyGallery from "../../components/PropertyGallery/PropertyGallery";
+import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
 const PropertyDetails = () => {
@@ -109,6 +110,11 @@ const PropertyDetails = () => {
 
   const updatedFormattedDate = uDate.toLocaleDateString("en-US", options);
   // console.log(updatedFormattedDate);
+
+  // property Location
+  const propLat = 23.81982;
+  const propLng = 90.36654;
+  const officeImg = "https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg";
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
@@ -889,6 +895,25 @@ const PropertyDetails = () => {
                       allowfullscreen
                     ></iframe>
                   </div>
+                </div>
+
+                {/* Map  */}
+                <div
+                  tabIndex={0}
+                  className="collapse collapse-plus  bg-white w-full shadow-lg p-4 my-6  rounded-md "
+                >
+                  <input type="checkbox" />
+
+                  <h4 className="collapse-title font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Map
+                  </h4>
+                  <Map
+                    lat={propLat}
+                    lng={propLng}
+                    title={title}
+                    price={price}
+                    propImg={officeImg}
+                  />
                 </div>
 
                 {/* Profile  */}
