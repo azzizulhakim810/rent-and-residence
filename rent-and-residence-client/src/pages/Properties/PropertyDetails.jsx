@@ -51,6 +51,8 @@ const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
 
+  const [coordinates, setCoordinates] = useState(null);
+
   const { propertyId } = useParams();
   // console.log(propertyId);
 
@@ -114,32 +116,48 @@ const PropertyDetails = () => {
   const updatedFormattedDate = uDate.toLocaleDateString("en-US", options);
   // console.log(updatedFormattedDate);
 
-  // property Location
-  const propLat = 23.81982;
-  const propLng = 90.36654;
-
   // Map
-  const getCoordinates = async (address) => {
-    const apiKey = "8998fe6898924ae886a046fcf0c0029a"; // Replace with your real key
+  const getCoordinates = async (propAddress) => {
+    const api = import.meta.env.VITE_GEOCODING_API;
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-      "dhaka, bangladesh"
-    )}&key=${apiKey}`;
+      propAddress
+    )}&key=${api}`;
 
     const res = await fetch(url);
     const data = await res.json();
 
-    if (data.results.length > 0) {
+    // console.log(data);
+
+    if (data?.results?.length > 0) {
       const { lat, lng } = data.results[0].geometry;
+
       console.log(lat, lng);
-      return [lat, lng]; // format Leaflet understands
+      return { lat, lng };
     } else {
-      console.log("No result for", address);
+      console.log("No result for", propAddress);
       return null;
     }
   };
 
-  getCoordinates();
-  useEffect(() => {}, []);
+  // Make the address
+  const propAddress =
+    address?.locality + ", " + address?.city + ", " + address?.state;
+
+  /*     const coords = getLatLngFromAddress(propAddress);
+console.log(coords.lat); // ❌ undefined because it's a Promise */
+
+  // pass the propAddress promise function
+  useEffect(() => {
+    const fetchCoordinate = async () => {
+      const res = await getCoordinates(propAddress);
+      setCoordinates(res);
+      // console.log(res);
+    };
+
+    fetchCoordinate();
+  }, [propAddress]);
+
+  console.log(coordinates);
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
@@ -932,13 +950,20 @@ const PropertyDetails = () => {
                   <h4 className="collapse-title font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
                     Map
                   </h4>
-                  <Map
-                    lat={propLat}
-                    lng={propLng}
-                    title={title}
-                    price={price}
-                    propImg={propImg}
-                  />
+
+                  {coordinates ? (
+                    <Map
+                      lat={coordinates?.lat}
+                      lng={coordinates?.lng}
+                      title={title}
+                      price={price}
+                      propImg={propImg}
+                    />
+                  ) : (
+                    <div class="flex justify-center items-center ">
+                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Profile  */}

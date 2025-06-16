@@ -9,8 +9,8 @@ import Sidebar from "../Shared/Sidebar/Sidebar";
 const Contact = () => {
   const homeLat = 23.921683;
   const homeLng = 90.258871;
-  const title = "Our Arena is here";
-  const officeImg = "https://i.ibb.co/chXfhj9Q/pexels-fotoaibe-1571460.jpg";
+  const title = "OUR ARENA IS HERE 😎";
+  const officeImg = "https://i.ibb.co/dDmcr52/Apple.jpg";
   const price = "";
 
   return (

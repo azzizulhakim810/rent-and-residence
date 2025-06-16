@@ -96,3 +96,10 @@
 .masonry-gallery a {
   height: 250px;
 }
+
+/* Map Leaflet CSS  */
+.leaflet-popup-content-wrapper {
+  padding: 1px;
+  text-align: left;
+  border-radius: 8px;
+}
