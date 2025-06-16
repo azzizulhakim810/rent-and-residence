@@ -118,6 +118,29 @@ const PropertyDetails = () => {
   const propLat = 23.81982;
   const propLng = 90.36654;
 
+  // Map
+  const getCoordinates = async (address) => {
+    const apiKey = "8998fe6898924ae886a046fcf0c0029a"; // Replace with your real key
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+      "dhaka, bangladesh"
+    )}&key=${apiKey}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.results.length > 0) {
+      const { lat, lng } = data.results[0].geometry;
+      console.log(lat, lng);
+      return [lat, lng]; // format Leaflet understands
+    } else {
+      console.log("No result for", address);
+      return null;
+    }
+  };
+
+  getCoordinates();
+  useEffect(() => {}, []);
+
   return (
     <div className="bg-C_LightGray/5 pb-6">
       {/* Banner Image  */}

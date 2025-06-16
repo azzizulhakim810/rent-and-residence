@@ -56,7 +56,7 @@ const Map = ({ lat, lng, title, propImg, price }) => {
       popupAnchor: [0, -40],
     }); */
 
-    // Initialize the map
+    // Initialize the map - Set a default View with Zoom
     const map = L.map("map").setView([lat, lng], 16); // (lat, lng, zoom)
 
     // Add OpenStreetMap tiles
