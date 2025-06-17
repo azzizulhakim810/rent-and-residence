@@ -3,6 +3,8 @@ import Main from "../layout/Main";
 import NotFound from "../layout/NotFound";
 
 import AddProperty from "../pages/AddProperty/AddProperty";
+
+import AgentDetails from "../pages/Agent/Agent/AgentDetails";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";
@@ -10,7 +12,6 @@ import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
-import Agent from "../pages/Agent/Agent/Agent";
 
 export const router = createBrowserRouter([
   {
@@ -43,13 +44,16 @@ export const router = createBrowserRouter([
         }, */
       },
       {
-        path: "/agent",
-        element: <Agent />,
+        path: "/agents/:id",
+        element: <AgentDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5123/api/users/${params.id}`),
       },
 
       {
         path: "/allAgents",
         element: <AllAgents />,
+
         loader: () => fetch("http://localhost:5123/api/users"),
       },
       {

@@ -1,3 +1,5 @@
+import { Link, useLoaderData } from "react-router-dom";
+
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import {
   FaFacebookF,
@@ -13,11 +15,16 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 
-const Agent = () => {
+const AgentDetails = () => {
+  const agent = useLoaderData([]);
+  // console.log(agent[0]);
+
+  // Destructure Details from Agent
+  const { _id, name, profileImage, email, role, phone } = agent[0] || {};
   return (
     <div className="bg-C_LightGray/5 py-6">
       <div className="w-10/12 mx-auto ">
@@ -33,11 +40,7 @@ const Agent = () => {
               <nav className="flex flex-col gap-2">
                 <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
                   <div className=" lg:w-[50%] w-full">
-                    <img
-                      className="rounded-md "
-                      src="https://i.ibb.co/nqCK8B0R/person7-21-1-500x328.webp"
-                      alt=""
-                    />
+                    <img className="rounded-md " src={profileImage} alt="" />
 
                     {/* Social Icons  */}
                     <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
@@ -63,10 +66,10 @@ const Agent = () => {
                   <span className=" w-auto flex flex-col gap-2 ps-3 ">
                     <div>
                       <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
-                        Michaela Roja
+                        {name}
                       </h4>
-                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6">
-                        real estate broker
+                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
+                        {role}
                       </p>
                     </div>
 
@@ -75,14 +78,14 @@ const Agent = () => {
                         <FaPhoneAlt className="text-lg" />
 
                         <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                          <Link to="tel:+34 912 123 678">+34 912 123 678</Link>
+                          <Link to="tel:+34 912 123 678">{phone}</Link>
                         </p>
                       </span>
 
                       <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
                         <FaPrint className="text-lg" />
                         <p className=" text-C_gray text-[16px] leading-6  me-5">
-                          +34 912 123 678
+                          {phone}
                         </p>
                       </span>
 
@@ -90,9 +93,7 @@ const Agent = () => {
                         <BsEnvelope className="text-lg" />
 
                         <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          <Link mailto="office@realestate.com">
-                            office@realestate.com{" "}
-                          </Link>
+                          <Link mailto="office@realestate.com">{email} </Link>
                         </p>
                       </span>
 
@@ -100,7 +101,7 @@ const Agent = () => {
                         <FaGlobe className="text-lg" />
 
                         <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          <Link mailto="website.net">website.net</Link>
+                          <Link mailto="website.net">NAN</Link>
                         </p>
                       </span>
                     </nav>
@@ -599,4 +600,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default AgentDetails;

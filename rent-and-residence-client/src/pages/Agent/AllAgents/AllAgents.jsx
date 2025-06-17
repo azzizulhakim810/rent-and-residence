@@ -1,10 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
-import UserCard from "../../../components/UserCard/UserCard";
+import UserCard from "../../../components/AgentCard/AgentCard";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import AgentCard from "../../../components/AgentCard/AgentCard";
 
 const AllAgents = () => {
-  const users = useLoaderData([]);
+  const agents = useLoaderData([]);
   // console.log(users);
 
   return (
@@ -37,10 +38,10 @@ const AllAgents = () => {
             </p>
 
             {/* All Agents  */}
-            {/* First Row  */}
-            <div className="grid grid-cols-2 justify-start w-full gap-6 py-5">
-              {users?.map((user) => (
-                <UserCard key={user._id} user={user} />
+
+            <div className="grid grid-cols-3 justify-start w-full gap-4 py-5">
+              {agents?.map((agent) => (
+                <AgentCard key={agent._id} agent={agent} />
               ))}
             </div>
           </div>
