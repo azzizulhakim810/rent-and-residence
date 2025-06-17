@@ -7,6 +7,7 @@ import Map from "../Shared/Map/Map";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Contact = () => {
+  // Default Contact Info(Hard Info)
   const homeLat = 23.921683;
   const homeLng = 90.258871;
   const title = "OUR ARENA IS HERE 😎";

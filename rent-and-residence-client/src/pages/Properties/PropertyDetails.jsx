@@ -161,12 +161,8 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
-      {/* Banner Image  */}
-      {/*  {images?.map((image, i) => (
-        <PropertyGallery key={i} image={image} />
-      ))} */}
-
       <div className="w-10/12 mx-auto">
+        {/* Banner Image  */}
         <div className="lg:py-8 pt-8 lg:mb-10 ">
           <PropertyGallery className="absolute" images={images} />
         </div>
@@ -179,7 +175,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 pb-5">
-              <div>
+              <div className="w-full">
                 {/* Categories  */}
                 <div className=" flex gap-3 font-Nunito_Sans">
                   <span className="bg-C_purple text-white text-[14px] rounded  px-4  py-1 ">
@@ -947,7 +943,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 >
                   <input type="checkbox" />
 
-                  <h4 className="collapse-title font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                  <h4 className="collapse-title  font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
                     Map
                   </h4>
 

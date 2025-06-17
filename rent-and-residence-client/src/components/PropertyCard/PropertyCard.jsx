@@ -33,35 +33,56 @@ const PropertyCard = ({ property }) => {
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner[0] || {};
 
-  // console.log(propertyOwner);
+  console.log(images.at(0));
+  console.log(images.find((item) => item !== undefined));
+  // console.log(images.forEach((img, i) => img));
   return (
     <Link to={`/propertyDetails/${_id}`}>
       <div className=" bg-white w-full shadow-lg rounded-lg">
         {/* Image  */}
-        <figure
-          className={`bg-[url(${images[0]})] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg`}
+        {images?.[0] && (
+          <figure
+            className={`bg-[url(${images.find(
+              (item) => item !== undefined
+            )})] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg`}
+          >
+            <div className="absolute top-0 right-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
+              <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
+                {listingType}
+              </span>
+
+              <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
+                {propertyType}
+              </span>
+            </div>
+
+            {/* Price & Title  */}
+            <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
+              <span className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
+                {price} €
+              </span>
+
+              <span className=" text-white font-Nunito font-[700] text-[20px] rounded px-6 ">
+                {title}
+              </span>
+            </div>
+          </figure>
+        )}
+        <img
+          src={images[0]}
+          alt="Banner"
+          onError={(e) => {
+            e.target.src = "https://i.ibb.co/khJGcQV/hero-bg.png"; // Use a local placeholder image
+          }}
+        />
+        <div
+          className="w-full h-64 bg-cover bg-center"
+          style={{
+            backgroundImage: images[0] ? `url(${images[0]})` : "none",
+          }}
         >
-          <div className="absolute top-0 right-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
-            <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
-              {listingType}
-            </span>
-
-            <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
-              {propertyType}
-            </span>
-          </div>
-
-          {/* Price & Title  */}
-          <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
-            <span className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
-              {price} €
-            </span>
-
-            <span className=" text-white font-Nunito font-[700] text-[20px] rounded px-6 ">
-              {title}
-            </span>
-          </div>
-        </figure>
+          {/* Your content here */}
+        </div>
 
         {/* Features  */}
         <div className="card-body ">
