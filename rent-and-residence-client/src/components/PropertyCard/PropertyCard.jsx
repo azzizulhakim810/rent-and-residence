@@ -33,8 +33,8 @@ const PropertyCard = ({ property }) => {
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner[0] || {};
 
-  console.log(images.at(0));
-  console.log(images.find((item) => item !== undefined));
+  // console.log(images.at(0));
+  // console.log(images.find((item) => item !== undefined));
   // console.log(images.forEach((img, i) => img));
   return (
     <Link to={`/propertyDetails/${_id}`}>
@@ -42,9 +42,15 @@ const PropertyCard = ({ property }) => {
         {/* Image  */}
         {images?.[0] && (
           <figure
-            className={`bg-[url(${images.find(
-              (item) => item !== undefined
-            )})] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg`}
+            className="w-full h-64 bg-cover bg-center relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg"
+            style={{
+              backgroundImage: images[0] ? `url(${images[0]})` : "none",
+              backgroundColor: images[0]
+                ? undefined
+                : `<div class="flex justify-center items-center ">
+                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                    </div>`,
+            }}
           >
             <div className="absolute top-0 right-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
               <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
@@ -68,21 +74,6 @@ const PropertyCard = ({ property }) => {
             </div>
           </figure>
         )}
-        <img
-          src={images[0]}
-          alt="Banner"
-          onError={(e) => {
-            e.target.src = "https://i.ibb.co/khJGcQV/hero-bg.png"; // Use a local placeholder image
-          }}
-        />
-        <div
-          className="w-full h-64 bg-cover bg-center"
-          style={{
-            backgroundImage: images[0] ? `url(${images[0]})` : "none",
-          }}
-        >
-          {/* Your content here */}
-        </div>
 
         {/* Features  */}
         <div className="card-body ">

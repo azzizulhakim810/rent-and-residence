@@ -10,10 +10,6 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 
 const PropertyGallery = ({ images }) => {
-  /*   const onInit = () => {
-    console.log("lightGallery has been initialized");
-  }; */
-
   return (
     <LightGallery
       speed={500}
@@ -25,15 +21,7 @@ const PropertyGallery = ({ images }) => {
           <img
             className="w-[100%] lg:h-[300px] h-[230px] rounded-2xl mb-10"
             src={image}
-            alt={i}
-            /*  style={{
-              width: "100%",
-              height: "300px",
-
-              // objectFit: "cover",
-              borderRadius: "8px",
-              marginBottom: "10px",
-            }} */
+            alt={i + 1}
           />
         </a>
       ))}

@@ -2,8 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import NotFound from "../layout/NotFound";
 
-import Agent from "../pages/Agent/Agent";
-
 import AddProperty from "../pages/AddProperty/AddProperty";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
@@ -12,6 +10,7 @@ import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
+import Agent from "../pages/Agent/Agent/Agent";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +50,7 @@ export const router = createBrowserRouter([
       {
         path: "/allAgents",
         element: <AllAgents />,
+        loader: () => fetch("http://localhost:5123/api/users"),
       },
       {
         path: "/blogs",

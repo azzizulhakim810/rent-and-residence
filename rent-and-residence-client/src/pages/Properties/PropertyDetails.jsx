@@ -84,7 +84,7 @@ const PropertyDetails = () => {
   } = property || {};
 
   const propImg = property?.images?.[0];
-  console.log(propImg);
+  // console.log(propImg);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -157,7 +157,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
     fetchCoordinate();
   }, [propAddress]);
 
-  console.log(coordinates);
+  // console.log(coordinates);
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
@@ -939,11 +939,9 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 {/* Map  */}
                 <div
                   tabIndex={0}
-                  className="collapse collapse-plus  bg-white w-full shadow-lg p-4 my-6  rounded-md "
+                  className=" bg-white w-full shadow-lg p-8 my-6  rounded-md "
                 >
-                  <input type="checkbox" />
-
-                  <h4 className="collapse-title  font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-6">
                     Map
                   </h4>
 

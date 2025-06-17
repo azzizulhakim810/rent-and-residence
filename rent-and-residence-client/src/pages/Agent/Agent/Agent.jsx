@@ -14,8 +14,8 @@ import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import Sidebar from "../Shared/Sidebar/Sidebar";
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
+import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const Agent = () => {
   return (
