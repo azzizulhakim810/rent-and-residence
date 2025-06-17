@@ -4,7 +4,7 @@ import NotFound from "../layout/NotFound";
 
 import AddProperty from "../pages/AddProperty/AddProperty";
 
-import AgentDetails from "../pages/Agent/Agent/AgentDetails";
+import AgentDetails from "../pages/Agent/AgentDetails/AgentDetails";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";

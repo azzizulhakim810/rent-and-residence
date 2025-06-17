@@ -76,6 +76,17 @@ async function run() {
       res.send(result);
     });
 
+    // Get each Agent Owned Property
+    app.get("/api/agentOwnedProperty/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+
+      const query = { ownerId: id };
+      const result = await propertiesCollection.find(query).toArray();
+
+      res.send(result);
+    });
+
     // Get all the saved properties
     /* app.get("/api/savedProperties", async (req, res) => {
       const result = await propertiesCollection.find().toArray();

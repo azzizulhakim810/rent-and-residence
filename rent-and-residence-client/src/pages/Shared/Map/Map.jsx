@@ -49,7 +49,12 @@ const Map = ({ lat, lng, title, propImg, price }) => {
   return (
     <div
       id="map"
-      style={{ height: "400px", width: "100%", borderRadius: "12px" }}
+      style={{
+        height: "400px",
+        width: "100%",
+        borderRadius: "12px",
+        zIndex: 0,
+      }}
     />
   );
 };

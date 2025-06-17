@@ -44,19 +44,11 @@ const Navbar = () => {
           onMouseEnter={() => handleSubmenu(setShowSubmenu(true))}
           onMouseLeave={() => handleSubmenu(setShowSubmenu(false))}
           to="#"
-          className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+          className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none "
         >
           Agents
           {showSubmenu ? (
-            <ul className="bg-white absolute w-[150px] shadow-sm top-9 sub-menu p-2">
-              <li>
-                <Link
-                  to="/agents"
-                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-                >
-                  Agent
-                </Link>
-              </li>
+            <ul className="bg-white absolute w-[150px] shadow-sm top-9 sub-menu p-2 ">
               <li>
                 <Link
                   to="/allAgents"
@@ -189,14 +181,6 @@ const Navbar = () => {
             <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
               <li>
                 <Link
-                  to="/agents"
-                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-                >
-                  Agents
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/allAgents"
                   className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
                 >
@@ -280,7 +264,7 @@ const Navbar = () => {
         </div>
 
         {/* Nav Items - Desktop | Logo - Mobile */}
-        <div className="navbar-center  ">
+        <div className="navbar-center z-100">
           <ul className="menu menu-horizontal px-10 text-[16px]  gap-2 hidden lg:flex">
             {navOptions}
           </ul>
