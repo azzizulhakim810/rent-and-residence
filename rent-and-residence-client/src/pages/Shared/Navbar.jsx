@@ -281,7 +281,7 @@ const Navbar = () => {
         <div className="navbar-end flex items-center content-center gap-4">
           {/* Number  */}
           <div className="lg:flex hidden">
-            <Link mailto="+88012345678">
+            <Link to="mailto:+88012345678">
               <p className="nav-item text-[16px] font-semibold">
                 +88 0124 56789
               </p>
