@@ -91,16 +91,17 @@ async function run() {
       res.send(result);
     });
 
-    // Get all the users
+    // Get all the blogs
     app.get("/api/blogs", async (req, res) => {
       const result = await blogsCollection.find().toArray();
       res.send(result);
     });
+
     // Get all the saved properties
-    /* app.get("/api/savedProperties", async (req, res) => {
-      const result = await propertiesCollection.find().toArray();
+    app.get("/api/savedProperties", async (req, res) => {
+      const result = await favouriteCollection.find().toArray();
       res.send(result);
-    }); */
+    });
 
     // Add a Property
     app.post("/api/properties", async (req, res) => {
