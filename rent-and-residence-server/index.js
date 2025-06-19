@@ -40,6 +40,10 @@ async function run() {
 
     const usersCollection = client.db("wp_residence_DB").collection("users");
 
+    const blogsCollection = client
+      .db("wp_residence_DB")
+      .collection("blogsCollection");
+
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
       const result = await propertiesCollection.find().toArray();
@@ -87,6 +91,11 @@ async function run() {
       res.send(result);
     });
 
+    // Get all the users
+    app.get("/api/blogs", async (req, res) => {
+      const result = await blogsCollection.find().toArray();
+      res.send(result);
+    });
     // Get all the saved properties
     /* app.get("/api/savedProperties", async (req, res) => {
       const result = await propertiesCollection.find().toArray();
