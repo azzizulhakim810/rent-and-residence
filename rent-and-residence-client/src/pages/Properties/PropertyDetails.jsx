@@ -42,16 +42,20 @@ import { PiBathtub, PiElevatorLight } from "react-icons/pi";
 import { PiBasketballThin } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
+import { Rating } from "@smastrom/react-rating";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyGallery from "../../components/PropertyGallery/PropertyGallery";
 import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
+import "@smastrom/react-rating/style.css";
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
 
   const [coordinates, setCoordinates] = useState(null);
+
+  const [rating, setRating] = useState(0);
 
   const { propertyId } = useParams();
   // console.log(propertyId);
@@ -939,7 +943,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 {/* Map  */}
                 <div
                   tabIndex={0}
-                  className=" bg-white w-full shadow-lg p-8 my-6  rounded-md "
+                  className=" bg-white w-full shadow-lg p-8 my-6 rounded-md "
                 >
                   <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-6">
                     Map
@@ -955,9 +959,56 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     />
                   ) : (
                     <div class="flex justify-center items-center ">
+                      <p className="font-Nunito_Sans text-C_purple pe-2">
+                        Don't see the map? Please Reload
+                      </p>
+                      <br />
                       <span className=" loading loading-ring loading-xl text-C_purple"></span>
                     </div>
                   )}
+                </div>
+
+                {/* Reviews  */}
+                <div
+                  tabIndex={0}
+                  className=" bg-white w-full shadow-lg p-8 my-6 rounded-md "
+                >
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-0">
+                    Reviews
+                  </h4>
+
+                  <div className="pt-5">
+                    <div className="flex flex-col gap-5 ">
+                      {/* Rating  */}
+                      <Rating
+                        style={{ maxWidth: 150 }}
+                        value={rating}
+                        onChange={setRating}
+                      />
+
+                      <div className="flex lg:flex-row flex-col gap-3">
+                        <input
+                          type="text"
+                          className="input font-Nunito_Sans font-[600] text-C_LightGray w-full"
+                          placeholder="Your Name"
+                        />
+                        <input
+                          type="text"
+                          className="input font-Nunito_Sans font-[600] text-C_LightGray  w-full"
+                          placeholder="Designation"
+                        />
+                      </div>
+
+                      <textarea
+                        placeholder="Comment"
+                        className="textarea w-full h-20 "
+                      ></textarea>
+
+                      <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Profile  */}
