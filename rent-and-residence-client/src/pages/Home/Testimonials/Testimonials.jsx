@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import TestimonialCard from "../../../components/TestimonialCard/TestimonialCard";
 const Testimonials = () => {
-  const [review, setReview] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5123/api/reviews")
       .then((res) => res.json())
-      .then((data) => setReview(data));
+      .then((data) => setReviews(data));
   }, []);
 
-  console.log(review);
+  // console.log(review);
+
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -23,7 +24,10 @@ const Testimonials = () => {
 
         {/* First Row  */}
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-5">
-          <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
+          {reviews?.map((review) => (
+            <TestimonialCard key={review._id} review={review} />
+          ))}
+          {/* <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
             <div className="flex justify-start items-center gap-5">
               <img
                 className="size-15 rounded-full"
@@ -50,9 +54,9 @@ const Testimonials = () => {
               <FaStar />
               <FaStar />
             </div>
-          </div>
+          </div> */}
 
-          <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
+          {/* <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
             <div className="flex justify-start items-center gap-5">
               <img
                 className="size-15 rounded-full"
@@ -79,9 +83,9 @@ const Testimonials = () => {
               <FaStar />
               <FaStar />
             </div>
-          </div>
+          </div> */}
 
-          <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
+          {/* <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
             <div className="flex justify-start items-center gap-5">
               <img
                 className="size-15 rounded-full"
@@ -108,11 +112,11 @@ const Testimonials = () => {
               <FaStar />
               <FaStar />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Second Row  */}
-        <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-12">
+        {/* <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-12">
           <div className="col-span-4 w-full shadow-[0px_0px_50px_rgba(100,80,200,0.11)] p-12 flex flex-col gap-5">
             <div className="flex justify-start items-center gap-5">
               <img
@@ -199,7 +203,7 @@ const Testimonials = () => {
               <FaStar />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
