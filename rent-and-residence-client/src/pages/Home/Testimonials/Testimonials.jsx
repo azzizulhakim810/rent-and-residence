@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 const Testimonials = () => {
+  const [review, setReview] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5123/api/reviews")
+      .then((res) => res.json())
+      .then((data) => setReview(data));
+  }, []);
+
+  console.log(review);
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
