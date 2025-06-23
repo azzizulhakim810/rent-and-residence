@@ -1,6 +1,7 @@
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Map from "../Shared/Map/Map";
@@ -16,6 +17,9 @@ const Contact = () => {
 
   return (
     <div className="bg-C_LightGray/5 pb-6 ">
+      <Helmet>
+        <title>R & R | Contact</title>
+      </Helmet>
       {/* Map  */}
       <Map
         lat={homeLat}

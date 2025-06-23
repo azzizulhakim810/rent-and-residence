@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaRegComments, FaXTwitter } from "react-icons/fa6";
 import { LuCalendarDays } from "react-icons/lu";
@@ -8,6 +9,9 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 const BlogDetails = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Helmet>
+        <title>R & R | Blog Details</title>
+      </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 

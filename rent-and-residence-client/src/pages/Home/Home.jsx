@@ -1,24 +1,30 @@
-import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import useProperties from "../../hooks/useProperties";
 import Banner from "./Banner/Banner";
 import Featured from "./Featured/Featured";
+import HomeProperties from "./HomeProperties/HomeProperties";
 import Location from "./Location/Location";
-import Properties from "./Properties/Properties";
 import Services from "./Services/Services";
 import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
-  const allProperties = useLoaderData([]);
+  // const allProperties = useLoaderData([]);
+  const [properties, loading] = useProperties();
 
   return (
     <div>
+      <Helmet>
+        <title>R & R | Home</title>
+      </Helmet>
+
       <Banner />
       <div className="w-10/12 mx-auto">
         <Services />
-        <Properties allProperties={allProperties} />
+        <HomeProperties properties={properties} loading={loading} />
       </div>
       <div className="bg-[#F0F5FF]">
         <div className="w-10/12 mx-auto ">
-          <Featured allProperties={allProperties} />
+          <Featured properties={properties} loading={loading} />
         </div>
       </div>
 

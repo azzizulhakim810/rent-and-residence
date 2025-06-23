@@ -2,20 +2,7 @@
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-const Properties = ({ allProperties }) => {
-  // const [properties, setProperties] = useState([]);
-  // const allProperties = useLoaderData([]);
-  // setProperties(allProperties);
-
-  /*   useEffect(() => {
-    fetch("http://localhost:5123/api/properties")
-      .then((res) => res.json())
-      .then((data) => setProperties(data));
-  }, []); */
-
-  // console.log(properties.map((property) => console.log(property)));
-
-  // console.log(properties);
+const HomeProperties = ({ properties, loading }) => {
   return (
     <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -29,9 +16,21 @@ const Properties = ({ allProperties }) => {
 
         {/* Property Cards  */}
         <div className="grid lg:grid-cols-3 grid-cols-1 justify-start w-full gap-6 py-5">
-          {allProperties?.map((property) => (
-            <PropertyCard key={property._id} property={property} />
-          ))}
+          {}
+
+          {loading ? (
+            <div className="flex">
+              <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
+                Properties are loading
+              </p>
+              <br />
+              <span className=" loading loading-ring loading-xl text-C_purple"></span>
+            </div>
+          ) : (
+            properties?.map((property) => (
+              <PropertyCard key={property._id} property={property} />
+            ))
+          )}
         </div>
 
         <Link className="btn w-1/6 mx-auto my-5 bg-C_purple text-white hover:bg-transparent hover:border-2 hover:border-C_purple hover:text-C_purple border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-5">
@@ -42,4 +41,4 @@ const Properties = ({ allProperties }) => {
   );
 };
 
-export default Properties;
+export default HomeProperties;

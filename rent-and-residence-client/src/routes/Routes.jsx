@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5123/api/properties"),
+        // loader: () => fetch("http://localhost:5123/api/properties"),
       },
       {
         path: "/addProperty",
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path: "/properties",
         element: <Properties />,
-        loader: () => fetch("http://localhost:5123/api/properties"),
+        // loader: () => fetch("http://localhost:5123/api/properties"),
       },
       {
         path: "/propertyDetails/:propertyId",

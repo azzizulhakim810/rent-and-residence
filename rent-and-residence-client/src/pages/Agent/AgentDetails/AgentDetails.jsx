@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useLoaderData } from "react-router-dom";
 
 import { BsEnvelope } from "react-icons/bs";
@@ -34,6 +35,9 @@ const AgentDetails = () => {
 
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Helmet>
+        <title>R & R | {name}</title>
+      </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 

@@ -1,11 +1,15 @@
 import { FaChevronRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Blogs = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Helmet>
+        <title>R & R | Blogs</title>
+      </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 

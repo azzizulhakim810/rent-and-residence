@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import UserCard from "../../../components/AgentCard/AgentCard";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
@@ -10,6 +11,9 @@ const AllAgents = () => {
 
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Helmet>
+        <title>R & R | Agents</title>
+      </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 

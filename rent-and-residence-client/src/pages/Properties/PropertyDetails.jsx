@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
@@ -42,13 +43,20 @@ import { PiBathtub, PiElevatorLight } from "react-icons/pi";
 import { PiBasketballThin } from "react-icons/pi";
 import { TbToolsKitchen2 } from "react-icons/tb";
 
-import { Rating } from "@smastrom/react-rating";
+import { Rating, ThinStar } from "@smastrom/react-rating";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyGallery from "../../components/PropertyGallery/PropertyGallery";
 import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
 import "@smastrom/react-rating/style.css";
+
+// Declare it outside your component so it doesn't get re-created
+const myStyles = {
+  itemShapes: ThinStar,
+  activeFillColor: "#7854F6",
+  inactiveFillColor: "#7854f64f",
+};
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
@@ -165,6 +173,9 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
+      <Helmet>
+        <title>R & R | properties</title>
+      </Helmet>
       <div className="w-10/12 mx-auto">
         {/* Banner Image  */}
         <div className="lg:py-8 pt-8 lg:mb-10 ">
@@ -980,10 +991,17 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   <div className="pt-5">
                     <div className="flex flex-col gap-5 ">
                       {/* Rating  */}
+                      {/* <Rating
+                        style={{ maxWidth: 150 }}
+                        value={rating}
+                        onChange={setRating}
+                      /> */}
+
                       <Rating
                         style={{ maxWidth: 150 }}
                         value={rating}
                         onChange={setRating}
+                        itemStyles={myStyles}
                       />
 
                       <div className="flex lg:flex-row flex-col gap-3">

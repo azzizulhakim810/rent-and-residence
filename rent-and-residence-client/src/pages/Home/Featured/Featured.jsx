@@ -15,7 +15,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 // import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
-const Featured = ({ allProperties }) => {
+const Featured = ({ properties }) => {
   // const [properties, setProperties] = useState([]);
 
   /*   useEffect(() => {
@@ -24,7 +24,7 @@ const Featured = ({ allProperties }) => {
       .then((data) => setProperties(data));
   }, []); */
 
-  const featuredProperties = allProperties.filter(
+  const featuredProperties = properties.filter(
     (property) => property.isFeatured == true
   );
   // properties.map((property) => console.log(property));

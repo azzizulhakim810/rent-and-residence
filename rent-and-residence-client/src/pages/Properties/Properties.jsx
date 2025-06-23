@@ -1,14 +1,21 @@
+import { Helmet } from "react-helmet";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { useLoaderData } from "react-router-dom";
+
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import useProperties from "../../hooks/useProperties";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Properties = () => {
-  const allProperties = useLoaderData([]);
+  // const allProperties = useLoaderData([]);
+
+  const [properties, loading] = useProperties();
   // console.log(allProperties);
   return (
     <div className="bg-C_LightGray/5 py-6">
+      <Helmet>
+        <title>R & R | Properties</title>
+      </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
 
@@ -75,10 +82,20 @@ const Properties = () => {
             </div>
 
             {/* Property Cards  */}
-            <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
-              {allProperties?.map((property) => (
-                <PropertyCard key={property._id} property={property} />
-              ))}
+            <div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
+              {loading ? (
+                <div className="flex">
+                  <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
+                    Properties are loading
+                  </p>
+                  <br />
+                  <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                </div>
+              ) : (
+                properties?.map((property) => (
+                  <PropertyCard key={property._id} property={property} />
+                ))
+              )}
             </div>
 
             {/* Pagination  */}

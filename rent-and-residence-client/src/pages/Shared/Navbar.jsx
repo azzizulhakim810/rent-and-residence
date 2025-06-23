@@ -241,7 +241,7 @@ const Navbar = () => {
           </div>
 
           {/* Sidebar - Mobile  */}
-          <div className="drawer-side  z-11">
+          <div className="drawer-side  z-110">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"

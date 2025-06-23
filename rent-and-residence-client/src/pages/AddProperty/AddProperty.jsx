@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
@@ -18,6 +19,9 @@ const AddProperty = () => {
 
   return (
     <div className="bg-C_LightGray/5 pb-6 ">
+      <Helmet>
+        <title>R & R | New Property</title>
+      </Helmet>
       <div className="w-10/12 mx-auto pt-4">
         {/* Breadcrumbs */}
 
