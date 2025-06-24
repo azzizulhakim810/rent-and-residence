@@ -10,27 +10,47 @@ const SignIn = () => {
       </button>
 
       {/* Form  */}
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">Login</legend>
-
-            <label className="label">Email</label>
-            <input type="email" className="input" placeholder="Email" />
-
-            <label className="label">Password</label>
-            <input type="password" className="input" placeholder="Password" />
-
-            <button className="btn btn-neutral mt-4">Login</button>
-          </fieldset>
+      <dialog id="my_modal_3" className="modal  ">
+        <div className="modal-box p-0 bg-white w-11/12 max-w-4xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+
+          {/* Body  */}
+          <div className="flex items-center w-full">
+            <img
+              className="w-1/2"
+              src="https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg"
+              alt=""
+            />
+            <fieldset className="w-1/2 gap-3 fieldset border-none rounded-box  border m-10">
+              {/*  <legend className="fieldset-legend">Sign In</legend> */}
+
+              {/* <label className="label">Email</label> */}
+              <h1 className="text-2xl font-[600] font-Nunito ">
+                Sign into your account
+              </h1>
+              <input
+                type="email"
+                className="input focus:outline-0 outline-C_purple  w-full"
+                placeholder="Email"
+              />
+
+              {/* <label className="label">Password</label> */}
+              <input
+                type="password"
+                className="input focus:outline-0 outline-C_purple  w-full"
+                placeholder="Password"
+              />
+
+              <button className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex mt-5">
+                Login
+              </button>
+            </fieldset>
+          </div>
         </div>
       </dialog>
     </div>
