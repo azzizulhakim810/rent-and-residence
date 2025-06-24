@@ -1,24 +1,30 @@
-import { useEffect } from "react";
-import { LoadCanvasTemplate, loadCaptchaEnginge } from "react-simple-captcha";
+import { useEffect, useState } from "react";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const SignIn = () => {
+  const [disabled, setDisabled] = useState(true);
+
   // Captcha Added
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(5);
   }, []);
-  /* const doSubmit = () => {
-    // <! --   let's assume there is an HTML input text box with id 'user_captcha_input' to get user input -->   
+  const handleCaptcha = () => {
     let user_captcha_value =
       document.getElementById("user_captcha_input").value;
+    console.log(user_captcha_value);
 
     if (validateCaptcha(user_captcha_value) == true) {
-      alert("Captcha Matched");
+      setDisabled(false);
     } else {
-      alert("Captcha Does Not Match");
+      setDisabled(true);
     }
-  }; */
+  };
 
   //  Toggle Password Visibility
   const handleShowPass = () => {
@@ -102,15 +108,27 @@ const SignIn = () => {
                   <FiEyeOff className="swap-off" />
                 </label>
               </div>
-              <div className="flex items-center">
-                <LoadCanvasTemplate /> <input type="text" />{" "}
+
+              {/* Captcha  */}
+              <div className="grid grid-cols-3 items-center gap-4 my-3">
+                <LoadCanvasTemplate />
                 <input
-                  type="checkbox"
-                  checked="checked"
-                  className="checkbox border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-orange-800"
+                  id="user_captcha_input"
+                  className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
+                  type="text"
+                  placeholder="Type the captcha value"
                 />
+
+                <button
+                  onClick={handleCaptcha}
+                  className=" bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
+                >
+                  Validate
+                </button>
               </div>
+
               <button
+                disabled={disabled}
                 className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md hidden lg:flex py-5 mt-2"
                 type="submit"
               >
