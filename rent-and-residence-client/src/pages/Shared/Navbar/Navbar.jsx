@@ -6,6 +6,7 @@ import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
+import SignIn from "../../SignIn/SignIn";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -331,12 +332,16 @@ const Navbar = () => {
           </div>
 
           {/* Btn - Desktop  */}
-          <Link
+          {/* <Link
             to="/addProperty"
             className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
           >
             Add Housing
-          </Link>
+          </Link> */}
+
+          {/* Sign In Btn - Desktop  */}
+
+          <SignIn />
         </div>
       </div>
     </div>
