@@ -12,6 +12,8 @@ import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
+import SignIn from "../pages/SignIn/SignIn";
+import SignUp from "../pages/Signup/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +24,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        // loader: () => fetch("http://localhost:5123/api/properties"),
       },
       {
         path: "/addProperty",
@@ -31,7 +32,6 @@ export const router = createBrowserRouter([
       {
         path: "/properties",
         element: <Properties />,
-        // loader: () => fetch("http://localhost:5123/api/properties"),
       },
       {
         path: "/propertyDetails/:propertyId",
@@ -67,6 +67,14 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/signIn",
+        element: <SignIn />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
       },
     ],
   },
