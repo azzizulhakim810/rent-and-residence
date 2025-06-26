@@ -15,6 +15,7 @@ import PropertyDetails from "../pages/Properties/PropertyDetails";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/Signup/Signup";
 import Dashboard from "../layout/Dashboard/Dashboard";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,11 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
-    children: [{}],
+    children: [
+      {
+        path: "/dashboard/myProfile",
+        element: <MyProfile />,
+      },
+    ],
   },
 ]);
