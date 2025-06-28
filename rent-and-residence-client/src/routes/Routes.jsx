@@ -16,6 +16,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/Signup/Signup";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import ActiveListing from "../pages/Dashboard/ActiveListing/ActiveListing";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myProfile",
         element: <MyProfile />,
+      },
+      {
+        path: "/dashboard/activeListing",
+        element: <ActiveListing />,
       },
     ],
   },
