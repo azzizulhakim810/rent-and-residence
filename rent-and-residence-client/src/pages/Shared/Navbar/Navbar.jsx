@@ -6,7 +6,7 @@ import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
-import SignIn from "../../SignIn/SignIn";
+import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -341,7 +341,7 @@ const Navbar = () => {
 
           {/* Sign In Btn - Desktop  */}
 
-          <SignIn />
+          <SignInAndUp />
         </div>
       </div>
     </div>
