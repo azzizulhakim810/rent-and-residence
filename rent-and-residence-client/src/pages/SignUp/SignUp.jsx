@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -8,9 +9,12 @@ import {
 
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { AuthContext } from "../../providers/AuthProvider";
 const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
+
+  const { createUser } = useContext(AuthContext);
 
   const handleValidateBtn = (e) => {
     e.preventDefault();
@@ -52,9 +56,20 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    console.log(firstName, lastName, email, password);
+
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        // form.reset();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="lg:flex block items-center w-full">
