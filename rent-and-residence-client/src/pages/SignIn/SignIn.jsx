@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
 
+import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const SignIn = () => {
   const [disabled, setDisabled] = useState(true);
 
+  const handleValidateBtn = () => {
+    setDisabled(false);
+  };
+
   // Captcha Added
   useEffect(() => {
     loadCaptchaEnginge(5);
   }, []);
+
+  // Captcha Validation
   const handleCaptcha = () => {
     let user_captcha_value =
       document.getElementById("user_captcha_input").value;
@@ -76,11 +84,25 @@ const SignIn = () => {
               onSubmit={handleSubmit}
               className="w-1/2 gap-3 fieldset border-none rounded-box  border m-10"
             >
-              {/*  <legend className="fieldset-legend">Sign In</legend> */}
-              {/* <label className="label">Email</label> */}
               <h1 className="text-2xl font-[700] font-Nunito mb-2">
                 Sign into your account
               </h1>
+
+              {/* <Google Button  */}
+              <div className="flex justify-center w-full pt-5">
+                <button
+                  // onClick={handleGoogleSignin}
+                  className=" flex select-none items-center gap-3 rounded-md border border-C_LightGray py-3 w-full justify-center align-middle font-Nunito_Sans text-sm font-bold uppercase text-C_DarkGray hover:text-C_purple cursor-pointer transition-all hover:opacity-75 focus:ring focus:ring-text-C_purple active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  data-ripple-dark="true"
+                >
+                  <FcGoogle></FcGoogle>
+                  Continue with Google
+                </button>
+              </div>
+
+              <div className="divider">OR</div>
+
+              {/* Form Field  */}
               <input
                 name="email"
                 type="email"
@@ -108,23 +130,34 @@ const SignIn = () => {
                   <FiEyeOff className="swap-off" />
                 </label>
               </div>
+              <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
+                Don't Have An Account?{" "}
+                <Link
+                  className="font-medium text-C_purple transition-colors hover:underline"
+                  to="/signup"
+                >
+                  SignUp
+                </Link>
+              </p>
 
               {/* Captcha  */}
               <div className="grid grid-cols-3 items-center gap-4 my-3">
                 <LoadCanvasTemplate />
                 <input
+                  onChange={handleValidateBtn}
                   id="user_captcha_input"
                   className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
                   type="text"
                   placeholder="Type the captcha value"
                 />
 
-                <button
+                <Link
                   onClick={handleCaptcha}
-                  className=" bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
+                  disabled={disabled}
+                  className="btn bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
                 >
                   Validate
-                </button>
+                </Link>
               </div>
 
               <button

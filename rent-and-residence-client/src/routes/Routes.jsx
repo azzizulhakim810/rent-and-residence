@@ -71,14 +71,14 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
+      /* {
         path: "/signIn",
         element: <SignIn />,
-      },
-      {
+      }, */
+      /* {
         path: "/signUp",
         element: <SignUp />,
-      },
+      }, */
     ],
   },
   {
