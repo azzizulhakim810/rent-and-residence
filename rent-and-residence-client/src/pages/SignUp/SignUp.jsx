@@ -57,16 +57,12 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
     console.log(email, password);
   };
   return (
-    <div className="flex items-center w-full">
-      <div className="bg-[url(https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg)] w-1/2"></div>
-      {/* <img
-        className="w-1/2 h-[100%]"
-        src="https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg"
-        alt=""
-      /> */}
+    <div className="lg:flex block items-center w-full">
+      <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
+
       <form
         onSubmit={handleSubmit}
-        className="w-1/2 gap-3 fieldset border-none rounded-box  border m-10"
+        className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box  border p-10"
       >
         <h1 className="text-2xl font-[700] font-Nunito mb-2">
           Create an account
@@ -145,7 +141,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           <LoadCanvasTemplate />
           <input
             onChange={handleValidateBtn}
-            id="user_captcha_input_signup"
+            id="user_captcha_input"
             className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
             type="text"
             placeholder="Type the captcha value"
@@ -162,10 +158,10 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         <button
           disabled={disabled}
-          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md hidden lg:flex py-5 mt-2"
+          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md  py-5 mt-2"
           type="submit"
         >
-          Login
+          Sign Up
         </button>
       </form>
     </div>

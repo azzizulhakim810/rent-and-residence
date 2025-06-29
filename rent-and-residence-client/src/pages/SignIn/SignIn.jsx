@@ -59,15 +59,11 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   };
 
   return (
-    <div className="flex items-center w-full">
-      <img
-        className="w-1/2"
-        src="https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg"
-        alt=""
-      />
+    <div className="lg:flex block items-center w-full ">
+      <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
       <form
         onSubmit={handleSubmit}
-        className="w-1/2 gap-3 fieldset border-none rounded-box  border m-10"
+        className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box border p-10"
       >
         <h1 className="text-2xl font-[700] font-Nunito mb-2">
           Sign into your account
@@ -147,10 +143,10 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         <button
           disabled={disabled}
-          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md hidden lg:flex py-5 mt-2"
+          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
           type="submit"
         >
-          Login
+          Sign In
         </button>
       </form>
     </div>

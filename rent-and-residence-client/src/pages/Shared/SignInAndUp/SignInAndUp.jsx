@@ -16,7 +16,7 @@ const SignInAndUp = () => {
       </button>
 
       {/* Form  */}
-      <dialog id="pop-up" className="modal ">
+      <dialog id="pop-up" className="modal">
         <div className="modal-box p-0 bg-white w-11/12 max-w-4xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
