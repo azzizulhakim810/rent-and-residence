@@ -23,11 +23,22 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      throw new Error();
+      console.log(data);
+    } catch (error) {
+      setError("email", {
+        message: "This Email is already taken",
+      });
+    }
+  };
+  // console.log(watch("email")); // watch input value by passing the name of it
 
   const handleValidateBtn = (e) => {
     e.preventDefault();
@@ -104,29 +115,45 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         <div className="divider">OR</div>
 
-        {/* Form Field  */}
-        {/* <input
-          name="email"
-          type="email"
-          className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
+        {/* Email Field  */}
+        <input
+          // name="email"
+          // type="email"
           placeholder="Email"
-        /> */}
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="test" {...register("example")} />
-        {/* <label className="label">Password</label> */}
+          className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
+          {...register("email", {
+            required: "Email is required",
+            validate: (value) => {
+              if (!value.includes("@")) {
+                return "Eamil must include @";
+              }
+              return true;
+            },
+          })}
+        />
+        {errors.email && (
+          <span className="text-red-500">{errors.email.message}</span>
+        )}
+
+        {/* Password Field  */}
         <div className="flex relative">
-          {/* <input
+          <input
+            // name="password"
+            placeholder="Password"
             id="passwordInput"
-            name="password"
             type="password"
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
-            placeholder="Password"
-          /> */}
-          {/* include validation with required or other standard HTML validation rules */}
-          <input {...register("exampleRequired", { required: true })} />
-          {/* errors will return when field validation fails  */}
-          {errors.exampleRequired && <span>This field is required</span>}
+            {...register("password", {
+              required: "Password is required",
+              pattern: /^[A-Za-z]+$/i,
+              minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters",
+              },
+            })}
+          />
 
+          {/* Eye Icon  */}
           <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
             {/* this hidden checkbox controls the state */}
             <input onClick={handleShowPass} type="checkbox" />
@@ -138,6 +165,9 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
             <FiEyeOff className="swap-off" />
           </label>
         </div>
+        {errors.password && (
+          <span className="text-red-500">{errors.password.message}</span>
+        )}
         <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
           Don't Have An Account?{" "}
           <Link
@@ -169,14 +199,12 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         </div>
 
         <button
-          disabled={disabled}
+          // disabled={disabled}
           className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
           type="submit"
         >
-          Sign In
+          {isSubmitting ? "Loading..." : "Sign In"}
         </button>
-
-        <input type="submit" />
       </form>
     </div>
   );
