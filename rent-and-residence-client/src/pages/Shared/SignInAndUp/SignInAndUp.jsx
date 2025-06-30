@@ -1,19 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+import { AuthContext } from "../../../providers/AuthProvider";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
 
 const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
+  const { user, signOutUser, loading } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Sign Out Successfully");
+        loading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div>
-      <button
-        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
-        onClick={() => document.getElementById("pop-up").showModal()}
-      >
-        Sign In
-      </button>
+      {user ? (
+        <button
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
+          onClick={handleSignOut}
+        >
+          Sign Out
+        </button>
+      ) : (
+        <button
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
+          onClick={() => document.getElementById("pop-up").showModal()}
+        >
+          Sign In
+        </button>
+      )}
 
       {/* Form  */}
       <dialog id="pop-up" className="modal">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
@@ -6,12 +6,17 @@ import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
-  const handleSubmenu = () => {};
+  const { user } = useContext(AuthContext);
+  // console.log(user);
+
+  const { uid, displayname, email, photoURL } = user || {};
+
   const navOptions = (
     <>
       <li>
@@ -42,8 +47,8 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          onMouseEnter={() => handleSubmenu(setShowSubmenu(true))}
-          onMouseLeave={() => handleSubmenu(setShowSubmenu(false))}
+          onMouseEnter={() => setShowSubmenu(true)}
+          onMouseLeave={() => setShowSubmenu(false)}
           to="#"
           className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none "
         >
@@ -149,8 +154,8 @@ const Navbar = () => {
 
       <li className="py-4  border-gray-600 border-b-1">
         <NavLink
-          onMouseEnter={() => handleSubmenu(setShowSubmenu(true))}
-          onMouseLeave={() => handleSubmenu(setShowSubmenu(false))}
+          onMouseEnter={() => setShowSubmenu(true)}
+          onMouseLeave={() => setShowSubmenu(false)}
           to="#"
           /* className={({ isActive }) =>
             isActive

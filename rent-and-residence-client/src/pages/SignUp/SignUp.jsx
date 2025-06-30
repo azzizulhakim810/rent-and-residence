@@ -60,12 +60,12 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
     const lastName = form.lastName.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(firstName, lastName, email, password);
+    // console.log(firstName, lastName, email, password);
 
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
-        // form.reset();
+        form.reset();
       })
       .catch((error) => {
         console.log(error.message);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   LoadCanvasTemplate,
@@ -6,12 +6,28 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
+import { useForm } from "react-hook-form";
+
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
+  const { user, signIn } = useContext(AuthContext);
+
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
+
+  // Extract Info form Hook Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
+  console.log(watch("example")); // watch input value by passing the name of it
 
   const handleValidateBtn = (e) => {
     e.preventDefault();
@@ -50,19 +66,24 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   };
 
   // Sign In Form Submission
-  const handleSubmit = (e) => {
+  /* const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-  };
+
+    signIn(email, password)
+      .then((res) => console.log(res.user))
+      .catch((error) => console.log(error.message));
+  }; */
 
   return (
     <div className="lg:flex block items-center w-full ">
       <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
       <form
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box border p-10"
       >
         <h1 className="text-2xl font-[700] font-Nunito mb-2">
@@ -84,21 +105,27 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         <div className="divider">OR</div>
 
         {/* Form Field  */}
-        <input
+        {/* <input
           name="email"
           type="email"
           className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
           placeholder="Email"
-        />
+        /> */}
+        {/* register your input into the hook by invoking the "register" function */}
+        <input defaultValue="test" {...register("example")} />
         {/* <label className="label">Password</label> */}
         <div className="flex relative">
-          <input
+          {/* <input
             id="passwordInput"
             name="password"
             type="password"
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
             placeholder="Password"
-          />
+          /> */}
+          {/* include validation with required or other standard HTML validation rules */}
+          <input {...register("exampleRequired", { required: true })} />
+          {/* errors will return when field validation fails  */}
+          {errors.exampleRequired && <span>This field is required</span>}
 
           <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
             {/* this hidden checkbox controls the state */}
@@ -148,6 +175,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         >
           Sign In
         </button>
+
+        <input type="submit" />
       </form>
     </div>
   );
