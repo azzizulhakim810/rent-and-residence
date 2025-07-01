@@ -13,7 +13,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -58,6 +58,18 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   };
   // console.log(watch("email")); // watch input value by passing the name of it
 
+  // Google Sign In
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        console.log(res.user);
+
+        // Close the modal
+        document.getElementById("signUpAndInPopUp").close();
+      })
+      .catch((error) => console.log(error));
+  };
+
   const handleValidateBtn = (e) => {
     e.preventDefault();
     // console.log(validateCaptcha(e.target.value));
@@ -99,10 +111,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   return (
     <div className="lg:flex block items-center w-full ">
       <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box border p-10"
-      >
+
+      <div className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box border p-10">
         <h1 className="text-2xl font-[700] font-Nunito mb-2">
           Sign into your account
         </h1>
@@ -110,7 +120,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         {/* <Google Button  */}
         <div className="flex justify-center w-full pt-5">
           <button
-            // onClick={handleGoogleSignin}
+            onClick={handleGoogleSignIn}
             className=" flex select-none items-center gap-3 rounded-md border border-C_LightGray py-3 w-full justify-center align-middle font-Nunito_Sans text-sm font-bold uppercase text-C_DarkGray hover:text-C_purple cursor-pointer transition-all hover:opacity-75 focus:ring focus:ring-text-C_purple active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             data-ripple-dark="true"
           >
@@ -122,98 +132,103 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         {/* Divider  */}
         <div className="divider">OR</div>
 
-        {/* Email */}
-        <input
-          placeholder="Email"
-          className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
-          {...register("email", {
-            required: "Email is required",
-            validate: (value) => {
-              if (!value.includes("@")) {
-                return "Email must include @";
-              }
-              return true;
-            },
-          })}
-        />
-        {errors.email && (
-          <span className="text-red-500">{errors.email.message}</span>
-        )}
-
-        {/* Password  */}
-        <div className="flex relative">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full gap-3 fieldset "
+        >
+          {/* Email */}
           <input
-            placeholder="Password"
-            id="passwordInput"
-            type="password"
+            placeholder="Email"
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
-            {...register("password", {
-              required: "Password is required",
-              pattern: /^[A-Za-z]+$/i,
-              minLength: {
-                value: 8,
-                message: "Password must have at least 8 characters",
+            {...register("email", {
+              required: "Email is required",
+              validate: (value) => {
+                if (!value.includes("@")) {
+                  return "Email must include @";
+                }
+                return true;
               },
             })}
           />
+          {errors.email && (
+            <span className="text-red-500">{errors.email.message}</span>
+          )}
 
-          {/* Eye Icon  */}
-          <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
-            {/* this hidden checkbox controls the state */}
-            <input onClick={handleShowPass} type="checkbox" />
+          {/* Password  */}
+          <div className="flex relative">
+            <input
+              placeholder="Password"
+              id="passwordInput"
+              type="password"
+              className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
+              {...register("password", {
+                required: "Password is required",
+                pattern: /^[A-Za-z]+$/i,
+                minLength: {
+                  value: 8,
+                  message: "Password must have at least 8 characters",
+                },
+              })}
+            />
 
-            {/* Show Password */}
-            <FiEye className="swap-on" />
+            {/* Eye Icon  */}
+            <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
+              {/* this hidden checkbox controls the state */}
+              <input onClick={handleShowPass} type="checkbox" />
 
-            {/* Hide Password */}
-            <FiEyeOff className="swap-off" />
-          </label>
-        </div>
-        {errors.password && (
-          <span className="text-red-500">{errors.password.message}</span>
-        )}
-        <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
-          Don't Have An Account?{" "}
-          <Link
-            className="font-medium text-C_purple transition-colors hover:underline"
-            onClick={() => setSwitchToSignIn(!switchToSignIn)}
-          >
-            SignUp
-          </Link>
-        </p>
+              {/* Show Password */}
+              <FiEye className="swap-on" />
 
-        {/* Captcha  */}
-        <div className="grid grid-cols-3 items-center gap-4 my-3">
-          <LoadCanvasTemplate />
-          <input
-            onChange={handleValidateBtn}
-            id="user_captcha_input"
-            className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
-            type="text"
-            placeholder="Type the captcha value"
-          />
+              {/* Hide Password */}
+              <FiEyeOff className="swap-off" />
+            </label>
+          </div>
+          {errors.password && (
+            <span className="text-red-500">{errors.password.message}</span>
+          )}
+          <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
+            Don't Have An Account?{" "}
+            <Link
+              className="font-medium text-C_purple transition-colors hover:underline"
+              onClick={() => setSwitchToSignIn(!switchToSignIn)}
+            >
+              SignUp
+            </Link>
+          </p>
 
+          {/* Captcha  */}
+          <div className="grid grid-cols-3 items-center gap-4 my-3">
+            <LoadCanvasTemplate />
+            <input
+              onChange={handleValidateBtn}
+              id="user_captcha_input"
+              className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
+              type="text"
+              placeholder="Type the captcha value"
+            />
+
+            <button
+              onClick={handleCaptcha}
+              disabled={disAllowCaptcha}
+              className="btn bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
+            >
+              Validate
+            </button>
+          </div>
+
+          {/* Submit Button  */}
           <button
-            onClick={handleCaptcha}
-            disabled={disAllowCaptcha}
-            className="btn bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
+            disabled={disabled}
+            className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
+            type="submit"
           >
-            Validate
+            {isSubmitting ? "Loading..." : "Sign In"}
           </button>
-        </div>
-
-        {/* Submit Button  */}
-        <button
-          disabled={disabled}
-          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
-          type="submit"
-        >
-          {isSubmitting ? "Loading..." : "Sign In"}
-        </button>
-        {errors.root && (
-          <span className="text-red-500">{errors.root.message}</span>
-        )}
-      </form>
+          {errors.root && (
+            <span className="text-red-500">{errors.root.message}</span>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
