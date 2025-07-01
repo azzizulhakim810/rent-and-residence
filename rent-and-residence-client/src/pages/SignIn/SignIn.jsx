@@ -13,18 +13,18 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
-  const { user, signIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
 
-  // Extract Info form Hook Form
+  // Destructure props form Hook
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     setError,
     reset,
     formState: { errors, isSubmitting },
@@ -42,17 +42,17 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           console.log(res.user);
           setDisabled(true);
           reset();
+          // navigate("/");
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
-          // navigate("/");
         })
         .catch((error) => console.log(error.message));
 
       // console.log(data);
     } catch (error) {
       setError("root", {
-        message: "This Email is already taken",
+        message: error,
       });
     }
   };
@@ -70,7 +70,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   }, []);
 
   // Captcha Validation
-  const handleCaptcha = () => {
+  const handleCaptcha = (e) => {
+    e.preventDefault;
     let user_captcha_value =
       document.getElementById("user_captcha_input").value;
     // console.log(user_captcha_value);
@@ -95,24 +96,10 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
     }
   };
 
-  // Sign In Form Submission
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(email, password);
-
-    signIn(email, password)
-      .then((res) => console.log(res.user))
-      .catch((error) => console.log(error.message));
-  }; */
-
   return (
     <div className="lg:flex block items-center w-full ">
       <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
       <form
-        // onSubmit={handleSubmit}
         onSubmit={handleSubmit(onSubmit)}
         className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box border p-10"
       >
@@ -132,9 +119,10 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           </button>
         </div>
 
+        {/* Divider  */}
         <div className="divider">OR</div>
 
-        {/* Email Field  */}
+        {/* Email */}
         <input
           placeholder="Email"
           className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
@@ -152,7 +140,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           <span className="text-red-500">{errors.email.message}</span>
         )}
 
-        {/* Password Field  */}
+        {/* Password  */}
         <div className="flex relative">
           <input
             placeholder="Password"
@@ -205,15 +193,16 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
             placeholder="Type the captcha value"
           />
 
-          <Link
+          <button
             onClick={handleCaptcha}
             disabled={disAllowCaptcha}
             className="btn bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
           >
             Validate
-          </Link>
+          </button>
         </div>
 
+        {/* Submit Button  */}
         <button
           disabled={disabled}
           className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"

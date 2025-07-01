@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   LoadCanvasTemplate,
@@ -7,14 +7,58 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
+import { useForm } from "react-hook-form";
+
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
+
 const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
+  const { createUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
 
-  const { createUser } = useContext(AuthContext);
+  // Destructure props form Hook
+  const {
+    register,
+    handleSubmit,
+    setError,
+    // watch,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      // Sleeper Expression - Sleep for one second xD
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // throw new Error();
+      const { email, password } = data;
+
+      createUser(email, password)
+        .then((res) => {
+          console.log(res.user);
+          setDisabled(true);
+          reset();
+
+          // Close the modal
+          document.getElementById("signUpAndInPopUp").close();
+          // navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+
+      // console.log(data);
+    } catch (error) {
+      setError("root", {
+        message: error,
+      });
+    }
+  };
 
   const handleValidateBtn = (e) => {
     e.preventDefault();
@@ -28,13 +72,15 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   }, []);
 
   // Captcha Validation
-  const handleCaptcha = () => {
+  const handleCaptcha = (e) => {
+    e.preventDefault;
     let user_captcha_value =
       document.getElementById("user_captcha_input").value;
     // console.log(user_captcha_value);
 
     if (validateCaptcha(user_captcha_value) == true) {
       setDisabled(false);
+      setDisAllowCaptcha(true);
       document.getElementById("user_captcha_input").value = " ";
     } else {
       setDisabled(true);
@@ -52,31 +98,12 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
     }
   };
 
-  // Sign In Form Submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const firstName = form.firstName.value;
-    const lastName = form.lastName.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    // console.log(firstName, lastName, email, password);
-
-    createUser(email, password)
-      .then((res) => {
-        console.log(res.user);
-        form.reset();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
   return (
     <div className="lg:flex block items-center w-full">
       <div className="lg:h-screen lg:flex hidden h-[50vw] lg:w-1/2 w-full bg-[url('https://i.ibb.co/LXKsFNwk/couple-login-modal.jpg')] bg-cover bg-no-repeat bg-center')]"></div>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="lg:w-1/2 w-full gap-3 fieldset border-none rounded-box  border p-10"
       >
         <h1 className="text-2xl font-[700] font-Nunito mb-2">
@@ -95,36 +122,71 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           </button>
         </div>
 
+        {/* Divider  */}
         <div className="divider">OR</div>
 
-        {/* Form Field  */}
-        <div className="w-full flex gap-2">
+        {/* First & Last Name  */}
+        <div className="w-full flex gap-2 -mb-2">
           <input
-            name="firstName"
-            type="text"
+            {...register("firstName", {
+              required: "First Name is required",
+            })}
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
             placeholder="First Name"
           />
 
           <input
-            name="lastName"
-            type="text"
+            {...register("lastName", {
+              required: "Last Name is required",
+            })}
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
             placeholder="Last Name"
           />
         </div>
+        <div className="w-full flex gap-2">
+          {errors.firstName && (
+            <span className="w-1/2 text-red-500">
+              {errors.firstName.message}
+            </span>
+          )}
 
+          {errors.lastName && (
+            <span className="w-1/2 text-red-500">
+              {errors.lastName.message}
+            </span>
+          )}
+        </div>
+
+        {/* Email  */}
         <input
-          name="email"
-          type="email"
-          className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
+          {...register("email", {
+            required: "Email is required",
+            validate: (value) => {
+              if (!value.includes("@")) {
+                return "Email must include @";
+              }
+              return true;
+            },
+          })}
+          className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans "
           placeholder="Email"
         />
-        {/* <label className="label">Password</label> */}
+        {errors.email && (
+          <span className="text-red-500">{errors.email.message}</span>
+        )}
+
+        {/* Password  */}
         <div className="flex relative">
           <input
+            {...register("password", {
+              required: "Password is required",
+              pattern: /^[A-Za-z]+$/i,
+              minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters",
+              },
+            })}
             id="passwordInput"
-            name="password"
             type="password"
             className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
             placeholder="Password"
@@ -141,6 +203,10 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             <FiEyeOff className="swap-off" />
           </label>
         </div>
+        {errors.password && (
+          <span className="text-red-500">{errors.password.message}</span>
+        )}
+
         <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
           Already Registered?{" "}
           <Link
@@ -162,22 +228,26 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             placeholder="Type the captcha value"
           />
 
-          <Link
+          <button
             onClick={handleCaptcha}
             disabled={disAllowCaptcha}
             className="btn bg-C_purple/80 text-white  hover:bg-[#40384B] rounded-md font-Nunito_Sans text-sm px-2 py-2 cursor-pointer"
           >
             Validate
-          </Link>
+          </button>
         </div>
 
+        {/* Submit Button  */}
         <button
           disabled={disabled}
-          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md  py-5 mt-2"
+          className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
           type="submit"
         >
-          Sign Up
+          {isSubmitting ? "Loading..." : "Sign Up"}
         </button>
+        {errors.root && (
+          <span className="text-red-500">{errors.root.message}</span>
+        )}
       </form>
     </div>
   );
