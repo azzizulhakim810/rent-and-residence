@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -16,6 +16,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const { signIn, googleSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);

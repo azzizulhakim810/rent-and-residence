@@ -15,7 +15,7 @@ const Navbar = () => {
   const { user } = useContext(AuthContext);
   // console.log(user);
 
-  const { uid, displayname, email, photoURL } = user || {};
+  const { uid, displayName, email, photoURL } = user || {};
 
   const navOptions = (
     <>
@@ -230,6 +230,23 @@ const Navbar = () => {
     </>
   );
 
+  const profileDropdownNav = (
+    <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
+          }
+        >
+          <span> Dashboard</span>
+        </NavLink>
+      </li>
+    </>
+  );
+
   return (
     <div id="top" className=" bg-white ">
       <div className="navbar py-6 lg:w-10/12 w-11/12 mx-auto ">
@@ -323,18 +340,44 @@ const Navbar = () => {
           </div>
 
           {/* Profile  */}
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+          {photoURL == null ? (
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Profile"
+                  src="https://i.ibb.co/jkGkX8fs/default-user.png"
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="dropdown dropdown-open">
+              <div
+                tabIndex="0"
+                role="button"
+                className="btn p-0 bg-transparent hover:bg-transparent border-none "
+              >
+                <div className="avatar">
+                  <div className="md:w-10 w-8 rounded-full ">
+                    <img className="w-full object-fill " src={photoURL} />
+                  </div>
+                </div>
+              </div>
+
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 -ml-16 divide-y-[1px] divide-gray-200">
+                <li className="px-4 py-2">{user?.displayName}</li>
+                <li>
+                  <Link to="/dashboard/myProfile">Dashboard</Link>
+                </li>
+                <li>
+                  {/* <button onClick={handleSignOut}>Signout</button> */}
+                </li>
+              </ul>
+            </div>
+          )}
 
           {/* Btn - Desktop  */}
           {/* <Link
