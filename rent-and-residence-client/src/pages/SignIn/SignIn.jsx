@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -15,6 +15,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const { user, signIn } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
 
@@ -24,16 +26,32 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
     handleSubmit,
     watch,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
+      // Sleeper Expression - Sleep for one second xD
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error();
-      console.log(data);
+      // throw new Error();
+      const { email, password } = data;
+
+      signIn(email, password)
+        .then((res) => {
+          console.log(res.user);
+          setDisabled(true);
+          reset();
+
+          // Close the modal
+          document.getElementById("signUpAndInPopUp").close();
+          // navigate("/");
+        })
+        .catch((error) => console.log(error.message));
+
+      // console.log(data);
     } catch (error) {
-      setError("email", {
+      setError("root", {
         message: "This Email is already taken",
       });
     }
@@ -59,6 +77,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
     if (validateCaptcha(user_captcha_value) == true) {
       setDisabled(false);
+      setDisAllowCaptcha(true);
       document.getElementById("user_captcha_input").value = " ";
     } else {
       setDisabled(true);
@@ -117,15 +136,13 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         {/* Email Field  */}
         <input
-          // name="email"
-          // type="email"
           placeholder="Email"
           className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
           {...register("email", {
             required: "Email is required",
             validate: (value) => {
               if (!value.includes("@")) {
-                return "Eamil must include @";
+                return "Email must include @";
               }
               return true;
             },
@@ -138,7 +155,6 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         {/* Password Field  */}
         <div className="flex relative">
           <input
-            // name="password"
             placeholder="Password"
             id="passwordInput"
             type="password"
@@ -199,12 +215,15 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
         </div>
 
         <button
-          // disabled={disabled}
+          disabled={disabled}
           className="btn bg-C_purple text-white  hover:bg-[#40384B] rounded-md py-5 mt-2"
           type="submit"
         >
           {isSubmitting ? "Loading..." : "Sign In"}
         </button>
+        {errors.root && (
+          <span className="text-red-500">{errors.root.message}</span>
+        )}
       </form>
     </div>
   );

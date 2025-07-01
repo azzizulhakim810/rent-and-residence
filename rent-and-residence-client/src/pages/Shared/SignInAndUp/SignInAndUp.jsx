@@ -31,14 +31,16 @@ const SignInAndUp = () => {
       ) : (
         <button
           className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
-          onClick={() => document.getElementById("pop-up").showModal()}
+          onClick={() =>
+            document.getElementById("signUpAndInPopUp").showModal()
+          }
         >
           Sign In
         </button>
       )}
 
       {/* Form  */}
-      <dialog id="pop-up" className="modal">
+      <dialog id="signUpAndInPopUp" className="modal">
         <div className="modal-box p-0 bg-white w-11/12 max-w-4xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
