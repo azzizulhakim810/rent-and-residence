@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
+import { BiMessageSquareAdd } from "react-icons/bi";
 import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
+import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
+import { LuLayoutDashboard } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
@@ -233,12 +236,7 @@ const Navbar = () => {
 
   const profileDropdownNav = (
     <>
-      <li className="flex items-center gap-2 md:text-lg text-sm justify-start">
-        <FaPhoneAlt className="text-xl text-C_DarkGray relative block z-100 bg-green-500" />
-        Dashboard
-      </li>
-
-      {/* <NavLink
+      <NavLink
         to="/myProfile"
         className={({ isActive }) =>
           isActive
@@ -250,7 +248,7 @@ const Navbar = () => {
           <CiUser />
           My Profile
         </li>
-      </NavLink> */}
+      </NavLink>
     </>
   );
 
@@ -361,7 +359,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="dropdown dropdown-hover">
+            <div className="dropdown dropdown-open">
               <div
                 tabIndex="0"
                 role="button"
@@ -374,8 +372,118 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-white   rounded-box w-52 -ml-16 divide-y-[1px] divide-gray-200">
-                {profileDropdownNav}
+              <ul className="dropdown-content z-[1] menu p-0 gap-3 shadow bg-white   rounded-box w-56 -ml-16 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350 hover:bg-C_purple hover:text-white"
+                        : "text-[##222222] hover:bg-transparent hover:ps-3"
+                    }
+                  >
+                    <span className="flex items-center gap-2 justify-start">
+                      <LuLayoutDashboard />
+                      Dashboard
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/myProfile"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2 justify-start">
+                      <CiUser />
+                      My Profile
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/myPropertyList"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2 justify-start">
+                      <GoHome />
+                      My Property List
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/addNewProperty"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2 justify-start">
+                      <BiMessageSquareAdd />
+                      Add New Property
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/favorites"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2  justify-start">
+                      <CiHeart />
+                      Favorites
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/inbox"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2 justify-start">
+                      <CiInboxIn />
+                      Inbox
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/logout"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
+                        : " nav-item text-[##222222]  "
+                    }
+                  >
+                    <span className="flex items-center gap-2  justify-start">
+                      <CiLogout />
+                      Logout
+                    </span>
+                  </NavLink>
+                </li>
               </ul>
             </div>
           )}
