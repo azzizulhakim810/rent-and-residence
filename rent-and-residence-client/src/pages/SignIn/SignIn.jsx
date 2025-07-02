@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -20,6 +20,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPass, setShowPass] = useState(false);
 
   // Destructure props form Hook
   const {
@@ -48,13 +50,17 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
         })
-        .catch((error) => console.log(error.message));
+        .catch((error) => {
+          console.log(error.message);
+          setErrorMessage(error.message);
+        });
 
       // console.log(data);
     } catch (error) {
       setError("root", {
         message: error,
       });
+      setErrorMessage(error.message);
     }
   };
   // console.log(watch("email")); // watch input value by passing the name of it
@@ -99,15 +105,12 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   };
 
   //  Toggle Password Visibility
-  const handleShowPass = () => {
-    const passField = document.getElementById("passwordInput");
 
-    if (passField.type === "password") {
-      passField.type = "text";
-    } else {
-      passField.type = "password";
-    }
-  };
+  /*  const handleShowPass = () => {
+
+    setShowPass(!showPass);
+    
+  }; */
 
   return (
     <div className="lg:flex block items-center w-full ">
@@ -159,34 +162,28 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           <div className="flex relative">
             <input
               placeholder="Password"
-              id="passwordInput"
-              type="password"
+              type={showPass ? "text" : "password"}
+              // type="password"
               className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
               {...register("password", {
                 required: "Password is required",
-                pattern: /^[A-Za-z]+$/i,
-                minLength: {
-                  value: 8,
-                  message: "Password must have at least 8 characters",
-                },
               })}
             />
 
             {/* Eye Icon  */}
-            <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
-              {/* this hidden checkbox controls the state */}
-              <input onClick={handleShowPass} type="checkbox" />
-
-              {/* Show Password */}
-              <FiEye className="swap-on" />
-
-              {/* Hide Password */}
-              <FiEyeOff className="swap-off" />
+            <label className="text-lg absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
+              <span
+                className="cursor-pointer"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {!showPass ? <FiEyeOff /> : <FiEye />}
+              </span>
             </label>
           </div>
           {errors.password && (
             <span className="text-red-500">{errors.password.message}</span>
           )}
+          {errorMessage && <span className="text-red-500">{errorMessage}</span>}
           <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
             Don't Have An Account?{" "}
             <Link

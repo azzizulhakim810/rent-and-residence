@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   LoadCanvasTemplate,
@@ -21,6 +21,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
 
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
+  const [showPass, setShowPass] = useState(false);
 
   // Destructure props form Hook
   const {
@@ -97,17 +98,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
       document.getElementById("user_captcha_input").value = " ";
     } else {
       setDisabled(true);
-    }
-  };
-
-  //  Toggle Password Visibility
-  const handleShowPass = () => {
-    const passField = document.getElementById("passwordInput");
-
-    if (passField.type === "password") {
-      passField.type = "text";
-    } else {
-      passField.type = "password";
     }
   };
 
@@ -194,27 +184,25 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             <input
               {...register("password", {
                 required: "Password is required",
-                pattern: /^[A-Za-z]+$/i,
-                minLength: {
-                  value: 8,
-                  message: "Password must have at least 8 characters",
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/i,
+                  message:
+                    "Password must have Minimum 8 characters, at least one uppercase letter, one lowercase letter and one number",
                 },
               })}
-              id="passwordInput"
-              type="password"
+              type={showPass ? "text" : "password"}
               className="input focus:outline-0 outline-C_purple w-full font-Nunito_Sans"
               placeholder="Password"
             />
 
-            <label className="text-lg swap absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
-              {/* this hidden checkbox controls the state */}
-              <input onClick={handleShowPass} type="checkbox" />
-
-              {/* Show Password */}
-              <FiEye className="swap-on" />
-
-              {/* Hide Password */}
-              <FiEyeOff className="swap-off" />
+            {/* Eye Icon  */}
+            <label className="text-lg absolute right-0 bottom-0 -translate-y-3 -translate-x-3 z-10">
+              <span
+                className="cursor-pointer"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {!showPass ? <FiEyeOff /> : <FiEye />}
+              </span>
             </label>
           </div>
           {errors.password && (

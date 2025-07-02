@@ -241,8 +241,8 @@ const Navbar = () => {
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -257,8 +257,8 @@ const Navbar = () => {
           to="/myProfile"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -273,8 +273,8 @@ const Navbar = () => {
           to="/myPropertyList"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -289,8 +289,8 @@ const Navbar = () => {
           to="/addNewProperty"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -305,8 +305,8 @@ const Navbar = () => {
           to="/favorites"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -321,8 +321,8 @@ const Navbar = () => {
           to="/inbox"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -337,8 +337,8 @@ const Navbar = () => {
           to="/logout"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -443,7 +443,7 @@ const Navbar = () => {
           </div>
 
           {/* Profile  */}
-          {photoURL == null ? (
+          {!user ? (
             <div
               tabIndex={0}
               role="button"
@@ -457,7 +457,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="dropdown dropdown-hover">
+            <div className="dropdown dropdown-bottom">
               <div
                 tabIndex="0"
                 role="button"
@@ -465,12 +465,19 @@ const Navbar = () => {
               >
                 <div className="avatar">
                   <div className="md:w-10 w-8 rounded-full ">
-                    <img className="w-full object-fill " src={photoURL} />
+                    <img
+                      className="w-full object-fill "
+                      src={
+                        photoURL
+                          ? photoURL
+                          : "https://i.ibb.co/jkGkX8fs/default-user.png"
+                      }
+                    />
                   </div>
                 </div>
               </div>
 
-              <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 -ml-10 mt-1 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+              <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 -ml-10 mt-2 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
                 {profileDropdownNav}
               </ul>
             </div>
