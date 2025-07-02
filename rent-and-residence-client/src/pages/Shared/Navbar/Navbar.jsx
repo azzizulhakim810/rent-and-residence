@@ -236,19 +236,117 @@ const Navbar = () => {
 
   const profileDropdownNav = (
     <>
-      <NavLink
-        to="/myProfile"
-        className={({ isActive }) =>
-          isActive
-            ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
-            : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
-        }
-      >
-        <li className="flex items-center gap-2 md:text-lg text-sm justify-start">
-          <CiUser />
-          My Profile
-        </li>
-      </NavLink>
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <LuLayoutDashboard />
+            Dashboard
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/myProfile"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <CiUser />
+            My Profile
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/myPropertyList"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <GoHome />
+            My Property List
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/addNewProperty"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <BiMessageSquareAdd />
+            Add New Property
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/favorites"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <CiHeart />
+            Favorites
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/inbox"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <CiInboxIn />
+            Inbox
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple">
+        <NavLink
+          to="/logout"
+          className={({ isActive }) =>
+            isActive
+              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-350  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-2 justify-start">
+            <CiLogout />
+            Logout
+          </span>
+        </NavLink>
+      </li>
     </>
   );
 
@@ -359,7 +457,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="dropdown dropdown-open">
+            <div className="dropdown dropdown-hover">
               <div
                 tabIndex="0"
                 role="button"
@@ -372,118 +470,8 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <ul className="dropdown-content z-[1] menu p-0 gap-3 shadow bg-white   rounded-box w-56 -ml-16 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
-                <li>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-350 hover:bg-C_purple hover:text-white"
-                        : "text-[##222222] hover:bg-transparent hover:ps-3"
-                    }
-                  >
-                    <span className="flex items-center gap-2 justify-start">
-                      <LuLayoutDashboard />
-                      Dashboard
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/myProfile"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2 justify-start">
-                      <CiUser />
-                      My Profile
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/myPropertyList"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2 justify-start">
-                      <GoHome />
-                      My Property List
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/addNewProperty"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2 justify-start">
-                      <BiMessageSquareAdd />
-                      Add New Property
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/favorites"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2  justify-start">
-                      <CiHeart />
-                      Favorites
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/inbox"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2 justify-start">
-                      <CiInboxIn />
-                      Inbox
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/logout"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " text-[#7854f6] border-t-[#7854f6] rounded-none"
-                        : " nav-item text-[##222222]  "
-                    }
-                  >
-                    <span className="flex items-center gap-2  justify-start">
-                      <CiLogout />
-                      Logout
-                    </span>
-                  </NavLink>
-                </li>
+              <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 -ml-10 mt-1 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+                {profileDropdownNav}
               </ul>
             </div>
           )}
