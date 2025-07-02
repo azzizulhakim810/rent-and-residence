@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
+import { NavLink } from "react-router";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import SignInAndUp from "../SignInAndUp/SignInAndUp";
+
 import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
-import { NavLink } from "react-router";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../../providers/AuthProvider";
-import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -232,18 +233,24 @@ const Navbar = () => {
 
   const profileDropdownNav = (
     <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
-              : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
-          }
-        >
-          <span> Dashboard</span>
-        </NavLink>
+      <li className="flex items-center gap-2 md:text-lg text-sm justify-start">
+        <FaPhoneAlt className="text-xl text-C_DarkGray relative block z-100 bg-green-500" />
+        Dashboard
       </li>
+
+      {/* <NavLink
+        to="/myProfile"
+        className={({ isActive }) =>
+          isActive
+            ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
+            : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
+        }
+      >
+        <li className="flex items-center gap-2 md:text-lg text-sm justify-start">
+          <CiUser />
+          My Profile
+        </li>
+      </NavLink> */}
     </>
   );
 
@@ -354,7 +361,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="dropdown dropdown-open">
+            <div className="dropdown dropdown-hover">
               <div
                 tabIndex="0"
                 role="button"
@@ -367,14 +374,8 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 -ml-16 divide-y-[1px] divide-gray-200">
-                <li className="px-4 py-2">{user?.displayName}</li>
-                <li>
-                  <Link to="/dashboard/myProfile">Dashboard</Link>
-                </li>
-                <li>
-                  {/* <button onClick={handleSignOut}>Signout</button> */}
-                </li>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-white   rounded-box w-52 -ml-16 divide-y-[1px] divide-gray-200">
+                {profileDropdownNav}
               </ul>
             </div>
           )}
