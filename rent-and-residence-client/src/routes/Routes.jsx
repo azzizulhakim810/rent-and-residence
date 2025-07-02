@@ -4,19 +4,17 @@ import NotFound from "../layout/NotFound";
 
 import AddProperty from "../pages/AddProperty/AddProperty";
 
+import Dashboard from "../layout/Dashboard/Dashboard";
 import AgentDetails from "../pages/Agent/AgentDetails/AgentDetails";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";
 import Contact from "../pages/Contact/Contact";
+import ActiveListing from "../pages/Dashboard_Pages/ActiveListing/ActiveListing";
+import MyProfile from "../pages/Dashboard_Pages/MyProfile/MyProfile";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
-import SignIn from "../pages/SignIn/SignIn";
-import SignUp from "../pages/Signup/Signup";
-import Dashboard from "../layout/Dashboard/Dashboard";
-import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
-import ActiveListing from "../pages/Dashboard/ActiveListing/ActiveListing";
 
 export const router = createBrowserRouter([
   {
@@ -71,14 +69,6 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      /* {
-        path: "/signIn",
-        element: <SignIn />,
-      }, */
-      /* {
-        path: "/signUp",
-        element: <SignUp />,
-      }, */
     ],
   },
   {
