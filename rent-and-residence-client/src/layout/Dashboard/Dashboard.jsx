@@ -133,13 +133,13 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className=" bg-white">
       <Navbar />
 
-      <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto">
+      <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto pt-1">
         {/* Dashboard Menu  */}
-        <div className="lg:col-span-3 col-span-10">
-          <div className="shadow-sm  p-8 w-full rounded-md bg-white">
+        <div className="lg:col-span-3 col-span-10 ">
+          <div className="p-8 w-full rounded-none bg-white border-e-[1px] border-e-gray-300 ">
             <div className="flex flex-col gap-5">
               {/* Image  */}
               <div className="avatar">
@@ -166,7 +166,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 -ml-10 mt-2 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+            <ul className="dropdown-content z-[1] menu p-0 gap-1 bg-white rounded-box w-56 -ml-10 mt-2 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
               {dashboardMenu}
             </ul>
           </div>
