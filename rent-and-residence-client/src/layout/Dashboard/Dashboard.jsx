@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../../pages/Shared/Footer/Footer";
 import Navbar from "../../pages/Shared/Navbar/Navbar";
-import Sidebar from "../../pages/Shared/Sidebar/Sidebar";
 
 import { NavLink } from "react-router";
 
@@ -13,18 +12,30 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
   const { uid, displayName, email, photoURL } = user || {};
+
+  // Sign Out
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Sign Out Successfully");
+        loading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const dashboardMenu = (
     <>
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/dashboard"
+          to="/dashboard/stat"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222]  hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -34,13 +45,13 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/myProfile"
+          to="/dashboard/myProfile"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -50,13 +61,13 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/myPropertyList"
+          to="/dashboard/myPropertyList"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -66,13 +77,13 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/addNewProperty"
+          to="/dashboard/addNewProperty"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -82,13 +93,13 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/favorites"
+          to="/dashboard/favorites"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -98,13 +109,13 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/inbox"
+          to="/dashboard/inbox"
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md hover:ms-3 transition-all duration-300  ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -114,13 +125,14 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
-          to="/logout"
+          to="/"
+          onClick={handleSignOut}
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -139,9 +151,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto pt-1">
         {/* Dashboard Menu  */}
         <div className="lg:col-span-3 col-span-10 ">
-          <div className="p-8 w-full rounded-none bg-white border-e-[1px] border-e-gray-300 ">
-            <div className="flex flex-col gap-5">
-              {/* Image  */}
+          <div className="p-5 w-full rounded-none bg-white border-e-[1px] border-e-gray-300 ">
+            {/* Profile */}
+            <div className="flex flex-col justify-center items-center  gap-5">
               <div className="avatar">
                 <div className="md:w-18 w-8 rounded-full ">
                   <img
@@ -155,30 +167,20 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Details  */}
-              <div className=" w-auto flex flex-col  gap-2  ">
-                <h4 className=" font-Nunito font-[600] text-C_gray text-[22px] leading-6">
-                  {displayName}
-                </h4>
-                <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] capitalize">
-                  {email}
-                </p>
-              </div>
+              <h4 className="font-Nunito font-[600] text-C_gray text-[17px] leading-6">
+                Welcome Back, {displayName}
+              </h4>
             </div>
 
-            <ul className="dropdown-content z-[1] menu p-0 gap-1 bg-white rounded-box w-56 -ml-10 mt-2 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+            {/* Menu  */}
+            <ul className=" z-[1] menu p-0 gap-1  rounded-box w-full mt-5 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
               {dashboardMenu}
             </ul>
           </div>
         </div>
 
-        <div className="lg:col-span-6 col-span-10 ">
+        <div className="lg:col-span-9  col-span-10 ">
           <Outlet />
-        </div>
-
-        {/* Sidebar  */}
-        <div className="lg:col-span-3 col-span-10">
-          <Sidebar />
         </div>
       </div>
 

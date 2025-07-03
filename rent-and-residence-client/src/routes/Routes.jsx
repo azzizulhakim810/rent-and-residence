@@ -15,6 +15,11 @@ import MyProfile from "../pages/Dashboard_Pages/MyProfile/MyProfile";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
+import Statistics from "../pages/Dashboard_Pages/Statistics/Statistics";
+import MyPropertyList from "../pages/Dashboard_Pages/MyPropertyList/MyPropertyList";
+import AddNewProperty from "../pages/Dashboard_Pages/AddNewProperty/AddNewProperty";
+import Favorites from "../pages/Dashboard_Pages/Favorites/Favorites";
+import Inbox from "../pages/Dashboard_Pages/Inbox/Inbox";
 
 export const router = createBrowserRouter([
   {
@@ -76,12 +81,28 @@ export const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
+        path: "/dashboard/stat",
+        element: <Statistics />,
+      },
+      {
         path: "/dashboard/myProfile",
         element: <MyProfile />,
       },
       {
-        path: "/dashboard/activeListing",
-        element: <ActiveListing />,
+        path: "/dashboard/myPropertyList",
+        element: <MyPropertyList />,
+      },
+      {
+        path: "/dashboard/addNewProperty",
+        element: <AddNewProperty />,
+      },
+      {
+        path: "/dashboard/favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/dashboard/inbox",
+        element: <Inbox />,
       },
     ],
   },

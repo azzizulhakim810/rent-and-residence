@@ -16,10 +16,22 @@ import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
   // console.log(user);
 
   const { uid, displayName, email, photoURL } = user || {};
+
+  // Sign Out
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Sign Out Successfully");
+        loading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const navOptions = (
     <>
@@ -238,7 +250,7 @@ const Navbar = () => {
     <>
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/dashboard"
+          to="/dashboard/stat"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -254,7 +266,7 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/myProfile"
+          to="/dashboard/myProfile"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -270,7 +282,7 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/myPropertyList"
+          to="/dashboard/myPropertyList"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -286,7 +298,7 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/addNewProperty"
+          to="/dashboard/addNewProperty"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -302,7 +314,7 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/favorites"
+          to="/dashboard/favorites"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -318,7 +330,7 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/inbox"
+          to="/dashboard/inbox"
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
@@ -334,10 +346,11 @@ const Navbar = () => {
 
       <li className="hover:bg-C_purple">
         <NavLink
-          to="/logout"
+          to="/"
+          onClick={handleSignOut}
           className={({ isActive }) =>
             isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-[##222222] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
