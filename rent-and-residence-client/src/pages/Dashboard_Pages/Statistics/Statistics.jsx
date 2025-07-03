@@ -1,3 +1,5 @@
+import StatisticsChart from "../../../components/StatisticsChart/StatisticsChart";
+
 const Statistics = () => {
   return (
     <div className="py-10">
@@ -5,8 +7,9 @@ const Statistics = () => {
       <h1 className="font-Nunito text-5xl font-[800]">Dashboard - Main</h1>
 
       <div className="grid grid-cols-12 gap-4 pt-5">
-        <div className="lg:col-span-8 col-span-10 ">
-          <div className="shadow-[0_8px_8px_rgba(0,0,0,0.10)] p-8 w-full rounded-md bg-white">
+        <div className="lg:col-span-8 col-span-10 flex flex-col gap-5">
+          {/* Account Summary  */}
+          <div className="shadow-[0px_0px_50px_rgba(0,0,0,0.08)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
               Account Summary
             </h1>
@@ -18,10 +21,18 @@ const Statistics = () => {
               <h3>Total Properties: 0</h3>
             </div>
           </div>
+
+          {/* Listing Views */}
+          <div className="shadow-[0px_0px_50px_rgba(0,0,0,0.08)] p-8 w-full rounded-xl bg-white">
+            <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
+              Listing Views
+            </h1>
+            <StatisticsChart />
+          </div>
         </div>
 
         <div className="lg:col-span-4 col-span-10 ">
-          <div className="shadow-sm  p-8 w-full rounded-md bg-white">
+          <div className="shadow-[0px_0px_80px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <label
               htmlFor="propertyType"
               className="block text-[16px] font-[700] font-Nunito tracking-wider text-gray-700 mb-2"
