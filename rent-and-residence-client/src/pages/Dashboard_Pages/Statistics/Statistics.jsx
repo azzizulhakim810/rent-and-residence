@@ -6,8 +6,8 @@ const Statistics = () => {
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
       <h1 className="font-Nunito text-5xl font-[800]">Dashboard - Main</h1>
 
-      <div className="grid grid-cols-12 gap-10 pt-10">
-        <div className="lg:col-span-8 col-span-10 flex flex-col gap-10">
+      <div className="grid grid-cols-12 gap-6 pt-10">
+        <div className="lg:col-span-8 col-span-10 flex flex-col gap-8">
           {/* Account Summary  */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">

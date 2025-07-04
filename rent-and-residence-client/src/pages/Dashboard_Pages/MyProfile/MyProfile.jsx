@@ -28,17 +28,17 @@ const MyProfile = () => {
         Dashboard – Profile Page
       </h1>
 
-      <div className="grid grid-cols-12 gap-10 pt-10">
-        <div className="lg:col-span-8 col-span-10 flex flex-col gap-10">
+      <div className="grid grid-cols-12 gap-6 pt-10">
+        <div className="lg:col-span-8 col-span-12 flex flex-col gap-10">
           {/*Contact Information  */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
-            <div className="font-Nunito_Sans text-C_LightGray">
+            <div className="font-Nunito_Sans text-C_LightGray w-full">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="fieldset flex  flex-col gap-5 bg-white w-full "
+                className="fieldset flex flex-col gap-5 bg-white w-full "
               >
                 {/*  User Details */}
-                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 ">
                   User Details
                 </h1>
 
@@ -213,12 +213,12 @@ const MyProfile = () => {
                 </div>
 
                 {/* Update + Delete  */}
-                <div className="flex justify-between gap-2 w-full  mt-5">
-                  <button className="btn flex items-center justify-center bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
+                <div className="flex lg:flex-row flex-col justify-between gap-2 w-full mt-5">
+                  <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
                     <RxUpdate /> Update Profile
                   </button>
 
-                  <button className="btn bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
+                  <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
                     <RxCross2 /> Delete Profile
                   </button>
                 </div>
@@ -227,7 +227,7 @@ const MyProfile = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-4 col-span-10 ">
+        <div className="lg:col-span-4 col-span-12 ">
           {/* Photo */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
@@ -236,7 +236,7 @@ const MyProfile = () => {
 
             <div className="avatar w-full">
               <div
-                className="lg:w-full w-8 rounded-md
+                className="lg:w-full w-full rounded-md
               mb-5"
               >
                 <img
