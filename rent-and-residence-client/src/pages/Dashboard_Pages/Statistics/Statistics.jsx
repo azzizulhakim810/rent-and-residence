@@ -9,7 +9,7 @@ const Statistics = () => {
       <div className="grid grid-cols-12 gap-10 pt-10">
         <div className="lg:col-span-8 col-span-10 flex flex-col gap-10">
           {/* Account Summary  */}
-          <div className="shadow-[0px_0px_50px_rgba(0,0,0,0.08)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
               Account Summary
             </h1>
@@ -23,7 +23,7 @@ const Statistics = () => {
           </div>
 
           {/* Listing Views */}
-          <div className="shadow-[0px_0px_50px_rgba(0,0,0,0.08)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
               Listing Views
             </h1>
@@ -33,7 +33,7 @@ const Statistics = () => {
 
         <div className="lg:col-span-4 col-span-10 ">
           {/* Account History  */}
-          <div className="shadow-[0px_0px_50px_rgba(0,0,0,0.08)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
               Account History <br />
               (last 7 days)

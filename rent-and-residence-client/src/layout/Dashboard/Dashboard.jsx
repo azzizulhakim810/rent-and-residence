@@ -38,7 +38,7 @@ const Dashboard = () => {
               : "text-[##222222]  hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <LuLayoutDashboard />
             Dashboard
           </span>
@@ -54,7 +54,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <CiUser />
             My Profile
           </span>
@@ -70,7 +70,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <GoHome />
             My Property List
           </span>
@@ -86,7 +86,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <BiMessageSquareAdd />
             Add New Property
           </span>
@@ -102,7 +102,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <CiHeart />
             Favorites
           </span>
@@ -118,7 +118,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <CiInboxIn />
             Inbox
           </span>
@@ -135,7 +135,7 @@ const Dashboard = () => {
               : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
-          <span className="flex items-center gap-2 justify-start">
+          <span className="flex items-center gap-4 justify-start">
             <CiLogout />
             Logout
           </span>
@@ -148,9 +148,9 @@ const Dashboard = () => {
     <div className=" bg-white">
       <Navbar />
 
-      <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto pt-1">
+      <div className="grid grid-cols-12 gap-10 w-11/12 mx-auto pt-1">
         {/* Dashboard Menu  */}
-        <div className="lg:block hidden lg:col-span-3  col-span-10 border-e-[1px] border-e-gray-300 ">
+        <div className="lg:block hidden lg:col-span-3 col-span-10 border-e-[1px] border-e-gray-300 ">
           <div className="p-5 w-full rounded-none bg-white ">
             {/* Profile */}
             <div className="flex flex-col justify-center items-center  gap-5">

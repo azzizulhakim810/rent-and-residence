@@ -365,7 +365,7 @@ const Navbar = () => {
 
   return (
     <div id="top" className=" bg-white shadow-md">
-      <div className="navbar py-6 lg:w-10/12 w-11/12 mx-auto ">
+      <div className="navbar py-6 lg:w-11/12 w-11/12 mx-auto ">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
