@@ -109,14 +109,30 @@ const data = [
 
 const StatisticsChart = () => {
   return (
-    <BarChart width={550} height={250} data={data}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#8884d8" />
-    </BarChart>
+    <>
+      <BarChart className="lg:flex hidden" width={550} height={250} data={data}>
+        <CartesianGrid strokeDasharray="3 2" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="uv" fill="#8884d8" />
+      </BarChart>
+
+      <BarChart
+        className="lg:hidden block -ms-6"
+        width={320}
+        height={250}
+        data={data}
+      >
+        <CartesianGrid strokeDasharray="3 2" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="uv" fill="#8884d8" />
+      </BarChart>
+    </>
   );
 };
 

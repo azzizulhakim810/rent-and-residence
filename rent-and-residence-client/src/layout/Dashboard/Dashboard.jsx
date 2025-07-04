@@ -150,8 +150,8 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto pt-1">
         {/* Dashboard Menu  */}
-        <div className="lg:col-span-3 col-span-10 ">
-          <div className="p-5 w-full rounded-none bg-white border-e-[1px] border-e-gray-300 ">
+        <div className="lg:block hidden lg:col-span-3  col-span-10 border-e-[1px] border-e-gray-300 ">
+          <div className="p-5 w-full rounded-none bg-white ">
             {/* Profile */}
             <div className="flex flex-col justify-center items-center  gap-5">
               <div className="avatar">

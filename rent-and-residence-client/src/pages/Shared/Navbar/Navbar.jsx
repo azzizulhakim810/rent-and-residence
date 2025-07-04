@@ -490,7 +490,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 -ml-10 mt-2 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
+              <ul className="dropdown-content z-[1] menu p-0 gap-1 shadow-xl bg-white rounded-box w-56 lg:-ml-10 -ml-40 lg:mt-2 mt-5 font-Nunito_Sans md:text-[16px] text-sm font-medium tracking-wide ">
                 {profileDropdownNav}
               </ul>
             </div>
