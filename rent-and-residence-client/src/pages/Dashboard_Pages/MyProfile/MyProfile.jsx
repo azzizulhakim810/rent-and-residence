@@ -11,7 +11,7 @@ const MyProfile = () => {
   const lastName = displayName?.split(" ")?.[1];
   // console.log(displayName?.split(" ")?.[0]);
 
-  const [profilePreview, setProfilePreview] = useState("");
+  const [profilePreview, setProfilePreview] = useState(null);
 
   const {
     register,
@@ -26,22 +26,15 @@ const MyProfile = () => {
 
   const getImgData = () => {
     const chooseFile = document.getElementById("choose-file");
-    const imgPreview = document.getElementById("img-preview");
 
     const files = chooseFile.files[0];
 
     if (files) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(files);
-      console.log(fileReader);
-
-      fileReader.addEventListener("load", function () {
-        imgPreview.style.display = "block";
-        imgPreview.innerHTML = '<img src="' + this.result + '" />';
-        setProfilePreview(this.result);
-      });
+      const imageURL = URL.createObjectURL(files);
+      setProfilePreview(imageURL);
+    } else {
+      setProfilePreview(null);
     }
-    console.log(profilePreview);
   };
   return (
     <div className="py-10">
@@ -264,8 +257,8 @@ const MyProfile = () => {
                 <img
                   className="w-full object-fill "
                   src={
-                    photoURL
-                      ? photoURL
+                    profilePreview
+                      ? profilePreview
                       : "https://i.ibb.co/jkGkX8fs/default-user.png"
                   }
                 />
