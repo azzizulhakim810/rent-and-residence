@@ -12,6 +12,7 @@ const MyProfile = () => {
   // console.log(displayName?.split(" ")?.[0]);
 
   const [profilePreview, setProfilePreview] = useState(null);
+  const [imageSize, setImageSize] = useState(null);
 
   const {
     register,
@@ -31,6 +32,7 @@ const MyProfile = () => {
 
     if (files) {
       const imageURL = URL.createObjectURL(files);
+      setImageSize((files.size * 0.001).toFixed(2) + "kb");
       setProfilePreview(imageURL);
     } else {
       setProfilePreview(null);
@@ -284,7 +286,9 @@ const MyProfile = () => {
                 accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               /> */}
-              <label className="label font-Nunito_Sans">Max size 2MB</label>
+              <label className="label font-Nunito_Sans mt-2">
+                File Size- {imageSize}
+              </label>
             </fieldset>
           </div>
         </div>
