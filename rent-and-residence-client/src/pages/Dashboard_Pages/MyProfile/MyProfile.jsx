@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../providers/AuthProvider";
 
@@ -13,6 +13,9 @@ const MyProfile = () => {
 
   const [profilePreview, setProfilePreview] = useState(null);
   const [imageSize, setImageSize] = useState(null);
+
+  const fileInputRef = useRef();
+  // console.log(fileInputRef.current.value);
 
   const {
     register,
@@ -30,13 +33,21 @@ const MyProfile = () => {
 
     const files = chooseFile.files[0];
 
-    if (files) {
-      const imageURL = URL.createObjectURL(files);
-      setImageSize((files.size * 0.001).toFixed(2) + "kb");
-      setProfilePreview(imageURL);
-    } else {
-      setProfilePreview(null);
+    const maxFileSize = 1 * 1024 * 1024;
+
+    console.log(fileInputRef.current.value);
+
+    if (files?.size > maxFileSize) {
+      alert("File size exceeds 1 MB limit.");
+      fileInputRef.current.value = null;
+      return;
     }
+
+    if (!files) return;
+
+    const imageURL = URL.createObjectURL(files);
+    setImageSize((files.size * 0.001).toFixed(2) + "kb");
+    setProfilePreview(imageURL);
   };
   return (
     <div className="py-10">
@@ -274,6 +285,7 @@ const MyProfile = () => {
                 name="choose-file"
                 id="choose-file"
                 onChange={getImgData}
+                ref={fileInputRef}
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
@@ -286,9 +298,15 @@ const MyProfile = () => {
                 accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               /> */}
-              <label className="label font-Nunito_Sans mt-2">
-                File Size- {imageSize}
-              </label>
+              {profilePreview ? (
+                <label className="label font-Nunito_Sans mt-2">
+                  File Size- {imageSize}
+                </label>
+              ) : (
+                <label className="label font-Nunito_Sans mt-2">
+                  File Size Must be up to 1Mb
+                </label>
+              )}
             </fieldset>
           </div>
         </div>
