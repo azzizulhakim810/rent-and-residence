@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../providers/AuthProvider";
 
@@ -11,6 +11,8 @@ const MyProfile = () => {
   const lastName = displayName?.split(" ")?.[1];
   // console.log(displayName?.split(" ")?.[0]);
 
+  const [profilePreview, setProfilePreview] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -20,6 +22,26 @@ const MyProfile = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const getImgData = () => {
+    const chooseFile = document.getElementById("choose-file");
+    const imgPreview = document.getElementById("img-preview");
+
+    const files = chooseFile.files[0];
+
+    if (files) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(files);
+      console.log(fileReader);
+
+      fileReader.addEventListener("load", function () {
+        imgPreview.style.display = "block";
+        imgPreview.innerHTML = '<img src="' + this.result + '" />';
+        setProfilePreview(this.result);
+      });
+    }
+    console.log(profilePreview);
   };
   return (
     <div className="py-10">
@@ -247,14 +269,28 @@ const MyProfile = () => {
                       : "https://i.ibb.co/jkGkX8fs/default-user.png"
                   }
                 />
+
+                <div id="img-preview"></div>
               </div>
             </div>
 
             <fieldset className="fieldset">
               <input
+                name="choose-file"
+                id="choose-file"
+                onChange={getImgData}
                 type="file"
+                accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               />
+              {/* <input
+                onChange={getImgData}
+                name="choose-file"
+                id="choose-file"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
+              /> */}
               <label className="label font-Nunito_Sans">Max size 2MB</label>
             </fieldset>
           </div>
