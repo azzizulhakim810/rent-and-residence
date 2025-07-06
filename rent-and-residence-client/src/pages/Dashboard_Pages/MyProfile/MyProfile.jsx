@@ -35,7 +35,7 @@ const MyProfile = () => {
 
     const maxFileSize = 1 * 1024 * 1024;
 
-    console.log(fileInputRef.current.value);
+    // console.log(fileInputRef.current.value);
 
     if (files?.size > maxFileSize) {
       alert("File size exceeds 1 MB limit.");
@@ -128,42 +128,78 @@ const MyProfile = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
                       defaultValue={email}
-                      {...register("email", { required: true })}
+                      {...register("email", {
+                        required: "This is required",
+                        validate: (value) => {
+                          if (!value.includes("@")) {
+                            message: "Must include @";
+                          }
+                        },
+                      })}
                     />
+
+                    {errors.email && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.email.message}
+                      </span>
+                    )}
                   </div>
 
                   <div className=" w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       Phone
                     </label>
+
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("phone", { required: true })}
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"
+                      type="tel"
+                      {...register("phone", {
+                        required: "This is required",
+                        minLength: {
+                          value: 8,
+                          message: "Number must be at least 8 Character",
+                        },
+                        maxLength: {
+                          value: 16,
+                          message: "Number must be more than 16 Character",
+                        },
+                      })}
                     />
+                    {errors.phone && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.phone.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 {/* Mobile + Skype */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
-                    <label className="label mb-2 text-sm font-[600]">
-                      Mobile
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("mobile", { required: true })}
-                    />
-                  </div>
-
-                  <div className=" w-1/2">
-                    <label className="label  mb-2 text-sm font-[600]">
-                      Skype
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("skype", { required: true })}
-                    />
-                  </div>
+                <div className="flex flex-col w-full">
+                  <label className="label mb-2 text-sm font-[600]">Bio</label>
+                  {/* <input
+                      className="textarea text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      type="textarea"
+                      {...register("bio", { required: true })}
+                    /> */}
+                  <textarea
+                    className="textarea w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                    {...register("bio", {
+                      required: "This is required",
+                      maxLength: {
+                        value: 150,
+                        message: "Bio won't be more than 150 Characters",
+                      },
+                      minLength: {
+                        value: 50,
+                        message: "Bio won't be less than 50 Characters",
+                      },
+                    })}
+                  ></textarea>
+                  {errors.bio && (
+                    <span className="w-1/2 text-red-500">
+                      {errors.bio.message}
+                    </span>
+                  )}
                 </div>
 
                 {/* Social Media */}
@@ -242,7 +278,10 @@ const MyProfile = () => {
 
                 {/* Update + Delete  */}
                 <div className="flex lg:flex-row flex-col justify-between gap-2 w-full mt-5">
-                  <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
+                  <button
+                    type="submit"
+                    className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md"
+                  >
                     <RxUpdate /> Update Profile
                   </button>
 
@@ -255,6 +294,7 @@ const MyProfile = () => {
           </div>
         </div>
 
+        {/* Second Column */}
         <div className="lg:col-span-4 col-span-12 ">
           {/* Photo */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
@@ -290,14 +330,7 @@ const MyProfile = () => {
                 accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               />
-              {/* <input
-                onChange={getImgData}
-                name="choose-file"
-                id="choose-file"
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
-              /> */}
+
               {profilePreview ? (
                 <label className="label font-Nunito_Sans mt-2">
                   File Size- {imageSize}
