@@ -132,8 +132,9 @@ const MyProfile = () => {
                         required: "This is required",
                         validate: (value) => {
                           if (!value.includes("@")) {
-                            message: "Must include @";
+                            return "Email must include @";
                           }
+                          return true;
                         },
                       })}
                     />
@@ -182,7 +183,7 @@ const MyProfile = () => {
                       {...register("bio", { required: true })}
                     /> */}
                   <textarea
-                    className="textarea w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                    className="textarea w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md  border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                     {...register("bio", {
                       required: "This is required",
                       maxLength: {
@@ -214,9 +215,16 @@ const MyProfile = () => {
                       Facebook Url
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("facebookUrl", { required: true })}
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("facebookUrl", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.facebookUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.facebookUrl.message}
+                      </span>
+                    )}
                   </div>
 
                   <div className=" w-1/2">
@@ -225,8 +233,15 @@ const MyProfile = () => {
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("twitterUrl", { required: true })}
+                      {...register("twitterUrl", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.twitterUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.twitterUrl.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -237,9 +252,16 @@ const MyProfile = () => {
                       Linkedin Url
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("linkedinUrl", { required: true })}
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("linkedinUrl", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.linkedinUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.linkedinUrl.message}
+                      </span>
+                    )}
                   </div>
 
                   <div className=" w-1/2">
@@ -247,9 +269,16 @@ const MyProfile = () => {
                       Instagram Url
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("instagramUrl", { required: true })}
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("instagramUrl", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.instagramUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.instagramUrl.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -260,9 +289,16 @@ const MyProfile = () => {
                       Pinterest Url
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("pinterestUrl", { required: true })}
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("pinterestUrl", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.pinterestUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.pinterestUrl.message}
+                      </span>
+                    )}
                   </div>
 
                   <div className=" w-1/2">
@@ -270,9 +306,42 @@ const MyProfile = () => {
                       Website Url (without http)
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("websiteUrl", { required: true })}
+                      // type="url"
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("websiteUrl", {
+                        required: "This is required",
+                        pattern: (value) => {
+                          const pattern = new RegExp(
+                            "^([a-zA-Z]+:\\/\\/)?" + // protocol
+                              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+                              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+                              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+                              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+                              "(\\#[-a-z\\d_]*)?$", // fragment locator
+                            "i"
+                          );
+
+                          return pattern.test(value);
+
+                          // message: "Invalid";
+                        },
+                        /* validate: (value) => {
+                          const checkUrl = new URL(value);
+                          if (
+                            checkUrl.protocol !== "http:" ||
+                            checkUrl.protocol !== "https:"
+                          ) {
+                            return "Provide a valid URL";
+                          }
+                          return true;
+                        }, */
+                      })}
                     />
+                    {errors.websiteUrl && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.websiteUrl.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
