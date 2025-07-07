@@ -24,9 +24,16 @@ const MyProfile = () => {
     formState: { errors },
   } = useForm();
 
+  // Form Data
   const onSubmit = (data) => {
-    console.log(data);
+    const chooseFile = document.getElementById("choose-file");
+
+    const files = chooseFile.files[0];
+
+    console.log([files, data]);
   };
+
+  // console.log(profilePreview);
 
   const getImgData = () => {
     const chooseFile = document.getElementById("choose-file");
@@ -49,6 +56,18 @@ const MyProfile = () => {
     setImageSize((files.size * 0.001).toFixed(2) + "kb");
     setProfilePreview(imageURL);
   };
+
+  // Check Web Url by Regex
+  const pattern = new RegExp(
+    "^([a-zA-Z]+:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$", // fragment locator
+    "i"
+  );
+
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -56,8 +75,8 @@ const MyProfile = () => {
         Dashboard – Profile Page
       </h1>
 
-      <div className="grid grid-cols-12 gap-6 pt-10">
-        <div className="lg:col-span-8 col-span-12 flex flex-col gap-10">
+      <div className="grid  grid-cols-12 gap-6 pt-10">
+        <div className="lg:col-span-8 col-span-12 lg:order-1 order-2 flex flex-col gap-10">
           {/*Contact Information  */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <div className="font-Nunito_Sans text-C_LightGray w-full">
@@ -78,14 +97,12 @@ const MyProfile = () => {
                     </label>
 
                     <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      // defaultValue="User"
                       {...register("title/position", { required: true })}
                     >
-                      <option disabled value="Select One">
-                        Select One
-                      </option>
-                      <option value="agent">Agent</option>
                       <option value="user">User</option>
+                      <option value="agent">Agent</option>
                     </select>
                   </div>
                 </div>
@@ -103,7 +120,9 @@ const MyProfile = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
                       defaultValue={firstName}
-                      {...register("firstName", { required: true })}
+                      {...register("firstName", {
+                        required: firstName ? false : true,
+                      })}
                     />
                   </div>
 
@@ -114,19 +133,21 @@ const MyProfile = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
                       defaultValue={lastName}
-                      {...register("lastName", { required: true })}
+                      {...register("lastName", {
+                        required: lastName ? false : true,
+                      })}
                     />
                   </div>
                 </div>
 
                 {/* Email + Phone  */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Email
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       defaultValue={email}
                       {...register("email", {
                         required: "This is required",
@@ -146,7 +167,7 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  <div className=" w-1/2">
+                  <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       Phone
                     </label>
@@ -174,7 +195,7 @@ const MyProfile = () => {
                   </div>
                 </div>
 
-                {/* Mobile + Skype */}
+                {/* Bio */}
                 <div className="flex flex-col w-full">
                   <label className="label mb-2 text-sm font-[600]">Bio</label>
                   {/* <input
@@ -209,8 +230,8 @@ const MyProfile = () => {
                 </h1>
 
                 {/* Facebook + Twitter */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Facebook Url
                     </label>
@@ -218,6 +239,13 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("facebookUrl", {
                         required: "This is required",
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
+                          }
+
+                          return true;
+                        },
                       })}
                     />
                     {errors.facebookUrl && (
@@ -227,7 +255,7 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  <div className=" w-1/2">
+                  <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       X - Twitter Url
                     </label>
@@ -235,6 +263,13 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
                       {...register("twitterUrl", {
                         required: "This is required",
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
+                          }
+
+                          return true;
+                        },
                       })}
                     />
                     {errors.twitterUrl && (
@@ -246,8 +281,8 @@ const MyProfile = () => {
                 </div>
 
                 {/* Linkedin  + Instagram  */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Linkedin Url
                     </label>
@@ -255,6 +290,13 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("linkedinUrl", {
                         required: "This is required",
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
+                          }
+
+                          return true;
+                        },
                       })}
                     />
                     {errors.linkedinUrl && (
@@ -264,7 +306,7 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  <div className=" w-1/2">
+                  <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       Instagram Url
                     </label>
@@ -272,6 +314,13 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("instagramUrl", {
                         required: "This is required",
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
+                          }
+
+                          return true;
+                        },
                       })}
                     />
                     {errors.instagramUrl && (
@@ -283,8 +332,8 @@ const MyProfile = () => {
                 </div>
 
                 {/* Pinterest + Website  */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
+                <div className="flex lg:flex-row flex-col gap-5 w-full">
+                  <div className=" lg:w-1/2 ">
                     <label className="label mb-2 text-sm font-[600]">
                       Pinterest Url
                     </label>
@@ -292,6 +341,13 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("pinterestUrl", {
                         required: "This is required",
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
+                          }
+
+                          return true;
+                        },
                       })}
                     />
                     {errors.pinterestUrl && (
@@ -301,40 +357,21 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  <div className=" w-1/2">
+                  <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       Website Url (without http)
                     </label>
                     <input
-                      // type="url"
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("websiteUrl", {
                         required: "This is required",
-                        pattern: (value) => {
-                          const pattern = new RegExp(
-                            "^([a-zA-Z]+:\\/\\/)?" + // protocol
-                              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-                              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
-                              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-                              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-                              "(\\#[-a-z\\d_]*)?$", // fragment locator
-                            "i"
-                          );
-
-                          return pattern.test(value);
-
-                          // message: "Invalid";
-                        },
-                        /* validate: (value) => {
-                          const checkUrl = new URL(value);
-                          if (
-                            checkUrl.protocol !== "http:" ||
-                            checkUrl.protocol !== "https:"
-                          ) {
-                            return "Provide a valid URL";
+                        validate: (value) => {
+                          if (!pattern.test(value)) {
+                            return "Invalid Url";
                           }
+
                           return true;
-                        }, */
+                        },
                       })}
                     />
                     {errors.websiteUrl && (
@@ -364,7 +401,7 @@ const MyProfile = () => {
         </div>
 
         {/* Second Column */}
-        <div className="lg:col-span-4 col-span-12 ">
+        <div className="lg:col-span-4 col-span-12 lg:order-2 order-1">
           {/* Photo */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
