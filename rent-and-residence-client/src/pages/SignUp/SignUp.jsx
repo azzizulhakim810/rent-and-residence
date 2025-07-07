@@ -47,15 +47,11 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           setDisabled(true);
           reset();
 
+          toast.success("Signed Up Successfully");
+
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
           // navigate("/");
-          <>
-            <Toaster />
-            <button onClick={() => toast("My first toast")}>
-              Give me a toast
-            </button>
-          </>;
         })
         .catch((error) => {
           setErrorMessage(error.message);
@@ -74,12 +70,16 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
+        toast.success("Signed In Successfully");
         console.log(res.user);
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error);
+        console.log(error);
+      });
   };
 
   const handleValidateBtn = (e) => {

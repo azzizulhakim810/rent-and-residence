@@ -5,7 +5,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
@@ -47,8 +47,9 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           setDisabled(true);
           reset();
           // navigate("/");
+
           toast.success("Signed In Successfully");
-          // <Toaster position="top-center" />;
+
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
         })
@@ -71,12 +72,16 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
+        toast.success("Signed In Successfully");
         console.log(res.user);
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error);
+        console.log(error);
+      });
   };
 
   const handleValidateBtn = (e) => {

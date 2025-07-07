@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-
+import { toast } from "sonner";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
@@ -11,6 +11,7 @@ const SignInAndUp = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
+        toast.success("Signed Out Successfully");
         console.log("Sign Out Successfully");
         loading(false);
       })
