@@ -112,7 +112,7 @@ async function run() {
     });
 
     // Add a User
-    app.post("/api/user", async (req, res) => {
+    app.post("/api/auth/register", async (req, res) => {
       const user = req.body;
 
       console.log(user);

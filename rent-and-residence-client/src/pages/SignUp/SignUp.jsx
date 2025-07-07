@@ -73,6 +73,9 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
         toast.success("Signed In Successfully");
         console.log(res.user);
 
+        // Save the user to Database
+        fetch("http://localhost:5123/api/auth/register");
+
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();
       })
