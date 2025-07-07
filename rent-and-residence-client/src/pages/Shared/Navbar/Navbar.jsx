@@ -19,8 +19,10 @@ const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
   // console.log(user);
 
-  const { uid, displayName, email, photoURL } = user || {};
+  const { uid, displayName, email, photoURL, metadata } = user || {};
 
+  // const newDate = new Date(parseFloat(metadata?.createdAt));
+  // console.log(newDate);
   // Sign Out
   const handleSignOut = () => {
     signOutUser()
@@ -63,26 +65,14 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          onMouseEnter={() => setShowSubmenu(true)}
-          onMouseLeave={() => setShowSubmenu(false)}
-          to="#"
-          className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none "
+          to="/allAgents"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#7854f6] font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
+              : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
+          }
         >
-          Agents
-          {showSubmenu ? (
-            <ul className="bg-white absolute w-[150px] shadow-sm top-9 sub-menu p-2 ">
-              <li>
-                <Link
-                  to="/allAgents"
-                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-                >
-                  All Agents
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            " "
-          )}
+          All Agents
         </NavLink>
       </li>
 
@@ -173,32 +163,9 @@ const Navbar = () => {
           onMouseEnter={() => setShowSubmenu(true)}
           onMouseLeave={() => setShowSubmenu(false)}
           to="#"
-          /* className={({ isActive }) =>
-            isActive
-              ? "relative text-C_purple hover:text-C_purple  gap-3"
-              : "relative nav-item text-white  gap-3"
-          } */
         >
           <BsPerson className="text-xl" />
           Agents
-          {/* <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
-            <li>
-              <Link
-                to="/agents"
-                className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-              >
-                Agents
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/allAgents"
-                className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-              >
-                All Agents
-              </Link>
-            </li>
-          </ul> */}
           {showSubmenu ? (
             <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
               <li>

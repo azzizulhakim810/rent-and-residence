@@ -113,13 +113,24 @@ async function run() {
 
     // Add a User
     app.post("/api/auth/register", async (req, res) => {
-      const user = req.body;
+      const newUser = req.body;
 
-      console.log(user);
+      // console.log(newUser.email);
+      const { email } = newUser;
+      console.log(email);
 
-      // const result = await propertiesCollection.insertOne(user);
+      const query = { email: email };
 
-      // res.send(result);
+      const findIfExisting = await usersCollection.findOne(query);
+
+      // console.log(findIfExisting);
+      if (!findIfExisting) {
+        const result = await usersCollection.insertOne(newUser);
+        res.send(result);
+        console.log("Injected");
+      } else {
+        console.log("Haven't Injected");
+      }
     });
 
     // Add a Property

@@ -5,7 +5,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
@@ -39,7 +39,9 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
       // Sleeper Expression - Sleep for one second xD
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // throw new Error();
-      const { email, password } = data;
+      const { email, password, firstName, lastName } = data;
+
+      const fullName = firstName + " " + lastName;
 
       createUser(email, password)
         .then((res) => {
@@ -47,7 +49,43 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           setDisabled(true);
           reset();
 
-          toast.success("Signed Up Successfully");
+          // toast.success("Signed Up Successfully");
+
+          const newUser = {
+            name: fullName,
+            email,
+            phone: null,
+            role: "user",
+            profileImage: null,
+            isVerified: "false",
+            createdAt: new Date(),
+          };
+
+          // Save the user to Database
+          fetch("http://localhost:5123/api/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          })
+            .then((res) => {
+              if (!res.ok) {
+                toast.error("There is having issues to POST");
+                return;
+              }
+              // console.log(res);
+
+              res.json();
+            })
+            .then((data) => {
+              toast.success("Signed In Successfully");
+              console.log(data);
+            })
+            .catch((error) => {
+              toast.error(error);
+              console.log(error);
+            });
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
@@ -73,8 +111,44 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
         toast.success("Signed In Successfully");
         console.log(res.user);
 
+        const { displayName, email, phoneNumber, photoURL, metadata } =
+          res.user || {};
+
+        const newUser = {
+          name: displayName,
+          email,
+          phone: phoneNumber,
+          role: "user",
+          profileImage: photoURL,
+          isVerified: "false",
+          createdAt: metadata.createdAt,
+        };
+
         // Save the user to Database
-        fetch("http://localhost:5123/api/auth/register");
+        fetch("http://localhost:5123/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              toast.error("There is having issues to POST");
+              return;
+            }
+            // console.log(res);
+
+            res.json();
+          })
+          .then((data) => {
+            toast.success("Signed In Successfully");
+            console.log(data);
+          })
+          .catch((error) => {
+            toast.error(error);
+            console.log(error);
+          });
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();
