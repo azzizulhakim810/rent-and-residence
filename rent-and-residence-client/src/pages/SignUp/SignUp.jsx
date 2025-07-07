@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import { Toaster, toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
@@ -19,6 +19,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [errorMessage, setErrorMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
   const [showPass, setShowPass] = useState(false);
@@ -49,8 +50,15 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
           // navigate("/");
+          <>
+            <Toaster />
+            <button onClick={() => toast("My first toast")}>
+              Give me a toast
+            </button>
+          </>;
         })
         .catch((error) => {
+          setErrorMessage(error.message);
           console.log(error.message);
         });
 
@@ -208,7 +216,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           {errors.password && (
             <span className="text-red-500">{errors.password.message}</span>
           )}
-
+          {errorMessage && <span className="text-red-500">{errorMessage}</span>}
           <p className="mt-0 block text-right font-sans text-base font-normal leading-relaxed text-C_LightGray antialiased">
             Already Registered?{" "}
             <Link

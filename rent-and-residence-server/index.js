@@ -111,6 +111,17 @@ async function run() {
       res.send(result);
     });
 
+    // Add a User
+    app.post("/api/user", async (req, res) => {
+      const user = req.body;
+
+      console.log(user);
+
+      // const result = await propertiesCollection.insertOne(user);
+
+      // res.send(result);
+    });
+
     // Add a Property
     app.post("/api/properties", async (req, res) => {
       const property = req.body;

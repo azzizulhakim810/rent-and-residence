@@ -5,6 +5,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import { toast, Toaster } from "sonner";
 
 import { useForm } from "react-hook-form";
 
@@ -46,7 +47,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           setDisabled(true);
           reset();
           // navigate("/");
-
+          toast.success("Signed In Successfully");
+          // <Toaster position="top-center" />;
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
         })
