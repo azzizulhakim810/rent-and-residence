@@ -30,23 +30,25 @@ const MyProfile = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm({
+    // Good Practice to set defaultValues
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
-      // phone: "",
+      phone: "",
       role: "",
-      // profileImage: "",
-      // bio: "",
-      // facebookUrl: "",
-      // instagramUrl: "",
-      // linkedinUrl: "",
-      // pinterestUrl: "",
-      // twitterUrl: "",
-      // websiteUrl: "",
+      profileImage: "",
+      bio: "",
+      facebookUrl: "",
+      instagramUrl: "",
+      linkedinUrl: "",
+      pinterestUrl: "",
+      twitterUrl: "",
+      websiteUrl: "",
     },
   });
 
+  // useEffect to reset the form with fetched user data
   useEffect(() => {
     if (currentUserFromDB) {
       console.log("Injected");
@@ -61,7 +63,16 @@ const MyProfile = () => {
         firstName: "",
         lastName: "",
         email: "",
+        phone: "",
         role: "",
+        profileImage: "",
+        bio: "",
+        facebookUrl: "",
+        instagramUrl: "",
+        linkedinUrl: "",
+        pinterestUrl: "",
+        twitterUrl: "",
+        websiteUrl: "",
       });
     }
   }, [currentUserFromDB, reset]);
@@ -99,16 +110,16 @@ const MyProfile = () => {
       _id,
       name: fullName,
       email,
-      // phone,
+      phone,
       role,
       profileImage: file,
-      // bio,
-      // facebookUrl,
-      // instagramUrl,
-      // linkedinUrl,
-      // pinterestUrl,
-      // twitterUrl,
-      // websiteUrl,
+      bio,
+      facebookUrl,
+      instagramUrl,
+      linkedinUrl,
+      pinterestUrl,
+      twitterUrl,
+      websiteUrl,
     };
 
     console.log(updateUser);
@@ -256,7 +267,7 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  {/*  <div className=" lg:w-1/2">
+                  <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
                       Phone
                     </label>
@@ -281,13 +292,13 @@ const MyProfile = () => {
                         {errors.phone.message}
                       </span>
                     )}
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* Bio */}
-                {/*   <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full">
                   <label className="label mb-2 text-sm font-[600]">Bio</label>
-                  
+
                   <textarea
                     className="textarea w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md  border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                     {...register("bio", {
@@ -307,7 +318,7 @@ const MyProfile = () => {
                       {errors.bio.message}
                     </span>
                   )}
-                </div> */}
+                </div>
 
                 {/* Social Media */}
                 <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
@@ -315,7 +326,7 @@ const MyProfile = () => {
                 </h1>
 
                 {/* Facebook + Twitter */}
-                {/*  <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Facebook Url
@@ -363,10 +374,10 @@ const MyProfile = () => {
                       </span>
                     )}
                   </div>
-                </div> */}
+                </div>
 
                 {/* Linkedin  + Instagram  */}
-                {/* <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Linkedin Url
@@ -414,10 +425,10 @@ const MyProfile = () => {
                       </span>
                     )}
                   </div>
-                </div> */}
+                </div>
 
                 {/* Pinterest + Website  */}
-                {/* <div className="flex lg:flex-row flex-col gap-5 w-full">
+                <div className="flex lg:flex-row flex-col gap-5 w-full">
                   <div className=" lg:w-1/2 ">
                     <label className="label mb-2 text-sm font-[600]">
                       Pinterest Url
@@ -465,7 +476,7 @@ const MyProfile = () => {
                       </span>
                     )}
                   </div>
-                </div> */}
+                </div>
 
                 {/* Update + Delete  */}
                 <div className="flex lg:flex-row flex-col justify-between gap-2 w-full mt-5">
@@ -473,7 +484,14 @@ const MyProfile = () => {
                     type="submit"
                     className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md"
                   >
-                    <RxUpdate /> Update Profile
+                    {isSubmitting ? (
+                      "Updating..."
+                    ) : (
+                      <span className="flex gap-2 items-center">
+                        {" "}
+                        <RxUpdate /> Update Profile
+                      </span>
+                    )}
                   </button>
 
                   <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
