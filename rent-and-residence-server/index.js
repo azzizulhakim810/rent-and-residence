@@ -117,7 +117,7 @@ async function run() {
 
       // console.log(newUser.email);
       const { email } = newUser;
-      console.log(email);
+      // console.log(email);
 
       const query = { email: email };
 

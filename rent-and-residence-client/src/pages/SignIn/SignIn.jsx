@@ -49,6 +49,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           // navigate("/");
 
           toast.success("Signed In Successfully");
+          navigate("/dashboard/myProfile");
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
@@ -72,7 +73,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        toast.success("Signed In Successfully");
+        // toast.success("Signed In Successfully");
         console.log(res.user);
 
         const { displayName, email, phoneNumber, photoURL, metadata } =
@@ -85,7 +86,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           role: "user",
           profileImage: photoURL,
           isVerified: "false",
-          createdAt: metadata.createdAt,
+          createdAt: new Date(parseFloat(metadata.createdAt)),
         };
 
         // Save the user to Database
@@ -106,13 +107,16 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
             res.json();
           })
           .then((data) => {
-            toast.success("Signed In Successfully");
+            // toast.success("Signed In Successfully");
             console.log(data);
           })
           .catch((error) => {
             toast.error(error);
             console.log(error);
           });
+
+        toast.success("Signed In Successfully");
+        navigate("/dashboard/myProfile");
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();

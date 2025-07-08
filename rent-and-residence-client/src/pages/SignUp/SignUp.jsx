@@ -49,7 +49,8 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           setDisabled(true);
           reset();
 
-          // toast.success("Signed Up Successfully");
+          // toast.success("Signed In Successfully");
+          navigate("/dashboard/myProfile");
 
           const newUser = {
             name: fullName,
@@ -108,7 +109,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        toast.success("Signed In Successfully");
         console.log(res.user);
 
         const { displayName, email, phoneNumber, photoURL, metadata } =
@@ -121,7 +121,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           role: "user",
           profileImage: photoURL,
           isVerified: "false",
-          createdAt: metadata.createdAt,
+          createdAt: new Date(parseFloat(metadata.createdAt)),
         };
 
         // Save the user to Database
@@ -142,13 +142,16 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             res.json();
           })
           .then((data) => {
-            toast.success("Signed In Successfully");
+            // toast.success("Signed In Successfully");
             console.log(data);
           })
           .catch((error) => {
             toast.error(error);
             console.log(error);
           });
+
+        toast.success("Signed In Successfully");
+        navigate("/dashboard/myProfile");
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();
