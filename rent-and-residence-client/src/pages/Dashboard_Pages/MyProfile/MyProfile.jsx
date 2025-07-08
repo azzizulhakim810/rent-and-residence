@@ -1,37 +1,50 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../../providers/AuthProvider";
 
 import { RxCross2, RxUpdate } from "react-icons/rx";
 
-const MyProfile = () => {
-  const { user } = useContext(AuthContext);
-  const { email } = user || {};
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
-  // console.log(_id);
+const MyProfile = () => {
+  // Custom hook to load the current user from DB
+  const [currentUserFromDB] = useSignedInUser();
+
+  console.log(currentUserFromDB.name);
 
   const [profilePreview, setProfilePreview] = useState(null);
   const [imageSize, setImageSize] = useState(null);
-  const [currentUserFromDB, setCurrentUserFromDB] = useState(null);
+  // const [currentUserFromDB, setCurrentUserFromDB] = useState(null);
 
   const fileInputRef = useRef();
   // console.log(fileInputRef.current.value);
 
-  useEffect(() => {
-    fetch(`http://localhost:5123/api/auth/me?email=${email}`)
-      .then((res) => res.json())
-      .then((data) => setCurrentUserFromDB(data));
-  }, [email]);
-
-  const { _id, name, profileImage, phone, role } = currentUserFromDB || {};
+  const { _id, name, email, profileImage, phone, role } = currentUserFromDB;
   const firstName = name?.split(" ")?.[0];
   const lastName = name?.split(" ")?.[1];
+  // console.log(firstName, lastName);
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      _id: "",
+      name: "",
+      email: "",
+      phone: "",
+      role: "",
+      profileImage: "",
+      bio: "",
+      facebookUrl: "",
+      instagramUrl: "",
+      linkedinUrl: "",
+      pinterestUrl: "",
+      twitterUrl: "",
+      websiteUrl: "",
+    },
+  });
 
   // Form Data
   const onSubmit = (data) => {
@@ -152,7 +165,7 @@ const MyProfile = () => {
 
                     <select
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      // defaultValue="User"
+                      value={role}
                       {...register("role", { required: true })}
                     >
                       <option value="user">User</option>
@@ -173,7 +186,7 @@ const MyProfile = () => {
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      defaultValue={firstName}
+                      defaultValue={name?.split(" ")?.[0]}
                       {...register("firstName", {
                         required: firstName ? false : true,
                       })}
@@ -202,11 +215,11 @@ const MyProfile = () => {
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      defaultValue={email}
+                      value={email}
                       {...register("email", {
                         required: email ? null : "This is required",
                         validate: (value) => {
-                          if (!value.includes("@")) {
+                          if (!email && !value.includes("@")) {
                             return "Email must include @";
                           }
                           return true;
@@ -263,11 +276,11 @@ const MyProfile = () => {
                       required: "This is required",
                       maxLength: {
                         value: 150,
-                        message: "Bio won't be more than 150 Characters",
+                        message: "Bio should be less than 150 Characters",
                       },
                       minLength: {
                         value: 50,
-                        message: "Bio won't be less than 50 Characters",
+                        message: "Bio should be more than 50 Characters",
                       },
                     })}
                   ></textarea>
