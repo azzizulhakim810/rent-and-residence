@@ -5,6 +5,7 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectId } = require("mongodb");
 const { fs } = require("fs");
+const multer = require("multer");
 
 const port = process.env.PORT || 5000;
 

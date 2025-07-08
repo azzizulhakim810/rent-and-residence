@@ -130,7 +130,10 @@ const MyProfile = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(updateUser),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   // console.log(profilePreview);
