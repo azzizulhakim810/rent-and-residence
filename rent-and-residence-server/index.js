@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectId } = require("mongodb");
+const { fs } = require("fs");
 
 const port = process.env.PORT || 5000;
 
@@ -187,13 +188,13 @@ async function run() {
     app.put("/api/users/:id", async (req, res) => {
       const id = req.params.id;
 
-      console.log(id);
+      // console.log(id);
 
       const updatedText = req.body;
 
-      console.log(updatedText);
+      console.log(updatedText.profileImage);
 
-      const filter = { _id: new ObjectId(id) };
+      /*       const filter = { _id: new ObjectId(id) };
 
       const options = { upsert: true };
 
@@ -221,7 +222,7 @@ async function run() {
         options
       );
 
-      res.send(result);
+      res.send(result); */
     });
 
     // Delete a Property
