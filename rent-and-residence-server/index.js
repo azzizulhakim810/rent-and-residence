@@ -184,10 +184,14 @@ async function run() {
     });
 
     // Update an user Info
-    app.patch("/api/users/:id", async (req, res) => {
+    app.put("/api/users/:id", async (req, res) => {
       const id = req.params.id;
 
+      console.log(id);
+
       const updatedText = req.body;
+
+      console.log(updatedText);
 
       const filter = { _id: new ObjectId(id) };
 
@@ -198,6 +202,16 @@ async function run() {
           name: updatedText.name,
           phone: updatedText.phone,
           profileImage: updatedText.profileImage,
+          email: updatedText.email,
+          phone: updatedText.phone,
+          role: updatedText.role,
+          bio: updatedText.bio,
+          facebookUrl: updatedText.facebookUrl,
+          instagramUrl: updatedText.instagramUrl,
+          linkedinUrl: updatedText.linkedinUrl,
+          pinterestUrl: updatedText.pinterestUrl,
+          twitterUrl: updatedText.twitterUrl,
+          websiteUrl: updatedText.websiteUrl,
         },
       };
 

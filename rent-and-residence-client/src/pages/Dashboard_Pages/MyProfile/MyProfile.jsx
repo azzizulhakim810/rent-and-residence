@@ -9,7 +9,7 @@ const MyProfile = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
 
-  console.log(currentUserFromDB.name);
+  // console.log(currentUserFromDB.name);
 
   const [profilePreview, setProfilePreview] = useState(null);
   const [imageSize, setImageSize] = useState(null);
@@ -124,13 +124,13 @@ const MyProfile = () => {
 
     console.log(updateUser);
 
-    /* fetch("http://localhost:5123/api/users/:id", {
+    fetch(`http://localhost:5123/api/users/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: updateUser,
-    }); */
+      body: JSON.stringify(updateUser),
+    });
   };
 
   // console.log(profilePreview);
