@@ -111,6 +111,16 @@ async function run() {
       res.send(result);
     });
 
+    // Fetch the current user
+    app.get("/api/auth/me", async (req, res) => {
+      const userEmail = req.query;
+      // console.log(userEmail.email);
+
+      const query = { email: userEmail?.email };
+      const result = await usersCollection.findOne(query);
+      res.send(result);
+    });
+
     // Add a User
     app.post("/api/auth/register", async (req, res) => {
       const newUser = req.body;
@@ -127,7 +137,7 @@ async function run() {
       if (!findIfExisting) {
         const result = await usersCollection.insertOne(newUser);
         res.send(result);
-        console.log("Injected");
+        console.log("User Injected");
       } else {
         console.log("Haven't Injected");
       }

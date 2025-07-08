@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../providers/AuthProvider";
 
@@ -6,17 +6,26 @@ import { RxCross2, RxUpdate } from "react-icons/rx";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
-  const { uid, displayName, email, photoURL } = user || {};
-  const firstName = displayName?.split(" ")?.[0];
-  const lastName = displayName?.split(" ")?.[1];
-  // console.log(displayName?.split(" ")?.[0]);
+  const { email } = user || {};
+
+  // console.log(_id);
 
   const [profilePreview, setProfilePreview] = useState(null);
   const [imageSize, setImageSize] = useState(null);
+  const [currentUserFromDB, setCurrentUserFromDB] = useState(null);
 
   const fileInputRef = useRef();
   // console.log(fileInputRef.current.value);
 
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/auth/me?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => setCurrentUserFromDB(data));
+  }, [email]);
+
+  const { _id, name, profileImage, phone, role } = currentUserFromDB || {};
+  const firstName = name?.split(" ")?.[0];
+  const lastName = name?.split(" ")?.[1];
   const {
     register,
     handleSubmit,
@@ -30,7 +39,52 @@ const MyProfile = () => {
 
     const files = chooseFile.files[0];
 
-    console.log([files, data]);
+    data.file = files;
+    // console.log(data);
+
+    const {
+      email,
+      role,
+      bio,
+      firstName,
+      lastName,
+      facebookUrl,
+      instagramUrl,
+      linkedinUrl,
+      pinterestUrl,
+      twitterUrl,
+      websiteUrl,
+      phone,
+      file,
+    } = data;
+
+    const fullName = firstName + " " + lastName;
+
+    const updateUser = {
+      _id,
+      name: fullName,
+      email,
+      phone,
+      role,
+      profileImage: file,
+      bio,
+      facebookUrl,
+      instagramUrl,
+      linkedinUrl,
+      pinterestUrl,
+      twitterUrl,
+      websiteUrl,
+    };
+
+    console.log(updateUser);
+
+    /* fetch("http://localhost:5123/api/users/:id", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: updateUser,
+    }); */
   };
 
   // console.log(profilePreview);
@@ -93,13 +147,13 @@ const MyProfile = () => {
                 <div className="flex gap-5 w-full">
                   <div className="flex flex-col w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Title/Position
+                      Role
                     </label>
 
                     <select
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       // defaultValue="User"
-                      {...register("title/position", { required: true })}
+                      {...register("role", { required: true })}
                     >
                       <option value="user">User</option>
                       <option value="agent">Agent</option>
@@ -150,7 +204,7 @@ const MyProfile = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       defaultValue={email}
                       {...register("email", {
-                        required: "This is required",
+                        required: email ? null : "This is required",
                         validate: (value) => {
                           if (!value.includes("@")) {
                             return "Email must include @";
