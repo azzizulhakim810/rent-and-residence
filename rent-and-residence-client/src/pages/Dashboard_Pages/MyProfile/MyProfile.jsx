@@ -131,8 +131,8 @@ const MyProfile = () => {
       },
       body: JSON.stringify(updateUser),
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((res) => console.log(res))
+      // .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
 
@@ -534,7 +534,7 @@ const MyProfile = () => {
 
             <fieldset className="fieldset">
               <input
-                name="choose-file"
+                name="image"
                 id="choose-file"
                 onChange={getImgData}
                 ref={fileInputRef}

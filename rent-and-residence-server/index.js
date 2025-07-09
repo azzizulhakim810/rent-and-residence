@@ -25,6 +25,14 @@ const client = new MongoClient(uri, {
   },
 });
 
+// Multer Setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
+
+const upload = multer({ storage });
+
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -186,16 +194,93 @@ async function run() {
     });
 
     // Update an user Info
-    app.put("/api/users/:id", async (req, res) => {
-      const id = req.params.id;
+    app.put(
+      "/api/users/:id",
+      upload.single("profileImage"),
+      async (req, res) => {
+        const id = req.params.id;
 
-      // console.log(id);
+        // console.log(id);
 
-      const updatedText = req.body;
+        const {
+          name,
+          email,
+          phone,
+          role,
+          bio,
+          profileImage,
+          facebookUrl,
+          instagramUrl,
+          linkedinUrl,
+          pinterestUrl,
+          twitterUrl,
+          websiteUrl,
+        } = req.body;
 
-      console.log(updatedText.profileImage);
+        console.log(profileImage);
 
-      /*       const filter = { _id: new ObjectId(id) };
+        const imageUrl = null;
+
+        // Upload image to ImageKit
+        if (req.file) {
+          const imageBuffer = fs.readFileSync(req.file.path, {
+            encoding: "base64",
+          });
+
+          const uploadResponse = await axios.post(
+            "https://upload.imagekit.io/api/v1/files/upload",
+            {
+              file: imageBuffer,
+              fileName: req.file.originalname,
+            },
+            {
+              headers: {
+                Authorization:
+                  "Basic " +
+                  Buffer.from(`${process.env.IMAGEKIT_PRIVATE_KEY}:`).toString(
+                    "base64"
+                  ),
+              },
+            }
+          );
+          imageUrl = uploadResponse.data.url;
+          fs.unlinkSync(req.file.path);
+        }
+
+        // Update the data
+        const updateProfile = {
+          name,
+          email,
+          phone,
+          role,
+          bio,
+          facebookUrl,
+          instagramUrl,
+          linkedinUrl,
+          pinterestUrl,
+          twitterUrl,
+          websiteUrl,
+        };
+
+        if (imageUrl) {
+          updateProfile.profileImage = imageUrl;
+        }
+
+        // Update user in MongoDB
+        const result = await usersCollection.findOneAndUpdate(
+          { _id: new ObjectId(req.params.id) },
+          { $set: updateProfile },
+          { returnDocument: "after" }
+        );
+
+        res.json(result.value);
+        /////////////////////////////////////////////////
+
+        // const updatedText = req.body;
+
+        // console.log(name);
+
+        /*       const filter = { _id: new ObjectId(id) };
 
       const options = { upsert: true };
 
@@ -224,7 +309,8 @@ async function run() {
       );
 
       res.send(result); */
-    });
+      }
+    );
 
     // Delete a Property
     app.delete("/api/properties/:id", async (req, res) => {
