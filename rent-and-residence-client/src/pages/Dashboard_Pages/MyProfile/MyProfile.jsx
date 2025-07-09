@@ -88,48 +88,30 @@ const MyProfile = () => {
     data.file = files;
     // console.log(data);
 
-    const {
-      email,
-      role,
-      bio,
-      firstName,
-      lastName,
-      facebookUrl,
-      instagramUrl,
-      linkedinUrl,
-      pinterestUrl,
-      twitterUrl,
-      websiteUrl,
-      phone,
-      file,
-    } = data;
+    const fullName = data.firstName + " " + data.lastName;
 
-    const fullName = firstName + " " + lastName;
+    const formData = new FormData();
+    formData.append("name", fullName);
+    formData.append("email", data.email);
+    formData.append("role", data.role);
+    formData.append("bio", data.bio);
+    formData.append("profileImage", data.file);
+    formData.append("phone", data.phone);
+    formData.append("facebookUrl", data.facebookUrl);
+    formData.append("twitterUrl", data.twitterUrl);
+    formData.append("instagramUrl", data.instagramUrl);
+    formData.append("linkedinUrl", data.linkedinUrl);
+    formData.append("pinterestUrl", data.pinterestUrl);
+    formData.append("websiteUrl", data.websiteUrl);
 
-    const updateUser = {
-      _id,
-      name: fullName,
-      email,
-      phone,
-      role,
-      profileImage: file,
-      bio,
-      facebookUrl,
-      instagramUrl,
-      linkedinUrl,
-      pinterestUrl,
-      twitterUrl,
-      websiteUrl,
-    };
-
-    console.log(updateUser);
+    console.log(Object.fromEntries(formData.entries()));
 
     fetch(`http://localhost:5123/api/users/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(updateUser),
+      body: JSON.stringify(formData),
     })
       .then((res) => console.log(res))
       // .then((data) => console.log(data))

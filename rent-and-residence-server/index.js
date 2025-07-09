@@ -220,7 +220,7 @@ async function run() {
         console.log(profileImage);
 
         const imageUrl = null;
-
+        /* 
         // Upload image to ImageKit
         if (req.file) {
           const imageBuffer = fs.readFileSync(req.file.path, {
@@ -273,7 +273,8 @@ async function run() {
           { returnDocument: "after" }
         );
 
-        res.json(result.value);
+        res.json(result.value); */
+
         /////////////////////////////////////////////////
 
         // const updatedText = req.body;
