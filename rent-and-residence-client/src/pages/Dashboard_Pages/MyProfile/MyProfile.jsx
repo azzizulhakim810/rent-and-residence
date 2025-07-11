@@ -51,7 +51,7 @@ const MyProfile = () => {
   // useEffect to reset the form with fetched user data
   useEffect(() => {
     if (currentUserFromDB) {
-      console.log("Injected");
+      console.log("Injected Frontend");
       reset({
         firstName: currentUserFromDB.name?.split(" ")?.[0],
         lastName: currentUserFromDB.name?.split(" ")?.[1],
@@ -106,15 +106,15 @@ const MyProfile = () => {
 
     console.log(Object.fromEntries(formData.entries()));
 
-    fetch(`http://localhost:5123/api/users/${_id}`, {
+    fetch(`http://localhost:5123/api/user/${_id}`, {
       method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      /* headers: {
+        "content-type": "multipart/form-data",
+      }, */
+      body: formData,
     })
-      .then((res) => console.log(res))
-      // .then((data) => console.log(data))
+      .then((res) => res)
+      .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
 

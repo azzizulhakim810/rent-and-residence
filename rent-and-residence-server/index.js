@@ -11,7 +11,8 @@ const port = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // for application/json
+app.use(express.urlencoded({ extended: true })); // for application/x-www-form-urlencoded
 
 // MongoDB Setup
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@atlascluster.sztfigr.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster`;
@@ -26,11 +27,12 @@ const client = new MongoClient(uri, {
 });
 
 // Multer Setup
-const storage = multer.diskStorage({
+/* const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-});
+}); */
 
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 async function run() {
@@ -195,12 +197,15 @@ async function run() {
 
     // Update an user Info
     app.put(
-      "/api/users/:id",
+      "/api/user/:id",
       upload.single("profileImage"),
       async (req, res) => {
         const id = req.params.id;
-
-        // console.log(id);
+        const file = req.file;
+        // console.log("id:", id);
+        // console.log("req-body:", req.body);
+        // console.log("req-file:", req.file);
+        console.log("req-buffer:", req.file.buffer);
 
         const {
           name,
@@ -217,10 +222,10 @@ async function run() {
           websiteUrl,
         } = req.body;
 
-        console.log(profileImage);
+        console.log(name);
 
         const imageUrl = null;
-
+        /* 
         // Upload image to ImageKit
         if (req.file) {
           const imageBuffer = fs.readFileSync(req.file.path, {
@@ -273,7 +278,7 @@ async function run() {
           { returnDocument: "after" }
         );
 
-        res.json(result.value);
+        res.json(result.value); */
 
         /////////////////////////////////////////////////
 
