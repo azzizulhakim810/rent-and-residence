@@ -7,6 +7,14 @@ const { ObjectId } = require("mongodb");
 const { fs } = require("fs");
 const multer = require("multer");
 
+const ImageKit = require("imagekit");
+
+const imagekit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+});
+
 const port = process.env.PORT || 5000;
 
 // Middlewares
@@ -205,7 +213,7 @@ async function run() {
         // console.log("id:", id);
         // console.log("req-body:", req.body);
         // console.log("req-file:", req.file);
-        console.log("req-buffer:", req.file.buffer);
+        // console.log("req-buffer:", req.file.buffer);
 
         const {
           name,
@@ -224,33 +232,13 @@ async function run() {
 
         console.log(name);
 
-        const imageUrl = null;
-        /* 
-        // Upload image to ImageKit
-        if (req.file) {
-          const imageBuffer = fs.readFileSync(req.file.path, {
-            encoding: "base64",
-          });
+        // Upload to ImageKit
+        const imgUpload = await imagekit.upload({
+          file: file.buffer,
+          fileName: `user-${Date.now()}`,
+        });
 
-          const uploadResponse = await axios.post(
-            "https://upload.imagekit.io/api/v1/files/upload",
-            {
-              file: imageBuffer,
-              fileName: req.file.originalname,
-            },
-            {
-              headers: {
-                Authorization:
-                  "Basic " +
-                  Buffer.from(`${process.env.IMAGEKIT_PRIVATE_KEY}:`).toString(
-                    "base64"
-                  ),
-              },
-            }
-          );
-          imageUrl = uploadResponse.data.url;
-          fs.unlinkSync(req.file.path);
-        }
+        console.log(imgUpload.url);
 
         // Update the data
         const updateProfile = {
@@ -267,54 +255,18 @@ async function run() {
           websiteUrl,
         };
 
-        if (imageUrl) {
-          updateProfile.profileImage = imageUrl;
+        if (imgUpload?.url) {
+          updateProfile.profileImage = imgUpload.url;
         }
 
         // Update user in MongoDB
         const result = await usersCollection.findOneAndUpdate(
-          { _id: new ObjectId(req.params.id) },
+          { _id: new ObjectId(id) },
           { $set: updateProfile },
           { returnDocument: "after" }
         );
 
-        res.json(result.value); */
-
-        /////////////////////////////////////////////////
-
-        // const updatedText = req.body;
-
-        // console.log(name);
-
-        /*       const filter = { _id: new ObjectId(id) };
-
-      const options = { upsert: true };
-
-      const updatedProfile = {
-        $set: {
-          name: updatedText.name,
-          phone: updatedText.phone,
-          profileImage: updatedText.profileImage,
-          email: updatedText.email,
-          phone: updatedText.phone,
-          role: updatedText.role,
-          bio: updatedText.bio,
-          facebookUrl: updatedText.facebookUrl,
-          instagramUrl: updatedText.instagramUrl,
-          linkedinUrl: updatedText.linkedinUrl,
-          pinterestUrl: updatedText.pinterestUrl,
-          twitterUrl: updatedText.twitterUrl,
-          websiteUrl: updatedText.websiteUrl,
-        },
-      };
-
-      const result = await usersCollection.updateOne(
-        filter,
-        updatedProfile,
-        options
-      );
-
-      res.send(result); */
+        res.json(result.value);
       }
     );
 
