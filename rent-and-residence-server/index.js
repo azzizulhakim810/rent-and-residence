@@ -6,14 +6,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectId } = require("mongodb");
 const { fs } = require("fs");
 const multer = require("multer");
-
-const ImageKit = require("imagekit");
-
-const imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
-});
+const imagekit = require("./configs/imageKit");
 
 const port = process.env.PORT || 5000;
 
@@ -211,8 +204,8 @@ async function run() {
         const id = req.params.id;
         const file = req?.file;
         // console.log("id:", id);
-        // console.log("req-body:", req.body);
-        // console.log("req-file:", req.file);
+        console.log("req-body:", req.body);
+        console.log("req-file:", req.file);
         // console.log("req-buffer:", req.file.buffer);
 
         const {

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { RxCross2, RxUpdate } from "react-icons/rx";
 
@@ -114,7 +115,12 @@ const MyProfile = () => {
       body: formData,
     })
       .then((res) => res)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        if (data.ok) {
+          toast.success("Profile Updated Successfully");
+        }
+      })
       .catch((error) => console.log(error));
   };
 
