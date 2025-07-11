@@ -12,17 +12,19 @@ import { GoHome } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
-  const { user, signOutUser, loading } = useContext(AuthContext);
+  const { signOutUser, loading } = useContext(AuthContext);
   // console.log(user);
-
-  const { uid, displayName, email, photoURL, metadata } = user || {};
+  const [currentUserFromDB] = useSignedInUser();
+  const { _id, profileImage } = currentUserFromDB;
 
   // const newDate = new Date(parseFloat(metadata?.createdAt));
   // console.log(newDate);
+
   // Sign Out
   const handleSignOut = () => {
     signOutUser()
@@ -423,7 +425,7 @@ const Navbar = () => {
           </div>
 
           {/* Profile  */}
-          {!user ? (
+          {!currentUserFromDB ? (
             <div
               tabIndex={0}
               role="button"
@@ -448,8 +450,8 @@ const Navbar = () => {
                     <img
                       className="w-full object-fill "
                       src={
-                        photoURL
-                          ? photoURL
+                        profileImage
+                          ? profileImage
                           : "https://i.ibb.co/jkGkX8fs/default-user.png"
                       }
                     />

@@ -26,7 +26,7 @@ const MyProfile = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     reset,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -503,11 +503,7 @@ const MyProfile = () => {
               >
                 <img
                   className="w-full object-fill "
-                  src={
-                    profilePreview
-                      ? profilePreview
-                      : "https://i.ibb.co/jkGkX8fs/default-user.png"
-                  }
+                  src={profilePreview ? profilePreview : profileImage}
                 />
 
                 <div id="img-preview"></div>

@@ -209,7 +209,7 @@ async function run() {
       upload.single("profileImage"),
       async (req, res) => {
         const id = req.params.id;
-        const file = req.file;
+        const file = req?.file;
         // console.log("id:", id);
         // console.log("req-body:", req.body);
         // console.log("req-file:", req.file);
@@ -232,14 +232,6 @@ async function run() {
 
         console.log(name);
 
-        // Upload to ImageKit
-        const imgUpload = await imagekit.upload({
-          file: file.buffer,
-          fileName: `user-${Date.now()}`,
-        });
-
-        console.log(imgUpload.url);
-
         // Update the data
         const updateProfile = {
           name,
@@ -255,8 +247,18 @@ async function run() {
           websiteUrl,
         };
 
-        if (imgUpload?.url) {
+        // Upload to ImageKit
+        if (req.file) {
+          const imgUpload = await imagekit.upload({
+            file: file?.buffer,
+            fileName: `user-${Date.now()}`,
+          });
+          console.log(imgUpload.url);
+
+          // Push the url inside updateProfile object
           updateProfile.profileImage = imgUpload.url;
+        } else {
+          console.log("Doesn't get the file");
         }
 
         // Update user in MongoDB

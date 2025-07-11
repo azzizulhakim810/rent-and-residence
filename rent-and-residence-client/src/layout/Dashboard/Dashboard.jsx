@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../../pages/Shared/Footer/Footer";
 import Navbar from "../../pages/Shared/Navbar/Navbar";
@@ -9,11 +8,11 @@ import { BiMessageSquareAdd } from "react-icons/bi";
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { AuthContext } from "../../providers/AuthProvider";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 const Dashboard = () => {
-  const { user, signOutUser, loading } = useContext(AuthContext);
-  const { uid, displayName, email, photoURL } = user || {};
+  const [currentUserFromDB] = useSignedInUser();
+  const { _id, name, profileImage } = currentUserFromDB;
 
   // Sign Out
   const handleSignOut = () => {
@@ -159,8 +158,8 @@ const Dashboard = () => {
                   <img
                     className="w-full object-fill "
                     src={
-                      photoURL
-                        ? photoURL
+                      profileImage
+                        ? profileImage
                         : "https://i.ibb.co/jkGkX8fs/default-user.png"
                     }
                   />
@@ -168,7 +167,7 @@ const Dashboard = () => {
               </div>
 
               <h4 className="font-Nunito font-[600] text-C_gray text-[17px] leading-6">
-                Welcome Back, {displayName}
+                Welcome Back, {name}
               </h4>
             </div>
 
