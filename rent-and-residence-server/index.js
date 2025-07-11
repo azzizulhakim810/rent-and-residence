@@ -28,11 +28,6 @@ const client = new MongoClient(uri, {
 });
 
 // Multer Setup
-/* const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-}); */
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -203,10 +198,9 @@ async function run() {
       async (req, res) => {
         const id = req.params.id;
         const file = req?.file;
-        // console.log("id:", id);
+
         console.log("req-body:", req.body);
         console.log("req-file:", req.file);
-        // console.log("req-buffer:", req.file.buffer);
 
         const {
           name,
@@ -223,8 +217,6 @@ async function run() {
           websiteUrl,
         } = req.body;
 
-        console.log(name);
-
         // Update the data
         const updateProfile = {
           name,
@@ -240,7 +232,7 @@ async function run() {
           websiteUrl,
         };
 
-        // Upload to ImageKit
+        // Upload to ImageKit if the file available
         if (req.file) {
           const imgUpload = await imagekit.upload({
             file: file?.buffer,
