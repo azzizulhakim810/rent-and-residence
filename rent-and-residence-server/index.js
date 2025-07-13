@@ -194,6 +194,7 @@ async function run() {
     // Update an user Info
     app.put(
       "/api/user/:id",
+      // identify the image by it's name
       upload.single("profileImage"),
       async (req, res) => {
         const id = req.params.id;
@@ -246,7 +247,7 @@ async function run() {
           console.log("Doesn't get the file");
         }
 
-        // Update user in MongoDB
+        // Find & Update user in MongoDB
         const result = await usersCollection.findOneAndUpdate(
           { _id: new ObjectId(id) },
           { $set: updateProfile },
