@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -9,6 +10,8 @@ import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 const MyProfile = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
+
+  const navigate = useNavigate();
 
   // console.log(currentUserFromDB.name);
 
@@ -119,6 +122,12 @@ const MyProfile = () => {
         console.log(data);
         if (data.ok) {
           toast.success("Profile Updated Successfully");
+          reset();
+          navigate("/dashboard/stat");
+          /* window.scrollTo({
+            top: 0,
+            behavior: "auto",
+          }); */
         }
       })
       .catch((error) => console.log(error));

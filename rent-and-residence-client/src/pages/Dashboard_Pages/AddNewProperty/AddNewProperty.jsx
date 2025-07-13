@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -30,53 +30,7 @@ const AddNewProperty = () => {
     // watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm({
-    // Good Practice to set defaultValues
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      role: "",
-      profileImage: "",
-      bio: "",
-      facebookUrl: "",
-      instagramUrl: "",
-      linkedinUrl: "",
-      pinterestUrl: "",
-      twitterUrl: "",
-      websiteUrl: "",
-    },
-  });
-
-  // useEffect to reset the form with fetched user data
-  useEffect(() => {
-    if (currentUserFromDB) {
-      console.log("Injected Frontend");
-      reset({
-        firstName: currentUserFromDB.name?.split(" ")?.[0],
-        lastName: currentUserFromDB.name?.split(" ")?.[1],
-        email: currentUserFromDB.email,
-        role: currentUserFromDB.role,
-      });
-    } else {
-      reset({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        role: "",
-        profileImage: "",
-        bio: "",
-        facebookUrl: "",
-        instagramUrl: "",
-        linkedinUrl: "",
-        pinterestUrl: "",
-        twitterUrl: "",
-        websiteUrl: "",
-      });
-    }
-  }, [currentUserFromDB, reset]);
+  } = useForm();
 
   // console.log(currentUserFromDB);
 
@@ -108,7 +62,7 @@ const AddNewProperty = () => {
     console.log(Object.fromEntries(formData.entries()));
 
     fetch(`http://localhost:5123/api/user/${_id}`, {
-      method: "PUT",
+      method: "POST",
       /* headers: {
         "content-type": "multipart/form-data",
       }, */
@@ -148,22 +102,11 @@ const AddNewProperty = () => {
     setProfilePreview(imageURL);
   };
 
-  // Check Web Url by Regex
-  const pattern = new RegExp(
-    "^([a-zA-Z]+:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$", // fragment locator
-    "i"
-  );
-
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
       <h1 className="font-Nunito text-5xl font-[800]">
-        Dashboard – Profile Page
+        Dashboard – Add Property
       </h1>
 
       <div className="grid  grid-cols-12 gap-6 pt-10">
@@ -175,197 +118,246 @@ const AddNewProperty = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className="fieldset flex flex-col gap-5 bg-white w-full "
               >
-                {/*  User Details */}
-                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 ">
-                  User Details
+                <div className="p-4 font-Nunito_Sans text-sm bg-red-400 text-white rounded-md">
+                  These fields are mandatory. Title, Property Category Submit,
+                  Property Action Category, Property Media
+                </div>
+
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Property Description
                 </h1>
 
-                {/* Title/Position  */}
-                <div className="flex gap-5 w-full">
-                  <div className="flex flex-col w-1/2">
-                    <label className="label mb-2 text-sm font-[600]">
-                      Role
-                    </label>
-
-                    <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      defaultValue={role}
-                      {...register("role", { required: role ? false : true })}
-                    >
-                      <option value="user">User</option>
-                      <option value="agent">Agent</option>
-                    </select>
-                  </div>
-                </div>
-
-                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-5">
-                  Contact Information
-                </h1>
-
-                {/* Name  */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
-                    <label className="label mb-2 text-sm font-[600]">
-                      First Name
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      defaultValue={firstName}
-                      {...register("firstName", {
-                        required: firstName ? false : true,
-                      })}
-                    />
-                  </div>
-
-                  <div className=" w-1/2">
-                    <label className="label  mb-2 text-sm font-[600]">
-                      Last Name
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      defaultValue={lastName}
-                      {...register("lastName", {
-                        required: lastName ? false : true,
-                      })}
-                    />
-                  </div>
-                </div>
-
-                {/* Email + Phone  */}
-                <div className="flex lg:flex-row flex-col  gap-5 w-full">
-                  <div className=" lg:w-1/2">
-                    <label className="label mb-2 text-sm font-[600]">
-                      Email
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      value={email}
-                      {...register("email", {
-                        required: email ? null : "This is required",
-                        validate: (value) => {
-                          if (!email && !value.includes("@")) {
-                            return "Email must include @";
-                          }
-                          return true;
-                        },
-                      })}
-                    />
-
-                    {errors.email && (
-                      <span className="w-1/2 text-red-500">
-                        {errors.email.message}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className=" lg:w-1/2">
-                    <label className="label  mb-2 text-sm font-[600]">
-                      Phone
-                    </label>
-
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"
-                      type="tel"
-                      {...register("phone", {
-                        required: "This is required",
-                        minLength: {
-                          value: 8,
-                          message: "Number must be at least 8 Character",
-                        },
-                        maxLength: {
-                          value: 16,
-                          message: "Number must be more than 16 Character",
-                        },
-                      })}
-                    />
-                    {errors.phone && (
-                      <span className="w-1/2 text-red-500">
-                        {errors.phone.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Bio */}
+                {/* Title  */}
                 <div className="flex flex-col w-full">
-                  <label className="label mb-2 text-sm font-[600]">Bio</label>
+                  <label className="label mb-2 text-sm font-[600]">
+                    *Title (mandatory)
+                  </label>
+                  <input
+                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                    {...register("title", {
+                      required: true,
+                    })}
+                  />
+                </div>
+
+                {/* Description */}
+                <div className="flex flex-col w-full">
+                  <label className="label mb-2 text-sm font-[600]">
+                    Description
+                  </label>
 
                   <textarea
-                    className="textarea w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md  border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                    {...register("bio", {
+                    className="textarea  w-full h-40 text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                    {...register("description", {
                       required: "This is required",
                       maxLength: {
-                        value: 150,
-                        message: "Bio should be less than 150 Characters",
+                        value: 500,
+                        message:
+                          "Description should be less than 500 Characters",
                       },
                       minLength: {
                         value: 50,
-                        message: "Bio should be more than 50 Characters",
+                        message:
+                          "Description should be more than 50 Characters",
                       },
                     })}
                   ></textarea>
-                  {errors.bio && (
+                  {errors.description && (
                     <span className="w-1/2 text-red-500">
-                      {errors.bio.message}
+                      {errors.description.message}
                     </span>
                   )}
                 </div>
 
-                {/* Social Media */}
-                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
-                  Social Media
+                {/* ///////////////////////////////////// */}
+
+                {/* Property Price */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Property Price
                 </h1>
 
-                {/* Facebook + Twitter */}
+                {/* Price  */}
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Facebook Url
+                      Price in € (only numbers)
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("facebookUrl", {
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("price", {
                         required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
-
-                          return true;
-                        },
                       })}
                     />
-                    {errors.facebookUrl && (
+                    {errors.price && (
                       <span className="w-1/2 text-red-500">
-                        {errors.facebookUrl.message}
+                        {errors.price.message}
                       </span>
                     )}
                   </div>
 
                   <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
-                      X - Twitter Url
+                      After Price Label (ex: "/month")
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
-                      {...register("twitterUrl", {
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      {...register("afterPriceLabel", {
                         required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
-
-                          return true;
-                        },
                       })}
                     />
-                    {errors.twitterUrl && (
+                    {errors.afterPriceLabel && (
                       <span className="w-1/2 text-red-500">
-                        {errors.twitterUrl.message}
+                        {errors.afterPriceLabel.message}
                       </span>
                     )}
                   </div>
                 </div>
+
+                {/* ///////////////////////////////////// */}
+
+                {/* Select Categories  */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700  mt-3">
+                  Select Categories
+                </h1>
+
+                {/* categories */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Category
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-5 px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("category", { required: true })}
+                    >
+                      <option value="none">None</option>
+                      <option value="apartments">Apartments</option>
+                      <option value="condos">Condos</option>
+                      <option value="duplexes">Duplexes</option>
+                      <option value="houses">Houses</option>
+                      <option value="industrial">Industrial</option>
+                      <option value="land">Land</option>
+                      <option value="retail">Retail</option>
+                      <option value="villas">Villas</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Listed In
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-5 px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("listedIn", { required: true })}
+                    >
+                      <option value="none">None</option>
+                      <option value="rentals">Rentals</option>
+                      <option value="sales">Sales</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* /////////////////////////////// */}
+
+                {/* Listing Location */}
+
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-5">
+                  Listing Location
+                </h1>
+
+                {/* Address */}
+                <div className="flex flex-col w-full">
+                  <label className="label mb-2 text-sm font-[600]">
+                    *Address
+                  </label>
+                  <input
+                    placeholder="Enter Address"
+                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                    {...register("address", {
+                      required: true,
+                    })}
+                  />
+                </div>
+
+                {/* County / State + City */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Country / State
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("countryORstate", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.countryORstate && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.countryORstate.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label  mb-2 text-sm font-[600]">
+                      City
+                    </label>
+                    <input
+                      placeholder="Enter City"
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      {...register("city", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.city && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.city.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Neighborhood + Zip */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Neighborhood
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("neighborhood", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.neighborhood && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.neighborhood.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label  mb-2 text-sm font-[600]">
+                      Zip
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      {...register("zip", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.zip && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.zip.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* ////////////////////////////// */}
 
                 {/* Linkedin  + Instagram  */}
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
