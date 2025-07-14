@@ -1,4 +1,6 @@
-import { useRef, useState } from "react";
+import Pikaday from "pikaday";
+import { useEffect, useRef, useState } from "react";
+import "react-day-picker/style.css";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -10,19 +12,23 @@ const AddNewProperty = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
 
-  // console.log(currentUserFromDB.name);
-
   const [profilePreview, setProfilePreview] = useState(null);
   const [imageSize, setImageSize] = useState(null);
-  // const [currentUserFromDB, setCurrentUserFromDB] = useState(null);
 
   const fileInputRef = useRef();
-  // console.log(fileInputRef.current.value);
 
-  const { _id, name, email, profileImage, phone, role } = currentUserFromDB;
-  const firstName = name?.split(" ")?.[0];
-  const lastName = name?.split(" ")?.[1];
-  // console.log(firstName, lastName, role);
+  // DatePicker
+  const myDatepicker = useRef(null);
+  useEffect(() => {
+    const picker = new Pikaday({
+      field: myDatepicker.current,
+    });
+    return () => picker.destroy();
+  }, []);
+
+  console.log(myDatepicker?.current?.value);
+
+  const { _id, profileImage } = currentUserFromDB;
 
   const {
     register,
@@ -31,8 +37,6 @@ const AddNewProperty = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  // console.log(currentUserFromDB);
 
   // Form Data
   const onSubmit = (data) => {
@@ -77,8 +81,6 @@ const AddNewProperty = () => {
       })
       .catch((error) => console.log(error));
   };
-
-  // console.log(profilePreview);
 
   const getImgData = () => {
     const chooseFile = document.getElementById("choose-file");
@@ -221,7 +223,7 @@ const AddNewProperty = () => {
                   Select Categories
                 </h1>
 
-                {/* categories */}
+                {/* Categories + Listed In */}
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className="flex flex-col w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
@@ -229,7 +231,7 @@ const AddNewProperty = () => {
                     </label>
 
                     <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-5 px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("category", { required: true })}
                     >
                       <option value="none">None</option>
@@ -250,7 +252,7 @@ const AddNewProperty = () => {
                     </label>
 
                     <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-5 px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("listedIn", { required: true })}
                     >
                       <option value="none">None</option>
@@ -365,7 +367,7 @@ const AddNewProperty = () => {
                     </label>
 
                     <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-5 px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 me-3"
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px] me-3"
                       {...register("country", { required: true })}
                     >
                       <option value="none">None</option>
@@ -595,47 +597,43 @@ const AddNewProperty = () => {
 
                 {/* ////////////////////////////// */}
 
-                {/* Linkedin  + Instagram  */}
-                <div className="flex lg:flex-row flex-col  gap-5 w-full">
-                  <div className=" lg:w-1/2">
-                    <label className="label mb-2 text-sm font-[600]">
-                      Linkedin Url
-                    </label>
-                    <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("linkedinUrl", {
-                        required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
+                {/* Energy Class */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Select Energy Class
+                </h1>
 
-                          return true;
-                        },
-                      })}
-                    />
-                    {errors.linkedinUrl && (
-                      <span className="w-1/2 text-red-500">
-                        {errors.linkedinUrl.message}
-                      </span>
-                    )}
+                {/* Energy Class  + Energy Index in kWh/m2a  */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Energy Class
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
+                      {...register("energyClass")}
+                    >
+                      <option value="none">
+                        {" "}
+                        Select Energy Class(EU Regulation)
+                      </option>
+                      <option value="A+">A+</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                    </select>
                   </div>
 
                   <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
-                      Instagram Url
+                      Energy Index in kWh/m2a
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("instagramUrl", {
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("energyIndex", {
                         required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
-
-                          return true;
-                        },
                       })}
                     />
                     {errors.instagramUrl && (
@@ -646,56 +644,265 @@ const AddNewProperty = () => {
                   </div>
                 </div>
 
-                {/* Pinterest + Website  */}
-                <div className="flex lg:flex-row flex-col gap-5 w-full">
-                  <div className=" lg:w-1/2 ">
+                {/* ////////////////////////////// */}
+
+                {/* Listing Details */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Listing Details
+                </h1>
+
+                {/* SizeInMeter + lotInInch  */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Pinterest Url
+                      Size in m2 (*only numbers)
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("pinterestUrl", {
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("sizeInMeter", {
                         required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
-
-                          return true;
-                        },
                       })}
                     />
-                    {errors.pinterestUrl && (
+                    {errors.sizeInMeter && (
                       <span className="w-1/2 text-red-500">
-                        {errors.pinterestUrl.message}
+                        {errors.sizeInMeter.message}
                       </span>
                     )}
                   </div>
 
                   <div className=" lg:w-1/2">
-                    <label className="label  mb-2 text-sm font-[600]">
-                      Website Url (without http)
+                    <label className="label mb-2 text-sm font-[600]">
+                      Lot Size in (*only numbers)
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("websiteUrl", {
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("lotInInch", {
                         required: "This is required",
-                        validate: (value) => {
-                          if (!pattern.test(value)) {
-                            return "Invalid Url";
-                          }
-
-                          return true;
-                        },
                       })}
                     />
-                    {errors.websiteUrl && (
+                    {errors.lotInInch && (
                       <span className="w-1/2 text-red-500">
-                        {errors.websiteUrl.message}
+                        {errors.lotInInch.message}
                       </span>
                     )}
                   </div>
                 </div>
+
+                {/* Rooms + Bedrooms  */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Rooms (*only numbers)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("rooms", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.rooms && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.rooms.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Bedrooms (*only numbers)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("bedrooms", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.bedrooms && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.bedrooms.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bathrooms  + Year Built  */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Bathrooms (*only numbers)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="number"
+                      {...register("bathrooms", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.bathrooms && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.bathrooms.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Year Built (*date)
+                    </label>
+
+                    {/* Date Picker */}
+
+                    <input
+                      type="text"
+                      className="input pika-single text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0  font-Nunito_Sans font-[500] duration-300 mb-2"
+                      placeholder="Pick a date 🗓"
+                      ref={myDatepicker}
+                      /* {...register("bedrooms", {
+                        // required: true,
+                      })} */
+                    />
+                  </div>
+                </div>
+
+                {/* //////////////////////////////// */}
+
+                {/* Garages  + Garage Size  */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Garages
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
+                      {...register("garages")}
+                    >
+                      <option value="not-available">Not Available</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Garage Size
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
+                      {...register("garageSize")}
+                    >
+                      <option value="not-available">Not Available</option>
+                      <option value="1car">1 Car</option>
+                      <option value="2cars">2 Cars</option>
+                      <option value="3cars">3 Cars</option>
+                      <option value="4cars">4 Cars</option>
+                      <option value="5cars">5 Cars</option>
+                    </select>
+                  </div>
+                </div>
+                {/* ////////////////////// */}
+
+                {/* Available from  + Basement */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Available from (*date)
+                    </label>
+
+                    {/* Date Picker */}
+                    <input
+                      type="text"
+                      className="input pika-single text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0  font-Nunito_Sans font-[500] duration-300 mb-2"
+                      placeholder="Pick a date 🗓"
+                      ref={myDatepicker}
+                      /* {...register("bedrooms", {
+                        // required: true,
+                      })} */
+                    />
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Basement (*text)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="text"
+                      {...register("basement", {
+                        required: "This is required",
+                      })}
+                    />
+                    {errors.basement && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.basement.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {/* ////////////////////// */}
+
+                {/* External construction  + Roofing */}
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      External construction (*text)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="text"
+                      {...register("externalConstruction")}
+                    />
+                  </div>
+
+                  <div className=" lg:w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Roofing (*text)
+                    </label>
+                    <input
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      type="text"
+                      {...register("roofing")}
+                    />
+                  </div>
+                </div>
+
+                {/* Owner/Agent notes  */}
+                <div className="flex flex-col w-full">
+                  <label className="label mb-2 text-sm font-[600]">
+                    Owner/Agent notes (*not visible on front end)
+                  </label>
+
+                  <textarea
+                    className="textarea  w-full h-20 text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                    {...register("owner", {
+                      required: "This is required",
+                      maxLength: {
+                        value: 500,
+                        message: "Note should be less than 500 Characters",
+                      },
+                      minLength: {
+                        value: 50,
+                        message: "Note should be more than 50 Characters",
+                      },
+                    })}
+                  ></textarea>
+                  {errors.description && (
+                    <span className="w-1/2 text-red-500">
+                      {errors.description.message}
+                    </span>
+                  )}
+                </div>
+
+                {/* /////////////////////// */}
 
                 {/* Update + Delete  */}
                 <div className="flex lg:flex-row flex-col justify-between gap-2 w-full mt-5">
