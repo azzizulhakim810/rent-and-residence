@@ -4,7 +4,8 @@ import "react-day-picker/style.css";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { RxCross2, RxUpdate } from "react-icons/rx";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import { RxUpdate } from "react-icons/rx";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -895,17 +896,251 @@ const AddNewProperty = () => {
                       },
                     })}
                   ></textarea>
-                  {errors.description && (
+                  {errors.owner && (
                     <span className="w-1/2 text-red-500">
-                      {errors.description.message}
+                      {errors.owner.message}
                     </span>
                   )}
                 </div>
 
                 {/* /////////////////////// */}
 
+                {/* Select Property Status */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Select Property Status
+                </h1>
+
+                <div className="flex lg:flex-row flex-col  gap-5 w-full">
+                  <div className="flex flex-col w-1/2">
+                    <label className="label mb-2 text-sm font-[600]">
+                      Property Status
+                    </label>
+
+                    <select
+                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px] me-3"
+                      {...register("propertyStatus", { required: true })}
+                    >
+                      <option value="noStatus">No Status</option>
+                      <option value="active">Active</option>
+                      <option value="hotOffer">Hot Offer</option>
+                      <option value="newOffer">New Offer</option>
+                      <option value="openHouse">Open House</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* /////////////////////// */}
+
+                {/* Amenities and Features */}
+                <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
+                  Amenities and Features
+                </h1>
+
+                <div>
+                  {/* Interior Details */}
+                  <h1 className=" font-Nunito text-[16px] font-[600] tracking-wider text-gray-700  mb-3">
+                    Interior Details
+                  </h1>
+                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("equippedKitchen")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Equipped Kitchen
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("gym")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Gym
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("laundry")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Laundry
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("mediaRoom")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Media Room
+                    </label>
+                  </div>
+
+                  {/* Outdoor Details */}
+                  <h1 className=" font-Nunito text-[16px] font-[600] tracking-wider text-gray-700  mb-3 mt-5">
+                    Outdoor Details
+                  </h1>
+
+                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("backYard")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Back yard
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("basketballCourt")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Basketball court
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("garageAttached")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Garage Attached
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("hotBath")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Hot Bath
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("pool")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Pool
+                    </label>
+                  </div>
+
+                  {/* Utilities */}
+                  <h1 className=" font-Nunito text-[16px] font-[600] tracking-wider text-gray-700  mb-3 mt-5">
+                    Utilities
+                  </h1>
+
+                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("centralAir")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Central Air
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("electricity")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Electricity
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("heating")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Heating
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("naturalGas")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Natural Gas
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("ventilation")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Ventilation
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("water")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Water
+                    </label>
+                  </div>
+
+                  {/* Other Features */}
+                  <h1 className=" font-Nunito text-[16px] font-[600] tracking-wider text-gray-700 mb-3 mt-5">
+                    Other Features
+                  </h1>
+
+                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("chairAccessible")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Chair Accessible
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("elevator")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Elevator
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("fireplace")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Fireplace
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("smokeDetectors")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Smoke detectors
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("washerDryer")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      Washer and dryer
+                    </label>
+                    <label className="label mb-2 text-sm font-[600]">
+                      <input
+                        {...register("wifi")}
+                        type="checkbox"
+                        className="checkbox"
+                      />
+                      WiFi
+                    </label>
+                  </div>
+                </div>
+
+                {/* /////////////////////// */}
+
                 {/* Update + Delete  */}
-                <div className="flex lg:flex-row flex-col justify-between gap-2 w-full mt-5">
+                <div className="w-full mt-5">
                   <button
                     type="submit"
                     className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md"
@@ -918,10 +1153,6 @@ const AddNewProperty = () => {
                         <RxUpdate /> Update Profile
                       </span>
                     )}
-                  </button>
-
-                  <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
-                    <RxCross2 /> Delete Profile
                   </button>
                 </div>
               </form>
@@ -944,14 +1175,25 @@ const AddNewProperty = () => {
               >
                 <img
                   className="w-full object-fill "
-                  src={profilePreview ? profilePreview : profileImage}
+                  src={
+                    profilePreview
+                      ? profilePreview
+                      : "https://i.ibb.co/jkGkX8fs/default-user.png"
+                  }
                 />
 
                 <div id="img-preview"></div>
               </div>
             </div>
 
-            <fieldset className="fieldset">
+            <fieldset className="fieldset bg-C_LightGray/10 rounded p-5 ">
+              <div className="flex flex-col justify-center items-center">
+                <FaCloudUploadAlt className="text-5xl text-C_purple/50" />
+                <p className="text-[16px] text-C_LightGray">
+                  Drag and Drop Images or
+                </p>
+              </div>
+
               <input
                 name="image"
                 id="choose-file"
@@ -961,17 +1203,18 @@ const AddNewProperty = () => {
                 accept=".jpg, .jpeg, .png"
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               />
-
-              {profilePreview ? (
-                <label className="label font-Nunito_Sans mt-2">
-                  File Size- {imageSize}
-                </label>
-              ) : (
-                <label className="label font-Nunito_Sans mt-2">
-                  File Size Must be up to 1Mb
-                </label>
-              )}
             </fieldset>
+
+            {/* Requirements  */}
+            {profilePreview ? (
+              <label className="label font-Nunito_Sans mt-2">
+                File Size- {imageSize}
+              </label>
+            ) : (
+              <label className="label font-Nunito_Sans mt-2">
+                File Size Must be up to 1Mb
+              </label>
+            )}
           </div>
         </div>
       </div>
