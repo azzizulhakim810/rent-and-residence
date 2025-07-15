@@ -160,28 +160,135 @@ async function run() {
         const images = req.files;
         const id = req.params.id;
 
-        // console.log(property);
-        // console.log(images);
-        // console.log(id);
-        // const propImages = [];
+        const {
+          title,
+          description,
+          price,
+          propertyStatus,
+          listedIn,
+          afterPriceLabel,
+          category,
+          address,
+          countyORstate,
+          city,
+          neighborhood,
+          zip,
+          country,
+          energyClass,
+          energyIndex,
+          sizeInMeter,
+          lotInInch,
+          rooms,
+          bedrooms,
+          bathrooms,
+          yearBuilt,
+          garages,
+          garageSize,
+          availableFrom,
+          basement,
+          externalConstruction,
+          roofing,
+          ownerNote,
+          equippedKitchen,
+          gym,
+          laundry,
+          mediaRoom,
+          backYard,
+          basketballCourt,
+          garageAttached,
+          hotBath,
+          pool,
+          centralAir,
+          electricity,
+          heating,
+          naturalGas,
+          ventilation,
+          water,
+          chairAccessible,
+          elevator,
+          fireplace,
+          smokeDetectors,
+          washerDryer,
+          wifi,
+        } = req.body;
 
-        if (req.files) {
-          images.map(async (image) => {
-            const imgUpload = await imagekit.upload({
-              file: image?.buffer,
-              fileName: `${image.originalname}-${Date.now()}`,
-            });
-            console.log(imgUpload.url);
-            property.images = imgUpload.url;
-            // console.log(propImages);
+        const uploadPromises = images.map((img) => {
+          return imagekit.upload({
+            file: img?.buffer,
+            fileName: `${img.originalname}-${Date.now()}`,
           });
-        } else {
-          console.log("Doesn't get the file");
-        }
+        });
 
-        // console.log(property);
+        // Wait to upload all the images
+        const uploadResults = await Promise.all(uploadPromises);
 
-        const result = await propertiesCollection.insertOne(property);
+        const imgUrls = uploadResults.map((result) => result.url);
+
+        const propertyWithImg = {
+          images: imgUrls,
+          ownerId: id,
+          title,
+          description,
+          price,
+          afterPriceLabel,
+          category,
+          propertyStatus,
+          listedIn,
+          address: {
+            street: address,
+            city,
+            state: countyORstate,
+            zip,
+            country,
+          },
+
+          amenities: {
+            equippedKitchen: equippedKitchen,
+            gym: gym,
+            laundry: laundry,
+            mediaRoom: mediaRoom,
+            backYard: backYard,
+            basketballCourt: basketballCourt,
+            garageAttached: garageAttached,
+            hotBath: hotBath,
+            pool: pool,
+            centralAir: centralAir,
+            electricity: electricity,
+            heating: heating,
+            naturalGas: naturalGas,
+            ventilation: ventilation,
+            water: water,
+            chairAccessible: chairAccessible,
+            elevator: elevator,
+            fireplace: fireplace,
+            smokeDetectors: smokeDetectors,
+            washerDryer: washerDryer,
+            wifi: wifi,
+          },
+
+          propertyDetails: {
+            rooms,
+            bedrooms,
+            bathrooms,
+
+            sizeInMeter,
+            lotInInch,
+
+            yearBuilt,
+            availableFrom,
+            basement,
+            externalConstruction,
+            roofing,
+          },
+          garages,
+          garageSize,
+          ownerNote,
+          energyClass,
+          energyIndex,
+          neighborhood,
+        };
+
+        const result = await propertiesCollection.insertOne(propertyWithImg);
 
         res.send(result);
       }

@@ -1,6 +1,6 @@
 import Pikaday from "pikaday";
 import { useEffect, useRef, useState } from "react";
-// import "react-day-picker/style.css";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -17,6 +17,7 @@ const AddNewProperty = () => {
   const [imageSize, setImageSize] = useState(null);
 
   const fileInputRef = useRef();
+  const navigate = useNavigate();
 
   // DatePicker
   const myDatepickerYearBuilt = useRef(null);
@@ -63,9 +64,11 @@ const AddNewProperty = () => {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("price", data.price);
+    formData.append("propertyStatus", data.propertyStatus);
+    formData.append("listedIn", data.listedIn);
     formData.append("afterPriceLabel", data.afterPriceLabel);
     formData.append("category", data.category);
-    formData.append("listedIn", data.listedIn);
+
     formData.append("address", data.address);
     formData.append("countyORstate", data.countyORstate);
     formData.append("city", data.city);
@@ -87,7 +90,28 @@ const AddNewProperty = () => {
     formData.append("externalConstruction", data.externalConstruction);
     formData.append("roofing", data.roofing);
     formData.append("ownerNote", data.ownerNote);
-    formData.append("propertyStatus", data.propertyStatus);
+
+    formData.append("equippedKitchen", data.equippedKitchen);
+    formData.append("gym", data.gym);
+    formData.append("laundry", data.laundry);
+    formData.append("mediaRoom", data.mediaRoom);
+    formData.append("backYard", data.backYard);
+    formData.append("basketballCourt", data.basketballCourt);
+    formData.append("garageAttached", data.garageAttached);
+    formData.append("hotBath", data.hotBath);
+    formData.append("pool", data.pool);
+    formData.append("centralAir", data.centralAir);
+    formData.append("electricity", data.electricity);
+    formData.append("heating", data.heating);
+    formData.append("naturalGas", data.naturalGas);
+    formData.append("ventilation", data.ventilation);
+    formData.append("water", data.water);
+    formData.append("chairAccessible", data.chairAccessible);
+    formData.append("elevator", data.elevator);
+    formData.append("fireplace", data.fireplace);
+    formData.append("smokeDetectors", data.smokeDetectors);
+    formData.append("washerDryer", data.washerDryer);
+    formData.append("wifi", data.wifi);
 
     /*  for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
@@ -97,16 +121,15 @@ const AddNewProperty = () => {
 
     fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
-      // headers: {
-      //   "content-type": "multipart/form-data",
-      // },
       body: formData,
     })
       .then((res) => res)
       .then((data) => {
         console.log(data);
         if (data.ok) {
+          reset();
           toast.success("Profile Updated Successfully");
+          navigate("/properties");
         }
       })
       .catch((error) => console.log(error));
