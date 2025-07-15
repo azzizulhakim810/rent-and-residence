@@ -152,17 +152,40 @@ async function run() {
     });
 
     // Add a Property
-    app.post("/api/properties", upload.array("images"), async (req, res) => {
-      const property = req.body;
-      const images = req.file;
+    app.post(
+      "/api/properties/:id",
+      upload.array("images"),
+      async (req, res) => {
+        const property = req.body;
+        const images = req.files;
+        const id = req.params.id;
 
-      console.log(property);
-      console.log(images);
+        // console.log(property);
+        // console.log(images);
+        // console.log(id);
+        // const propImages = [];
 
-      // const result = await propertiesCollection.insertOne(property);
+        if (req.files) {
+          images.map(async (image) => {
+            const imgUpload = await imagekit.upload({
+              file: image?.buffer,
+              fileName: `${image.originalname}-${Date.now()}`,
+            });
+            console.log(imgUpload.url);
+            property.images = imgUpload.url;
+            // console.log(propImages);
+          });
+        } else {
+          console.log("Doesn't get the file");
+        }
 
-      // res.send(result);
-    });
+        // console.log(property);
+
+        const result = await propertiesCollection.insertOne(property);
+
+        res.send(result);
+      }
+    );
 
     // Update a property Info
     app.patch("/api/properties/:id", async (req, res) => {
