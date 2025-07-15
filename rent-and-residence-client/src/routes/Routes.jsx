@@ -2,24 +2,21 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import NotFound from "../layout/NotFound";
 
-import AddProperty from "../pages/AddProperty/AddProperty";
-
 import Dashboard from "../layout/Dashboard/Dashboard";
 import AgentDetails from "../pages/Agent/AgentDetails/AgentDetails";
 import AllAgents from "../pages/Agent/AllAgents/AllAgents";
 import BlogDetails from "../pages/Blogs/BlogDetails/BlogDetails";
 import Blogs from "../pages/Blogs/Blogs";
 import Contact from "../pages/Contact/Contact";
-import ActiveListing from "../pages/Dashboard_Pages/ActiveListing/ActiveListing";
-import MyProfile from "../pages/Dashboard_Pages/MyProfile/MyProfile";
-import Home from "../pages/Home/Home";
-import Properties from "../pages/Properties/Properties";
-import PropertyDetails from "../pages/Properties/PropertyDetails";
-import Statistics from "../pages/Dashboard_Pages/Statistics/Statistics";
-import MyPropertyList from "../pages/Dashboard_Pages/MyPropertyList/MyPropertyList";
 import AddNewProperty from "../pages/Dashboard_Pages/AddNewProperty/AddNewProperty";
 import Favorites from "../pages/Dashboard_Pages/Favorites/Favorites";
 import Inbox from "../pages/Dashboard_Pages/Inbox/Inbox";
+import MyProfile from "../pages/Dashboard_Pages/MyProfile/MyProfile";
+import MyPropertyList from "../pages/Dashboard_Pages/MyPropertyList/MyPropertyList";
+import Statistics from "../pages/Dashboard_Pages/Statistics/Statistics";
+import Home from "../pages/Home/Home";
+import Properties from "../pages/Properties/Properties";
+import PropertyDetails from "../pages/Properties/PropertyDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,10 +28,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/addProperty",
-        element: <AddProperty />,
-      },
+
       {
         path: "/properties",
         element: <Properties />,

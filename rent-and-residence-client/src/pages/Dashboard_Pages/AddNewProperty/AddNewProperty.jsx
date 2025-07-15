@@ -1,11 +1,12 @@
 import Pikaday from "pikaday";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -13,7 +14,7 @@ const AddNewProperty = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
 
-  const [profilePreview, setProfilePreview] = useState(null);
+  const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
 
   const fileInputRef = useRef();
@@ -139,25 +140,32 @@ const AddNewProperty = () => {
     const chooseFiles = document.getElementById("choose-files");
 
     const files = chooseFiles.files;
-    // console.log(files);
+    // console.log("By spreading", [...files]);
+    // console.log("Using Array Method", Array.from(files));
 
-    const maxFileSize = 1 * 1024 * 1024;
+    const filesArray = Array.from(files);
 
-    // console.log(fileInputRef.current.value);
+    filesArray.map((file) => {
+      console.log("These are the urls", URL.createObjectURL(file));
+      const imgURL = URL.createObjectURL(file);
+      setUploadedPropImages((prev) => [...prev, imgURL]);
+    });
 
-    if (files?.size > maxFileSize) {
+    // const maxFileSize = 1 * 1024 * 1024;
+
+    /* if (files?.size > maxFileSize) {
       alert("File size exceeds 1 MB limit.");
       fileInputRef.current.value = null;
       return;
-    }
+    } */
 
-    if (!files) return;
+    // if (!files) return;
 
-    const imageURL = URL.createObjectURL(files);
-    setImageSize((files.size * 0.001).toFixed(2) + "kb");
-    setProfilePreview(imageURL);
+    // const imageURL = URL.createObjectURL(files);
+    // setImageSize((files.size * 0.001).toFixed(2) + "kb");
+    // setProfilePreview(imageURL);
   };
-
+  console.log(uploadedPropImages);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -1245,22 +1253,16 @@ const AddNewProperty = () => {
               Photo
             </h1>
 
-            <div className="avatar w-full">
-              <div
-                className="lg:w-full w-full rounded-md
+            <div
+              className="w-full grid grid-cols-3 gap-2 rounded-md
               mb-5"
-              >
-                <img
-                  className="w-full object-fill "
-                  src={
-                    profilePreview
-                      ? profilePreview
-                      : "https://i.ibb.co/jkGkX8fs/default-user.png"
-                  }
-                />
-
-                <div id="img-preview"></div>
-              </div>
+            >
+              {uploadedPropImages?.map((eachImg) => (
+                <>
+                  <img className="w-full object-fill " src={eachImg} />
+                  <RxCross2 />
+                </>
+              ))}
             </div>
 
             <fieldset className="fieldset bg-C_LightGray/10 rounded p-5 ">
@@ -1284,7 +1286,7 @@ const AddNewProperty = () => {
             </fieldset>
 
             {/* Requirements  */}
-            {profilePreview ? (
+            {uploadedPropImages ? (
               <label className="label font-Nunito_Sans mt-2">
                 File Size- {imageSize}
               </label>
