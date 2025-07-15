@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { RxCross2, RxUpdate } from "react-icons/rx";
@@ -124,10 +124,10 @@ const MyProfile = () => {
           toast.success("Profile Updated Successfully");
           reset();
           navigate("/dashboard/stat");
-          /* window.scrollTo({
+          window.scrollTo({
             top: 0,
             behavior: "auto",
-          }); */
+          });
         }
       })
       .catch((error) => console.log(error));
@@ -247,24 +247,28 @@ const MyProfile = () => {
                       Email
                     </label>
                     <input
+                      disabled
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       value={email}
-                      {...register("email", {
-                        required: email ? null : "This is required",
-                        validate: (value) => {
-                          if (!email && !value.includes("@")) {
-                            return "Email must include @";
-                          }
-                          return true;
-                        },
-                      })}
+                      {...register(
+                        "email"
+                        //   {
+                        //   required: email ? null : "This is required",
+                        //   validate: (value) => {
+                        //     if (!email && !value.includes("@")) {
+                        //       return "Email must include @";
+                        //     }
+                        //     return true;
+                        //   },
+                        // }
+                      )}
                     />
 
-                    {errors.email && (
+                    {/* {errors.email && (
                       <span className="w-1/2 text-red-500">
                         {errors.email.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">

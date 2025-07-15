@@ -2,6 +2,7 @@ import Pikaday from "pikaday";
 import { useEffect, useRef, useState } from "react";
 // import "react-day-picker/style.css";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
@@ -38,7 +39,7 @@ const AddNewProperty = () => {
 
   // console.log(myDatepickerAvailableFrom?.current?.value);
 
-  const { _id, profileImage } = currentUserFromDB;
+  const { _id } = currentUserFromDB;
 
   const {
     register,
@@ -53,22 +54,11 @@ const AddNewProperty = () => {
     const chooseFiles = document.getElementById("choose-files");
 
     const files = chooseFiles.files;
-    const propImgs = [];
-    {
-      for (const key in files) {
-        propImgs.push(files[key]);
-      }
-    }
-
-    {
-      propImgs.map((img) => console.log(img));
-    }
-    // data.file = files;
-    // console.log(propImgs);
+    const fileArray = Array.from(files);
 
     const formData = new FormData();
 
-    formData.append("propImgs", files);
+    fileArray.forEach((file) => formData.append("images", file));
 
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -99,9 +89,13 @@ const AddNewProperty = () => {
     formData.append("ownerNote", data.ownerNote);
     formData.append("propertyStatus", data.propertyStatus);
 
+    /*  for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+ */
     console.log(Object.fromEntries(formData.entries()));
 
-    /*    fetch(`http://localhost:5123/api/user/${_id}`, {
+    fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
       // headers: {
       //   "content-type": "multipart/form-data",
@@ -115,7 +109,7 @@ const AddNewProperty = () => {
           toast.success("Profile Updated Successfully");
         }
       })
-      .catch((error) => console.log(error)); */
+      .catch((error) => console.log(error));
   };
 
   const getImgsData = () => {

@@ -152,12 +152,16 @@ async function run() {
     });
 
     // Add a Property
-    app.post("/api/properties", async (req, res) => {
+    app.post("/api/properties", upload.array("images"), async (req, res) => {
       const property = req.body;
+      const images = req.file;
 
-      const result = await propertiesCollection.insertOne(property);
+      console.log(property);
+      console.log(images);
 
-      res.send(result);
+      // const result = await propertiesCollection.insertOne(property);
+
+      // res.send(result);
     });
 
     // Update a property Info
