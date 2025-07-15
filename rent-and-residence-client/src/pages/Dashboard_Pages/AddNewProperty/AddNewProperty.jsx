@@ -1,11 +1,10 @@
 import Pikaday from "pikaday";
 import { useEffect, useRef, useState } from "react";
-import "react-day-picker/style.css";
+// import "react-day-picker/style.css";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { RxUpdate } from "react-icons/rx";
+import { BsHouseAdd } from "react-icons/bs";
+import { IoIosCloudUpload } from "react-icons/io";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -19,15 +18,25 @@ const AddNewProperty = () => {
   const fileInputRef = useRef();
 
   // DatePicker
-  const myDatepicker = useRef(null);
+  const myDatepickerYearBuilt = useRef(null);
   useEffect(() => {
     const picker = new Pikaday({
-      field: myDatepicker.current,
+      field: myDatepickerYearBuilt.current,
     });
     return () => picker.destroy();
   }, []);
 
-  console.log(myDatepicker?.current?.value);
+  // console.log(myDatepickerYearBuilt?.current?.value);
+
+  const myDatepickerAvailableFrom = useRef(null);
+  useEffect(() => {
+    const picker = new Pikaday({
+      field: myDatepickerAvailableFrom.current,
+    });
+    return () => picker.destroy();
+  }, []);
+
+  // console.log(myDatepickerAvailableFrom?.current?.value);
 
   const { _id, profileImage } = currentUserFromDB;
 
@@ -41,36 +50,50 @@ const AddNewProperty = () => {
 
   // Form Data
   const onSubmit = (data) => {
-    const chooseFile = document.getElementById("choose-file");
+    const chooseFiles = document.getElementById("choose-files");
 
-    const files = chooseFile.files[0];
+    const files = chooseFiles.files;
 
-    data.file = files;
+    // data.file = files;
     // console.log(data);
 
-    const fullName = data.firstName + " " + data.lastName;
-
     const formData = new FormData();
-    formData.append("name", fullName);
-    formData.append("email", data.email);
-    formData.append("role", data.role);
-    formData.append("bio", data.bio);
-    formData.append("profileImage", data.file);
-    formData.append("phone", data.phone);
-    formData.append("facebookUrl", data.facebookUrl);
-    formData.append("twitterUrl", data.twitterUrl);
-    formData.append("instagramUrl", data.instagramUrl);
-    formData.append("linkedinUrl", data.linkedinUrl);
-    formData.append("pinterestUrl", data.pinterestUrl);
-    formData.append("websiteUrl", data.websiteUrl);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("afterPriceLabel", data.afterPriceLabel);
+    formData.append("category", data.category);
+    formData.append("listedIn", data.listedIn);
+    formData.append("address", data.address);
+    formData.append("countyORstate", data.countyORstate);
+    formData.append("city", data.city);
+    formData.append("neighborhood", data.neighborhood);
+    formData.append("zip", data.zip);
+    formData.append("country", data.country);
+    formData.append("energyClass", data.energyClass);
+    formData.append("energyIndex", data.energyIndex);
+    formData.append("sizeInMeter", data.sizeInMeter);
+    formData.append("lotInInch", data.lotInInch);
+    formData.append("rooms", data.rooms);
+    formData.append("bedrooms", data.bedrooms);
+    formData.append("bathrooms", data.bathrooms);
+    formData.append("yearBuilt", myDatepickerYearBuilt.current.value);
+    formData.append("garages", data.garages);
+    formData.append("garageSize", data.garageSize);
+    formData.append("availableFrom", myDatepickerAvailableFrom.current.value);
+    formData.append("basement", data.basement);
+    formData.append("externalConstruction", data.externalConstruction);
+    formData.append("roofing", data.roofing);
+    formData.append("ownerNote", data.ownerNote);
+    formData.append("propertyStatus", data.propertyStatus);
 
     console.log(Object.fromEntries(formData.entries()));
 
-    fetch(`http://localhost:5123/api/user/${_id}`, {
+    /*    fetch(`http://localhost:5123/api/user/${_id}`, {
       method: "POST",
-      /* headers: {
-        "content-type": "multipart/form-data",
-      }, */
+      // headers: {
+      //   "content-type": "multipart/form-data",
+      // },
       body: formData,
     })
       .then((res) => res)
@@ -80,13 +103,14 @@ const AddNewProperty = () => {
           toast.success("Profile Updated Successfully");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error)); */
   };
 
-  const getImgData = () => {
-    const chooseFile = document.getElementById("choose-file");
+  const getImgsData = () => {
+    const chooseFiles = document.getElementById("choose-files");
 
-    const files = chooseFile.files[0];
+    const files = chooseFiles.files;
+    // console.log(files);
 
     const maxFileSize = 1 * 1024 * 1024;
 
@@ -136,17 +160,22 @@ const AddNewProperty = () => {
                     *Title (mandatory)
                   </label>
                   <input
-                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                     {...register("title", {
-                      required: true,
+                      required: "This is required",
                     })}
                   />
+                  {errors.title && (
+                    <span className="w-1/2 text-red-500">
+                      {errors.title.message}
+                    </span>
+                  )}
                 </div>
 
                 {/* Description */}
                 <div className="flex flex-col w-full">
                   <label className="label mb-2 text-sm font-[600]">
-                    Description
+                    *Description
                   </label>
 
                   <textarea
@@ -183,7 +212,7 @@ const AddNewProperty = () => {
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className=" lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Price in € (only numbers)
+                      *Price in € (only numbers)
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
@@ -201,10 +230,10 @@ const AddNewProperty = () => {
 
                   <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
-                      After Price Label (ex: "/month")
+                      *After Price Label (ex: "/month")
                     </label>
                     <input
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"
                       {...register("afterPriceLabel", {
                         required: "This is required",
                       })}
@@ -228,7 +257,7 @@ const AddNewProperty = () => {
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className="flex flex-col w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Category
+                      *Category
                     </label>
 
                     <select
@@ -278,11 +307,16 @@ const AddNewProperty = () => {
                   </label>
                   <input
                     placeholder="Enter Address"
-                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                    className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"
                     {...register("address", {
-                      required: true,
+                      required: "This is required",
                     })}
                   />
+                  {errors.address && (
+                    <span className="w-1/2 text-red-500">
+                      {errors.address.message}
+                    </span>
+                  )}
                 </div>
 
                 {/* County / State + City */}
@@ -293,24 +327,24 @@ const AddNewProperty = () => {
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      {...register("countryORstate", {
-                        required: "This is required",
+                      {...register("countyORstate", {
+                        // required: "This is required",
                       })}
                     />
-                    {errors.countryORstate && (
+                    {/* {errors.countyORstate && (
                       <span className="w-1/2 text-red-500">
-                        {errors.countryORstate.message}
+                        {errors.countyORstate.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
-                      City
+                      *City
                     </label>
                     <input
                       placeholder="Enter City"
-                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
+                      className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"
                       {...register("city", {
                         required: "This is required",
                       })}
@@ -332,14 +366,14 @@ const AddNewProperty = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("neighborhood", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.neighborhood && (
+                    {/* {errors.neighborhood && (
                       <span className="w-1/2 text-red-500">
                         {errors.neighborhood.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">
@@ -349,14 +383,14 @@ const AddNewProperty = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300"
                       {...register("zip", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.zip && (
+                    {/* {errors.zip && (
                       <span className="w-1/2 text-red-500">
                         {errors.zip.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -369,9 +403,11 @@ const AddNewProperty = () => {
 
                     <select
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px] me-3"
-                      {...register("country", { required: true })}
+                      {...register("country", { required: "This is required" })}
                     >
-                      <option value="none">None</option>
+                      <option disabled value="none">
+                        None
+                      </option>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Albania">Albania</option>
                       <option value="Algeria">Algeria</option>
@@ -593,6 +629,12 @@ const AddNewProperty = () => {
                       <option value="Zambia">Zambia</option>
                       <option value="Zimbabwe">Zimbabwe</option>
                     </select>
+
+                    {errors.country && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.country.message}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -634,14 +676,14 @@ const AddNewProperty = () => {
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("energyIndex", {
-                        required: "This is required",
+                        // required: "This is5 required",
                       })}
                     />
-                    {errors.instagramUrl && (
+                    {/* {errors.energyIndex && (
                       <span className="w-1/2 text-red-500">
-                        {errors.instagramUrl.message}
+                        {errors.energyIndex.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -662,14 +704,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="number"
                       {...register("sizeInMeter", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.sizeInMeter && (
+                    {/* {errors.sizeInMeter && (
                       <span className="w-1/2 text-red-500">
                         {errors.sizeInMeter.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">
@@ -680,14 +722,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="number"
                       {...register("lotInInch", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.lotInInch && (
+                    {/* {errors.lotInInch && (
                       <span className="w-1/2 text-red-500">
                         {errors.lotInInch.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -701,14 +743,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="number"
                       {...register("rooms", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.rooms && (
+                    {/* {errors.rooms && (
                       <span className="w-1/2 text-red-500">
                         {errors.rooms.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">
@@ -719,14 +761,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="number"
                       {...register("bedrooms", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.bedrooms && (
+                    {/* {errors.bedrooms && (
                       <span className="w-1/2 text-red-500">
                         {errors.bedrooms.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -740,14 +782,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="number"
                       {...register("bathrooms", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.bathrooms && (
+                    {/* {errors.bathrooms && (
                       <span className="w-1/2 text-red-500">
                         {errors.bathrooms.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className=" lg:w-1/2">
@@ -761,7 +803,7 @@ const AddNewProperty = () => {
                       type="text"
                       className="input pika-single text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0  font-Nunito_Sans font-[500] duration-300 mb-2"
                       placeholder="Pick a date 🗓"
-                      ref={myDatepicker}
+                      ref={myDatepickerYearBuilt}
                       /* {...register("bedrooms", {
                         // required: true,
                       })} */
@@ -824,7 +866,7 @@ const AddNewProperty = () => {
                       type="text"
                       className="input pika-single text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0  font-Nunito_Sans font-[500] duration-300 mb-2"
                       placeholder="Pick a date 🗓"
-                      ref={myDatepicker}
+                      ref={myDatepickerAvailableFrom}
                       /* {...register("bedrooms", {
                         // required: true,
                       })} */
@@ -839,14 +881,14 @@ const AddNewProperty = () => {
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       type="text"
                       {...register("basement", {
-                        required: "This is required",
+                        // required: "This is required",
                       })}
                     />
-                    {errors.basement && (
+                    {/* {errors.basement && (
                       <span className="w-1/2 text-red-500">
                         {errors.basement.message}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
                 {/* ////////////////////// */}
@@ -884,23 +926,26 @@ const AddNewProperty = () => {
 
                   <textarea
                     className="textarea  w-full h-20 text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                    {...register("owner", {
-                      required: "This is required",
-                      maxLength: {
-                        value: 500,
-                        message: "Note should be less than 500 Characters",
-                      },
-                      minLength: {
-                        value: 50,
-                        message: "Note should be more than 50 Characters",
-                      },
-                    })}
+                    {...register(
+                      "ownerNote"
+                      //   {
+                      //   required: "This is required",
+                      //   maxLength: {
+                      //     value: 500,
+                      //     message: "Note should be less than 500 Characters",
+                      //   },
+                      //   minLength: {
+                      //     value: 50,
+                      //     message: "Note should be more than 50 Characters",
+                      //   },
+                      // }
+                    )}
                   ></textarea>
-                  {errors.owner && (
+                  {/* {errors.ownerNote && (
                     <span className="w-1/2 text-red-500">
-                      {errors.owner.message}
+                      {errors.ownerNote.message}
                     </span>
-                  )}
+                  )} */}
                 </div>
 
                 {/* /////////////////////// */}
@@ -913,7 +958,7 @@ const AddNewProperty = () => {
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
                   <div className="flex flex-col w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
-                      Property Status
+                      *Property Status
                     </label>
 
                     <select
@@ -1146,11 +1191,12 @@ const AddNewProperty = () => {
                     className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md"
                   >
                     {isSubmitting ? (
-                      "Updating..."
+                      "Uploading..."
                     ) : (
                       <span className="flex gap-2 items-center">
                         {" "}
-                        <RxUpdate /> Update Profile
+                        <BsHouseAdd className="text-[22px] -mt-1" /> Upload
+                        Property
                       </span>
                     )}
                   </button>
@@ -1188,19 +1234,20 @@ const AddNewProperty = () => {
 
             <fieldset className="fieldset bg-C_LightGray/10 rounded p-5 ">
               <div className="flex flex-col justify-center items-center">
-                <FaCloudUploadAlt className="text-5xl text-C_purple/50" />
-                <p className="text-[16px] text-C_LightGray">
+                <IoIosCloudUpload className="text-5xl text-C_purple/50" />
+                <p className="text-[16px] text-C_LightGray/60 mb-2">
                   Drag and Drop Images or
                 </p>
               </div>
 
               <input
                 name="image"
-                id="choose-file"
-                onChange={getImgData}
+                id="choose-files"
+                onChange={getImgsData}
                 ref={fileInputRef}
                 type="file"
                 accept=".jpg, .jpeg, .png"
+                multiple
                 className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               />
             </fieldset>

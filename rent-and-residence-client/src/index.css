@@ -24,8 +24,8 @@
   themes: light --default;
 }
 
-/* Date Picker Css  */
-@import "./node_modules/pikaday/css/pikaday.css";
+/* Date Picker CSS  */
+/* @import "./node_modules/pikaday/css/pikaday.css"; */
 
 .nav-item:hover {
   color: #7854f6;
