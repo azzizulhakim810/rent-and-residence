@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
-import { RxCross2 } from "react-icons/rx";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -1254,14 +1254,16 @@ const AddNewProperty = () => {
             </h1>
 
             <div
-              className="w-full grid grid-cols-3 gap-2 rounded-md
+              className="w-full grid grid-cols-3 gap-2 relative rounded-md
               mb-5"
             >
               {uploadedPropImages?.map((eachImg) => (
-                <>
+                <div className="relative">
+                  <button className="cursor-pointer absolute bg-C_purple p-[4px] rounded text-white">
+                    <RiDeleteBin6Line />
+                  </button>
                   <img className="w-full object-fill " src={eachImg} />
-                  <RxCross2 />
-                </>
+                </div>
               ))}
             </div>
 
