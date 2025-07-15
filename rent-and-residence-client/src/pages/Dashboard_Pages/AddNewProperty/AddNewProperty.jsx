@@ -16,6 +16,7 @@ const AddNewProperty = () => {
 
   const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
+  const [fileArray, setFileArray] = useState();
 
   const fileInputRef = useRef();
   const navigate = useNavigate();
@@ -118,7 +119,7 @@ const AddNewProperty = () => {
       console.log(pair[0], pair[1]);
     }
  */
-    console.log(Object.fromEntries(formData.entries()));
+    // console.log(Object.fromEntries(formData.entries()));
 
     fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
@@ -146,7 +147,7 @@ const AddNewProperty = () => {
     const filesArray = Array.from(files);
 
     filesArray.map((file) => {
-      console.log("These are the urls", URL.createObjectURL(file));
+      // console.log("These are the urls", URL.createObjectURL(file));
       const imgURL = URL.createObjectURL(file);
       setUploadedPropImages((prev) => [...prev, imgURL]);
     });
@@ -164,6 +165,20 @@ const AddNewProperty = () => {
     // const imageURL = URL.createObjectURL(files);
     // setImageSize((files.size * 0.001).toFixed(2) + "kb");
     // setProfilePreview(imageURL);
+  };
+  // console.log(uploadedPropImages);
+
+  const handleDelete = (e) => {
+    // console.log(e);
+    // console.log(uploadedPropImages);
+    const filteredImgs = uploadedPropImages.filter((img) => img !== e);
+    setUploadedPropImages(filteredImgs);
+
+    const chooseFiles = document.getElementById("choose-files");
+    const files = chooseFiles.files;
+    const fileArray = Array.from(files);
+
+    // fileArray.map((file) => console.log(URL.createObjectURL(file)));
   };
   console.log(uploadedPropImages);
   return (
@@ -1257,9 +1272,12 @@ const AddNewProperty = () => {
               className="w-full grid grid-cols-3 gap-2 relative rounded-md
               mb-5"
             >
-              {uploadedPropImages?.map((eachImg) => (
-                <div className="relative">
-                  <button className="cursor-pointer absolute bg-C_purple p-[4px] rounded text-white">
+              {uploadedPropImages?.map((eachImg, i) => (
+                <div key={i} className="relative">
+                  <button
+                    onClick={() => handleDelete(eachImg)}
+                    className="cursor-pointer absolute bg-C_purple p-[4px] rounded text-white"
+                  >
                     <RiDeleteBin6Line />
                   </button>
                   <img className="w-full object-fill " src={eachImg} />
