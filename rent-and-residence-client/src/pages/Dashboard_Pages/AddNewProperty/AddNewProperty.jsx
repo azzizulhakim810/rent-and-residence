@@ -53,11 +53,23 @@ const AddNewProperty = () => {
     const chooseFiles = document.getElementById("choose-files");
 
     const files = chooseFiles.files;
+    const propImgs = [];
+    {
+      for (const key in files) {
+        propImgs.push(files[key]);
+      }
+    }
 
+    {
+      propImgs.map((img) => console.log(img));
+    }
     // data.file = files;
-    // console.log(data);
+    // console.log(propImgs);
 
     const formData = new FormData();
+
+    formData.append("propImgs", files);
+
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("price", data.price);
@@ -264,7 +276,9 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("category", { required: true })}
                     >
-                      <option value="none">None</option>
+                      <option disabled value="none">
+                        None
+                      </option>
                       <option value="apartments">Apartments</option>
                       <option value="condos">Condos</option>
                       <option value="duplexes">Duplexes</option>
