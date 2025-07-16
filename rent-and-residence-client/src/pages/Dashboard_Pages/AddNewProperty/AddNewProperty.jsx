@@ -53,6 +53,14 @@ const AddNewProperty = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  // files.map((f) => console.log(f));
+
+  // const chooseFiles2 = document.getElementById("choose-files");
+
+  // const files2 = chooseFiles2.files;
+  // const fileArray2 = Array.from(files2);
+  // console.log(fileArray2);
+
   // Form Data
   const onSubmit = (data) => {
     const chooseFiles = document.getElementById("choose-files");
@@ -120,9 +128,9 @@ const AddNewProperty = () => {
       console.log(pair[0], pair[1]);
     }
  */
-    // console.log(Object.fromEntries(formData.entries()));
+    console.log(Object.fromEntries(formData.entries()));
 
-    fetch(`http://localhost:5123/api/properties/${_id}`, {
+   /*  fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
       body: formData,
     })
@@ -136,7 +144,7 @@ const AddNewProperty = () => {
         }
       })
       .catch((error) => console.log(error));
-  };
+  }; */
 
   const getImgsData = (e) => {
     const selectedFiles = document.getElementById("choose-files").files;
@@ -151,8 +159,6 @@ const AddNewProperty = () => {
     setFiles((prev) => [...prev, ...fileArray]);
     setPreviews((prev) => [...prev, ...newPreviews]);
 
-    const maxFileSize = 1 * 1024 * 1024;
-
     // console.log(fileArray);
     const newfiles = Array.from(e.target.files);
 
@@ -160,21 +166,32 @@ const AddNewProperty = () => {
     let prevTotalSize = 0;
     allFiles.forEach((file) => {
       prevTotalSize = prevTotalSize + file.size;
-      setImageSize((prevTotalSize * 0.001).toFixed(2));
+
+      const maxFileSize = 1 * 1024 * 1024;
+
+      if (prevTotalSize < maxFileSize) {
+        // alert("File size exceeds 1 MB limit.");
+        // fileInputRef.current.value = null;
+        // return;
+        setImageSize((prevTotalSize * 0.001).toFixed(2));
+      } else {
+        alert("File size exceeds 1 MB limit.");
+
+        setFiles([]);
+
+        // Revoke blob URLs to prevent memory leaks
+        previews.forEach((p) => URL.revokeObjectURL(p.preview));
+
+        setPreviews([]);
+
+        e.target.value = null;
+        setImageSize(null);
+        return;
+      }
     });
     console.log(allFiles);
 
-    // if (files?.size > maxFileSize) {
-    //   alert("File size exceeds 1 MB limit.");
-    //   // fileInputRef.current.value = null;
-    //   return;
-    // }
-
-    // if (!files) return;
-
-    // setImageSize((files.size * 0.001).toFixed(2) + "kb");
-
-    // e.target.value = null;
+    e.target.value = null;
   };
 
   const handleDelete = (eachImg, idx) => {
@@ -183,8 +200,8 @@ const AddNewProperty = () => {
     // Revoke the blob URL to avoid memory leaks
     URL.revokeObjectURL(previews[idx].preview);
 
-    const updatedFiles = files.filter((_, i) => i !== idx);
-    const updatedPreviews = previews.filter((_, i) => i !== idx);
+    const updatedFiles = files?.filter((_, i) => i !== idx);
+    const updatedPreviews = previews?.filter((_, i) => i !== idx);
 
     setFiles(updatedFiles);
     setPreviews(updatedPreviews);
@@ -1306,10 +1323,10 @@ const AddNewProperty = () => {
                 htmlFor="choose-files"
                 className="btn font-Nunito_Sans w-full  bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               >
-                {files.length === 0
+                {files?.length === 0
                   ? "Choose Files"
-                  : `${files.length} file${
-                      files.length > 1 ? "s" : ""
+                  : `${files?.length} file${
+                      files?.length > 1 ? "s" : ""
                     } selected`}
               </label>
 
@@ -1328,9 +1345,9 @@ const AddNewProperty = () => {
             </fieldset>
 
             {/* Requirements  */}
-            {files ? (
+            {files?.length !== 0 ? (
               <label className="label font-Nunito_Sans mt-2">
-                File Size- {imageSize}
+                File Size - {imageSize}kb
               </label>
             ) : (
               <label className="label font-Nunito_Sans mt-2">
