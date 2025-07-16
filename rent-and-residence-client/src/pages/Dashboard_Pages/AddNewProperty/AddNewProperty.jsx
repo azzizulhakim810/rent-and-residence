@@ -14,7 +14,7 @@ const AddNewProperty = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
 
-  const [uploadedPropImages, setUploadedPropImages] = useState([]);
+  // const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -63,14 +63,15 @@ const AddNewProperty = () => {
 
   // Form Data
   const onSubmit = (data) => {
-    const chooseFiles = document.getElementById("choose-files");
+    // const chooseFiles = document.getElementById("choose-files");
 
-    const files = chooseFiles.files;
-    const fileArray = Array.from(files);
+    // const files = chooseFiles.files;
+    // const fileArray = Array.from(files);
+    const createdAt = Date.now();
 
     const formData = new FormData();
 
-    fileArray.forEach((file) => formData.append("images", file));
+    files.forEach((file) => formData.append("images", file));
 
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -79,6 +80,7 @@ const AddNewProperty = () => {
     formData.append("listedIn", data.listedIn);
     formData.append("afterPriceLabel", data.afterPriceLabel);
     formData.append("category", data.category);
+    formData.append("createdAt", createdAt);
 
     formData.append("address", data.address);
     formData.append("countyORstate", data.countyORstate);
@@ -125,12 +127,11 @@ const AddNewProperty = () => {
     formData.append("wifi", data.wifi);
 
     /*  for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
- */
+      console.log(pair[0], pair[1]);  */
+
     console.log(Object.fromEntries(formData.entries()));
 
-   /*  fetch(`http://localhost:5123/api/properties/${_id}`, {
+    fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
       body: formData,
     })
@@ -144,7 +145,7 @@ const AddNewProperty = () => {
         }
       })
       .catch((error) => console.log(error));
-  }; */
+  };
 
   const getImgsData = (e) => {
     const selectedFiles = document.getElementById("choose-files").files;
