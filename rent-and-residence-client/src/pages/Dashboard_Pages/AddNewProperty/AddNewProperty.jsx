@@ -16,7 +16,8 @@ const AddNewProperty = () => {
 
   const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
-  const [fileArray, setFileArray] = useState();
+  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
 
   const fileInputRef = useRef();
   const navigate = useNavigate();
@@ -138,19 +139,17 @@ const AddNewProperty = () => {
   };
 
   const getImgsData = () => {
-    const chooseFiles = document.getElementById("choose-files");
+    const files = document.getElementById("choose-files").files;
+    const fileArray = Array.from(files);
+    // console.log(fileArray);
 
-    const files = chooseFiles.files;
-    // console.log("By spreading", [...files]);
-    // console.log("Using Array Method", Array.from(files));
+    const newPreviews = fileArray.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+    }));
 
-    const filesArray = Array.from(files);
-
-    filesArray.map((file) => {
-      // console.log("These are the urls", URL.createObjectURL(file));
-      const imgURL = URL.createObjectURL(file);
-      setUploadedPropImages((prev) => [...prev, imgURL]);
-    });
+    setFiles((prev) => [...prev, ...fileArray]);
+    setPreviews((prev) => [...prev, ...newPreviews]);
 
     // const maxFileSize = 1 * 1024 * 1024;
 
@@ -162,25 +161,24 @@ const AddNewProperty = () => {
 
     // if (!files) return;
 
-    // const imageURL = URL.createObjectURL(files);
     // setImageSize((files.size * 0.001).toFixed(2) + "kb");
     // setProfilePreview(imageURL);
   };
-  // console.log(uploadedPropImages);
 
-  const handleDelete = (e) => {
-    // console.log(e);
-    // console.log(uploadedPropImages);
-    const filteredImgs = uploadedPropImages.filter((img) => img !== e);
-    setUploadedPropImages(filteredImgs);
+  // previews.map((each) => console.log(each.preview));
+  console.log(files);
+  console.log(previews);
 
-    const chooseFiles = document.getElementById("choose-files");
-    const files = chooseFiles.files;
-    const fileArray = Array.from(files);
+  const handleDelete = (idx) => {
+    console.log(idx);
 
-    // fileArray.map((file) => console.log(URL.createObjectURL(file)));
+    const updatedFiles = files.filter((_, i) => i !== idx);
+    const updatedPreviews = previews.filter((_, i) => i !== idx);
+
+    setFiles(updatedFiles);
+    setPreviews(updatedPreviews);
   };
-  console.log(uploadedPropImages);
+
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -1272,15 +1270,15 @@ const AddNewProperty = () => {
               className="w-full grid grid-cols-3 gap-2 relative rounded-md
               mb-5"
             >
-              {uploadedPropImages?.map((eachImg, i) => (
-                <div key={i} className="relative">
+              {previews?.map((eachImg, idx) => (
+                <div key={idx} className="relative">
                   <button
-                    onClick={() => handleDelete(eachImg)}
+                    onClick={() => handleDelete(idx)}
                     className="cursor-pointer absolute bg-C_purple p-[4px] rounded text-white"
                   >
                     <RiDeleteBin6Line />
                   </button>
-                  <img className="w-full object-fill " src={eachImg} />
+                  <img className="w-full object-fill " src={eachImg.preview} />
                 </div>
               ))}
             </div>
