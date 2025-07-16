@@ -19,7 +19,7 @@ const AddNewProperty = () => {
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
 
-  const fileInputRef = useRef();
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   // DatePicker
@@ -138,9 +138,9 @@ const AddNewProperty = () => {
       .catch((error) => console.log(error));
   };
 
-  const getImgsData = () => {
-    const files = document.getElementById("choose-files").files;
-    const fileArray = Array.from(files);
+  const getImgsData = (e) => {
+    const selectedFiles = document.getElementById("choose-files").files;
+    const fileArray = Array.from(selectedFiles);
     // console.log(fileArray);
 
     const newPreviews = fileArray.map((file) => ({
@@ -151,26 +151,37 @@ const AddNewProperty = () => {
     setFiles((prev) => [...prev, ...fileArray]);
     setPreviews((prev) => [...prev, ...newPreviews]);
 
-    // const maxFileSize = 1 * 1024 * 1024;
+    const maxFileSize = 1 * 1024 * 1024;
 
-    /* if (files?.size > maxFileSize) {
-      alert("File size exceeds 1 MB limit.");
-      fileInputRef.current.value = null;
-      return;
-    } */
+    // console.log(fileArray);
+    const newfiles = Array.from(e.target.files);
+
+    const allFiles = [...files, ...newfiles];
+    let prevTotalSize = 0;
+    allFiles.forEach((file) => {
+      prevTotalSize = prevTotalSize + file.size;
+      setImageSize((prevTotalSize * 0.001).toFixed(2));
+    });
+    console.log(allFiles);
+
+    // if (files?.size > maxFileSize) {
+    //   alert("File size exceeds 1 MB limit.");
+    //   // fileInputRef.current.value = null;
+    //   return;
+    // }
 
     // if (!files) return;
 
     // setImageSize((files.size * 0.001).toFixed(2) + "kb");
-    // setProfilePreview(imageURL);
+
+    // e.target.value = null;
   };
 
-  // previews.map((each) => console.log(each.preview));
-  console.log(files);
-  console.log(previews);
+  const handleDelete = (eachImg, idx) => {
+    setImageSize(imageSize - (eachImg.file.size * 0.001).toFixed(2));
 
-  const handleDelete = (idx) => {
-    console.log(idx);
+    // Revoke the blob URL to avoid memory leaks
+    URL.revokeObjectURL(previews[idx].preview);
 
     const updatedFiles = files.filter((_, i) => i !== idx);
     const updatedPreviews = previews.filter((_, i) => i !== idx);
@@ -1273,7 +1284,7 @@ const AddNewProperty = () => {
               {previews?.map((eachImg, idx) => (
                 <div key={idx} className="relative">
                   <button
-                    onClick={() => handleDelete(idx)}
+                    onClick={() => handleDelete(eachImg, idx)}
                     className="cursor-pointer absolute bg-C_purple p-[4px] rounded text-white"
                   >
                     <RiDeleteBin6Line />
@@ -1291,6 +1302,18 @@ const AddNewProperty = () => {
                 </p>
               </div>
 
+              <label
+                htmlFor="choose-files"
+                className="btn font-Nunito_Sans w-full  bg-C_purple text-white hover:bg-[#40384B] rounded-md "
+              >
+                {files.length === 0
+                  ? "Choose Files"
+                  : `${files.length} file${
+                      files.length > 1 ? "s" : ""
+                    } selected`}
+              </label>
+
+              {/* Input Field is hidden, Label is working like input instead  */}
               <input
                 name="image"
                 id="choose-files"
@@ -1298,13 +1321,14 @@ const AddNewProperty = () => {
                 ref={fileInputRef}
                 type="file"
                 accept=".jpg, .jpeg, .png"
+                // style={{ display: "none" }}
                 multiple
-                className="btn font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
+                className="btn hidden font-Nunito_Sans w-full pt-3 pb-9 bg-C_purple text-white hover:bg-[#40384B] rounded-md "
               />
             </fieldset>
 
             {/* Requirements  */}
-            {uploadedPropImages ? (
+            {files ? (
               <label className="label font-Nunito_Sans mt-2">
                 File Size- {imageSize}
               </label>
