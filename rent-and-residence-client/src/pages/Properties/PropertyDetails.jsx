@@ -352,63 +352,74 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             <td>
                               <strong>Property Id:</strong>{" "}
                               {/* {parseInt(_id?.slice(-8))} */}
-                              {_id?.slice(-5)}
+                              <span className="uppercase">
+                                {_id?.slice(-5)}
+                              </span>
                             </td>
                             <td>
-                              <strong>Price:</strong> {price} € / month
+                              <strong>Price:</strong> {price} €{" "}
+                              {afterPriceLabel}
                             </td>
                             <td>
-                              <strong>Property Size:</strong> {size} m2
+                              <strong>Property Size:</strong>{" "}
+                              {propertyDetails?.sizeInMeter} m2
                             </td>
                           </tr>
 
                           {/* row 2  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Property Lot Size:</strong> NAN m2
+                              <strong>Property Lot Size:</strong>{" "}
+                              {propertyDetails?.lotInInch} m2
                             </td>
                             <td>
-                              <strong>Rooms: </strong> {rooms}
+                              <strong>Rooms: </strong> {propertyDetails?.rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong> {bedrooms}
+                              <strong>Bedrooms: </strong>{" "}
+                              {propertyDetails?.bedrooms}
                             </td>
                           </tr>
 
                           {/* row 3  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Bathrooms:</strong> {bathrooms}
+                              <strong>Bathrooms:</strong>{" "}
+                              {propertyDetails?.bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong> NAN
+                              <strong>Year Built: </strong>{" "}
+                              {propertyDetails?.yearBuilt}
                             </td>
                             <td>
-                              <strong>Garages: </strong> NAN
+                              <strong>Garages: </strong> {garages}
                             </td>
                           </tr>
 
                           {/* row 4 */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Garage Size:</strong> NAN cars
+                              <strong>Garage Size:</strong> {garageSize} cars
                             </td>
                             <td>
                               <strong>Available from: </strong>{" "}
-                              {createdFormattedDate}
+                              {propertyDetails?.availableFrom}
                             </td>
                             <td>
-                              <strong>Basement: </strong> NAN
+                              <strong>Basement: </strong>{" "}
+                              {propertyDetails?.basement}
                             </td>
                           </tr>
 
                           {/* row 5 */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>External construction:</strong> NAN
+                              <strong>External construction:</strong>{" "}
+                              {propertyDetails?.externalConstruction}
                             </td>
                             <td>
-                              <strong>Roofing: </strong> NAN
+                              <strong>Roofing: </strong>{" "}
+                              {propertyDetails?.roofing}
                             </td>
                             <td></td>
                           </tr>
@@ -425,63 +436,74 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             <td>
                               <strong>Property Id:</strong>{" "}
                               {/* {parseInt(_id?.slice(-8))} */}
-                              {_id?.slice(-5)}
+                              <span className="uppercase">
+                                {_id?.slice(-5)}
+                              </span>
                             </td>
                             <td>
-                              <strong>Price:</strong> {price} € / month
+                              <strong>Price:</strong> {price} €{" "}
+                              {afterPriceLabel}
                             </td>
                             <td>
-                              <strong>Property Size:</strong> {size} m2
+                              <strong>Property Size:</strong>{" "}
+                              {propertyDetails?.sizeInMeter} m2
                             </td>
                           </tr>
 
                           {/* row 2  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Property Lot Size:</strong> NAN m2
+                              <strong>Property Lot Size:</strong>{" "}
+                              {propertyDetails?.lotInInch} m2
                             </td>
                             <td>
-                              <strong>Rooms: </strong> {rooms}
+                              <strong>Rooms: </strong> {propertyDetails?.rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong> {bedrooms}
+                              <strong>Bedrooms: </strong>{" "}
+                              {propertyDetails?.bedrooms}
                             </td>
                           </tr>
 
                           {/* row 3  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Bathrooms:</strong> {bathrooms}
+                              <strong>Bathrooms:</strong>{" "}
+                              {propertyDetails?.bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong> NAN
+                              <strong>Year Built: </strong>{" "}
+                              {propertyDetails?.yearBuilt}
                             </td>
                             <td>
-                              <strong>Garages: </strong> NAN
+                              <strong>Garages: </strong> {garages}
                             </td>
                           </tr>
 
                           {/* row 4 */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Garage Size:</strong> NAN cars
+                              <strong>Garage Size:</strong> {garageSize} cars
                             </td>
                             <td>
                               <strong>Available from: </strong>{" "}
-                              {createdFormattedDate}
+                              {propertyDetails?.availableFrom}
                             </td>
                             <td>
-                              <strong>Basement: </strong> NAN
+                              <strong>Basement: </strong>{" "}
+                              {propertyDetails?.basement}
                             </td>
                           </tr>
 
                           {/* row 5 */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>External construction:</strong> NAN
+                              <strong>External construction:</strong>{" "}
+                              {propertyDetails?.externalConstruction}
                             </td>
                             <td>
-                              <strong>Roofing: </strong> NAN
+                              <strong>Roofing: </strong>{" "}
+                              {propertyDetails?.roofing}
                             </td>
                             <td></td>
                           </tr>
@@ -508,30 +530,36 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Interior Details
                           </tr>
                           <tr className="text-C_gray">
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <TbToolsKitchen2 className="text-C_purple text-xl" />
-                                Equipped Kitchen
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("gym") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <CgGym className="text-C_purple text-xl" />
-                                Gym
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("laundry") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
-                                Laundry
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                  Equipped Kitchen
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.gym ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CgGym className="text-C_purple text-xl" />
+                                  Gym
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.laundry ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                  Laundry
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 2  */}
@@ -539,30 +567,59 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Outdoor Details
                           </tr>
                           <tr className=" text-C_gray">
-                            {/* {amenities?.includes("backYard") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineYard className="text-C_purple text-xl" />
-                                Back yard
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("basketballCourt") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <PiBasketballThin className="text-C_purple text-xl" />
-                                Basketball court
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("garageAttached") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <CiParking1 className="text-C_purple text-xl" />
-                                Garage Attached
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.backYard ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineYard className="text-C_purple text-xl" />
+                                  Back yard
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.basketballCourt ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <PiBasketballThin className="text-C_purple text-xl" />
+                                  Basketball court
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.garageAttached ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Garage Attached
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className=" text-C_gray">
+                            {amenities?.hotBath ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Hot Bath
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.pool ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Pool
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 3  */}
@@ -570,57 +627,71 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Utilities
                           </tr>
                           <tr className=" text-C_gray">
-                            {/* {amenities?.includes("centralAir") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiFrozenOrb className="text-C_purple text-xl" />
-                                Central Air
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("electricity") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdElectricBolt className="text-C_purple text-xl" />
-                                Electricity
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("heating") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiHotSurface className="text-C_purple text-xl" />
-                                Heating
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.centralAir ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiFrozenOrb className="text-C_purple text-xl" />
+                                  Central Air
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.electricity ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdElectricBolt className="text-C_purple text-xl" />
+                                  Electricity
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.heating ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiHotSurface className="text-C_purple text-xl" />
+                                  Heating
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
+
                           <span className="block my-3"></span>
+
                           <tr className=" text-C_gray">
-                            {/* {amenities?.includes("naturalGas") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineGasMeter className="text-C_purple text-xl" />
-                                Natural Gas
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("ventilation") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiComputerFan className="text-C_purple text-xl" />
-                                Ventilation
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("water") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <IoWaterOutline className="text-C_purple text-xl" />
-                                Water
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.naturalGas ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                  Natural Gas
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.ventilation ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiComputerFan className="text-C_purple text-xl" />
+                                  Ventilation
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.water ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <IoWaterOutline className="text-C_purple text-xl" />
+                                  Water
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 4 */}
@@ -628,60 +699,70 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Other Features
                           </tr>
                           <tr className=" text-C_gray">
-                            {/* {amenities?.includes("chairAccessible") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GrWheelchair className="text-C_purple text-xl" />
-                                Chair Accessible
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("elevator") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <PiElevatorLight className="text-C_purple text-xl" />
-                                Elevator
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("fireplace") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiFireplace className="text-C_purple text-xl" />
-                                Fireplace
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.chairAccessible ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GrWheelchair className="text-C_purple text-xl" />
+                                  Chair Accessible
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.elevator ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <PiElevatorLight className="text-C_purple text-xl" />
+                                  Elevator
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.fireplace ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiFireplace className="text-C_purple text-xl" />
+                                  Fireplace
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className=" text-C_gray">
-                            {/* {amenities?.includes("smokeDetector") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
-                                Smoke detectors
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <GiWashingMachine className="text-C_purple text-xl" />
-                                Washer and dryer
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-1/3">
-                              <p className="flex gap-3">
-                                <IoWifiOutline className="text-C_purple text-xl" />
-                                WiFi
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.smokeDetector ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                  Smoke detectors
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <GiWashingMachine className="text-C_purple text-xl" />
+                                  Washer and dryer
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <IoWifiOutline className="text-C_purple text-xl" />
+                                  WiFi
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
-
-                          {/* row 5 */}
                         </tbody>
                       </table>
                     </div>
@@ -695,30 +776,36 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Interior Details
                           </tr>
                           <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <TbToolsKitchen2 className="text-C_purple text-xl" />
-                                Equipped Kitchen
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("gym") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <CgGym className="text-C_purple text-xl" />
-                                Gym
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("laundry") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
-                                Laundry
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <TbToolsKitchen2 className="text-C_purple text-xl" />
+                                  Equipped Kitchen
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.gym ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <CgGym className="text-C_purple text-xl" />
+                                  Gym
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.laundry ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
+                                  Laundry
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 2  */}
@@ -727,30 +814,36 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           </tr>
 
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            {/* {amenities?.includes("backYard") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <MdOutlineYard className="text-C_purple text-xl" />
-                                Back yard
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("basketballCourt") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <PiBasketballThin className="text-C_purple text-xl" />
-                                Basketball court
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("garageAttached") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <CiParking1 className="text-C_purple text-xl" />
-                                Garage Attached
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.backYard ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineYard className="text-C_purple text-xl" />
+                                  Back yard
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.basketballCourt ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <PiBasketballThin className="text-C_purple text-xl" />
+                                  Basketball court
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.garageAttached ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Garage Attached
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 3  */}
@@ -758,57 +851,69 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Utilities
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            {/* {amenities?.includes("centralAir") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GiFrozenOrb className="text-C_purple text-xl" />
-                                Central Air
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("electricity") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <MdElectricBolt className="text-C_purple text-xl" />
-                                Electricity
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("heating") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GiHotSurface className="text-C_purple text-xl" />
-                                Heating
-                              </p>
-                            </td>
-                            {/* // ) : ( */}" "{/* // )} */}
+                            {amenities?.centralAir ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiFrozenOrb className="text-C_purple text-xl" />
+                                  Central Air
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.electricity ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdElectricBolt className="text-C_purple text-xl" />
+                                  Electricity
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.heating ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiHotSurface className="text-C_purple text-xl" />
+                                  Heating
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            {/* {amenities?.includes("naturalGas") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <MdOutlineGasMeter className="text-C_purple text-xl" />
-                                Natural Gas
-                              </p>
-                            </td>
-                            {/* // ) : ( */}" "{/* // )} */}
-                            {/* {amenities?.includes("ventilation") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GiComputerFan className="text-C_purple text-xl" />
-                                Ventilation
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("water") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <IoWaterOutline className="text-C_purple text-xl" />
-                                Water
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.naturalGas ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineGasMeter className="text-C_purple text-xl" />
+                                  Natural Gas
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.ventilation ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiComputerFan className="text-C_purple text-xl" />
+                                  Ventilation
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.water ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <IoWaterOutline className="text-C_purple text-xl" />
+                                  Water
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
 
                           {/* row 4 */}
@@ -816,57 +921,69 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             Other Features
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
-                            {/* {amenities?.includes("chairAccessible") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GrWheelchair className="text-C_purple text-xl" />
-                                Chair Accessible
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("elevator") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <PiElevatorLight className="text-C_purple text-xl" />
-                                Elevator
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("fireplace") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GiFireplace className="text-C_purple text-xl" />
-                                Fireplace
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.chairAccessible ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GrWheelchair className="text-C_purple text-xl" />
+                                  Chair Accessible
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.elevator ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <PiElevatorLight className="text-C_purple text-xl" />
+                                  Elevator
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.fireplace ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiFireplace className="text-C_purple text-xl" />
+                                  Fireplace
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                           <span className="block my-3"></span>
                           <tr className="flex flex-col gap-3 w-full  text-C_gray">
-                            {/* {amenities?.includes("smokeDetector") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <MdOutlineSmokeFree className="text-C_purple text-xl" />
-                                Smoke detectors
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <GiWashingMachine className="text-C_purple text-xl" />
-                                Washer and dryer
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
-                            {/* {amenities?.includes("equippedKitchen") ? ( */}
-                            <td className="w-full">
-                              <p className="flex gap-3">
-                                <IoWifiOutline className="text-C_purple text-xl" />
-                                WiFi
-                              </p>
-                            </td>
-                            {/* ) : ( */}" "{/* )} */}
+                            {amenities?.smokeDetector ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <MdOutlineSmokeFree className="text-C_purple text-xl" />
+                                  Smoke detectors
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <GiWashingMachine className="text-C_purple text-xl" />
+                                  Washer and dryer
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.equippedKitchen ? (
+                              <td className="w-full">
+                                <p className="flex gap-3">
+                                  <IoWifiOutline className="text-C_purple text-xl" />
+                                  WiFi
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
                           </tr>
                         </tbody>
                       </table>
