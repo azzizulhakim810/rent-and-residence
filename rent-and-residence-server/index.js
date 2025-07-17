@@ -306,13 +306,13 @@ async function run() {
 
     // Add a review
     app.post("/api/reviews", async (req, res) => {
-      // const propertyId = req.params.id;
-
       const reviewText = req.body;
 
-      const result = await reviewCollection.insertOne(reviewText);
+      console.log(reviewText);
 
-      res.send(result);
+      // const result = await reviewCollection.insertOne(reviewText);
+
+      // res.send(result);
     });
 
     // Update a property Info

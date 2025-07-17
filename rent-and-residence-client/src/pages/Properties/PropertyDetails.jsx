@@ -85,11 +85,11 @@ const PropertyDetails = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     // Good Practice to set defaultValues
-    defaultValues: {
-      name: "",
-      designation: "",
-      comment: "",
-    },
+    // defaultValues: {
+    //   name: "",
+    //   designation: "",
+    //   comment: "",
+    // },
   });
 
   const onSubmit = (data) => {
@@ -102,15 +102,14 @@ const PropertyDetails = () => {
     formData.append("propertyId", propertyId);
     formData.append("userId", _id);
 
-    fetch(`http://localhost:5123/api/reviews`, {
+    console.log(Object.fromEntries(formData.entries()));
+
+    fetch("http://localhost:5123/api/reviews", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then((res) => console.log(res))
+      /* .then((data) => {
         console.log(data);
         if (data.ok) {
           toast.success("Successfully submitted review");
@@ -120,7 +119,7 @@ const PropertyDetails = () => {
             behavior: "auto",
           });
         }
-      })
+      }) */
       .catch((err) => console.log(err));
   };
 
@@ -1177,14 +1176,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {...register("comment", {
                             required: "This is required",
                             maxLength: {
-                              value: 150,
-                              message:
-                                "Comment should be less than 150 Characters",
-                            },
-                            minLength: {
                               value: 50,
                               message:
-                                "Comment should be more than 50 Characters",
+                                "Comment should be less than 50 Characters",
+                            },
+                            minLength: {
+                              value: 10,
+                              message:
+                                "Comment should be more than 10 Characters",
                             },
                           })}
                         ></textarea>
