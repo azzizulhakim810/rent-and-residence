@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
@@ -59,6 +60,7 @@ const myStyles = {
   activeFillColor: "#7854F6",
   inactiveFillColor: "#7854f64f",
 };
+
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
@@ -69,6 +71,26 @@ const PropertyDetails = () => {
 
   const { propertyId } = useParams();
   // console.log(propertyId);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    // Good Practice to set defaultValues
+    defaultValues: {
+      name: "",
+      designation: "",
+      comment: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    data.rating = rating;
+
+    fetch("");
+  };
 
   // Fetch the Property
   useEffect(() => {
@@ -105,7 +127,7 @@ const PropertyDetails = () => {
   } = property || {};
 
   const propImg = property?.images?.[0];
-  console.log("Image URL from DB:", property?.images?.[0]);
+  // console.log("Image URL from DB:", property?.images?.[0]);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -1072,13 +1094,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   </h4>
 
                   <div className="pt-5">
-                    <div className="flex flex-col gap-5 ">
+                    <form
+                      onSubmit={handleSubmit(onSubmit)}
+                      className="flex flex-col gap-5 "
+                    >
                       {/* Rating  */}
-                      {/* <Rating
-                        style={{ maxWidth: 150 }}
-                        value={rating}
-                        onChange={setRating}
-                      /> */}
 
                       <Rating
                         style={{ maxWidth: 150 }}
@@ -1088,27 +1108,69 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       />
 
                       <div className="flex lg:flex-row flex-col gap-3">
-                        <input
-                          type="text"
-                          className="input font-Nunito_Sans font-[600] text-C_LightGray w-full"
-                          placeholder="Your Name"
-                        />
-                        <input
-                          type="text"
-                          className="input font-Nunito_Sans font-[600] text-C_LightGray  w-full"
-                          placeholder="Designation"
-                        />
+                        <div className="w-1/2">
+                          <input
+                            type="text"
+                            className="input font-Nunito_Sans font-[600] text-C_LightGray w-full focus:border-1 focus:border-C_purple focus:outline-0"
+                            placeholder="Your Name"
+                            {...register("name", {
+                              required: "This is required",
+                            })}
+                          />
+                          {errors.name && (
+                            <span className="w-1/2 text-sm text-red-500 ">
+                              {errors.name.message}
+                            </span>
+                          )}
+                        </div>
+                        <div className="w-1/2">
+                          <input
+                            type="text"
+                            className="input font-Nunito_Sans font-[600] text-C_LightGray w-full focus:border-1 focus:border-C_purple focus:outline-0"
+                            placeholder="Designation"
+                            {...register("designation", {
+                              required: "This is required",
+                            })}
+                          />
+                          {errors.designation && (
+                            <span className="w-1/2 text-sm text-red-500  mt-2">
+                              {errors.designation.message}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
-                      <textarea
-                        placeholder="Comment"
-                        className="textarea w-full h-20 "
-                      ></textarea>
+                      <div>
+                        <textarea
+                          placeholder="Comment"
+                          className="textarea w-full h-20 focus:border-1 focus:border-C_purple focus:outline-0"
+                          {...register("comment", {
+                            required: "This is required",
+                            maxLength: {
+                              value: 150,
+                              message:
+                                "Comment should be less than 150 Characters",
+                            },
+                            minLength: {
+                              value: 50,
+                              message:
+                                "Comment should be more than 50 Characters",
+                            },
+                          })}
+                        ></textarea>
+                        {errors.comment && (
+                          <span className="w-1/2 text-sm text-red-500">
+                            {errors.comment.message}
+                          </span>
+                        )}
+                      </div>
 
-                      <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                        Submit
-                      </button>
-                    </div>
+                      <input
+                        value="Submit"
+                        type="submit"
+                        className="btn lg:w-3/12 w-full bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md  text-[16px] font-Nunito_Sans font-[600]"
+                      />
+                    </form>
                   </div>
                 </div>
 

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import customHomeMarker from "../../../assets/home.png";
 
 const Map = ({ lat, lng, title, propImg, price }) => {
-  console.log(lat, lng, propImg);
+  // console.log(lat, lng, propImg);
 
   useEffect(() => {
     // Create custom icon
