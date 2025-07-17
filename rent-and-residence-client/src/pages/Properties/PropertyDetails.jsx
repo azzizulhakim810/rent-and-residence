@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
@@ -53,6 +54,7 @@ import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
 import "@smastrom/react-rating/style.css";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -64,6 +66,10 @@ const myStyles = {
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
+
+  const [currentUserFromDB] = useSignedInUser();
+
+  const { _id } = currentUserFromDB;
 
   const [coordinates, setCoordinates] = useState(null);
 
@@ -87,9 +93,35 @@ const PropertyDetails = () => {
   });
 
   const onSubmit = (data) => {
-    data.rating = rating;
+    const formData = new FormData();
 
-    fetch("");
+    formData.append("name", data.name);
+    formData.append("designation", data.designation);
+    formData.append("rating", rating);
+    formData.append("comment", data.comment);
+    formData.append("propertyId", propertyId);
+    formData.append("userId", _id);
+
+    fetch(`http://localhost:5123/api/reviews`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.ok) {
+          toast.success("Successfully submitted review");
+          reset();
+          window.scrollTo({
+            top: 0,
+            behavior: "auto",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   // Fetch the Property
@@ -101,7 +133,6 @@ const PropertyDetails = () => {
 
   // Destructure Details from Property
   const {
-    _id,
     title,
     description,
     price,
@@ -127,7 +158,6 @@ const PropertyDetails = () => {
   } = property || {};
 
   const propImg = property?.images?.[0];
-  // console.log("Image URL from DB:", property?.images?.[0]);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -346,7 +376,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               <strong>Property Id:</strong>{" "}
                               {/* {parseInt(_id?.slice(-8))} */}
                               <span className="uppercase">
-                                {_id?.slice(-5)}
+                                {propertyId?.slice(-5)}
                               </span>
                             </td>
                             <td>
@@ -429,7 +459,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               <strong>Property Id:</strong>{" "}
                               {/* {parseInt(_id?.slice(-8))} */}
                               <span className="uppercase">
-                                {_id?.slice(-5)}
+                                {propertyId?.slice(-5)}
                               </span>
                             </td>
                             <td>

@@ -113,12 +113,6 @@ async function run() {
       res.send(result);
     });
 
-    // Get all the reviews
-    app.get("/api/reviews", async (req, res) => {
-      const result = await reviewCollection.find().toArray();
-      res.send(result);
-    });
-
     // Fetch the current user
     app.get("/api/auth/me", async (req, res) => {
       const userEmail = req.query;
@@ -126,6 +120,22 @@ async function run() {
 
       const query = { email: userEmail?.email };
       const result = await usersCollection.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/api/reviews", async (req, res) => {
+      const result = await reviewCollection.find().toArray();
+      res.send(result);
+    });
+
+    // Fetch specific property reviews
+    app.get("/api/reviews/:propertyId", async (req, res) => {
+      const propertyId = req.params.id;
+
+      const query = { _id: new ObjectId(propertyId) };
+
+      const result = await reviewCollection.find(query).toArray();
+
       res.send(result);
     });
 
@@ -293,6 +303,17 @@ async function run() {
         res.send(result);
       }
     );
+
+    // Add a review
+    app.post("/api/reviews", async (req, res) => {
+      // const propertyId = req.params.id;
+
+      const reviewText = req.body;
+
+      const result = await reviewCollection.insertOne(reviewText);
+
+      res.send(result);
+    });
 
     // Update a property Info
     app.patch("/api/properties/:id", async (req, res) => {
