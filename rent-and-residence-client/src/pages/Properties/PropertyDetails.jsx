@@ -29,6 +29,8 @@ import {
   IoWaterOutline,
   IoWifiOutline,
 } from "react-icons/io5";
+import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
+
 import { LiaBedSolid } from "react-icons/lia";
 import { LuCalendar } from "react-icons/lu";
 import {
@@ -88,9 +90,7 @@ const PropertyDetails = () => {
     afterPriceLabel,
     category,
     address,
-    listingType,
-    propertyType,
-    size,
+
     propertyDetails,
 
     amenities,
@@ -100,41 +100,12 @@ const PropertyDetails = () => {
     energyClass,
     energyIndex,
 
-    rooms,
-    bedrooms,
-    bathrooms,
-
     garages,
     garageSize,
-    // countyORstate,
-    // city,
-    // zip,
-    // country,
-    // sizeInMeter,
-    // lotInInch,
-    // yearBuilt,
-
-    // availableFrom,
-    // basement,
-    // externalConstruction,
-    // roofing,
-    // ownerNote,
-    // equippedKitchen,
-    // gym,
-    // laundry,
-    // mediaRoom,
-    // backYard,
-    // basketballCourt,
-    // garageAttached,
-    // hotBath,
-    // pool,
-    // centralAir,
-    createdAt,
-    updatedAt,
   } = property || {};
 
   const propImg = property?.images?.[0];
-  // console.log(propImg);
+  console.log("Image URL from DB:", property?.images?.[0]);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -146,13 +117,15 @@ const PropertyDetails = () => {
   // Destructure Details from Owner
   const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
 
-  // Created Date Format
-  const cTimeStamp = propertyDetails?.yearBuilt;
-  const cDate = new Date(cTimeStamp);
+  // Built Year Date Format
+  const yearBuiltTimeStamp = propertyDetails?.yearBuilt;
+  const yearBuiltOnly = new Date(yearBuiltTimeStamp)?.getFullYear();
+  // console.log(cDate);
 
-  // Updated Date Format
-  // const uTimeStamp = updatedAt;
-  // const uDate = new Date(uTimeStamp);
+  // Available from Date Format
+  const availableFromTimeStamp = propertyDetails?.availableFrom;
+  const availableFromOnly = new Date(availableFromTimeStamp);
+  // console.log(availableFromOnly);
 
   const options = {
     year: "numeric",
@@ -160,34 +133,11 @@ const PropertyDetails = () => {
     day: "numeric",
   };
 
-  const createdFormattedDate = cDate.toLocaleDateString("en-US", options);
-  // console.log(createdFormattedDate);
-
-  // const updatedFormattedDate = uDate.toLocaleDateString("en-US", options);
-  // console.log(updatedFormattedDate);
-
-  // Map
-  const getCoordinates = async (propAddress) => {
-    const api = import.meta.env.VITE_GEOCODING_API;
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-      propAddress
-    )}&key=${api}`;
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    // console.log(data);
-
-    if (data?.results?.length > 0) {
-      const { lat, lng } = data.results[0].geometry;
-
-      // console.log(lat, lng);
-      return { lat, lng };
-    } else {
-      console.log("No result for", propAddress);
-      return null;
-    }
-  };
+  const updatedAvailableFromFormat = availableFromOnly.toLocaleDateString(
+    "en-US",
+    options
+  );
+  // console.log(updatedAvailableFromFormat);
 
   // Make the address
   const propAddress =
@@ -207,7 +157,28 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
     fetchCoordinate();
   }, [propAddress]);
 
-  // console.log(coordinates);
+  // Map
+  const getCoordinates = async (propAddress) => {
+    const api = import.meta.env.VITE_GEOCODING_API;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+      propAddress
+    )}&key=${api}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log(data);
+
+    if (data?.results?.length > 0) {
+      const { lat, lng } = data.results[0].geometry;
+
+      // console.log(lat, lng);
+      return { lat, lng };
+    } else {
+      console.log("No result for", propAddress);
+      return null;
+    }
+  };
 
   return (
     <div className="bg-C_LightGray/5 pb-6">
@@ -285,8 +256,8 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   {/* Overview Details  */}
                   <div className="flex lg:flex-row lg:gap-0 gap-8 justify-between lg:items-center flex-wrap items-start py-2">
                     <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
-                      Updated On:<br></br> Null
-                      {/* {updatedFormattedDate} */}
+                      Updated On:<br></br>
+                      {updatedAvailableFromFormat}
                     </p>
 
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
@@ -318,7 +289,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     <div className="flex flex-col items-center gap-2 font-Nunito font-[700] text-[16px]">
                       <LuCalendar className="text-[25px] text-[#3f3f3f]" />
                       <p className="text-[#6f6f6f]">
-                        Year Built: {propertyDetails?.yearBuilt}
+                        Year Built: {yearBuiltOnly}
                       </p>
                     </div>
                   </div>
@@ -388,8 +359,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               {propertyDetails?.bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong>{" "}
-                              {propertyDetails?.yearBuilt}
+                              <strong>Year Built: </strong> {yearBuiltOnly}
                             </td>
                             <td>
                               <strong>Garages: </strong> {garages}
@@ -403,7 +373,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             </td>
                             <td>
                               <strong>Available from: </strong>{" "}
-                              {propertyDetails?.availableFrom}
+                              {updatedAvailableFromFormat}
                             </td>
                             <td>
                               <strong>Basement: </strong>{" "}
@@ -472,8 +442,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               {propertyDetails?.bathrooms}
                             </td>
                             <td>
-                              <strong>Year Built: </strong>{" "}
-                              {propertyDetails?.yearBuilt}
+                              <strong>Year Built: </strong> {yearBuiltOnly}
                             </td>
                             <td>
                               <strong>Garages: </strong> {garages}
@@ -487,7 +456,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             </td>
                             <td>
                               <strong>Available from: </strong>{" "}
-                              {propertyDetails?.availableFrom}
+                              {updatedAvailableFromFormat}
                             </td>
                             <td>
                               <strong>Basement: </strong>{" "}
@@ -555,6 +524,19 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                                 <p className="flex gap-3">
                                   <MdOutlineLocalLaundryService className="text-C_purple text-xl" />
                                   Laundry
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className="text-C_gray">
+                            {amenities?.mediaRoom ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <TfiLayoutMediaCenterAlt className="text-C_purple text-xl" />
+                                  Media Room
                                 </p>
                               </td>
                             ) : (
@@ -807,6 +789,19 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
+                          <span className="block my-3"></span>
+                          <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
+                            {amenities?.mediaRoom ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <TfiLayoutMediaCenterAlt className="text-C_purple text-xl" />
+                                  Media Room
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                          </tr>
 
                           {/* row 2  */}
                           <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
@@ -839,6 +834,29 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                                 <p className="flex gap-3">
                                   <CiParking1 className="text-C_purple text-xl" />
                                   Garage Attached
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                          </tr>
+                          <span className="block my-3"></span>
+                          <tr className="flex flex-col gap-3 w-full text-C_gray">
+                            {amenities?.hotBath ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Hot Bath
+                                </p>
+                              </td>
+                            ) : (
+                              " "
+                            )}
+                            {amenities?.pool ? (
+                              <td className="w-1/3">
+                                <p className="flex gap-3">
+                                  <CiParking1 className="text-C_purple text-xl" />
+                                  Pool
                                 </p>
                               </td>
                             ) : (
