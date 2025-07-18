@@ -81,11 +81,16 @@ async function run() {
     // Get an individual user
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
-      // console.log(id);
+      console.log(id);
+
+      // Validate the id
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID Format" });
+      }
 
       const query = { _id: new ObjectId(id) };
 
-      const result = await usersCollection.find(query).toArray();
+      const result = await usersCollection.findOne(query);
 
       res.send(result);
     });
@@ -305,14 +310,14 @@ async function run() {
     );
 
     // Add a review
-    app.post("/api/reviews", async (req, res) => {
+    app.post("/api/reviews", upload.none(), async (req, res) => {
       const reviewText = req.body;
 
-      console.log(reviewText);
+      console.log(req.body);
 
-      // const result = await reviewCollection.insertOne(reviewText);
+      const result = await reviewCollection.insertOne(reviewText);
 
-      // res.send(result);
+      res.send(result);
     });
 
     // Update a property Info

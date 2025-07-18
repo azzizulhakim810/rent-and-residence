@@ -93,6 +93,10 @@ const PropertyDetails = () => {
   });
 
   const onSubmit = (data) => {
+    if (rating == 0) {
+      toast.error("Rating must be more than 0");
+      return;
+    }
     const formData = new FormData();
 
     formData.append("name", data.name);
@@ -108,18 +112,17 @@ const PropertyDetails = () => {
       method: "POST",
       body: formData,
     })
-      .then((res) => console.log(res))
-      /* .then((data) => {
-        console.log(data);
-        if (data.ok) {
+      .then((res) => {
+        if (res.ok) {
           toast.success("Successfully submitted review");
           reset();
+          setRating(0);
           window.scrollTo({
             top: 0,
             behavior: "auto",
           });
         }
-      }) */
+      })
       .catch((err) => console.log(err));
   };
 
