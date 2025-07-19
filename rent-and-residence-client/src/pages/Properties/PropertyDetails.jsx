@@ -185,6 +185,25 @@ const PropertyDetails = () => {
   } = propertyOwner || {};
   console.log(propertyOwner);
 
+  const handleUrl = (url) => {
+    if (!url) return "#";
+
+    /*  if (!/^https?:\/\//i.test(url)) {
+      return "https://" + url;
+    } */
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      return "https://" + url;
+    }
+    return url;
+  };
+
+  const formattedFacebookURL = handleUrl(facebookUrl);
+  const formattedLinkedInURL = handleUrl(linkedinUrl);
+  const formattedPinterestURL = handleUrl(pinterestUrl);
+  const formattedTwitterURL = handleUrl(twitterUrl);
+  const formattedWebsiteURL = handleUrl(websiteUrl);
+
   useEffect(() => {
     fetch(`http://localhost:5123/api/reviews/${propertyId}`)
       .then((res) => res.json())
@@ -1241,26 +1260,42 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
                         {/* Social Icons  */}
                         <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                          <Link to={facebookUrl ? facebookUrl : "#"}>
+                          <a
+                            href={formattedFacebookURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaFacebookF />
                             </button>
-                          </Link>
-                          <Link to={linkedinUrl ? linkedinUrl : "#"}>
+                          </a>
+                          <a
+                            href={formattedLinkedInURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaLinkedinIn />
                             </button>
-                          </Link>
-                          <Link to={twitterUrl ? twitterUrl : "#"}>
+                          </a>
+                          <a
+                            href={formattedTwitterURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaXTwitter />
                             </button>
-                          </Link>
-                          <Link to={pinterestUrl ? pinterestUrl : "#"}>
+                          </a>
+                          <a
+                            href={formattedPinterestURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaPinterest />
                             </button>
-                          </Link>
+                          </a>
                         </div>
                       </div>
 
@@ -1276,7 +1311,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                         </div>
 
                         <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                          <Link to={`tel:${phone}`}>
+                          <a href={`tel:${phone}`}>
                             <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
                               <FaPhoneAlt className="text-lg" />
 
@@ -1284,18 +1319,18 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                                 {phone}
                               </p>
                             </span>
-                          </Link>
+                          </a>
 
-                          <Link to={`tel:${phone}`}>
+                          <a href={`tel:${phone}`}>
                             <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
                               <FaPrint className="text-lg" />
                               <p className=" text-C_gray text-[16px] leading-6  me-5">
                                 {phone}
                               </p>
                             </span>
-                          </Link>
+                          </a>
 
-                          <Link to={`mailto:${email}`}>
+                          <a href={`mailto:${email}`}>
                             <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
                               <BsEnvelope className="text-lg" />
 
@@ -1303,15 +1338,17 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                                 {email}
                               </p>
                             </span>
-                          </Link>
+                          </a>
 
-                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                            <FaGlobe className="text-lg" />
+                          <a href={formattedWebsiteURL}>
+                            <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
+                              <FaGlobe className="text-lg" />
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                              NAN
-                            </p>
-                          </span>
+                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                                {websiteUrl}
+                              </p>
+                            </span>
+                          </a>
                         </nav>
                       </span>
                     </div>
