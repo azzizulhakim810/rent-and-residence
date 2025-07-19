@@ -15,7 +15,7 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaPrint,
-  FaYoutube,
+  FaPinterest,
 } from "react-icons/fa";
 import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
 import {
@@ -170,7 +170,20 @@ const PropertyDetails = () => {
   }, [ownerId]);
 
   // Destructure Details from Owner
-  const { name, profileImage, email, role, phone } = propertyOwner || {};
+  const {
+    name,
+    profileImage,
+    email,
+    role,
+    phone,
+    facebookUrl,
+    instagramUrl,
+    linkedinUrl,
+    pinterestUrl,
+    twitterUrl,
+    websiteUrl,
+  } = propertyOwner || {};
+  console.log(propertyOwner);
 
   useEffect(() => {
     fetch(`http://localhost:5123/api/reviews/${propertyId}`)
@@ -178,7 +191,7 @@ const PropertyDetails = () => {
       .then((data) => setReviews(data));
   }, [propertyId]);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   // Built Year Date Format
   const yearBuiltTimeStamp = propertyDetails?.yearBuilt;
@@ -1218,41 +1231,41 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 {/* Profile  */}
                 <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                   <nav className="flex flex-col gap-2">
-                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
-                      <div className=" lg:w-1/2 w-[200px] ">
+                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-26">
+                      <div className=" lg:w-1/2 w-full ">
                         <img
-                          className="rounded-md w-[100%] h-[70%]  mx-auto object-cover object-center"
+                          className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
                           src={profileImage}
                           alt=""
                         />
 
                         {/* Social Icons  */}
                         <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                          <Link to="#">
+                          <Link to={facebookUrl ? facebookUrl : "#"}>
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaFacebookF />
                             </button>
                           </Link>
-                          <Link to="#">
+                          <Link to={linkedinUrl ? linkedinUrl : "#"}>
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaLinkedinIn />
                             </button>
                           </Link>
-                          <Link to="#">
+                          <Link to={twitterUrl ? twitterUrl : "#"}>
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                               <FaXTwitter />
                             </button>
                           </Link>
-                          <Link to="#">
+                          <Link to={pinterestUrl ? pinterestUrl : "#"}>
                             <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                              <FaYoutube />
+                              <FaPinterest />
                             </button>
                           </Link>
                         </div>
                       </div>
 
                       {/* Details  */}
-                      <span className="lg:w-1/2 bg-red-300 w-auto flex flex-col gap-2 ps-3 ">
+                      <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
                         <div>
                           <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
                             {name}
