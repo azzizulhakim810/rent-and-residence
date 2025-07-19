@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { RxCross2, RxUpdate } from "react-icons/rx";
+import { RxUpdate } from "react-icons/rx";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -496,10 +496,6 @@ const MyProfile = () => {
                         <RxUpdate /> Update Profile
                       </span>
                     )}
-                  </button>
-
-                  <button className="btn flex items-center justify-center  gap-2 bg-C_purple text-white hover:bg-[#40384B] py-6 px-8 text-[16px] rounded-md">
-                    <RxCross2 /> Delete Profile
                   </button>
                 </div>
               </form>

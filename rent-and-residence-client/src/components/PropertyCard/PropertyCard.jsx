@@ -13,15 +13,17 @@ const PropertyCard = ({ property }) => {
     _id,
     title,
     price,
-    propertyType,
-    listingType,
+
     images,
-    size,
-    bedrooms,
-    bathrooms,
-    rooms,
+
     ownerId,
+    listedIn,
+    category,
+    propertyStatus,
+    propertyDetails,
   } = property || {};
+
+  // console.log(property);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -29,9 +31,10 @@ const PropertyCard = ({ property }) => {
       .then((res) => res.json())
       .then((data) => setPropertyOwner(data));
   }, [ownerId]);
+  console.log(propertyOwner);
 
   // Destructure Details from Owner
-  const { name, profileImage } = propertyOwner[0] || {};
+  const { name, profileImage } = propertyOwner || {};
 
   // console.log(images.at(0));
   // console.log(images.find((item) => item !== undefined));
@@ -54,11 +57,11 @@ const PropertyCard = ({ property }) => {
           >
             <div className="absolute top-0 right-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
               <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
-                {listingType}
+                {listedIn}
               </span>
 
               <span className="bg-C_purple text-white text-[12px] rounded  px-4  py-1 capitalize">
-                {propertyType}
+                {propertyStatus}
               </span>
             </div>
 
@@ -80,25 +83,26 @@ const PropertyCard = ({ property }) => {
           <div className="flex justify-between">
             <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
               <VscHome className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">{rooms} Rooms</p>
+              <p className="text-[#6f6f6f]">{propertyDetails?.rooms} Rooms</p>
             </div>
 
             <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
               <LiaBedSolid className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">{bedrooms} Beds</p>
+              <p className="text-[#6f6f6f]">{propertyDetails?.bedrooms} Beds</p>
             </div>
 
             <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
               <PiBathtub className="text-[20px] text-[#3f3f3f]" />
               <p className="text-[#6f6f6f]">
-                {bathrooms ? bathrooms : "No"} Baths
+                {propertyDetails?.bathrooms ? propertyDetails?.bathrooms : "No"}{" "}
+                Baths
               </p>
             </div>
 
             <div className="flex flex-col items-center gap-3 font-Nunito text-[14px] ">
               <BsBoundingBoxCircles className="text-[20px] text-[#3f3f3f]" />
               <p className="text-[#6f6f6f]">
-                {size} m<sup>2</sup>
+                {propertyDetails?.sizeInMeter} m<sup>2</sup>
               </p>
             </div>
           </div>

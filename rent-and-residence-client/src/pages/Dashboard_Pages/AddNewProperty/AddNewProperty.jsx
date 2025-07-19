@@ -343,17 +343,15 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("category", { required: true })}
                     >
-                      <option disabled value="none">
-                        None
-                      </option>
-                      <option value="apartments">Apartments</option>
-                      <option value="condos">Condos</option>
-                      <option value="duplexes">Duplexes</option>
-                      <option value="houses">Houses</option>
-                      <option value="industrial">Industrial</option>
-                      <option value="land">Land</option>
-                      <option value="retail">Retail</option>
-                      <option value="villas">Villas</option>
+                      <option value="None">None</option>
+                      <option value="Apartments">Apartments</option>
+                      <option value="Condos">Condos</option>
+                      <option value="Duplexes">Duplexes</option>
+                      <option value="Houses">Houses</option>
+                      <option value="Industrial">Industrial</option>
+                      <option value="Land">Land</option>
+                      <option value="Retail">Retail</option>
+                      <option value="Villas">Villas</option>
                     </select>
                   </div>
 
@@ -366,9 +364,9 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("listedIn", { required: true })}
                     >
-                      <option value="none">None</option>
-                      <option value="rentals">Rentals</option>
-                      <option value="sales">Sales</option>
+                      <option value="None">None</option>
+                      <option value="Rentals">Rentals</option>
+                      <option value="Sales">Sales</option>
                     </select>
                   </div>
                 </div>
@@ -486,9 +484,7 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px] me-3"
                       {...register("country", { required: "This is required" })}
                     >
-                      <option disabled value="none">
-                        None
-                      </option>
+                      <option value="None">None</option>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Albania">Albania</option>
                       <option value="Algeria">Algeria</option>
@@ -905,7 +901,7 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px]"
                       {...register("garages")}
                     >
-                      <option value="not-available">Not Available</option>
+                      <option value="Not Available">Not Available</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -925,11 +921,11 @@ const AddNewProperty = () => {
                       {...register("garageSize")}
                     >
                       <option value="not-available">Not Available</option>
-                      <option value="1car">1 Car</option>
-                      <option value="2cars">2 Cars</option>
-                      <option value="3cars">3 Cars</option>
-                      <option value="4cars">4 Cars</option>
-                      <option value="5cars">5 Cars</option>
+                      <option value="1 Car">1 Car</option>
+                      <option value="2 Cars">2 Cars</option>
+                      <option value="3 Cars">3 Cars</option>
+                      <option value="4 Cars">4 Cars</option>
+                      <option value="5 Cars">5 Cars</option>
                     </select>
                   </div>
                 </div>
@@ -1046,11 +1042,11 @@ const AddNewProperty = () => {
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-[18px] px-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 text-[14px] me-3"
                       {...register("propertyStatus", { required: true })}
                     >
-                      <option value="noStatus">No Status</option>
-                      <option value="active">Active</option>
-                      <option value="hotOffer">Hot Offer</option>
-                      <option value="newOffer">New Offer</option>
-                      <option value="openHouse">Open House</option>
+                      <option value="No Status">No Status</option>
+                      <option value="Active">Active</option>
+                      <option value="Hot Offer">Hot Offer</option>
+                      <option value="New Offer">New Offer</option>
+                      <option value="Open House">Open House</option>
                     </select>
                   </div>
                 </div>

@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoCallOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-const PropertySidebar = ({ ownerId }) => {
+import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
+const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
+
+  console.log(reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -11,6 +14,8 @@ const PropertySidebar = ({ ownerId }) => {
       .then((res) => res.json())
       .then((data) => setPropertyOwner(data));
   }, [ownerId]);
+
+  // console.log(review);
 
   // Destructure Details from Owner
   const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
@@ -210,6 +215,26 @@ const PropertySidebar = ({ ownerId }) => {
             </span>
           </div>
         </nav>
+      </div>
+
+      {/* Latest Listings */}
+      <div className="shadow-sm  p-8 w-full rounded-md bg-white">
+        <label
+          htmlFor="propertyType"
+          className="block text-[16px] font-[700] font-Nunito tracking-wider text-C_DarkGray mb-5"
+        >
+          Property Reviews
+        </label>
+
+        <nav className="flex flex-col gap-2">
+          <div className="flex justify-between items-center gap-3 pt-2"></div>
+        </nav>
+
+        <div className="grid lg:grid-cols-1 grid-cols-1 gap-5 pb-5">
+          {reviews?.map((review) => (
+            <TestimonialCard key={review._id} review={review} />
+          ))}
+        </div>
       </div>
     </div>
   );

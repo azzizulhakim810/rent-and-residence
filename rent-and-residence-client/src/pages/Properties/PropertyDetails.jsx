@@ -74,9 +74,10 @@ const PropertyDetails = () => {
   const [coordinates, setCoordinates] = useState(null);
 
   const [rating, setRating] = useState(0);
+  const [reviews, setReviews] = useState([]);
 
   const { propertyId } = useParams();
-  // console.log(propertyId);
+  // console.log(currentUserFromDB);
 
   const {
     register,
@@ -169,7 +170,15 @@ const PropertyDetails = () => {
   }, [ownerId]);
 
   // Destructure Details from Owner
-  const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
+  const { name, profileImage, email, role, phone } = propertyOwner || {};
+
+  useEffect(() => {
+    fetch(`http://localhost:5123/api/reviews/${propertyId}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  }, [propertyId]);
+
+  console.log(reviews);
 
   // Built Year Date Format
   const yearBuiltTimeStamp = propertyDetails?.yearBuilt;
@@ -1210,9 +1219,9 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                   <nav className="flex flex-col gap-2">
                     <div className="flex lg:flex-row flex-col justify-start items-top gap-8">
-                      <div className=" lg:w-[50%] w-full ">
+                      <div className=" lg:w-1/2 w-[200px] ">
                         <img
-                          className="rounded-md h-[200px] mx-auto"
+                          className="rounded-md w-[100%] h-[70%]  mx-auto object-cover object-center"
                           src={profileImage}
                           alt=""
                         />
@@ -1243,7 +1252,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       </div>
 
                       {/* Details  */}
-                      <span className=" w-auto flex flex-col gap-2 ps-3 ">
+                      <span className="lg:w-1/2 bg-red-300 w-auto flex flex-col gap-2 ps-3 ">
                         <div>
                           <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
                             {name}
@@ -1362,7 +1371,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 Share
               </span>
             </div>
-            <PropertySidebar ownerId={ownerId} />
+            <PropertySidebar ownerId={ownerId} reviews={reviews} />
           </div>
         </div>
       </div>

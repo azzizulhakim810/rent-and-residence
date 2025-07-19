@@ -81,7 +81,7 @@ async function run() {
     // Get an individual user
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
+      // console.log(id);
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
@@ -135,9 +135,10 @@ async function run() {
 
     // Fetch specific property reviews
     app.get("/api/reviews/:propertyId", async (req, res) => {
-      const propertyId = req.params.id;
+      const propertyId = req.params.propertyId;
+      // console.log(propertyId);
 
-      const query = { _id: new ObjectId(propertyId) };
+      const query = { propertyId: propertyId };
 
       const result = await reviewCollection.find(query).toArray();
 
@@ -313,7 +314,7 @@ async function run() {
     app.post("/api/reviews", upload.none(), async (req, res) => {
       const reviewText = req.body;
 
-      console.log(req.body);
+      // console.log(req.body);
 
       const result = await reviewCollection.insertOne(reviewText);
 
