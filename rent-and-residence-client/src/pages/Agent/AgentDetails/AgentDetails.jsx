@@ -9,7 +9,7 @@ import {
   FaLinkedinIn,
   FaPhoneAlt,
   FaPrint,
-  FaYoutube,
+  FaPinterest,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { GrNext, GrPrevious } from "react-icons/gr";
@@ -25,7 +25,41 @@ const AgentDetails = () => {
   // console.log(agent[0]);
 
   // Destructure Details from Agent
-  const { _id, name, profileImage, email, role, phone } = agent[0] || {};
+  const {
+    _id,
+    name,
+    profileImage,
+    email,
+    role,
+    phone,
+    facebookUrl,
+    instagramUrl,
+    linkedinUrl,
+    pinterestUrl,
+    twitterUrl,
+    websiteUrl,
+  } = agent || {};
+
+  // Check & validate URL
+  const handleUrl = (url) => {
+    if (!url) return "#";
+
+    /*  if (!/^https?:\/\//i.test(url)) {
+      return "https://" + url;
+    } */
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      return "https://" + url;
+    }
+    return url;
+  };
+
+  const formattedFacebookURL = handleUrl(facebookUrl);
+  const formattedLinkedInURL = handleUrl(linkedinUrl);
+  const formattedPinterestURL = handleUrl(pinterestUrl);
+  const formattedTwitterURL = handleUrl(twitterUrl);
+  const formattedInstagramURL = handleUrl(instagramUrl);
+  const formattedWebsiteURL = handleUrl(websiteUrl);
 
   useEffect(() => {
     fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
@@ -47,34 +81,60 @@ const AgentDetails = () => {
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             {/* Profile  */}
+            {/* Profile  */}
             <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
               <nav className="flex flex-col gap-2">
-                <div className="flex lg:flex-row flex-col justify-start items-center gap-8">
-                  <div className=" lg:w-[40%] w-full">
-                    <img className="rounded-md " src={profileImage} alt="" />
+                <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-26">
+                  <div className=" lg:w-1/2 w-full ">
+                    <img
+                      className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
+                      src={profileImage}
+                      alt=""
+                    />
 
                     {/* Social Icons  */}
                     <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                        <FaFacebookF />
-                      </button>
-
-                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                        <FaLinkedinIn />
-                      </button>
-
-                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                        <FaXTwitter />
-                      </button>
-
-                      <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                        <FaYoutube />
-                      </button>
+                      <a
+                        href={formattedFacebookURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                          <FaFacebookF />
+                        </button>
+                      </a>
+                      <a
+                        href={formattedLinkedInURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                          <FaLinkedinIn />
+                        </button>
+                      </a>
+                      <a
+                        href={formattedTwitterURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                          <FaXTwitter />
+                        </button>
+                      </a>
+                      <a
+                        href={formattedPinterestURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                          <FaPinterest />
+                        </button>
+                      </a>
                     </div>
                   </div>
 
                   {/* Details  */}
-                  <div className=" w-auto flex flex-col gap-2 ps-3 ">
+                  <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
                     <div>
                       <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
                         {name}
@@ -85,62 +145,46 @@ const AgentDetails = () => {
                     </div>
 
                     <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                      <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                        <FaPhoneAlt className="text-lg" />
+                      <a href={`tel:${phone}`}>
+                        <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
+                          <FaPhoneAlt className="text-lg" />
 
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                          <Link to="tel:+34 912 123 678">{phone}</Link>
-                        </p>
-                      </span>
+                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                            {phone}
+                          </p>
+                        </span>
+                      </a>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                        <FaPrint className="text-lg" />
-                        <p className=" text-C_gray text-[16px] leading-6  me-5">
-                          {phone}
-                        </p>
-                      </span>
+                      <a href={`tel:${phone}`}>
+                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
+                          <FaPrint className="text-lg" />
+                          <p className=" text-C_gray text-[16px] leading-6  me-5">
+                            {phone}
+                          </p>
+                        </span>
+                      </a>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                        <BsEnvelope className="text-lg" />
+                      <a href={`mailto:${email}`}>
+                        <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                          <BsEnvelope className="text-lg" />
 
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          <Link mailto="office@realestate.com">{email} </Link>
-                        </p>
-                      </span>
+                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                            {email}
+                          </p>
+                        </span>
+                      </a>
 
-                      <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                        <FaGlobe className="text-lg" />
+                      <a href={formattedWebsiteURL}>
+                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
+                          <FaGlobe className="text-lg" />
 
-                        <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                          <Link mailto="website.net">NAN</Link>
-                        </p>
-                      </span>
+                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                            {websiteUrl}
+                          </p>
+                        </span>
+                      </a>
                     </nav>
-                  </div>
-                </div>
-
-                {/* About Me */}
-                <div className="pt-10 p-2">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                    About Me
-                  </h4>
-
-                  <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
-                    <span>
-                      Michaela’s sociability, independent spirit, and incredible
-                      customer service set him apart as a top agent in the New
-                      York real estate market. He works with a range of clients
-                      – national and international, as well as investors and
-                      local residents.
-                    </span>
-
-                    <span>
-                      Whether a client is in the market for a single-family home
-                      or a luxury penthouse, Michael is there to help out.
-                      Between his time in the hospitality and real estate
-                      industries, he knows what good service is all about.
-                    </span>
-                  </p>
+                  </span>
                 </div>
 
                 {/* Contact Me */}

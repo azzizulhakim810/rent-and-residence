@@ -185,6 +185,7 @@ const PropertyDetails = () => {
   } = propertyOwner || {};
   console.log(propertyOwner);
 
+  // Check & validate URL
   const handleUrl = (url) => {
     if (!url) return "#";
 

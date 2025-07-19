@@ -43,7 +43,7 @@ const AllAgents = () => {
 
             {/* All Agents  */}
 
-            <div className="grid grid-cols-3 justify-start w-full gap-4 py-5">
+            <div className="grid grid-cols-2 justify-start w-full gap-4 py-5">
               {agents?.map((agent) => (
                 <AgentCard key={agent._id} agent={agent} />
               ))}
