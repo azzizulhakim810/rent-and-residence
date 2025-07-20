@@ -31,7 +31,7 @@ const PropertyCard = ({ property }) => {
       .then((res) => res.json())
       .then((data) => setPropertyOwner(data));
   }, [ownerId]);
-  console.log(propertyOwner);
+  // console.log(propertyOwner);
 
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};

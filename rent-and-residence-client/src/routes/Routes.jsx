@@ -17,6 +17,7 @@ import Statistics from "../pages/Dashboard_Pages/Statistics/Statistics";
 import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/propertyDetails/:propertyId",
-        element: <PropertyDetails />,
+        element: (
+          <PrivateRoute>
+            <PropertyDetails />
+          </PrivateRoute>
+        ),
         /* loader: ({ params }) => {
           console.log(params.propertyId);
           fetch(`http://localhost:5123/api/properties/${params.propertyId}`)
@@ -45,7 +50,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/agents/:id",
-        element: <AgentDetails />,
+        element: (
+          <PrivateRoute>
+            <AgentDetails />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5123/api/users/${params.id}`),
       },
@@ -76,27 +85,51 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/stat",
-        element: <Statistics />,
+        element: (
+          <PrivateRoute>
+            <Statistics />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/myProfile",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/myPropertyList",
-        element: <MyPropertyList />,
+        element: (
+          <PrivateRoute>
+            <MyPropertyList />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/addNewProperty",
-        element: <AddNewProperty />,
+        element: (
+          <PrivateRoute>
+            <AddNewProperty />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/favorites",
-        element: <Favorites />,
+        element: (
+          <PrivateRoute>
+            <Favorites />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/inbox",
-        element: <Inbox />,
+        element: (
+          <PrivateRoute>
+            <Inbox />
+          </PrivateRoute>
+        ),
       },
     ],
   },

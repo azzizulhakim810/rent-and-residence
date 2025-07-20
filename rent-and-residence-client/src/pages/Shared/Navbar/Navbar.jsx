@@ -425,7 +425,7 @@ const Navbar = () => {
           </div>
 
           {/* Profile  */}
-          {!currentUserFromDB ? (
+          {!user ? (
             <div
               tabIndex={0}
               role="button"
