@@ -22,14 +22,14 @@ const MyPropertyTable = ({ property }) => {
           </div>
         </div>
       </td>
-      <td className="capitalize">{category}</td>
-      <td className="capitalize">{propertyStatus}</td>
+      <td className="capitalize text-C_LightGray/90">{category}</td>
+      <td className="capitalize text-C_LightGray/90">{propertyStatus}</td>
 
-      <td>Unpaid</td>
-      <td>{price}€</td>
+      <td className="text-C_LightGray/90">Unpaid</td>
+      <td className="text-C_LightGray/90">{price}€</td>
       <td>
         <Link to={`/propertyDetails/${_id}`}>
-          <button className="btn btn-xs border-[1px] rounded-lg px-4 py-3 font-medium hover:bg-C_purple hover:text-white duration-300">
+          <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
             Details
           </button>
         </Link>

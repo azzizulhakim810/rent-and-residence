@@ -6,7 +6,7 @@ import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -15,7 +15,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
       .then((data) => setPropertyOwner(data));
   }, [ownerId]);
 
-  // console.log(review);
+  console.log(reviews);
 
   // Destructure Details from Owner
   const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
@@ -230,10 +230,16 @@ const PropertySidebar = ({ ownerId, reviews }) => {
           <div className="flex justify-between items-center gap-3 pt-2"></div>
         </nav>
 
-        <div className="grid lg:grid-cols-1 grid-cols-1 gap-5 pb-5">
-          {reviews?.map((review) => (
-            <TestimonialCard key={review._id} review={review} />
-          ))}
+        <div className="grid lg:grid-cols-1 grid-cols-1 gap-5 pb-2">
+          {reviews.length !== 0 ? (
+            reviews?.map((review) => (
+              <TestimonialCard key={review._id} review={review} />
+            ))
+          ) : (
+            <span className="-mt-2 font-Nunito_Sans text-paragraph_colorTwo">
+              There are no reviews
+            </span>
+          )}
         </div>
       </div>
     </div>

@@ -33,12 +33,12 @@ const MyPropertyList = () => {
               <PropertyCard property={agentOwnedProperty} />
             </div> */}
 
-            {/* Property Cards  */}
-            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-5">
+            {/* Property Table  */}
+            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
               <table className="table">
                 {/* head */}
                 <thead>
-                  <tr className="font-Nunito text-C_LightGray/60 text-[15px]">
+                  <tr className="font-Nunito text-black text-[16px]">
                     <th>Title</th>
                     <th>Category</th>
                     <th>Status</th>
@@ -48,9 +48,16 @@ const MyPropertyList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {agentOwnedProperty?.map((property) => (
-                    <MyPropertyTable key={property._id} property={property} />
-                  ))}
+                  {}
+                  {agentOwnedProperty.length !== 0 ? (
+                    agentOwnedProperty?.map((property) => (
+                      <MyPropertyTable key={property._id} property={property} />
+                    ))
+                  ) : (
+                    <span className="block mt-5 font-Nunito_Sans text-paragraph_colorTwo text-xl font-[600]">
+                      You don't have any properties!
+                    </span>
+                  )}
                 </tbody>
               </table>
 
