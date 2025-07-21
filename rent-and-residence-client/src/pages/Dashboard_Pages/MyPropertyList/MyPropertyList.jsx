@@ -7,13 +7,17 @@ const MyPropertyList = () => {
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
   const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // console.log(user);
 
   useEffect(() => {
     fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
       .then((res) => res.json())
-      .then((data) => setAgentOwnedProperty(data));
+      .then((data) => {
+        setAgentOwnedProperty(data);
+        setLoading(false);
+      });
   }, [_id]);
 
   console.log(agentOwnedProperty);
@@ -49,12 +53,17 @@ const MyPropertyList = () => {
                 </thead>
                 <tbody>
                   {}
-                  {agentOwnedProperty.length !== 0 ? (
+                  {loading ? (
+                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                      Loading{" "}
+                      <span className="loading loading-dots loading-lg"></span>
+                    </p>
+                  ) : agentOwnedProperty.length !== 0 ? (
                     agentOwnedProperty?.map((property) => (
                       <MyPropertyTable key={property._id} property={property} />
                     ))
                   ) : (
-                    <span className="block mt-5 font-Nunito_Sans text-paragraph_colorTwo text-xl font-[600]">
+                    <span className="text-lg font-Nunito_Sans block mt-4">
                       You don't have any properties!
                     </span>
                   )}

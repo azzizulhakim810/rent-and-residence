@@ -41,12 +41,6 @@ export const router = createBrowserRouter([
             <PropertyDetails />
           </PrivateRoute>
         ),
-        /* loader: ({ params }) => {
-          console.log(params.propertyId);
-          fetch(`http://localhost:5123/api/properties/${params.propertyId}`)
-            .then((res) => res.json())
-            .then((data) => console.log(data[0]));
-        }, */
       },
       {
         path: "/agents/:id",
