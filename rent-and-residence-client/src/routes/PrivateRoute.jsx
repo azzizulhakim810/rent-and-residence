@@ -8,8 +8,8 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
   const [currentUserFromDB] = useSignedInUser();
   const { user, loading } = useContext(AuthContext);
-  // console.log(currentUserFromDB);
-  // console.log(user);
+  console.log(currentUserFromDB);
+  console.log(user);
 
   // console.log(location);
 
@@ -21,6 +21,7 @@ const PrivateRoute = ({ children }) => {
     }; */
   }, [user, navigate, loading]);
 
+  // When nothing is fetched
   if (loading) {
     return (
       <p className="text-lg text-C_purple flex items-center justify-center mt-5 gap-4">
@@ -29,12 +30,14 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
+  // If there is no user logged in
   if (!user) {
     navigate("/");
     // document.getElementById("signUpAndInPopUp").showModal();
     // <Navigate to="/" />;
   }
 
+  // If user is logged in
   if (user) {
     return children;
   }
