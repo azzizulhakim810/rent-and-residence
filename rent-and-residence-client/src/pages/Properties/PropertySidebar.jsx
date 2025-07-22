@@ -18,7 +18,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
   console.log(reviews);
 
   // Destructure Details from Owner
-  const { name, profileImage, email, role, phone } = propertyOwner[0] || {};
+  const { name, profileImage, email, role, phone } = propertyOwner || {};
 
   return (
     <div className="flex flex-col gap-6">

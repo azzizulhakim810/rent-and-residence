@@ -9,7 +9,7 @@ import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -402,7 +402,7 @@ const Navbar = () => {
               {/* Cart  */}
               <div tabIndex={0} role="button" className="">
                 <div className="indicator">
-                  <BsCart2 className="text-[#222222] text-2xl" />
+                  <LuShoppingCart className="text-[#222222] text-2xl" />
                   <span className="badge badge-sm indicator-item">8</span>
                 </div>
               </div>

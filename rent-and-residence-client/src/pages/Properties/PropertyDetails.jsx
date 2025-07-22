@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
@@ -14,8 +14,8 @@ import {
   FaLinkedinIn,
   FaMapMarkerAlt,
   FaPhoneAlt,
-  FaPrint,
   FaPinterest,
+  FaPrint,
 } from "react-icons/fa";
 import { FaRegHeart, FaXTwitter } from "react-icons/fa6";
 import {
@@ -33,7 +33,7 @@ import {
 } from "react-icons/io5";
 import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
 
-import { LiaBedSolid } from "react-icons/lia";
+import { LiaBedSolid, LiaCartPlusSolid } from "react-icons/lia";
 import { LuCalendar } from "react-icons/lu";
 import {
   MdElectricBolt,
@@ -318,7 +318,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   <span className="text-[28px] font-[500]">month</span>
                 </h1>
 
-                {/* Subtitle - Desktop */}
+                {/* Address - Desktop */}
                 <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[18px] lg:pb-2 ">
                   <FaMapMarkerAlt /> {address?.street}, {address?.city},{" "}
                   {address?.state}
@@ -349,7 +349,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     Overview
                   </h4>
 
-                  {/* Overview Details  */}
+                  {/* Details  */}
                   <div className="flex lg:flex-row lg:gap-0 gap-8 justify-between lg:items-center flex-wrap items-start py-2">
                     <p className=" font-Nunito font-[600] text-[17px] text-C_DarkGray/90">
                       Updated On:<br></br>
@@ -1399,6 +1399,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
           {/* Sidebar  */}
           <div className="lg:col-span-4 col-span-10">
+            <span
+              className="flex  items-center gap-2 tooltip bg-C_purple text-white hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded w-6/12   px-4  py-1 cursor-pointer"
+              data-tip="add to cart"
+            >
+              <LiaCartPlusSolid />
+              Add to Cart
+            </span>
+
             {/* Price -  Desktop */}
             <h1 className="lg:block hidden font-Nunito lg:text-[38px] text-[32px] font-[600] py-2 text-end text-C_purple">
               {price} € / <span className="text-[28px] font-[500]">month</span>
