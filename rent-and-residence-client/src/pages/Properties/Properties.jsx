@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import useProperties from "../../hooks/useProperties";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 
 const Properties = () => {
   // const allProperties = useLoaderData([]);
@@ -83,14 +84,9 @@ const Properties = () => {
 
             {/* Property Cards  */}
             <div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
+              {/* <SkeletonOfPropertyCard /> */}
               {loading ? (
-                <div className="flex">
-                  <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
-                    Properties are loading
-                  </p>
-                  <br />
-                  <span className=" loading loading-ring loading-xl text-C_purple"></span>
-                </div>
+                <SkeletonOfPropertyCard />
               ) : (
                 properties?.map((property) => (
                   <PropertyCard key={property._id} property={property} />

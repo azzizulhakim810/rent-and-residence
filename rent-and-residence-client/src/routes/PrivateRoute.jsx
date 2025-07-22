@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
   // When nothing is fetched
   if (loading) {
     return (
-      <p className="text-lg text-C_purple flex items-center justify-center mt-5 gap-4">
+      <p className="text-lg text-C_purple flex items-center justify-center my-5 gap-4">
         Loading <span className="loading loading-dots loading-lg"></span>
       </p>
     );
