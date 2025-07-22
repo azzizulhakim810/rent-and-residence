@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import useSignedInUser from "../hooks/useSignedInUser/useSignedInUser";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -8,18 +8,6 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
   const [currentUserFromDB] = useSignedInUser();
   const { user, loading } = useContext(AuthContext);
-  console.log(currentUserFromDB);
-  console.log(user);
-
-  // console.log(location);
-
-  useEffect(() => {
-    console.log("Component Loaded");
-
-    /*  return () => {
-      console.log("Component unmounted");
-    }; */
-  }, [user, navigate, loading]);
 
   // When nothing is fetched
   if (loading) {
@@ -32,17 +20,13 @@ const PrivateRoute = ({ children }) => {
 
   // If there is no user logged in
   if (!user) {
-    navigate("/");
-    // document.getElementById("signUpAndInPopUp").showModal();
-    // <Navigate to="/" />;
+    return (
+      <Navigate to="/" state={{ from: location, showModal: true }} replace />
+    );
   }
 
   // If user is logged in
-  if (user) {
-    return children;
-  }
-
-  // return navigate("/");
+  return children;
 };
 
 export default PrivateRoute;

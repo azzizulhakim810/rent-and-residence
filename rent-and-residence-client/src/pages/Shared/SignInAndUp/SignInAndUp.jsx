@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SignIn from "../../SignIn/SignIn";
@@ -6,13 +7,17 @@ import SignUp from "../../SignUp/SignUp";
 
 const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
-  const { user, signOutUser, loading } = useContext(AuthContext);
+  const { user, signOutUser, loading, setUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
         toast.success("Signed Out Successfully");
         console.log("Sign Out Successfully");
+        setUser(null);
+        navigate("/", { state: { showModal: true }, replace: true });
         loading(false);
       })
       .catch((error) => {

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -152,6 +152,14 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         toast.success("Signed In Successfully");
         navigate("/dashboard/myProfile");
+        //  navigate(from, { replace: true });
+        {
+          /* <Navigate
+          to="/dashboard/myProfile"
+          state={{ from: location }}
+          replace
+        />; */
+        }
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();

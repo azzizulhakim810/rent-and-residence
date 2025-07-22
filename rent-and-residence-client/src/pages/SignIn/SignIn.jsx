@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -23,6 +23,8 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
+
+  const from = location.state?.from?.pathname || "/dashborad/myProfile";
 
   // Destructure props form Hook
   const {
@@ -49,7 +51,15 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           // navigate("/");
 
           toast.success("Signed In Successfully");
-          navigate("/dashboard/myProfile");
+          // navigate("/dashboard/myProfile");
+          navigate(from, { replace: true });
+          {
+            /* <Navigate
+            to="/dashboard/myProfile"
+            state={{ from: location }}
+            replace
+          />; */
+          }
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
@@ -116,7 +126,15 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
           });
 
         toast.success("Signed In Successfully");
-        navigate("/dashboard/myProfile");
+        // navigate("/dashboard/myProfile");
+        navigate(from, { replace: true });
+        {
+          /* <Navigate
+          to="/dashboard/myProfile"
+          state={{ from: location }}
+          replace
+        />; */
+        }
 
         // Close the modal
         document.getElementById("signUpAndInPopUp").close();

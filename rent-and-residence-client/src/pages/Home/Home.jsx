@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import useProperties from "../../hooks/useProperties";
 import Banner from "./Banner/Banner";
@@ -10,6 +12,20 @@ import Testimonials from "./Testimonials/Testimonials";
 const Home = () => {
   // const allProperties = useLoaderData([]);
   const [properties, loading] = useProperties();
+  const locationHook = useLocation();
+
+  console.log(locationHook);
+
+  useEffect(() => {
+    if (locationHook.state?.showModal) {
+      document.getElementById("signUpAndInPopUp").showModal();
+      /* const modal = document.getElementById("signUpAndInPopUp");
+
+      if (modal) {
+        modal.showModal();
+      } */
+    }
+  }, [locationHook.state]);
 
   return (
     <div>
