@@ -14,7 +14,8 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
-  const { createUser, googleSignIn } = useContext(AuthContext);
+  const { createUser, googleSignIn, updateUserProfile } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +47,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
       createUser(email, password)
         .then((res) => {
           console.log(res.user);
+          updateUserProfile(fullName);
           setDisabled(true);
           reset();
 

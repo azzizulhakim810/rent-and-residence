@@ -44,14 +44,24 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const updateUserProfile = (name) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+    })
+      .then(() => {
+        console.log("Profile Updated");
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      updateProfile(auth.currentUser, {
+      /* updateProfile(auth.currentUser, {
         displayName: "New User",
       }).then(() => {
         console.log("New DisplayName");
-      });
+      }); */
 
       console.log(auth.currentUser);
       setLoading(false);
@@ -69,6 +79,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     signOutUser,
     googleSignIn,
+    updateUserProfile,
   };
 
   return (
