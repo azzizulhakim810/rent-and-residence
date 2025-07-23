@@ -42,21 +42,23 @@ async function run() {
     );
 
     // Property Related Api's
-    const propertiesCollection = client
+    const propertyCollection = client
       .db("wp_residence_DB")
       .collection("properties");
 
-    const usersCollection = client.db("wp_residence_DB").collection("users");
+    const userCollection = client.db("wp_residence_DB").collection("users");
 
     const reviewCollection = client.db("wp_residence_DB").collection("reviews");
 
-    const blogsCollection = client
+    const cartCollection = client.db("wp_residence_DB").collection("carts");
+
+    const blogCollection = client
       .db("wp_residence_DB")
       .collection("blogsCollection");
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
-      const result = await propertiesCollection.find().toArray();
+      const result = await propertyCollection.find().toArray();
       res.send(result);
     });
 
@@ -67,14 +69,14 @@ async function run() {
 
       const query = { _id: new ObjectId(id) };
 
-      const result = await propertiesCollection.find(query).toArray();
+      const result = await propertyCollection.find(query).toArray();
 
       res.send(result);
     });
 
     // Get all the users
     app.get("/api/users", async (req, res) => {
-      const result = await usersCollection.find().toArray();
+      const result = await userCollection.find().toArray();
       res.send(result);
     });
 
@@ -90,7 +92,7 @@ async function run() {
 
       const query = { _id: new ObjectId(id) };
 
-      const result = await usersCollection.findOne(query);
+      const result = await userCollection.findOne(query);
 
       res.send(result);
     });
@@ -101,14 +103,14 @@ async function run() {
       console.log(id);
 
       const query = { ownerId: id };
-      const result = await propertiesCollection.find(query).toArray();
+      const result = await propertyCollection.find(query).toArray();
 
       res.send(result);
     });
 
     // Get all the blogs
     app.get("/api/blogs", async (req, res) => {
-      const result = await blogsCollection.find().toArray();
+      const result = await blogCollection.find().toArray();
       res.send(result);
     });
 
@@ -124,7 +126,7 @@ async function run() {
       // console.log(userEmail.email);
 
       const query = { email: userEmail?.email };
-      const result = await usersCollection.findOne(query);
+      const result = await userCollection.findOne(query);
       res.send(result);
     });
 
@@ -156,11 +158,11 @@ async function run() {
 
       const query = { email: email };
 
-      const findIfExisting = await usersCollection.findOne(query);
+      const findIfExisting = await userCollection.findOne(query);
 
       // console.log(findIfExisting);
       if (!findIfExisting) {
-        const result = await usersCollection.insertOne(newUser);
+        const result = await userCollection.insertOne(newUser);
         res.send(result);
         console.log("User Injected");
       } else {
@@ -305,7 +307,7 @@ async function run() {
           neighborhood,
         };
 
-        const result = await propertiesCollection.insertOne(propertyWithImg);
+        const result = await propertyCollection.insertOne(propertyWithImg);
 
         res.send(result);
       }
@@ -320,6 +322,15 @@ async function run() {
       const result = await reviewCollection.insertOne(reviewText);
 
       res.send(result);
+    });
+
+    // Add to Cart
+    app.post("/api/carts", async (req, res) => {
+      const cartItem = req.body;
+      console.log(cartItem);
+
+      // const result = await cartCollection.insertOne(cart);
+      // res.send(result);
     });
 
     // Update a property Info
@@ -344,7 +355,7 @@ async function run() {
         },
       };
 
-      const result = await propertiesCollection.updateOne(
+      const result = await propertyCollection.updateOne(
         filter,
         updatedProperty,
         options
@@ -410,7 +421,7 @@ async function run() {
         }
 
         // Find & Update user in MongoDB
-        const result = await usersCollection.findOneAndUpdate(
+        const result = await userCollection.findOneAndUpdate(
           { _id: new ObjectId(id) },
           { $set: updateProfile },
           { returnDocument: "after" }
@@ -426,7 +437,7 @@ async function run() {
 
       const query = { _id: new ObjectId(id) };
 
-      const result = await propertiesCollection.deleteOne(query);
+      const result = await propertyCollection.deleteOne(query);
 
       res.send(result);
     });
@@ -437,7 +448,7 @@ async function run() {
 
       const query = { _id: new ObjectId(id) };
 
-      const result = await usersCollection.deleteOne(query);
+      const result = await userCollection.deleteOne(query);
 
       res.send(result);
     });

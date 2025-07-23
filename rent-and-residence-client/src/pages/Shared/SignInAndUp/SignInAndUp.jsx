@@ -4,10 +4,11 @@ import { toast } from "sonner";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
+import UseAuth from "../../../hooks/UseAuth/UseAuth";
 
 const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
-  const { user, signOutUser, loading, setUser } = useContext(AuthContext);
+  const { user, signOutUser, loading, setUser } = UseAuth();
 
   const navigate = useNavigate();
 

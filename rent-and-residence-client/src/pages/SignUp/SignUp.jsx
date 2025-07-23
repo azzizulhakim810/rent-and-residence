@@ -12,10 +12,10 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
+import UseAuth from "../../hooks/UseAuth/UseAuth";
 
 const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
-  const { createUser, googleSignIn, updateUserProfile } =
-    useContext(AuthContext);
+  const { createUser, googleSignIn, updateUserProfile } = UseAuth();
 
   const navigate = useNavigate();
   const location = useLocation();

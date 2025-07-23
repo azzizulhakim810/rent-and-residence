@@ -13,11 +13,12 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import UseAuth from "../../../hooks/UseAuth/UseAuth";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
-  const { user, signOutUser, loading } = useContext(AuthContext);
+  const { user, signOutUser, loading } = UseAuth();
   // console.log(user);
   const [currentUserFromDB] = useSignedInUser();
   const { _id, profileImage } = currentUserFromDB;

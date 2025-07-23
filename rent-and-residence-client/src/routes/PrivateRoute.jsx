@@ -2,12 +2,13 @@ import { useContext, useEffect } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import useSignedInUser from "../hooks/useSignedInUser/useSignedInUser";
 import { AuthContext } from "../providers/AuthProvider";
+import UseAuth from "../hooks/UseAuth/UseAuth";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [currentUserFromDB] = useSignedInUser();
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = UseAuth();
 
   // When nothing is fetched
   if (loading) {

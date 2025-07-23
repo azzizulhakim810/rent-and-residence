@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import UseAuth from "../UseAuth/UseAuth";
 
 const useSignedInUser = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = UseAuth();
   const { email } = user || {};
 
   const [currentUserFromDB, setCurrentUserFromDB] = useState({});
