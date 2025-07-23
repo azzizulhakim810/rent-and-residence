@@ -25,7 +25,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
 
-  const from = location.state?.from?.pathname || "/dashborad/myProfile";
+  const from = location.state?.from?.pathname || "/dashboard/myProfile";
 
   // Destructure props form Hook
   const {

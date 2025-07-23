@@ -69,7 +69,8 @@ const PropertyDetails = () => {
 
   const [currentUserFromDB] = useSignedInUser();
 
-  const { _id } = currentUserFromDB;
+  const { _id, email: userEmail } = currentUserFromDB;
+  // console.log(userEmail);
 
   const [coordinates, setCoordinates] = useState(null);
 
@@ -273,7 +274,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
   // Add to Cart
   const handleAddToCart = (e) => {
-    console.log(e);
+    if (currentUserFromDB && userEmail) {
+      console.log(e);
+    } else {
+      toast.error("You must login to add items");
+    }
   };
 
   return (
