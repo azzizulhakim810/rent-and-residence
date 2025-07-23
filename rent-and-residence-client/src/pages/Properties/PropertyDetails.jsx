@@ -183,7 +183,7 @@ const PropertyDetails = () => {
     twitterUrl,
     websiteUrl,
   } = propertyOwner || {};
-  console.log(propertyOwner);
+  // console.log(propertyOwner);
 
   // Check & validate URL
   const handleUrl = (url) => {
@@ -211,17 +211,13 @@ const PropertyDetails = () => {
       .then((data) => setReviews(data));
   }, [propertyId]);
 
-  // console.log(reviews);
-
   // Built Year Date Format
   const yearBuiltTimeStamp = propertyDetails?.yearBuilt;
   const yearBuiltOnly = new Date(yearBuiltTimeStamp)?.getFullYear();
-  // console.log(cDate);
 
   // Available from Date Format
   const availableFromTimeStamp = propertyDetails?.availableFrom;
   const availableFromOnly = new Date(availableFromTimeStamp);
-  // console.log(availableFromOnly);
 
   const options = {
     year: "numeric",
@@ -233,7 +229,6 @@ const PropertyDetails = () => {
     "en-US",
     options
   );
-  // console.log(updatedAvailableFromFormat);
 
   // Make the address
   const propAddress =
@@ -263,7 +258,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
     const res = await fetch(url);
     const data = await res.json();
 
-    console.log(data);
+    // console.log(data);
 
     if (data?.results?.length > 0) {
       const { lat, lng } = data.results[0].geometry;
@@ -271,9 +266,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
       // console.log(lat, lng);
       return { lat, lng };
     } else {
-      console.log("No result for", propAddress);
+      // console.log("No result for", propAddress);
       return null;
     }
+  };
+
+  // Add to Cart
+  const handleAddToCart = (e) => {
+    console.log(e);
   };
 
   return (
@@ -1398,14 +1398,16 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
           </div>
 
           {/* Sidebar  */}
-          <div className="lg:col-span-4 col-span-10">
-            <span
-              className="flex  items-center gap-2 tooltip bg-C_purple text-white hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded w-6/12   px-4  py-1 cursor-pointer"
-              data-tip="add to cart"
-            >
-              <LiaCartPlusSolid />
-              Add to Cart
-            </span>
+          <div className="lg:col-span-4 col-span-10 ">
+            <div className="flex justify-end -mt-[30px]">
+              <button
+                onClick={() => handleAddToCart(property)}
+                className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
+              >
+                <LiaCartPlusSolid />
+                Add to Cart
+              </button>
+            </div>
 
             {/* Price -  Desktop */}
             <h1 className="lg:block hidden font-Nunito lg:text-[38px] text-[32px] font-[600] py-2 text-end text-C_purple">
@@ -1413,7 +1415,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
             </h1>
 
             {/* Share & Favourite Button - Desktop  */}
-            <div className=" lg:flex hidden justify-end gap-3 font-Nunito_Sans mb-14">
+            <div className=" lg:flex hidden justify-end gap-3 font-Nunito_Sans mb-10">
               <span
                 className="flex items-center gap-2 tooltip bg-white text-title_color hover:text-C_purple font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded  px-4  py-1 cursor-pointer"
                 data-tip="add to favourite"

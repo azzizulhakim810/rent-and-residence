@@ -15,7 +15,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
       .then((data) => setPropertyOwner(data));
   }, [ownerId]);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   // Destructure Details from Owner
   const { name, profileImage, email, role, phone } = propertyOwner || {};
