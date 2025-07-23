@@ -12,6 +12,7 @@
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
     "@tailwindcss/vite": "^4.1.7",
+    "axios": "^1.11.0",
     "daisyui": "^5.0.35",
     "firebase": "^11.9.1",
     "leaflet": "^1.9.4",

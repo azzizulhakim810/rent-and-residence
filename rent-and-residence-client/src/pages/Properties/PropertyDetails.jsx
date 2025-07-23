@@ -273,9 +273,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
   };
 
   // Add to Cart
-  const handleAddToCart = (e) => {
+  const handleAddToCart = (propertyItem) => {
     if (currentUserFromDB && userEmail) {
-      console.log(e);
+      console.log(propertyItem);
+
+      const cartItem = {
+        propertyId,
+        userId: _id,
+      };
     } else {
       toast.error("You must login to add items");
     }
