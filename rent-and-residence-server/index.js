@@ -148,6 +148,11 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/api/carts", async (req, res) => {
+      const result = await cartCollection.find().toArray();
+      res.send(result);
+    });
+
     // Add a User
     app.post("/api/auth/register", async (req, res) => {
       const newUser = req.body;
@@ -326,11 +331,12 @@ async function run() {
 
     // Add to Cart
     app.post("/api/carts", async (req, res) => {
+      // console.log("Hallo");
       const cartItem = req.body;
-      console.log(cartItem);
+      // console.log(cartItem);
 
-      // const result = await cartCollection.insertOne(cart);
-      // res.send(result);
+      const result = await cartCollection.insertOne(cartItem);
+      res.send(result);
     });
 
     // Update a property Info
@@ -449,6 +455,17 @@ async function run() {
       const query = { _id: new ObjectId(id) };
 
       const result = await userCollection.deleteOne(query);
+
+      res.send(result);
+    });
+
+    app.delete("/api/carts/:propertyId", async (req, res) => {
+      const propertyId = req.params.propertyId;
+      const query = { propertyId: propertyId };
+
+      console.log(propertyId);
+
+      const result = await cartCollection.deleteOne(query);
 
       res.send(result);
     });

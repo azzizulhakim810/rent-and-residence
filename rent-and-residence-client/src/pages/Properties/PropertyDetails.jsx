@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import axios from "axios";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
@@ -275,12 +276,19 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
   // Add to Cart
   const handleAddToCart = (propertyItem) => {
     if (currentUserFromDB && userEmail) {
-      console.log(propertyItem);
+      // console.log(propertyItem);
 
       const cartItem = {
         propertyId,
         userId: _id,
       };
+
+      axios.post("http://localhost:5123/api/carts", cartItem).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success("This property is added to cart");
+        }
+      });
     } else {
       toast.error("You must login to add items");
     }
