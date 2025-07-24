@@ -330,10 +330,13 @@ async function run() {
     });
 
     // Add to Cart
-    app.post("/api/carts", async (req, res) => {
-      // console.log("Hallo");
+    app.post("/api/carts/:userId", async (req, res) => {
+      // console.log(req.params.userId);
       const cartItem = req.body;
-      // console.log(cartItem);
+
+      const query = { userId: req.params.userId };
+
+      console.log(cartItem);
 
       const result = await cartCollection.insertOne(cartItem);
       res.send(result);

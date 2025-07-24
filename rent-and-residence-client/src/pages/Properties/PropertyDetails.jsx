@@ -56,6 +56,7 @@ import PropertySidebar from "./PropertySidebar";
 
 import "@smastrom/react-rating/style.css";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -80,6 +81,8 @@ const PropertyDetails = () => {
 
   const { propertyId } = useParams();
   // console.log(currentUserFromDB);
+
+  const axiosSecure = UseAxiosSecure();
 
   const {
     register,
@@ -276,19 +279,21 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
   // Add to Cart
   const handleAddToCart = (propertyItem) => {
     if (currentUserFromDB && userEmail) {
-      // console.log(propertyItem);
+      console.log(_id);
 
       const cartItem = {
-        propertyId,
+        propertyId: propertyItem?._id,
         userId: _id,
       };
 
-      axios.post("http://localhost:5123/api/carts", cartItem).then((res) => {
-        console.log(res.data);
-        if (res.data.insertedId) {
-          toast.success("This property is added to cart");
-        }
-      });
+      axiosSecure
+        .post(`http://localhost:5123/api/carts/${_id}`, cartItem)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            toast.success("This property is added to cart");
+          }
+        });
     } else {
       toast.error("You must login to add items");
     }

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -14,17 +14,31 @@ import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const { user, signOutUser, loading } = UseAuth();
   // console.log(user);
   const [currentUserFromDB] = useSignedInUser();
   const { _id, profileImage } = currentUserFromDB;
 
+  const axiosSecure = UseAxiosSecure();
+
   // const newDate = new Date(parseFloat(metadata?.createdAt));
   // console.log(newDate);
+
+  // Load the cart items
+  useEffect(() => {
+    axiosSecure.get("/api/carts").then((res) => {
+      // console.log(res.data);
+      setCartItems(res.data);
+    });
+  }, [axiosSecure, cartItems.length]);
+
+  console.log(cartItems);
 
   // Sign Out
   const handleSignOut = () => {
@@ -404,7 +418,9 @@ const Navbar = () => {
               <div tabIndex={0} role="button" className="">
                 <div className="indicator">
                   <LuShoppingCart className="text-[#222222] text-2xl" />
-                  <span className="badge badge-sm indicator-item">8</span>
+                  <span className="badge badge-sm indicator-item">
+                    {cartItems.length}
+                  </span>
                 </div>
               </div>
               {/* Dropdown */}
