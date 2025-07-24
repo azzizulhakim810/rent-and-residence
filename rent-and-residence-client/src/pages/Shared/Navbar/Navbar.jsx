@@ -435,6 +435,7 @@ const Navbar = () => {
                   {/* Sidebar content here */}
 
                   {cart?.map((item) => {
+                    console.log(item);
                     <CartSidebar key={item._id} item={item} />;
                   })}
                 </ul>

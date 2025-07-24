@@ -152,7 +152,19 @@ async function run() {
       const query = { userEmail: req.query.userEmail };
       // console.log(req.query.userEmail);
 
-      const result = await cartCollection.find(query).toArray();
+      const cartItems = await cartCollection.find(query).toArray();
+      const propertyIds = cartItems.map(
+        (item) => new ObjectId(item.propertyId)
+      );
+
+      // console.log(propertyIds);
+
+      const result = await propertyCollection
+        .find({
+          _id: { $in: propertyIds },
+        })
+        .toArray();
+
       res.send(result);
     });
 
