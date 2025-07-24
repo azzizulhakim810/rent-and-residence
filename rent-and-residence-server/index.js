@@ -149,7 +149,8 @@ async function run() {
     });
 
     app.get("/api/carts", async (req, res) => {
-      const query = { userEmail: req.query.email };
+      const query = { userEmail: req.query.userEmail };
+      // console.log(req.query.userEmail);
 
       const result = await cartCollection.find(query).toArray();
       res.send(result);

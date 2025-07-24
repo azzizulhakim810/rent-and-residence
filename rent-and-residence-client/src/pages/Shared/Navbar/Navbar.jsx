@@ -1,21 +1,21 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../providers/AuthProvider";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { BsBuilding, BsCart2, BsPerson } from "react-icons/bs";
+import { BsBuilding, BsPerson } from "react-icons/bs";
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
-import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -25,22 +25,10 @@ const Navbar = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id, profileImage } = currentUserFromDB;
 
-  // const axiosSecure = UseAxiosSecure();
-
+  // Load the cart items from useCart Hook
   const [cart] = UseCart();
 
-  // const newDate = new Date(parseFloat(metadata?.createdAt));
-  // console.log(newDate);
-
-  // Load the cart items
-  /* useEffect(() => {
-    axiosSecure.get("/api/carts").then((res) => {
-      // console.log(res.data);
-      setCartItems(res.data);
-    });
-  }, [axiosSecure, cartItems.length]);
-
-  console.log(cartItems); */
+  console.log(cart);
 
   // Sign Out
   const handleSignOut = () => {
@@ -414,9 +402,46 @@ const Navbar = () => {
           </div>
 
           {/* Cart  */}
-          <div className="flex-none  cursor-pointer">
-            <div className="dropdown dropdown-end mt-2">
-              {/* Cart  */}
+          <div className="flex-none cursor-pointer">
+            <div className="drawer drawer-end">
+              <input
+                id="cart-drawer"
+                type="checkbox"
+                className="drawer-toggle"
+              />
+              <div className="drawer-content">
+                {/* Page content here */}
+                <label
+                  htmlFor="cart-drawer"
+                  className="drawer-button btn border-0 bg-transparent p-0 mx-2"
+                >
+                  <div className="indicator">
+                    <LuShoppingCart className="text-[#222222] text-2xl" />
+                    <span className="badge badge-sm indicator-item">
+                      {cart.length}
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+              {/* Sidebar  */}
+              <div className="drawer-side">
+                <label
+                  htmlFor="cart-drawer"
+                  aria-label="close sidebar"
+                  className="drawer-overlay"
+                ></label>
+                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                  {/* Sidebar content here */}
+
+                  {cart?.map((item) => {
+                    <CartSidebar key={item._id} item={item} />;
+                  })}
+                </ul>
+              </div>
+            </div>
+            {/* <div className="dropdown dropdown-end mt-2">
+              
               <div tabIndex={0} role="button" className="">
                 <div className="indicator">
                   <LuShoppingCart className="text-[#222222] text-2xl" />
@@ -425,7 +450,7 @@ const Navbar = () => {
                   </span>
                 </div>
               </div>
-              {/* Dropdown */}
+              
               <div
                 tabIndex={0}
                 className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-42 shadow-2xl"
@@ -440,7 +465,7 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Profile  */}
