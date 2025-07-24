@@ -149,7 +149,9 @@ async function run() {
     });
 
     app.get("/api/carts", async (req, res) => {
-      const result = await cartCollection.find().toArray();
+      const query = { userEmail: req.query.email };
+
+      const result = await cartCollection.find(query).toArray();
       res.send(result);
     });
 
@@ -330,13 +332,9 @@ async function run() {
     });
 
     // Add to Cart
-    app.post("/api/carts/:userId", async (req, res) => {
-      // console.log(req.params.userId);
+    app.post("/api/carts", async (req, res) => {
       const cartItem = req.body;
-
-      const query = { userId: req.params.userId };
-
-      console.log(cartItem);
+      // console.log(cartItem);
 
       const result = await cartCollection.insertOne(cartItem);
       res.send(result);

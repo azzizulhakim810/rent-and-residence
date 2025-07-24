@@ -284,10 +284,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
       const cartItem = {
         propertyId: propertyItem?._id,
         userId: _id,
+        userEmail,
       };
 
       axiosSecure
-        .post(`http://localhost:5123/api/carts/${_id}`, cartItem)
+        .post(`http://localhost:5123/api/carts?email=${userEmail}`, cartItem)
         .then((res) => {
           console.log(res.data);
           if (res.data.insertedId) {

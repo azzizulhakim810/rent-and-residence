@@ -15,30 +15,32 @@ import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import UseCart from "../../../hooks/UseCart/UseCart";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
 
   const { user, signOutUser, loading } = UseAuth();
   // console.log(user);
   const [currentUserFromDB] = useSignedInUser();
   const { _id, profileImage } = currentUserFromDB;
 
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
+
+  const [cart] = UseCart();
 
   // const newDate = new Date(parseFloat(metadata?.createdAt));
   // console.log(newDate);
 
   // Load the cart items
-  useEffect(() => {
+  /* useEffect(() => {
     axiosSecure.get("/api/carts").then((res) => {
       // console.log(res.data);
       setCartItems(res.data);
     });
   }, [axiosSecure, cartItems.length]);
 
-  console.log(cartItems);
+  console.log(cartItems); */
 
   // Sign Out
   const handleSignOut = () => {
@@ -419,7 +421,7 @@ const Navbar = () => {
                 <div className="indicator">
                   <LuShoppingCart className="text-[#222222] text-2xl" />
                   <span className="badge badge-sm indicator-item">
-                    {cartItems.length}
+                    {cart.length}
                   </span>
                 </div>
               </div>
