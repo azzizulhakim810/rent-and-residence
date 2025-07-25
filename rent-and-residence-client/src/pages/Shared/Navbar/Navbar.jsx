@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
@@ -14,8 +14,6 @@ import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -433,11 +431,11 @@ const Navbar = () => {
                 ></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                   {/* Sidebar content here */}
-
-                  {cart?.map((item) => {
-                    console.log(item);
-                    <CartSidebar key={item._id} item={item} />;
-                  })}
+                  <li>
+                    {cart.map((item) => (
+                      <p key={item._id}>{item.title}</p>
+                    ))}
+                  </li>
                 </ul>
               </div>
             </div>

@@ -12,7 +12,7 @@ const UseCart = () => {
   // const [currentUserFromDB] = useSignedInUser();
   // const { email } = currentUserFromDB;
   const { user } = UseAuth();
-  console.log(user?.email);
+  // console.log(user?.email);
 
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["cart", user?.email],
@@ -20,6 +20,7 @@ const UseCart = () => {
       const res = await axiosSecure.get(`/api/carts?userEmail=${user.email}`);
       return res.data;
     },
+    enabled: !!user?.email,
   });
   return [cart, refetch];
 };

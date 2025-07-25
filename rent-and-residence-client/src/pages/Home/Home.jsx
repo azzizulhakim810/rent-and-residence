@@ -14,7 +14,7 @@ const Home = () => {
   const [properties, loading] = useProperties();
   const locationHook = useLocation();
 
-  console.log(locationHook);
+  // console.log(locationHook);
 
   useEffect(() => {
     if (locationHook.state?.showModal) {
