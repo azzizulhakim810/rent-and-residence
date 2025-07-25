@@ -4,7 +4,7 @@ import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 const CartSidebar = ({ item }) => {
   // const axiosSecure = UseAxiosSecure();
 
-  console.log(item);
+  // console.log(item);
 
   return <div>Hello</div>;
 };

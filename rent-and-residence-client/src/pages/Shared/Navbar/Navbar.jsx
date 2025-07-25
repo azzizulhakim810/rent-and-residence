@@ -14,6 +14,7 @@ import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -433,7 +434,7 @@ const Navbar = () => {
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <p key={item._id}>{item.title}</p>
+                      <CartSidebar key={item._id} item={item} />
                     ))}
                   </li>
                 </ul>
