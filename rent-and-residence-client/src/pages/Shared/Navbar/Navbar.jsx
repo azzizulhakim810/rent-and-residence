@@ -11,10 +11,10 @@ import { GoHome } from "react-icons/go";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
+import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -438,6 +438,13 @@ const Navbar = () => {
                     ))}
                   </li>
                 </ul>
+                <button
+                  // onClick={() => handleAddToCart(property)}
+                  className="btn absolute bottom-0 w-[320px] flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-2 cursor-pointer border-0"
+                >
+                  {/* <LiaCartPlusSolid /> */}
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
             {/* <div className="dropdown dropdown-end mt-2">
