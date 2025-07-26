@@ -29,6 +29,12 @@ const Navbar = () => {
 
   console.log(cart);
 
+  const totalPrice = cart.reduce((total, item) => {
+    return total + parseInt(item.price);
+  }, 0);
+
+  // console.log(totalPrice);
+
   // Sign Out
   const handleSignOut = () => {
     signOutUser()
@@ -424,20 +430,32 @@ const Navbar = () => {
               </div>
 
               {/* Sidebar  */}
-              <div className="drawer-side">
+              <div className="drawer-side z-50">
                 <label
                   htmlFor="cart-drawer"
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-3 ">
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <CartSidebar key={item._id} item={item} />
+                      <Link
+                        className="hover:bg-C_purple/10 "
+                        to={`/propertyDetails/${item._id}`}
+                      >
+                        <CartSidebar key={item._id} item={item} />
+                      </Link>
                     ))}
                   </li>
+
+                  <div className="divider"></div>
+                  <div className="text-lg flex justify-between font-Nunito font-bold px-4 py-2">
+                    <h2>Total Price :</h2>
+                    <span>{totalPrice} €</span>
+                  </div>
                 </ul>
+
                 <button
                   // onClick={() => handleAddToCart(property)}
                   className="btn absolute bottom-0 w-[320px] flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-2 cursor-pointer border-0"

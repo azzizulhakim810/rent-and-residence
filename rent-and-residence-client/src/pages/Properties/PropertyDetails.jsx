@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-import axios from "axios";
+// import axios from "axios";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
@@ -55,9 +55,9 @@ import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
 import "@smastrom/react-rating/style.css";
-import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../hooks/UseCart/UseCart";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -1431,7 +1431,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 onClick={() => handleAddToCart(property)}
                 className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
               >
-                <LiaCartPlusSolid />
+                <LiaCartPlusSolid className="text-[24px] -mt-1" />
                 Add to Cart
               </button>
             </div>
