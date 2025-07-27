@@ -33,6 +33,10 @@ const Navbar = () => {
     return total + parseInt(item.price);
   }, 0);
 
+  const handleDeleteItem = () => {
+    console.log("Hello");
+  };
+
   // console.log(totalPrice);
 
   // Sign Out
@@ -440,12 +444,13 @@ const Navbar = () => {
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <Link
-                        className="hover:bg-C_purple/10 "
-                        to={`/propertyDetails/${item._id}`}
-                      >
-                        <CartSidebar key={item._id} item={item} />
-                      </Link>
+                      <div className="hover:bg-C_purple/10 ">
+                        <CartSidebar
+                          key={item._id}
+                          item={item}
+                          handleDeleteItem={handleDeleteItem}
+                        />
+                      </div>
                     ))}
                   </li>
 
