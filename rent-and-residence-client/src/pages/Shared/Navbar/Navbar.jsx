@@ -444,7 +444,7 @@ const Navbar = () => {
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <div className="hover:bg-C_purple/10 ">
+                      <div className="hover:bg-transparent ">
                         <CartSidebar
                           key={item._id}
                           item={item}

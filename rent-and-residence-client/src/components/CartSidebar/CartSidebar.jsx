@@ -12,7 +12,7 @@ const CartSidebar = ({ item, handleDeleteItem }) => {
       <div className="flex justify-between items-center gap-3 pt-2">
         <button
           onClick={handleDeleteItem}
-          className="text-[15px] p-3 w-[20px]  border-[1px] text-C_purple rounded hover:bg-C_purple hover:text-white cursor-pointer"
+          className="text-[15px] p-[15px] h-auto border-[1px] border-dotted text-C_purple rounded hover:bg-C_purple hover:text-white cursor-pointer"
         >
           X
         </button>
