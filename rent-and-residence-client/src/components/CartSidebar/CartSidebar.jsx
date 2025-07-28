@@ -12,14 +12,11 @@ const CartSidebar = ({ item, handleDeleteItem }) => {
       <div className="flex justify-between items-center gap-3 pt-2">
         <button
           onClick={handleDeleteItem}
-          className="p-1 w-10 border-[1px] text-C_purple rounded-full hover:bg-C_purple hover:text-white cursor-pointer"
+          className="text-[15px] p-3 w-[20px]  border-[1px] text-C_purple rounded hover:bg-C_purple hover:text-white cursor-pointer"
         >
           X
         </button>
-        <Link
-          className="hover:bg-C_purple/10 "
-          to={`/propertyDetails/${item._id}`}
-        >
+        <Link className="flex gap-4" to={`/propertyDetails/${item._id}`}>
           <img className="w-[18%] rounded" src={propImg} alt="" />
           <span className="w-full flex flex-col gap-1">
             <h4 className="font-Nunito font-[700] text-C_gray text-[15px] leading-6">
