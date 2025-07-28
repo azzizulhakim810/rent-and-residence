@@ -483,6 +483,26 @@ async function run() {
 
       res.send(result);
     });
+
+    app.delete("/api/carts", async (req, res) => {
+      const query = { userEmail: req.query.userEmail };
+      // console.log(req.query.userEmail);
+
+      const cartItems = await cartCollection.find(query).toArray();
+      const propertyIds = cartItems.map(
+        (item) => new ObjectId(item.propertyId)
+      );
+
+      // console.log(propertyIds);
+
+      const result = await propertyCollection
+        .find({
+          _id: { $in: propertyIds },
+        })
+        .toArray();
+
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
