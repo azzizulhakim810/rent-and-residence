@@ -488,23 +488,30 @@ async function run() {
       const deletedPropertyId = req.query.propertyId;
 
       const userEmail = req.query.userEmail;
-      const query = { userEmail: req.query.userEmail };
+      const query = { userEmail: userEmail };
       // console.log(req.query.userEmail);
 
       const cartItems = await cartCollection.find(query).toArray();
-      const propertyIds = cartItems.map(
-        (item) => new ObjectId(item.propertyId)
-      );
 
-      console.log(deletedPropertyId, userEmail);
+      // console.log(cartItems);
+      // const propertyId = cartItems.map((item) => item.propertyId === deletedPropertyId);
+
+      // const result = await cartCollection.deleteOne(propertyId)
+
+      // console.log(propertyId);
+      // console.log(deletedPropertyId);
+
+      // console.log(deletedPropertyId, userEmail);
 
       // console.log(propertyIds);
 
-      // const result = await propertyCollection
-      //   .find({
-      //     _id: { $in: propertyIds },
-      //   })
-      //   .toArray();
+      // const matchThePropertyToDelete = {}
+
+      /*  const result = await propertyCollection
+        .find({
+          _id: { $in: propertyIds },
+        })
+        .toArray(); */
 
       // res.send(result);
     });
