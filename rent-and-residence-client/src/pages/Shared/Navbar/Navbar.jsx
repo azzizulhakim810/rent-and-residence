@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 import { BiMessageSquareAdd } from "react-icons/bi";
@@ -28,7 +29,7 @@ const Navbar = () => {
   const axiosSecure = UseAxiosSecure();
 
   // Load the cart items from useCart Hook
-  const [cart] = UseCart();
+  const [cart, refetch] = UseCart();
 
   // console.log(cart);
 
@@ -42,7 +43,11 @@ const Navbar = () => {
       .delete(
         `/api/carts?userEmail=${currentUserFromDB.email}&propertyId=${_id}`
       )
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res);
+        toast.success("Property has deleted");
+        refetch();
+      });
   };
 
   // console.log(totalPrice);

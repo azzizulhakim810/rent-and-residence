@@ -148,6 +148,7 @@ async function run() {
       res.send(result);
     });
 
+    // Get all the cart items of logged in user
     app.get("/api/carts", async (req, res) => {
       const query = { userEmail: req.query.userEmail };
       // console.log(req.query.userEmail);
@@ -346,11 +347,37 @@ async function run() {
 
     // Add to Cart
     app.post("/api/carts", async (req, res) => {
-      const cartItem = req.body;
-      // console.log(cartItem);
+      const userEmail = req.query.userEmail;
+      const query = { userEmail: userEmail };
 
-      const result = await cartCollection.insertOne(cartItem);
+      const cartItem = req.body;
+
+      const cartItems = await cartCollection.find(query).toArray();
+      // console.log(cartItems);
+
+      const propertyIds = cartItems.filter((item) => {
+        console.log(item.propertyId, cartItem.propertyId);
+      });
+
+      // console.log(propertyIds);
+
+      // const result = await cartCollection.insertOne(cartItem);
+      // res.send(result);
+
+      // const cartItem = req.body;
+      // console.log(cartItem.propertyId);
+
+      /* if(cartItem.propertyId) {
+        // query = {propertyId: cartItem.propertyId}
+
+        
+
+        console.log("Sorry, It's already in the cart");
+      } else {
+
+        const result = await cartCollection.insertOne(cartItem);
       res.send(result);
+      } */
     });
 
     // Update a property Info
@@ -473,17 +500,7 @@ async function run() {
       res.send(result);
     });
 
-    app.delete("/api/carts/:propertyId", async (req, res) => {
-      const propertyId = req.params.propertyId;
-      const query = { propertyId: propertyId };
-
-      console.log(propertyId);
-
-      const result = await cartCollection.deleteOne(query);
-
-      res.send(result);
-    });
-
+    // Remove the property from cart
     app.delete("/api/carts", async (req, res) => {
       const deletedPropertyId = req.query.propertyId;
 
@@ -493,27 +510,11 @@ async function run() {
 
       const cartItems = await cartCollection.find(query).toArray();
 
-      // console.log(cartItems);
-      // const propertyId = cartItems.map((item) => item.propertyId === deletedPropertyId);
+      const matchTheProperty = { propertyId: deletedPropertyId };
 
-      // const result = await cartCollection.deleteOne(propertyId)
+      const result = await cartCollection.deleteOne(matchTheProperty);
 
-      // console.log(propertyId);
-      // console.log(deletedPropertyId);
-
-      // console.log(deletedPropertyId, userEmail);
-
-      // console.log(propertyIds);
-
-      // const matchThePropertyToDelete = {}
-
-      /*  const result = await propertyCollection
-        .find({
-          _id: { $in: propertyIds },
-        })
-        .toArray(); */
-
-      // res.send(result);
+      res.send(result);
     });
   } finally {
     // Ensures that the client will close when you finish/error

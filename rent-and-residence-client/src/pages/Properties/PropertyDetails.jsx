@@ -100,6 +100,7 @@ const PropertyDetails = () => {
     // },
   });
 
+  // Submit Rating
   const onSubmit = (data) => {
     if (rating == 0) {
       toast.error("Rating must be more than 0");
@@ -281,7 +282,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
   // Add to Cart
   const handleAddToCart = (propertyItem) => {
     if (currentUserFromDB && userEmail) {
-      console.log(_id);
+      // console.log(_id);
 
       const cartItem = {
         propertyId: propertyItem?._id,
@@ -290,7 +291,10 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
       };
 
       axiosSecure
-        .post(`http://localhost:5123/api/carts`, cartItem)
+        .post(
+          `http://localhost:5123/api/carts?userEmail=${userEmail}`,
+          cartItem
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.insertedId) {
