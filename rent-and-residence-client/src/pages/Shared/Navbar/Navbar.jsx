@@ -15,6 +15,7 @@ import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -24,17 +25,24 @@ const Navbar = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id, profileImage } = currentUserFromDB;
 
+  const axiosSecure = UseAxiosSecure();
+
   // Load the cart items from useCart Hook
   const [cart] = UseCart();
 
-  console.log(cart);
+  // console.log(cart);
 
   const totalPrice = cart.reduce((total, item) => {
     return total + parseInt(item.price);
   }, 0);
 
-  const handleDeleteItem = () => {
-    console.log("Hello");
+  const handleDeleteItem = (_id) => {
+    // console.log("Id", _id);
+    axiosSecure
+      .delete(
+        `/api/carts?userEmail=${currentUserFromDB.email}&propertyId=${_id}`
+      )
+      .then((res) => console.log(res.data));
   };
 
   // console.log(totalPrice);
@@ -444,7 +452,7 @@ const Navbar = () => {
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <div className="hover:bg-transparent ">
+                      <div className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none">
                         <CartSidebar
                           key={item._id}
                           item={item}
