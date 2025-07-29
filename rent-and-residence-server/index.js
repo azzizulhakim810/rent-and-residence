@@ -362,30 +362,12 @@ async function run() {
 
       if (filteredProperties.length > 0) {
         // console.log("Sorry, the item is already in the cart");
-        res.status(409).send("Item already exists in the cart.");
+        res.status(409).send({"Item already exists in the cart."});
       } else {
         const result = await cartCollection.insertOne(cartItem);
         res.send(result);
         console.log("This item is added in the cart");
       }
-
-      // const result = await cartCollection.insertOne(cartItem);
-      // res.send(result);
-
-      // const cartItem = req.body;
-      // console.log(cartItem.propertyId);
-
-      /* if(cartItem.propertyId) {
-        // query = {propertyId: cartItem.propertyId}
-
-        
-
-        console.log("Sorry, It's already in the cart");
-      } else {
-
-        const result = await cartCollection.insertOne(cartItem);
-      res.send(result);
-      } */
     });
 
     // Update a property Info
