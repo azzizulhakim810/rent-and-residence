@@ -296,12 +296,15 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
           cartItem
         )
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           if (res.data.insertedId) {
             toast.success("This property is added to cart");
             refetch();
+          } else {
+            toast.error("Item already exists in the cart.");
           }
-        });
+        })
+        .catch((err) => console.log(err));
     } else {
       toast.error("You must login to add items");
     }

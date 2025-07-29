@@ -349,17 +349,25 @@ async function run() {
     app.post("/api/carts", async (req, res) => {
       const userEmail = req.query.userEmail;
       const query = { userEmail: userEmail };
-
       const cartItem = req.body;
 
       const cartItems = await cartCollection.find(query).toArray();
       // console.log(cartItems);
 
-      const propertyIds = cartItems.filter((item) => {
-        console.log(item.propertyId, cartItem.propertyId);
-      });
+      const filteredProperties = cartItems.filter(
+        (item) => item.propertyId === cartItem.propertyId
+      );
 
-      // console.log(propertyIds);
+      // console.log(filteredProperties);
+
+      if (filteredProperties.length > 0) {
+        // console.log("Sorry, the item is already in the cart");
+        res.status(409).send("Item already exists in the cart.");
+      } else {
+        const result = await cartCollection.insertOne(cartItem);
+        res.send(result);
+        console.log("This item is added in the cart");
+      }
 
       // const result = await cartCollection.insertOne(cartItem);
       // res.send(result);
