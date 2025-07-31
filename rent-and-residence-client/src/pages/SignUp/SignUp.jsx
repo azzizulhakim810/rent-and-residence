@@ -13,9 +13,11 @@ import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   const { createUser, googleSignIn, updateUserProfile } = UseAuth();
+  const axiosPublic = useAxiosPublic();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,7 +67,26 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           };
 
           // Save the user to Database
-          fetch("http://localhost:5123/api/auth/register", {
+
+          axiosPublic
+            .post("http://localhost:5123/api/auth/register", newUser)
+            .then((res) => {
+              console.log(res.data);
+
+              // if (!res.ok) {
+              //     toast.error("There is having issues to POST");
+              //     return;
+              //   }
+
+              toast.success("Signed In Successfully");
+              console.log(res.data);
+            })
+            .catch((error) => {
+              toast.error(error);
+              console.log(error);
+            });
+
+          /* fetch("http://localhost:5123/api/auth/register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -88,7 +109,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             .catch((error) => {
               toast.error(error);
               console.log(error);
-            });
+            }); */
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();

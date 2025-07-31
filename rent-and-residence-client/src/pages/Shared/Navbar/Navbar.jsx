@@ -45,7 +45,7 @@ const Navbar = () => {
       )
       .then((res) => {
         console.log(res);
-        toast.success("Property has deleted");
+        toast.success("Property has removed from the cart");
         refetch();
       });
   };
