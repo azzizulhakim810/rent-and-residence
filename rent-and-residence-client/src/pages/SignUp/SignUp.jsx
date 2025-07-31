@@ -148,44 +148,21 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
         };
 
         // Save the user to Database
-        fetch("http://localhost:5123/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        })
+        axiosPublic
+          .post("http://localhost:5123/api/auth/register", newUser)
           .then((res) => {
+            console.log(res.data);
             if (!res.ok) {
               toast.error("There is having issues to POST");
               return;
             }
-            // console.log(res);
 
-            res.json();
-          })
-          .then((data) => {
-            // toast.success("Signed In Successfully");
-            console.log(data);
-          })
-          .catch((error) => {
-            toast.error(error);
-            console.log(error);
+            toast.success("Signed In Successfully");
+            navigate("/dashboard/myProfile");
+
+            // Close the modal
+            document.getElementById("signUpAndInPopUp").close();
           });
-
-        toast.success("Signed In Successfully");
-        navigate("/dashboard/myProfile");
-        //  navigate(from, { replace: true });
-        {
-          /* <Navigate
-          to="/dashboard/myProfile"
-          state={{ from: location }}
-          replace
-        />; */
-        }
-
-        // Close the modal
-        document.getElementById("signUpAndInPopUp").close();
       })
       .catch((error) => {
         toast.error(error);
