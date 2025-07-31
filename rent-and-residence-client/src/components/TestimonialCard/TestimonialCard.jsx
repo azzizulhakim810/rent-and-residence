@@ -2,19 +2,26 @@ import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const TestimonialCard = ({ review }) => {
   const [user, setUser] = useState(null);
+  const axiosPublic = useAxiosPublic();
 
   const { userId, rating, comment, designation, name } = review || {};
 
   // console.log(review);
 
   useEffect(() => {
-    fetch(`http://localhost:5123/api/users/${userId}`)
+    /* fetch(`http://localhost:5123/api/users/${userId}`)
       .then((res) => res.json())
-      .then((data) => setUser(data));
-  }, [userId]);
+      .then((data) => setUser(data)); */
+
+    axiosPublic.get(`http://localhost:5123/api/users/${userId}`).then((res) => {
+      // console.log(res.data);
+      setUser(res.data);
+    });
+  }, [userId, axiosPublic]);
 
   // console.log(user);
   const { profileImage } = user || {};

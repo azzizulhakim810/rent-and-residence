@@ -6,16 +6,17 @@ import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const PropertyCard = ({ property }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
+
+  const axiosPublic = useAxiosPublic();
   // Destructure Details from Property
   const {
     _id,
     title,
     price,
-
     images,
-
     ownerId,
     listedIn,
     category,
@@ -27,10 +28,17 @@ const PropertyCard = ({ property }) => {
 
   // Fetch the owner of each Property
   useEffect(() => {
-    fetch(`http://localhost:5123/api/users/${ownerId}`)
+    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
       .then((res) => res.json())
-      .then((data) => setPropertyOwner(data));
-  }, [ownerId]);
+      .then((data) => setPropertyOwner(data)); */
+
+    axiosPublic
+      .get(`http://localhost:5123/api/users/${ownerId}`)
+      .then((res) => {
+        // console.log(res.data);
+        setPropertyOwner(res.data);
+      });
+  }, [ownerId, axiosPublic]);
   // console.log(propertyOwner);
 
   // Destructure Details from Owner
