@@ -304,7 +304,10 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
             toast.error("Item already exists in the cart.");
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          toast.error("Item already exists in the cart.");
+          console.log(err);
+        });
     } else {
       toast.error("You must login to add items");
     }

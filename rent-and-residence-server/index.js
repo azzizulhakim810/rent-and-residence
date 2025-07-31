@@ -362,7 +362,7 @@ async function run() {
 
       if (filteredProperties.length > 0) {
         // console.log("Sorry, the item is already in the cart");
-        res.status(409).send({"Item already exists in the cart."});
+        res.status(409).send("Item already exists in the cart.");
       } else {
         const result = await cartCollection.insertOne(cartItem);
         res.send(result);
