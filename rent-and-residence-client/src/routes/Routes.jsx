@@ -18,6 +18,7 @@ import Home from "../pages/Home/Home";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
 import PrivateRoute from "./PrivateRoute";
+import Comparison from "../pages/Comparison/Comparison";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/comparison",
+        element: <Comparison />,
       },
     ],
   },
