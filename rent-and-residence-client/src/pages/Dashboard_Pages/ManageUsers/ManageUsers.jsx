@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import ManageUsersTable from "../../../components/ManageUsersTable/ManageUsersTable";
 
-const MyPropertyList = () => {
+const ManageUsers = () => {
   const [currentUserFromDB] = useSignedInUser();
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
-  const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const axiosSecure = UseAxiosSecure();
@@ -15,16 +15,14 @@ const MyPropertyList = () => {
   // console.log(user);
 
   useEffect(() => {
-    axiosSecure
-      .get(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
-      .then((res) => {
-        console.log(res.data);
-        setAgentOwnedProperty(res.data);
-        setLoading(false);
-      });
+    axiosSecure.get(`http://localhost:5123/api/users`).then((res) => {
+      console.log(res.data);
+      setAllUsers(res.data);
+      setLoading(false);
+    });
   }, [_id, axiosSecure]);
 
-  // console.log(agentOwnedProperty);
+  console.log(allUsers);
 
   return (
     <div className="py-10">
@@ -43,15 +41,14 @@ const MyPropertyList = () => {
 
             {/* Property Table  */}
             <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
-              <table className="table">
+              <table className="table rounded-8xl">
                 {/* head */}
-                <thead>
-                  <tr className="font-Nunito text-black text-[16px]">
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Pay Status</th>
-                    <th>Price</th>
+                <thead className="bg-C_purple rounded-5xl ">
+                  <tr className="font-Nunito text-[16px] text-white rounded-4xl">
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -62,35 +59,17 @@ const MyPropertyList = () => {
                       Loading{" "}
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
-                  ) : agentOwnedProperty.length !== 0 ? (
-                    agentOwnedProperty?.map((property) => (
-                      <MyPropertyTable key={property._id} property={property} />
+                  ) : allUsers.length !== 0 ? (
+                    allUsers?.map((user) => (
+                      <ManageUsersTable key={user._id} user={user} />
                     ))
                   ) : (
                     <span className="text-lg font-Nunito_Sans block mt-4">
-                      You don't have any properties!
+                      There is no user!
                     </span>
                   )}
                 </tbody>
               </table>
-
-              {/*  {agentOwnedProperty?.map((property) => (
-                <PropertyCard key={property._id} property={property} />
-              ))} */}
-
-              {/* {loading ? (
-                <div className="flex">
-                  <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
-                    Properties are loading
-                  </p>
-                  <br />
-                  <span className=" loading loading-ring loading-xl text-C_purple"></span>
-                </div>
-              ) : (
-                agentOwnedProperty?.map((property) => (
-                  <PropertyCard key={property._id} property={property} />
-                ))
-              )} */}
             </div>
           </div>
         </div>
@@ -99,4 +78,4 @@ const MyPropertyList = () => {
   );
 };
 
-export default MyPropertyList;
+export default ManageUsers;

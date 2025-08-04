@@ -8,6 +8,8 @@ import { BiMessageSquareAdd } from "react-icons/bi";
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { MdOutlineManageAccounts } from "react-icons/md";
+
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 const Dashboard = () => {
@@ -72,6 +74,22 @@ const Dashboard = () => {
           <span className="flex items-center gap-4 justify-start">
             <GoHome />
             My Property List
+          </span>
+        </NavLink>
+      </li>
+
+      <li className="hover:bg-C_purple hover:rounded-md">
+        <NavLink
+          to="/dashboard/manageUsers"
+          className={({ isActive }) =>
+            isActive
+              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+          }
+        >
+          <span className="flex items-center gap-4 justify-start">
+            <MdOutlineManageAccounts />
+            Manage Users
           </span>
         </NavLink>
       </li>
@@ -178,6 +196,7 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* Childrens  */}
         <div className="lg:col-span-9  col-span-10 ">
           <Outlet />
         </div>

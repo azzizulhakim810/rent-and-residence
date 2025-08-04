@@ -19,6 +19,7 @@ import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/Properties/PropertyDetails";
 import PrivateRoute from "./PrivateRoute";
 import Comparison from "../pages/Comparison/Comparison";
+import ManageUsers from "../pages/Dashboard_Pages/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPropertyList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageUsers",
+        element: (
+          <PrivateRoute>
+            <ManageUsers />
           </PrivateRoute>
         ),
       },
