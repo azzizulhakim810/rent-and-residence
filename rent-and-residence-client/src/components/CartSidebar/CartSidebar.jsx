@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+
 const CartSidebar = ({ item, handleDeleteItem }) => {
   // Destructure Details from Property
   const { _id, title, price } = item || {};
 
   const propImg = item?.images?.[0];
 
-  console.log(item);
+  // console.log(item);
 
   return (
     <nav className="flex flex-col gap-4 active:border-none">

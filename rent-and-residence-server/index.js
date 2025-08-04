@@ -183,10 +183,11 @@ async function run() {
 
       // console.log(findIfExisting);
       if (!findIfExisting) {
+        console.log("User Injected");
         const result = await userCollection.insertOne(newUser);
         res.send(result);
-        console.log("User Injected");
       } else {
+        return res.send({ message: "User already exists", insertedId: null });
         console.log("Haven't Injected");
       }
     });
@@ -480,7 +481,7 @@ async function run() {
     });
 
     // Delete an User
-    app.delete("/api/user/:id", async (req, res) => {
+    app.delete("/api/users/:id", async (req, res) => {
       const id = req.params.id;
 
       const query = { _id: new ObjectId(id) };

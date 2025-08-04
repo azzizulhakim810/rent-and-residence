@@ -1,9 +1,3 @@
-import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus, FaRegHeart } from "react-icons/fa6";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtub } from "react-icons/pi";
-import { VscHome } from "react-icons/vsc";
 import { useEffect, useState } from "react";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaPlus, FaRegHeart } from "react-icons/fa6";
@@ -11,7 +5,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const Comparison = () => {
   const [propertyOwner, setPropertyOwner] = useState([]);

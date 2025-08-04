@@ -13,9 +13,11 @@ import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
+// import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
-  const { signIn, googleSignIn } = UseAuth();
+  const { signIn } = UseAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -80,72 +82,6 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
   };
   // console.log(watch("email")); // watch input value by passing the name of it
 
-  // Google Sign In
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((res) => {
-        // toast.success("Signed In Successfully");
-        console.log(res.user);
-
-        const { displayName, email, phoneNumber, photoURL, metadata } =
-          res.user || {};
-
-        const newUser = {
-          name: displayName,
-          email,
-          phone: phoneNumber,
-          role: "user",
-          profileImage: photoURL,
-          isVerified: "false",
-          createdAt: new Date(parseFloat(metadata.createdAt)),
-        };
-
-        // Save the user to Database
-        fetch("http://localhost:5123/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        })
-          .then((res) => {
-            if (!res.ok) {
-              toast.error("There is having issues to POST");
-              return;
-            }
-            // console.log(res);
-
-            res.json();
-          })
-          .then((data) => {
-            // toast.success("Signed In Successfully");
-            console.log(data);
-          })
-          .catch((error) => {
-            toast.error(error);
-            console.log(error);
-          });
-
-        toast.success("Signed In Successfully");
-        // navigate("/dashboard/myProfile");
-        navigate(from, { replace: true });
-        {
-          /* <Navigate
-          to="/dashboard/myProfile"
-          state={{ from: location }}
-          replace
-        />; */
-        }
-
-        // Close the modal
-        document.getElementById("signUpAndInPopUp").close();
-      })
-      .catch((error) => {
-        toast.error(error);
-        console.log(error);
-      });
-  };
-
   const handleValidateBtn = (e) => {
     e.preventDefault();
     // console.log(validateCaptcha(e.target.value));
@@ -192,14 +128,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
 
         {/* <Google Button  */}
         <div className="flex justify-center w-full pt-5">
-          <button
-            onClick={handleGoogleSignIn}
-            className=" flex select-none items-center gap-3 rounded-md border border-C_LightGray py-3 w-full justify-center align-middle font-Nunito_Sans text-sm font-bold uppercase text-C_DarkGray hover:text-C_purple cursor-pointer transition-all hover:opacity-75 focus:ring focus:ring-text-C_purple active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            data-ripple-dark="true"
-          >
-            <FcGoogle></FcGoogle>
-            Continue with Google
-          </button>
+          <SocialLogin />
         </div>
 
         {/* Divider  */}

@@ -15,7 +15,7 @@ const useProperties = () => {
       }); */
 
     axiosPublic.get("http://localhost:5123/api/properties").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setProperties(res.data);
       setLoading(false);
     });
