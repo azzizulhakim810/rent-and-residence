@@ -483,6 +483,7 @@ async function run() {
     // Delete an User
     app.delete("/api/users/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(id);
 
       const query = { _id: new ObjectId(id) };
 

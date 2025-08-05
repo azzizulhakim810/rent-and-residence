@@ -1,6 +1,46 @@
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+
+import { RiDeleteBin3Line } from "react-icons/ri";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import { toast } from "sonner";
+
 const ManageUsersTable = ({ user, i }) => {
+  const axiosSecure = UseAxiosSecure();
+
   // Destructure Details from Property
   const { _id, name, email, profileImage, role } = user || {};
+
+  const { refetch, data: allUser } = useQuery({
+    queryKey: ["allUser"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        "http://localhost:5123/api/users/${id)"
+      );
+      return res.data;
+    },
+  });
+
+  const handleRoleChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+
+    axiosSecure
+      .delete(`http://localhost:5123/api/users/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("User Deleted");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
 
   // console.log(user);
   return (
@@ -17,8 +57,11 @@ const ManageUsersTable = ({ user, i }) => {
       <td className="capitalize text-C_LightGray/90">{email}</td>
       <td className="capitalize text-C_LightGray/90">
         {/* {role} */}
-        <select>
-          <option defaultValue={role}>Select</option>
+        <select
+          className="border-[1px] px-4 py-1 border-C_LightGray/30 rounded focus:border-[1px] focus:outline-0"
+          onChange={handleRoleChange}
+          defaultValue={role}
+        >
           <option value="User">User</option>
           <option value="Agent">Agent</option>
           <option value="Admin">Admin</option>
@@ -27,8 +70,12 @@ const ManageUsersTable = ({ user, i }) => {
 
       <td>
         {/* <Link to={`/propertyDetails/${_id}`}> */}
-        <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
-          Details
+        <button
+          onClick={() => handleDelete(_id)}
+          className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-3 py-5 font-[700] bg-red-600/70 hover:bg-red-600 text-white duration-300 uppercase "
+        >
+          {/* <img className="text-sm w-6" src={deleteBtn} alt="" srcset="" /> */}
+          <RiDeleteBin3Line className="text-lg" />
         </button>
         {/* </Link> */}
       </td>

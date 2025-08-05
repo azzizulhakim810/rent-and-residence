@@ -22,14 +22,12 @@ const ManageUsers = () => {
     });
   }, [_id, axiosSecure]);
 
-  console.log(allUsers);
+  // console.log(allUsers);
 
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
-      <h1 className="font-Nunito text-5xl font-[800]">
-        Dashboard – Profile Page
-      </h1>
+      <h1 className="font-Nunito text-5xl font-[800]">Dashboard – All Users</h1>
 
       <div className="grid  grid-cols-12 gap-6 pt-10">
         <div className="lg:col-span-12 col-span-12 lg:order-1 order-2 flex flex-col gap-10">
