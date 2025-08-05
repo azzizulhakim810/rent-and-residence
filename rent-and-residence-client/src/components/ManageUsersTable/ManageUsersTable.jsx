@@ -1,28 +1,12 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-
 import { RiDeleteBin3Line } from "react-icons/ri";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import { toast } from "sonner";
 
-const ManageUsersTable = ({ user, i }) => {
+const ManageUsersTable = ({ user, i, refetch, setLoading }) => {
   const axiosSecure = UseAxiosSecure();
 
   // Destructure Details from Property
   const { _id, name, email, profileImage, role } = user || {};
-
-  const { refetch, data: allUser } = useQuery({
-    queryKey: ["allUser"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(
-        "http://localhost:5123/api/users/${id)"
-      );
-      return res.data;
-    },
-  });
 
   const handleRoleChange = (e) => {
     console.log(e.target.value);
@@ -36,6 +20,8 @@ const ManageUsersTable = ({ user, i }) => {
       .then((res) => {
         console.log(res.data);
         toast.success("User Deleted");
+        // setLoading(false);
+        refetch();
       })
       .catch((err) => {
         toast.error(err);

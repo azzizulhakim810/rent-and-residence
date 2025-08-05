@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 import ManageUsersTable from "../../../components/ManageUsersTable/ManageUsersTable";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -7,20 +12,30 @@ const ManageUsers = () => {
   const [currentUserFromDB] = useSignedInUser();
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const axiosSecure = UseAxiosSecure();
 
+  const { refetch, data: allUser } = useQuery({
+    queryKey: ["allUser"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        "http://localhost:5123/api/users/${id)"
+      );
+      return res.data;
+    },
+  });
+
   // console.log(user);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     axiosSecure.get(`http://localhost:5123/api/users`).then((res) => {
       console.log(res.data);
       setAllUsers(res.data);
       setLoading(false);
     });
-  }, [_id, axiosSecure]);
+  }, [_id, axiosSecure]); */
 
   // console.log(allUsers);
 
@@ -58,9 +73,15 @@ const ManageUsers = () => {
                       Loading{" "}
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
-                  ) : allUsers.length !== 0 ? (
-                    allUsers?.map((user, i) => (
-                      <ManageUsersTable key={user._id} user={user} i={i} />
+                  ) : allUser.length !== 0 ? (
+                    allUser?.map((user, i) => (
+                      <ManageUsersTable
+                        key={user._id}
+                        user={user}
+                        i={i}
+                        refetch={refetch}
+                        setLoading={setLoading}
+                      />
                     ))
                   ) : (
                     <span className="text-lg font-Nunito_Sans block mt-4">
