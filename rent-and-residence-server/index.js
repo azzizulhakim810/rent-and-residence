@@ -402,6 +402,27 @@ async function run() {
       res.send(result);
     });
 
+    app.patch("/api/updateUserRole/:id", async (req, res) => {
+      const userId = req.params.id;
+      const newRole = req.body.role;
+
+      const filter = { _id: new ObjectId(userId) };
+
+      const updateRole = {
+        $set: {
+          role: newRole,
+        },
+      };
+
+      // console.log(userId, newRole);
+      // console.log(userId);
+      console.log(newRole);
+
+      const result = await userCollection.updateOne(filter, updateRole);
+
+      res.send(result);
+    });
+
     // Update an user Info
     app.put(
       "/api/user/:id",
@@ -483,7 +504,7 @@ async function run() {
     // Delete an User
     app.delete("/api/users/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
+      // console.log(id);
 
       const query = { _id: new ObjectId(id) };
 

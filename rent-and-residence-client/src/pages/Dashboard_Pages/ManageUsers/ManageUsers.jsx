@@ -13,21 +13,23 @@ const ManageUsers = () => {
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
   // const [allUsers, setAllUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const axiosSecure = UseAxiosSecure();
 
-  const { refetch, data: allUser } = useQuery({
+  const {
+    isPending,
+    refetch,
+    data: allUser,
+  } = useQuery({
     queryKey: ["allUser"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        "http://localhost:5123/api/users/${id)"
-      );
+      const res = await axiosSecure.get("http://localhost:5123/api/users");
       return res.data;
     },
   });
 
-  // console.log(user);
+  console.log(allUser);
 
   /*  useEffect(() => {
     axiosSecure.get(`http://localhost:5123/api/users`).then((res) => {
@@ -68,19 +70,19 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                   {}
-                  {loading ? (
+                  {isPending ? (
                     <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
                       Loading{" "}
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
-                  ) : allUser.length !== 0 ? (
+                  ) : allUser?.length !== 0 ? (
                     allUser?.map((user, i) => (
                       <ManageUsersTable
                         key={user._id}
                         user={user}
                         i={i}
                         refetch={refetch}
-                        setLoading={setLoading}
+                        // setLoading={setLoading}
                       />
                     ))
                   ) : (

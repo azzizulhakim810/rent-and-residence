@@ -2,14 +2,21 @@ import { RiDeleteBin3Line } from "react-icons/ri";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import { toast } from "sonner";
 
-const ManageUsersTable = ({ user, i, refetch, setLoading }) => {
+const ManageUsersTable = ({ user, i, refetch }) => {
   const axiosSecure = UseAxiosSecure();
 
   // Destructure Details from Property
   const { _id, name, email, profileImage, role } = user || {};
 
-  const handleRoleChange = (e) => {
-    console.log(e.target.value);
+  const handleRoleChange = (e, id) => {
+    axiosSecure
+      .patch(`http://localhost:5123/api/updateUserRole/${id}`, {
+        role: e.target.value,
+      })
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Role Updated");
+      });
   };
 
   const handleDelete = (id) => {
@@ -45,7 +52,7 @@ const ManageUsersTable = ({ user, i, refetch, setLoading }) => {
         {/* {role} */}
         <select
           className="border-[1px] px-4 py-1 border-C_LightGray/30 rounded focus:border-[1px] focus:outline-0"
-          onChange={handleRoleChange}
+          onChange={(e) => handleRoleChange(e, _id)}
           defaultValue={role}
         >
           <option value="User">User</option>
