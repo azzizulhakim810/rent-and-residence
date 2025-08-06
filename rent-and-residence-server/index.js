@@ -406,6 +406,7 @@ async function run() {
       const userId = req.params.id;
       const newRole = req.body.role;
 
+      // console.log(newRole);
       const filter = { _id: new ObjectId(userId) };
 
       const updateRole = {
@@ -416,7 +417,6 @@ async function run() {
 
       // console.log(userId, newRole);
       // console.log(userId);
-      console.log(newRole);
 
       const result = await userCollection.updateOne(filter, updateRole);
 
