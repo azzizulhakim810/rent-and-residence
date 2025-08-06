@@ -24,22 +24,12 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["allUser"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:5123/api/users");
+      const res = await axiosSecure.get("/api/users");
       return res.data;
     },
   });
 
-  console.log(allUser);
-
-  /*  useEffect(() => {
-    axiosSecure.get(`http://localhost:5123/api/users`).then((res) => {
-      console.log(res.data);
-      setAllUsers(res.data);
-      setLoading(false);
-    });
-  }, [_id, axiosSecure]); */
-
-  // console.log(allUsers);
+  // console.log(allUser);
 
   return (
     <div className="py-10">

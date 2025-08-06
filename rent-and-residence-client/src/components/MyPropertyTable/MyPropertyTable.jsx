@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-const MyPropertyTable = ({ property }) => {
+const MyPropertyTable = ({ property, refetch }) => {
   // Destructure Details from Property
   const { _id, title, price, images, address, category, propertyStatus } =
     property || {};
 
-  console.log(property);
+  // console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
       <td>

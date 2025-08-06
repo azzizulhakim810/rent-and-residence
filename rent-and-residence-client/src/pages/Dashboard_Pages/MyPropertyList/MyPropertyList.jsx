@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -7,24 +7,23 @@ const MyPropertyList = () => {
   const [currentUserFromDB] = useSignedInUser();
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
-  const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   const axiosSecure = UseAxiosSecure();
 
-  // console.log(user);
-
-  useEffect(() => {
-    axiosSecure
-      .get(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
-      .then((res) => {
-        console.log(res.data);
-        setAgentOwnedProperty(res.data);
-        setLoading(false);
-      });
-  }, [_id, axiosSecure]);
-
-  // console.log(agentOwnedProperty);
+  const {
+    isPending,
+    refetch,
+    data: agentOwnedProperties,
+  } = useQuery({
+    queryKey: ["agentOwnedProperties", _id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/api/agentOwnedProperty/${_id}`);
+      return res.data;
+    },
+    enabled: !!_id,
+  });
 
   return (
     <div className="py-10">
@@ -57,19 +56,19 @@ const MyPropertyList = () => {
                 </thead>
                 <tbody>
                   {}
-                  {loading ? (
+                  {isPending ? (
                     <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
                       Loading{" "}
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
-                  ) : agentOwnedProperty.length !== 0 ? (
-                    agentOwnedProperty?.map((property) => (
-                      <MyPropertyTable key={property._id} property={property} />
-                    ))
                   ) : (
-                    <span className="text-lg font-Nunito_Sans block mt-4">
-                      You don't have any properties!
-                    </span>
+                    agentOwnedProperties.map((property) => (
+                      <MyPropertyTable
+                        key={property._id}
+                        property={property}
+                        refetch={refetch}
+                      />
+                    ))
                   )}
                 </tbody>
               </table>

@@ -15,7 +15,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
     setSelectedRole(updatedRole);
 
     axiosSecure
-      .patch(`http://localhost:5123/api/updateUserRole/${id}`, {
+      .patch(`/api/updateUserRole/${id}`, {
         role: updatedRole,
       })
       .then((res) => {
@@ -28,7 +28,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
     console.log(id);
 
     axiosSecure
-      .delete(`http://localhost:5123/api/users/${id}`)
+      .delete(`/api/users/${id}`)
       .then((res) => {
         console.log(res.data);
         toast.success("User Deleted");
