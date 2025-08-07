@@ -26,18 +26,33 @@ const ManageUsersTable = ({ user, i, refetch }) => {
 
   const handleDelete = (id) => {
     console.log(id);
+    toast.warning("Are you sure?", {
+      action: {
+        label: "Yes",
 
-    axiosSecure
-      .delete(`/api/users/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        toast.success("User Deleted");
-        // setLoading(false);
-        refetch();
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
+        onClick: () => {
+          axiosSecure
+            .delete(`/api/users/${id}`)
+            .then((res) => {
+              console.log(res.data);
+              toast.success("User Deleted");
+
+              // setLoading(false);
+              refetch();
+            })
+            .catch((err) => {
+              toast.error(err);
+            });
+        },
+      },
+    });
+
+    /* toast("My cancel toast", {
+      cancel: {
+        label: "Cancel",
+        onClick: () => console.log("Cancel!"),
+      },
+    }); */
   };
 
   // console.log(user);

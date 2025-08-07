@@ -20,7 +20,7 @@ const ManageUsers = () => {
   const {
     isPending,
     refetch,
-    data: allUser,
+    data: allUser = [],
   } = useQuery({
     queryKey: ["allUser"],
     queryFn: async () => {

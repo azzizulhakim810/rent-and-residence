@@ -217,11 +217,7 @@ const PropertyDetails = () => {
       .then((data) => setReviews(data));
   }, [propertyId]); */
 
-  const {
-    isPending,
-    refetch: refetchReviews,
-    data: reviews,
-  } = useQuery({
+  const { refetch: refetchReviews, data: reviews } = useQuery({
     queryKey: ["reviews", propertyId],
     queryFn: async () => {
       const res = await axiosSecure.get(
