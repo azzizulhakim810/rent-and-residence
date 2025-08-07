@@ -1,18 +1,18 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import { toast } from "sonner";
 
 const ManageUsersTable = ({ user, i, refetch }) => {
   const axiosSecure = UseAxiosSecure();
-  const [selectedRole, setSelectedRole] = useState("");
+  // const [selectedRole, setSelectedRole] = useState("");
 
   // Destructure Details from Property
   const { _id, name, email, profileImage, role } = user || {};
 
   const handleRoleChange = (e, id) => {
     const updatedRole = e.target.value;
-    setSelectedRole(updatedRole);
+    // setSelectedRole(updatedRole);
 
     axiosSecure
       .patch(`/api/updateUserRole/${id}`, {
@@ -73,7 +73,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
         <select
           className="border-[1px] px-4 py-1 border-C_LightGray/30 rounded focus:border-[1px] focus:outline-0"
           onChange={(e) => handleRoleChange(e, _id)}
-          defaultValue={role}
+          value={role}
         >
           <option value="User">User</option>
           <option value="Agent">Agent</option>

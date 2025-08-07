@@ -11,10 +11,13 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineManageAccounts } from "react-icons/md";
 
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import { AuthContext } from "../../providers/AuthProvider";
+import UseAuth from "../../hooks/UseAuth/UseAuth";
 
 const Dashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id, name, profileImage } = currentUserFromDB;
+  const { signOutUser, loading } = UseAuth();
 
   // Sign Out
   const handleSignOut = () => {
