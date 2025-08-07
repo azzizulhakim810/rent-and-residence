@@ -6,7 +6,7 @@ import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
 
-  // console.log(reviews);
+  console.log(reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -231,7 +231,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
         </nav>
 
         <div className="grid lg:grid-cols-1 grid-cols-1 gap-5 pb-2">
-          {reviews.length !== 0 ? (
+          {reviews?.length !== 0 ? (
             reviews?.map((review) => (
               <TestimonialCard key={review._id} review={review} />
             ))

@@ -14,9 +14,9 @@ import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 import CartSidebar from "../../../components/CartSidebar/CartSidebar";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -453,7 +453,7 @@ const Navbar = () => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-3 ">
+                <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
@@ -476,7 +476,7 @@ const Navbar = () => {
 
                 <button
                   // onClick={() => handleAddToCart(property)}
-                  className="btn absolute bottom-0 w-[320px] flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-2 cursor-pointer border-0"
+                  className="btn absolute bottom-0 w-[360px] flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-2 cursor-pointer border-0"
                 >
                   {/* <LiaCartPlusSolid /> */}
                   Proceed to Checkout

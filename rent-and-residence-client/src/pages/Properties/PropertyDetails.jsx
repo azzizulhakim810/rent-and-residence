@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
@@ -78,7 +79,7 @@ const PropertyDetails = () => {
   const [coordinates, setCoordinates] = useState(null);
 
   const [rating, setRating] = useState(0);
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
 
   const { propertyId } = useParams();
   // console.log(currentUserFromDB);
@@ -125,6 +126,7 @@ const PropertyDetails = () => {
         if (res.ok) {
           toast.success("Successfully submitted review");
           reset();
+          refetchReviews();
           setRating(0);
           window.scrollTo({
             top: 0,
@@ -197,10 +199,6 @@ const PropertyDetails = () => {
   const handleUrl = (url) => {
     if (!url) return "#";
 
-    /*  if (!/^https?:\/\//i.test(url)) {
-      return "https://" + url;
-    } */
-
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
       return "https://" + url;
     }
@@ -213,11 +211,28 @@ const PropertyDetails = () => {
   const formattedTwitterURL = handleUrl(twitterUrl);
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
-  useEffect(() => {
+  /* useEffect(() => {
     fetch(`http://localhost:5123/api/reviews/${propertyId}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, [propertyId]);
+  }, [propertyId]); */
+
+  const {
+    isPending,
+    refetch: refetchReviews,
+    data: reviews,
+  } = useQuery({
+    queryKey: ["reviews", propertyId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `http://localhost:5123/api/reviews/${propertyId}`
+      );
+      return res.data;
+    },
+    enabled: !!propertyId,
+  });
+
+  // console.log(reviews);
 
   // Built Year Date Format
   const yearBuiltTimeStamp = propertyDetails?.yearBuilt;

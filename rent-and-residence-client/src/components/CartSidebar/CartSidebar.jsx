@@ -21,7 +21,7 @@ const CartSidebar = ({ item, handleDeleteItem }) => {
           <img className="w-[50px] rounded" src={propImg} alt="" />
           <span className="w-full flex flex-col gap-1">
             <h4 className="font-Nunito font-[700] text-C_gray text-[15px] leading-6">
-              {title.slice(0, 18) + "..."}
+              {title.slice(0, 24) + "..."}
             </h4>
             <p className=" text-C_purple font-Nunito_Sans font-[600] text-[15px] leading-6">
               {price} €
