@@ -20,7 +20,7 @@ const SocialLogin = () => {
     googleSignIn()
       .then((res) => {
         // toast.success("Signed In Successfully");
-        console.log(res.user);
+        // console.log(res.user);
 
         const { displayName, email, phoneNumber, photoURL, metadata } =
           res.user || {};

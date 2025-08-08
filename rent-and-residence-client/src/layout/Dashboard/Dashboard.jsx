@@ -16,7 +16,7 @@ import UseAuth from "../../hooks/UseAuth/UseAuth";
 
 const Dashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
-  const { _id, name, profileImage } = currentUserFromDB;
+  const { _id, name, profileImage, role } = currentUserFromDB;
   const { signOutUser, loading } = UseAuth();
 
   // Sign Out
@@ -81,37 +81,45 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple hover:rounded-md">
-        <NavLink
-          to="/dashboard/manageUsers"
-          className={({ isActive }) =>
-            isActive
-              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
-              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-          }
-        >
-          <span className="flex items-center gap-4 justify-start">
-            <MdOutlineManageAccounts />
-            Manage Users
-          </span>
-        </NavLink>
-      </li>
+      {role?.toLowerCase() === "admin" ? (
+        <li className="hover:bg-C_purple hover:rounded-md">
+          <NavLink
+            to="/dashboard/manageUsers"
+            className={({ isActive }) =>
+              isActive
+                ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+            }
+          >
+            <span className="flex items-center gap-4 justify-start">
+              <MdOutlineManageAccounts />
+              Manage Users
+            </span>
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
 
-      <li className="hover:bg-C_purple hover:rounded-md">
-        <NavLink
-          to="/dashboard/addNewProperty"
-          className={({ isActive }) =>
-            isActive
-              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
-              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-          }
-        >
-          <span className="flex items-center gap-4 justify-start">
-            <BiMessageSquareAdd />
-            Add New Property
-          </span>
-        </NavLink>
-      </li>
+      {role?.toLowerCase() === "user" ? (
+        ""
+      ) : (
+        <li className="hover:bg-C_purple hover:rounded-md">
+          <NavLink
+            to="/dashboard/addNewProperty"
+            className={({ isActive }) =>
+              isActive
+                ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+            }
+          >
+            <span className="flex items-center gap-4 justify-start">
+              <BiMessageSquareAdd />
+              Add New Property
+            </span>
+          </NavLink>
+        </li>
+      )}
 
       <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink

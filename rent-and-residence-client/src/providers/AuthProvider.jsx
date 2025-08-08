@@ -63,7 +63,13 @@ const AuthProvider = ({ children }) => {
         console.log("New DisplayName");
       }); */
 
-      console.log(auth.currentUser);
+      if (currentUser) {
+        console.log("Get the user");
+      } else {
+        console.log("nichts ist hier");
+      }
+
+      console.log(currentUser);
       setLoading(false);
     });
     return () => {

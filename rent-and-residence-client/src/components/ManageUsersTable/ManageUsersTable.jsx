@@ -20,7 +20,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
       })
       .then((res) => {
         console.log(res.data);
-        toast.success("Role Updated");
+        toast.success(`${name} is now ${updatedRole}`);
       });
   };
 
@@ -73,7 +73,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
         <select
           className="border-[1px] px-4 py-1 border-C_LightGray/30 rounded focus:border-[1px] focus:outline-0"
           onChange={(e) => handleRoleChange(e, _id)}
-          value={role}
+          defaultValue={role}
         >
           <option value="User">User</option>
           <option value="Agent">Agent</option>
