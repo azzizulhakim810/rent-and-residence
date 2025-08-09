@@ -57,6 +57,20 @@ async function run() {
       .db("wp_residence_DB")
       .collection("blogsCollection");
 
+    app.post("/jwt", async (req, res) => {
+      const user = req.body;
+
+      // console.log(user);
+
+      const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "1h",
+      });
+
+      // console.log(token);
+
+      res.send(token);
+    });
+
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
       const result = await propertyCollection.find().toArray();

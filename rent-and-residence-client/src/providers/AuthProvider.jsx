@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
@@ -19,6 +20,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   // Email-Password Sign Up
   const createUser = (email, password) => {
@@ -64,7 +66,12 @@ const AuthProvider = ({ children }) => {
       }); */
 
       if (currentUser) {
-        console.log("Get the user");
+        const userEmail = currentUser.email;
+        console.log("Get the user", currentUser.email);
+
+        axiosPublic.post("/jwt", { userEmail: userEmail }).then((res) => {
+          console.log(res.data);
+        });
       } else {
         console.log("nichts ist hier");
       }
@@ -75,7 +82,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
