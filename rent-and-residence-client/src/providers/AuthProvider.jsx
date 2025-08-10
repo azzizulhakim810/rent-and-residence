@@ -66,14 +66,19 @@ const AuthProvider = ({ children }) => {
       }); */
 
       if (currentUser) {
-        const userEmail = currentUser.email;
+        const userEmail = { email: currentUser.email };
         console.log("Get the user", currentUser.email);
 
-        axiosPublic.post("/jwt", { userEmail: userEmail }).then((res) => {
+        axiosPublic.post("/jwt", userEmail).then((res) => {
           console.log(res.data);
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
         });
       } else {
         console.log("nichts ist hier");
+
+        localStorage.removeItem("access-token");
       }
 
       console.log(currentUser);

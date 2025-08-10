@@ -57,6 +57,7 @@ async function run() {
       .db("wp_residence_DB")
       .collection("blogsCollection");
 
+    // JWT Related API
     app.post("/jwt", async (req, res) => {
       const user = req.body;
 
@@ -68,7 +69,7 @@ async function run() {
 
       // console.log(token);
 
-      res.send(token);
+      res.send({ token });
     });
 
     // Get all the properties
