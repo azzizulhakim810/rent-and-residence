@@ -22,11 +22,7 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["allUser"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/users", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+      const res = await axiosSecure.get("/api/users");
       return res.data;
     },
   });
