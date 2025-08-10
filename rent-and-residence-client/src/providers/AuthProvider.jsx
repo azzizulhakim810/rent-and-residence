@@ -69,14 +69,16 @@ const AuthProvider = ({ children }) => {
         const userEmail = { email: currentUser.email };
         console.log("Get the user", currentUser.email);
 
+        // Generate, Store & Remove Token from Local Storage
         axiosPublic.post("/jwt", userEmail).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
+
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
           }
         });
       } else {
-        console.log("nichts ist hier");
+        // console.log("nichts ist hier");
 
         localStorage.removeItem("access-token");
       }

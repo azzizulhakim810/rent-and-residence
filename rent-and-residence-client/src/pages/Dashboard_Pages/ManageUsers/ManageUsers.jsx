@@ -12,8 +12,6 @@ const ManageUsers = () => {
   const [currentUserFromDB] = useSignedInUser();
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;
-  // const [allUsers, setAllUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
   const axiosSecure = UseAxiosSecure();
 
@@ -24,7 +22,11 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["allUser"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/users");
+      const res = await axiosSecure.get("/api/users", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return res.data;
     },
   });
