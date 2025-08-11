@@ -12,7 +12,12 @@ const imagekit = require("./configs/imageKit");
 const port = process.env.PORT || 5000;
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(express.json()); // for application/json
 app.use(express.urlencoded({ extended: true })); // for application/x-www-form-urlencoded
 
@@ -75,11 +80,9 @@ async function run() {
 
       const token = authHeader && authHeader.split(" ")[1];
 
-      if (!token) {
-        return res
-          .status(401)
-          .json({ error: "Access denied. No token provided." });
-      }
+      // console.log(token);
+
+      if (!token) return res.status(401).json({ message: "No token provided" });
 
       /*  if (!req.headers.authorization || req.headers.authorization === null) {
         return res.status(401).send({ message: "forbidden access" });
@@ -122,6 +125,7 @@ async function run() {
     // Get all the users
     app.get("/api/users", verifyToken, async (req, res) => {
       // console.log(req.headers);
+
       const result = await userCollection.find().toArray();
       res.send(result);
     });

@@ -4,6 +4,8 @@ import UseAuth from "../UseAuth/UseAuth";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5123",
+  // headers: { "Content-Type": "application/json" },
+  // withCredentials: true,
 });
 
 const UseAxiosSecure = () => {
@@ -17,7 +19,11 @@ const UseAxiosSecure = () => {
       console.log("request stopped by interceptors", token);
       // console.log(token);
 
-      config.headers.authorization = `Bearer ${token}`;
+      if (token) {
+        config.headers.authorization = `Bearer ${token}`;
+      } else {
+        delete config.headers.authorization;
+      }
       return config;
     },
     function (err) {
@@ -32,20 +38,13 @@ const UseAxiosSecure = () => {
       return response;
     },
     async (err) => {
-      const status = err.res.status;
-      console.log("Status error", status);
+      const status = err.response?.status;
+      console.log("Status error", err.response);
 
       // For 401 & 403 user to logOut
 
       if (status == 401 || status == 403) {
-        await signOutUser()
-          .then(() => {
-            console.log("Sign Out Successfully");
-            // loading(false);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        await signOutUser();
 
         navigate("/");
       }

@@ -11,6 +11,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
+import { queryClient } from "../main";
 
 export const AuthContext = createContext(null);
 
@@ -80,7 +81,14 @@ const AuthProvider = ({ children }) => {
       } else {
         // console.log("nichts ist hier");
 
+        // 1. Remove token from storage
         localStorage.removeItem("access-token");
+
+        // 2. Cancel all active queries
+        queryClient.cancelQueries();
+
+        // 3. Remove all query cache
+        queryClient.clear();
       }
 
       console.log(currentUser);

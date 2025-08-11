@@ -16,7 +16,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes/Routes";
 import AuthProvider from "./providers/AuthProvider";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
