@@ -70,19 +70,29 @@ async function run() {
 
     // middlewares
     const verifyToken = (req, res, next) => {
-      console.log("Inside verify Token", req.headers.authorization);
+      const authHeader = req.headers["authorization"];
+      console.log("Inside verify Token", authHeader);
 
-      if (!req.headers.authorization) {
-        return res.status(401).send({ message: "forbidden access" });
+      const token = authHeader && authHeader.split(" ")[1];
+
+      if (!token) {
+        return res
+          .status(401)
+          .json({ error: "Access denied. No token provided." });
       }
 
-      const token = req.headers.authorization.split(" ")[1];
-
-      // console.log(token);
+      /*  if (!req.headers.authorization || req.headers.authorization === null) {
+        return res.status(401).send({ message: "forbidden access" });
+        console.log("No token");
+      } else {
+        console.log("Has token");
+      }
+ */
+      // const token = req.headers.authorization.split(" ")[1];
 
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
-          return res.status(401).send({ message: "forbidden access" });
+          return res.status(403).send({ message: "forbidden access" });
         }
 
         req.decoded = decoded;
