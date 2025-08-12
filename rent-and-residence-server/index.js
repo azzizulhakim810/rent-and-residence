@@ -84,15 +84,6 @@ async function run() {
 
       if (!token) return res.status(401).json({ message: "No token provided" });
 
-      /*  if (!req.headers.authorization || req.headers.authorization === null) {
-        return res.status(401).send({ message: "forbidden access" });
-        console.log("No token");
-      } else {
-        console.log("Has token");
-      }
- */
-      // const token = req.headers.authorization.split(" ")[1];
-
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
           return res.status(403).send({ message: "forbidden access" });
@@ -103,6 +94,13 @@ async function run() {
         next();
       });
     };
+
+    // Check what is user's role
+    app.get("/api/role/:email", verifyToken, async (req, res) => {
+      const email = req.params.email;
+
+      console.log(email, req.decoded.email);
+    });
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {

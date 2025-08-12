@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         const userEmail = { email: currentUser.email };
-        console.log("Get the user", currentUser.email);
+        // console.log("Get the user", currentUser.email);
 
         // Generate, Store & Remove Token from Local Storage
         axiosPublic.post("/jwt", userEmail).then((res) => {

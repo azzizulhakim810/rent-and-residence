@@ -13,7 +13,7 @@ const UseAxiosSecure = () => {
   const navigate = useNavigate();
   // Request interceptor to add authorization header for every secure call to api
   axiosSecure.interceptors.request.use(
-    function (config) {
+    (config) => {
       // Do something before request is sent
       const token = localStorage.getItem("access-token");
       console.log("request stopped by interceptors", token);
@@ -34,19 +34,20 @@ const UseAxiosSecure = () => {
 
   // Response interceptor (Intercepts 401 & 403 status)
   axiosSecure.interceptors.response.use(
-    function (response) {
+    (response) => {
       return response;
     },
     async (err) => {
       const status = err.response?.status;
-      console.log("Status error", err.response);
+      console.log("Status error", status);
 
       // For 401 & 403 user to logOut
 
-      if (status == 401 || status == 403) {
+      if (status === 401 || status === 403) {
         await signOutUser();
 
         navigate("/");
+        document.getElementById("signUpAndInPopUp").showModal();
       }
       return Promise.reject(err);
     }
