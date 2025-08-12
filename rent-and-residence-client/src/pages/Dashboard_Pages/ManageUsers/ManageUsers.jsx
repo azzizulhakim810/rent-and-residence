@@ -25,9 +25,9 @@ const ManageUsers = () => {
       const res = await axiosSecure.get("/api/users");
       return res.data;
     },
-    staleTime: 0, // no stale data
-    cacheTime: 0, // remove data when unused
-    retry: false,
+    // staleTime: 0, // no stale data
+    // cacheTime: 0, // remove data when unused
+    // retry: false,
   });
 
   // console.log(allUser);

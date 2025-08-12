@@ -11,7 +11,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
-import { queryClient } from "../main";
+// import { queryClient } from "../main";
 
 export const AuthContext = createContext(null);
 
@@ -60,11 +60,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      /* updateProfile(auth.currentUser, {
-        displayName: "New User",
-      }).then(() => {
-        console.log("New DisplayName");
-      }); */
 
       if (currentUser) {
         const userEmail = { email: currentUser.email };
@@ -85,10 +80,10 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access-token");
 
         // 2. Cancel all active queries
-        queryClient.cancelQueries();
+        // queryClient.cancelQueries();
 
         // 3. Remove all query cache
-        queryClient.clear();
+        // queryClient.clear();
       }
 
       console.log(currentUser);

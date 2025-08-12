@@ -457,9 +457,11 @@ const Navbar = () => {
                   {/* Sidebar content here */}
                   <li>
                     {cart.map((item) => (
-                      <div className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none">
+                      <div
+                        key={item._id}
+                        className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
+                      >
                         <CartSidebar
-                          key={item._id}
                           item={item}
                           handleDeleteItem={handleDeleteItem}
                         />

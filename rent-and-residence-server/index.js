@@ -82,7 +82,7 @@ async function run() {
 
       // console.log(token);
 
-      if (!token) return res.status(401).json({ message: "No token provided" });
+      if (!token) return res.status(401).send({ message: "No token provided" });
 
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
