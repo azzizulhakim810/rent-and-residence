@@ -13,11 +13,16 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
+import useRole from "../../hooks/useRole/useRole";
 
 const Dashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
-  const { _id, name, profileImage, role } = currentUserFromDB;
+  const { _id, name, profileImage } = currentUserFromDB;
   const { signOutUser, loading } = UseAuth();
+
+  const [isRole] = useRole();
+
+  // console.log(isRole);
 
   // Sign Out
   const handleSignOut = () => {
@@ -81,7 +86,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      {role?.toLowerCase() === "admin" ? (
+      {isRole?.toLowerCase() === "admin" ? (
         <li className="hover:bg-C_purple hover:rounded-md">
           <NavLink
             to="/dashboard/manageUsers"
@@ -101,7 +106,7 @@ const Dashboard = () => {
         ""
       )}
 
-      {role?.toLowerCase() === "user" ? (
+      {isRole?.toLowerCase() === "user" ? (
         ""
       ) : (
         <li className="hover:bg-C_purple hover:rounded-md">

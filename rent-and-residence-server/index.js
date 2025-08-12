@@ -96,10 +96,30 @@ async function run() {
     };
 
     // Check what is user's role
-    app.get("/api/role/:email", verifyToken, async (req, res) => {
+    app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
 
-      console.log(email, req.decoded.email);
+      // console.log(email, req.decoded.email);
+
+      if (email !== req.decoded.email) {
+        return res.status(403).send({ message: "unauthorized access" });
+      }
+
+      const query = { email: email };
+
+      const user = await userCollection.findOne(query);
+
+      // console.log(user);
+
+      let role;
+
+      if (user?.role === "Admin") {
+        res.send({ role: "Admin" });
+      } else if (user?.role === "Agent") {
+        res.send({ role: "Agent" });
+      } else {
+        res.send({ role: "User" });
+      }
     });
 
     // Get all the properties

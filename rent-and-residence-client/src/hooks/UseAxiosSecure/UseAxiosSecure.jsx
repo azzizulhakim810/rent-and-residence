@@ -16,7 +16,7 @@ const UseAxiosSecure = () => {
     (config) => {
       // Do something before request is sent
       const token = localStorage.getItem("access-token");
-      console.log("request stopped by interceptors", token);
+      // console.log("request stopped by interceptors", token);
       // console.log(token);
 
       if (token) {
@@ -39,7 +39,7 @@ const UseAxiosSecure = () => {
     },
     async (err) => {
       const status = err.response?.status;
-      console.log("Status error", status);
+      // console.log("Status error", status);
 
       // For 401 & 403 user to logOut
 
