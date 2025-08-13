@@ -20,7 +20,8 @@ import PropertyDetails from "../pages/Properties/PropertyDetails";
 import PrivateRoute from "./PrivateRoute";
 import Comparison from "../pages/Comparison/Comparison";
 import ManageUsers from "../pages/Dashboard_Pages/ManageUsers/ManageUsers";
-import AdminRoute from "./adminRoute";
+import AdminRoute from "./AdminRoute";
+import AllProperties from "../pages/Dashboard_Pages/AllProperties/AllProperties";
 
 export const router = createBrowserRouter([
   {
@@ -113,13 +114,23 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/allProperties",
+        element: (
+          // <PrivateRoute>
+          <AdminRoute>
+            <AllProperties />
+          </AdminRoute>
+          // </PrivateRoute>
+        ),
+      },
+      {
         path: "/dashboard/manageUsers",
         element: (
-          <PrivateRoute>
-            {/* <AdminRoute> */}
+          // <PrivateRoute>
+          <AdminRoute>
             <ManageUsers />
-            {/* </AdminRoute> */}
-          </PrivateRoute>
+          </AdminRoute>
+          // </PrivateRoute>
         ),
       },
       {

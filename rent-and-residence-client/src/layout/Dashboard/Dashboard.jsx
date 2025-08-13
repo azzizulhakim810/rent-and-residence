@@ -70,21 +70,25 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple hover:rounded-md">
-        <NavLink
-          to="/dashboard/myPropertyList"
-          className={({ isActive }) =>
-            isActive
-              ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
-              : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-          }
-        >
-          <span className="flex items-center gap-4 justify-start">
-            <GoHome />
-            My Property List
-          </span>
-        </NavLink>
-      </li>
+      {isRole?.toLowerCase() === "admin" ? (
+        <li className="hover:bg-C_purple hover:rounded-md">
+          <NavLink
+            to="/dashboard/allProperties"
+            className={({ isActive }) =>
+              isActive
+                ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+            }
+          >
+            <span className="flex items-center gap-4 justify-start">
+              <GoHome />
+              All Properties
+            </span>
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
 
       {isRole?.toLowerCase() === "admin" ? (
         <li className="hover:bg-C_purple hover:rounded-md">
@@ -106,9 +110,27 @@ const Dashboard = () => {
         ""
       )}
 
-      {isRole?.toLowerCase() === "user" ? (
-        ""
+      {isRole?.toLowerCase() === "agent" ? (
+        <li className="hover:bg-C_purple hover:rounded-md">
+          <NavLink
+            to="/dashboard/myPropertyList"
+            className={({ isActive }) =>
+              isActive
+                ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+            }
+          >
+            <span className="flex items-center gap-4 justify-start">
+              <GoHome />
+              My Property List
+            </span>
+          </NavLink>
+        </li>
       ) : (
+        ""
+      )}
+
+      {isRole?.toLowerCase() === "agent" ? (
         <li className="hover:bg-C_purple hover:rounded-md">
           <NavLink
             to="/dashboard/addNewProperty"
@@ -124,6 +146,8 @@ const Dashboard = () => {
             </span>
           </NavLink>
         </li>
+      ) : (
+        ""
       )}
 
       <li className="hover:bg-C_purple hover:rounded-md">

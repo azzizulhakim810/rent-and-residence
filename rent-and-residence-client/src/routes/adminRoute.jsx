@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import useSignedInUser from "../hooks/useSignedInUser/useSignedInUser";
+// import { useContext, useEffect } from "react";
+import { useLocation, Navigate } from "react-router-dom";
+// import useSignedInUser from "../hooks/useSignedInUser/useSignedInUser";
 import { AuthContext } from "../providers/AuthProvider";
 import UseAuth from "../hooks/UseAuth/UseAuth";
 import useRole from "../hooks/useRole/useRole";
@@ -26,7 +26,7 @@ const AdminRoute = ({ children }) => {
   }
   // If there is no user logged in
   return (
-    <Navigate to="/" state={{ from: location, showModal: true }} replace />
+    <Navigate to="/" state={{ from: location, showModal: false }} replace />
   );
 };
 

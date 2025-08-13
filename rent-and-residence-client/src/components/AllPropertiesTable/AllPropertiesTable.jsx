@@ -1,10 +1,34 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const MyPropertyTable = ({ property }) => {
-  // Destructure Details from Property
-  const { _id, title, price, images, address, category, propertyStatus } =
-    property || {};
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+const AllPropertiesTable = ({ property, refetch }) => {
+  const [owner, setOwner] = useState();
+  const axiosSecure = UseAxiosSecure();
 
-  console.log(property);
+  // Destructure Details from Property
+  const {
+    _id,
+    title,
+    price,
+    images,
+    address,
+    category,
+    propertyStatus,
+    ownerId,
+  } = property || {};
+
+  useEffect(() => {
+    axiosSecure.get(`/api/users/${ownerId}`).then((res) => setOwner(res.data));
+  }, [axiosSecure, ownerId]);
+
+  // Destructure Details from Property
+  const {
+    // _id,
+    name,
+    profileImage,
+  } = owner || {};
+
+  // console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
       <td>
@@ -29,7 +53,7 @@ const MyPropertyTable = ({ property }) => {
           </div>
         </div>
       </td>
-      <td className="capitalize text-C_LightGray/90">{category}</td>
+      <td className="capitalize text-C_LightGray/90">{name}</td>
       <td className="capitalize text-C_LightGray/90">{propertyStatus}</td>
 
       <td className="text-C_LightGray/90">Unpaid</td>
@@ -45,4 +69,4 @@ const MyPropertyTable = ({ property }) => {
   );
 };
 
-export default MyPropertyTable;
+export default AllPropertiesTable;
