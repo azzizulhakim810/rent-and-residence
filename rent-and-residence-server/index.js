@@ -76,7 +76,7 @@ async function run() {
     // middlewares
     const verifyToken = (req, res, next) => {
       const authHeader = req.headers["authorization"];
-      console.log("Inside verify Token", authHeader);
+      // console.log("Inside verify Token", authHeader);
 
       const token = authHeader && authHeader.split(" ")[1];
 
@@ -95,6 +95,24 @@ async function run() {
       });
     };
 
+    // Verify Admin whether he is Admin or not. If not then don't let him Admin controlled info
+    const verifyAdmin = async (req, res, next) => {
+      const email = req.decoded.email;
+      // console.log("Verify Admin Email", email);
+
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      // console.log(user);
+
+      const isAdmin = user?.role === "Admin";
+
+      if (!isAdmin) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+
+      next();
+    };
+
     // Check what is user's role
     app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
@@ -102,7 +120,7 @@ async function run() {
       // console.log(email, req.decoded.email);
 
       if (email !== req.decoded.email) {
-        return res.status(403).send({ message: "unauthorized access" });
+        return res.status(403).send({ message: "forbidden access" });
       }
 
       const query = { email: email };
@@ -141,7 +159,7 @@ async function run() {
     });
 
     // Get all the users
-    app.get("/api/users", verifyToken, async (req, res) => {
+    app.get("/api/users", verifyToken, verifyAdmin, async (req, res) => {
       // console.log(req.headers);
 
       const result = await userCollection.find().toArray();
