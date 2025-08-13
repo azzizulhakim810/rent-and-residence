@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+// import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
 import AllPropertiesTable from "../../../components/AllPropertiesTable/AllPropertiesTable";
 

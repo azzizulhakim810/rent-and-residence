@@ -6,16 +6,8 @@ const AllPropertiesTable = ({ property, refetch }) => {
   const axiosSecure = UseAxiosSecure();
 
   // Destructure Details from Property
-  const {
-    _id,
-    title,
-    price,
-    images,
-    address,
-    category,
-    propertyStatus,
-    ownerId,
-  } = property || {};
+  const { _id, title, price, images, address, propertyStatus, ownerId } =
+    property || {};
 
   useEffect(() => {
     axiosSecure.get(`/api/users/${ownerId}`).then((res) => setOwner(res.data));
@@ -25,7 +17,7 @@ const AllPropertiesTable = ({ property, refetch }) => {
   const {
     // _id,
     name,
-    profileImage,
+    // profileImage,
   } = owner || {};
 
   // console.log(property);
