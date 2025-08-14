@@ -17,7 +17,7 @@ const TestimonialCard = ({ review }) => {
       .then((res) => res.json())
       .then((data) => setUser(data)); */
 
-    axiosPublic.get(`http://localhost:5123/api/users/${userId}`).then((res) => {
+    axiosPublic.get(`/api/users/${userId}`).then((res) => {
       // console.log(res.data);
       setUser(res.data);
     });

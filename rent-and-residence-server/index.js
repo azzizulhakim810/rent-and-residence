@@ -117,7 +117,7 @@ async function run() {
     app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
 
-      // console.log(email, req.decoded.email);
+      console.log(email, req.decoded.email);
 
       if (email !== req.decoded.email) {
         return res.status(403).send({ message: "forbidden access" });

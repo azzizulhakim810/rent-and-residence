@@ -6,6 +6,8 @@ import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { BsBuilding, BsPerson } from "react-icons/bs";
+import { MdOutlineManageAccounts } from "react-icons/md";
+
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
@@ -17,19 +19,23 @@ import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+// import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
   const { user, signOutUser, loading } = UseAuth();
   // console.log(user);
-  const [currentUserFromDB] = useSignedInUser();
-  const { _id, profileImage } = currentUserFromDB;
+  const [{ _id, profileImage, role }] = useSignedInUser();
+  // const { _id, profileImage, role } = currentUserFromDB;
+  console.log(role);
 
   const axiosSecure = UseAxiosSecure();
 
   // Load the cart items from useCart Hook
   const [cart, refetch] = UseCart();
+  // const [isRole, isRolePending] = useRole();
+  // console.log(isRole);
 
   // console.log(cart);
 
@@ -276,37 +282,81 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
-        <NavLink
-          to="/dashboard/myPropertyList"
-          className={({ isActive }) =>
-            isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-          }
-        >
-          <span className="flex items-center gap-2 justify-start">
-            <GoHome />
-            My Property List
-          </span>
-        </NavLink>
-      </li>
+      {role?.toLowerCase() === "admin" ? (
+        <>
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/allProperties"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <GoHome />
+                All Properties
+              </span>
+            </NavLink>
+          </li>
 
-      <li className="hover:bg-C_purple">
-        <NavLink
-          to="/dashboard/addNewProperty"
-          className={({ isActive }) =>
-            isActive
-              ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-          }
-        >
-          <span className="flex items-center gap-2 justify-start">
-            <BiMessageSquareAdd />
-            Add New Property
-          </span>
-        </NavLink>
-      </li>
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/manageUsers"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <MdOutlineManageAccounts />
+                Manage Users
+              </span>
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        ""
+      )}
+
+      {role?.toLowerCase() === "agent" ? (
+        <>
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/myPropertyList"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <GoHome />
+                My Property List
+              </span>
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/addNewProperty"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <BiMessageSquareAdd />
+                Add New Property
+              </span>
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        ""
+      )}
 
       <li className="hover:bg-C_purple">
         <NavLink

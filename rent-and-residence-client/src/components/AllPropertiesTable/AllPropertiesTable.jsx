@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 const AllPropertiesTable = ({ property, refetch }) => {
@@ -9,16 +10,29 @@ const AllPropertiesTable = ({ property, refetch }) => {
   const { _id, title, price, images, address, propertyStatus, ownerId } =
     property || {};
 
-  useEffect(() => {
+  const {
+    isPending,
+
+    data: ownerInfo,
+  } = useQuery({
+    queryKey: ["ownerInfo", ownerId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/api/users/${ownerId}`);
+      return res.data;
+    },
+  });
+
+  console.log(ownerInfo);
+  /*   useEffect(() => {
     axiosSecure.get(`/api/users/${ownerId}`).then((res) => setOwner(res.data));
-  }, [axiosSecure, ownerId]);
+  }, [axiosSecure, ownerId]); */
 
   // Destructure Details from Property
   const {
     // _id,
     name,
     // profileImage,
-  } = owner || {};
+  } = ownerInfo || {};
 
   // console.log(property);
   return (
