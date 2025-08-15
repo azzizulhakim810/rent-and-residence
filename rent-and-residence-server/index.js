@@ -184,7 +184,7 @@ async function run() {
     });
 
     // Get each Agent Owned Property
-    app.get("/api/agentOwnedProperty/:id", async (req, res) => {
+    app.get("/api/agentOwnedProperty/:id", verifyToken, async (req, res) => {
       const id = req.params.id;
       console.log(id);
 
@@ -201,7 +201,7 @@ async function run() {
     });
 
     // Get all the saved properties
-    app.get("/api/savedProperties", async (req, res) => {
+    app.get("/api/savedProperties", verifyToken, async (req, res) => {
       const result = await favouriteCollection.find().toArray();
       res.send(result);
     });
@@ -223,7 +223,7 @@ async function run() {
     });
 
     // Fetch specific property reviews
-    app.get("/api/reviews/:propertyId", async (req, res) => {
+    app.get("/api/reviews/:propertyId", verifyToken, async (req, res) => {
       const propertyId = req.params.propertyId;
       // console.log(propertyId);
 
@@ -235,7 +235,7 @@ async function run() {
     });
 
     // Get all the cart items of logged in user
-    app.get("/api/carts", async (req, res) => {
+    app.get("/api/carts", verifyToken, async (req, res) => {
       const query = { userEmail: req.query.userEmail };
       // console.log(req.query.userEmail);
 
@@ -282,6 +282,7 @@ async function run() {
     app.post(
       "/api/properties/:id",
       upload.array("images"),
+      verifyToken,
       async (req, res) => {
         const property = req.body;
         const images = req.files;
@@ -422,7 +423,7 @@ async function run() {
     );
 
     // Add a review
-    app.post("/api/reviews", upload.none(), async (req, res) => {
+    app.post("/api/reviews", verifyToken, upload.none(), async (req, res) => {
       const reviewText = req.body;
 
       // console.log(req.body);
@@ -433,7 +434,7 @@ async function run() {
     });
 
     // Add to Cart
-    app.post("/api/carts", async (req, res) => {
+    app.post("/api/carts", verifyToken, async (req, res) => {
       const userEmail = req.query.userEmail;
       const query = { userEmail: userEmail };
       const cartItem = req.body;
@@ -458,7 +459,7 @@ async function run() {
     });
 
     // Update a property Info
-    app.patch("/api/properties/:id", async (req, res) => {
+    app.patch("/api/properties/:id", verifyToken, async (req, res) => {
       const id = req.params.id;
 
       const updatedText = req.body;
@@ -488,30 +489,37 @@ async function run() {
       res.send(result);
     });
 
-    app.patch("/api/updateUserRole/:id", async (req, res) => {
-      const userId = req.params.id;
-      const newRole = req.body.role;
+    // update an user to agent/admin/user
+    app.patch(
+      "/api/updateUserRole/:id",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const userId = req.params.id;
+        const newRole = req.body.role;
 
-      // console.log(newRole);
-      const filter = { _id: new ObjectId(userId) };
+        // console.log(newRole);
+        const filter = { _id: new ObjectId(userId) };
 
-      const updateRole = {
-        $set: {
-          role: newRole,
-        },
-      };
+        const updateRole = {
+          $set: {
+            role: newRole,
+          },
+        };
 
-      // console.log(userId, newRole);
-      // console.log(userId);
+        // console.log(userId, newRole);
+        // console.log(userId);
 
-      const result = await userCollection.updateOne(filter, updateRole);
+        const result = await userCollection.updateOne(filter, updateRole);
 
-      res.send(result);
-    });
+        res.send(result);
+      }
+    );
 
     // Update an user Info
     app.put(
       "/api/user/:id",
+      verifyToken,
       // identify the image by it's name
       upload.single("profileImage"),
       async (req, res) => {
@@ -577,18 +585,23 @@ async function run() {
     );
 
     // Delete a Property
-    app.delete("/api/properties/:id", async (req, res) => {
-      const id = req.params.id;
+    app.delete(
+      "/api/properties/:id",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const id = req.params.id;
 
-      const query = { _id: new ObjectId(id) };
+        const query = { _id: new ObjectId(id) };
 
-      const result = await propertyCollection.deleteOne(query);
+        const result = await propertyCollection.deleteOne(query);
 
-      res.send(result);
-    });
+        res.send(result);
+      }
+    );
 
     // Delete an User
-    app.delete("/api/users/:id", async (req, res) => {
+    app.delete("/api/users/:id", verifyToken, verifyAdmin, async (req, res) => {
       const id = req.params.id;
       // console.log(id);
 
@@ -600,7 +613,7 @@ async function run() {
     });
 
     // Remove the property from cart
-    app.delete("/api/carts", async (req, res) => {
+    app.delete("/api/carts", verifyToken, async (req, res) => {
       const deletedPropertyId = req.query.propertyId;
 
       const userEmail = req.query.userEmail;

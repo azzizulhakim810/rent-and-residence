@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import TestimonialCard from "../../../components/TestimonialCard/TestimonialCard";
+import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    fetch("http://localhost:5123/api/reviews")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
-
-  // console.log(reviews);
+    axiosPublic
+      .get("http://localhost:5123/api/reviews")
+      .then((res) => setReviews(res.data));
+  }, [axiosPublic]);
 
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
@@ -24,7 +24,7 @@ const Testimonials = () => {
 
         {/* First Row  */}
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-5">
-          {reviews?.map((review) => (
+          {reviews.map((review) => (
             <TestimonialCard key={review._id} review={review} />
           ))}
         </div>

@@ -28,10 +28,6 @@ const PropertyCard = ({ property }) => {
 
   // Fetch the owner of each Property
   useEffect(() => {
-    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
-      .then((res) => res.json())
-      .then((data) => setPropertyOwner(data)); */
-
     axiosPublic
       .get(`http://localhost:5123/api/users/${ownerId}`)
       .then((res) => {

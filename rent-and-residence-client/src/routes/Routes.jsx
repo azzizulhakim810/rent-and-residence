@@ -22,6 +22,7 @@ import Comparison from "../pages/Comparison/Comparison";
 import ManageUsers from "../pages/Dashboard_Pages/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AllProperties from "../pages/Dashboard_Pages/AllProperties/AllProperties";
+import AgentRoute from "./AgentRoute";
 
 export const router = createBrowserRouter([
   {
@@ -126,19 +127,17 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/manageUsers",
         element: (
-          // <PrivateRoute>
           <AdminRoute>
             <ManageUsers />
           </AdminRoute>
-          // </PrivateRoute>
         ),
       },
       {
         path: "/dashboard/addNewProperty",
         element: (
-          <PrivateRoute>
+          <AgentRoute>
             <AddNewProperty />
-          </PrivateRoute>
+          </AgentRoute>
         ),
       },
       {
