@@ -9,10 +9,13 @@ import { IoIosCloudUpload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const AddNewProperty = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
+
+  const axiosSecure = UseAxiosSecure();
 
   // const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
@@ -132,20 +135,32 @@ const AddNewProperty = () => {
 
     console.log(Object.fromEntries(formData.entries()));
 
-    fetch(`http://localhost:5123/api/properties/${_id}`, {
+    axiosSecure
+      .post(`http://localhost:5123/api/properties/${_id}`, formData)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.insertedId) {
+          reset();
+          toast.success("Profile Updated Successfully");
+          navigate("/properties");
+        }
+      })
+      .catch((error) => console.log("Error in fetching", error));
+
+    /* fetch(`http://localhost:5123/api/properties/${_id}`, {
       method: "POST",
       body: formData,
     })
       .then((res) => res)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.ok) {
           reset();
           toast.success("Profile Updated Successfully");
           navigate("/properties");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("Error in fetching", error)); */
   };
 
   const getImgsData = (e) => {

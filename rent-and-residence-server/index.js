@@ -113,6 +113,24 @@ async function run() {
       next();
     };
 
+    // Verify Admin whether he is Admin or not. If not then don't let him Admin controlled info
+    const verifyAgent = async (req, res, next) => {
+      const email = req.decoded.email;
+      // console.log("Verify Agent Email", email);
+
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      // console.log(user);
+
+      const isAdmin = user?.role === "Agent";
+
+      if (!isAdmin) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      // console.log("Verify Agent Email", email);
+      next();
+    };
+
     // Check what is user's role
     app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
@@ -235,7 +253,7 @@ async function run() {
     });
 
     // Get all the cart items of logged in user
-    app.get("/api/carts", verifyToken, async (req, res) => {
+    app.get("/api/carts", async (req, res) => {
       const query = { userEmail: req.query.userEmail };
       // console.log(req.query.userEmail);
 
@@ -283,10 +301,13 @@ async function run() {
       "/api/properties/:id",
       upload.array("images"),
       verifyToken,
+      verifyAgent,
       async (req, res) => {
         const property = req.body;
         const images = req.files;
         const id = req.params.id;
+
+        // console.log(property);
 
         const {
           title,

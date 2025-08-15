@@ -48,10 +48,11 @@ const MyPropertyList = () => {
                   <tr className="font-Nunito text-black text-[16px]">
                     <th>Title</th>
                     <th>Category</th>
-                    <th>Status</th>
+
                     <th>Pay Status</th>
                     <th>Price</th>
-                    <th>Action</th>
+                    <th>Approval</th>
+                    <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>

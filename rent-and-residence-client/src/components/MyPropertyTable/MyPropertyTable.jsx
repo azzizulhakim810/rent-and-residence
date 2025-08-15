@@ -30,14 +30,14 @@ const MyPropertyTable = ({ property }) => {
         </div>
       </td>
       <td className="capitalize text-C_LightGray/90">{category}</td>
-      <td className="capitalize text-C_LightGray/90">{propertyStatus}</td>
 
       <td className="text-C_LightGray/90">Unpaid</td>
       <td className="text-C_LightGray/90">{price}€</td>
+      <td className="capitalize text-C_LightGray/90">{propertyStatus}</td>
       <td>
         <Link to={`/propertyDetails/${_id}`}>
           <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
-            Details
+            View
           </button>
         </Link>
       </td>
