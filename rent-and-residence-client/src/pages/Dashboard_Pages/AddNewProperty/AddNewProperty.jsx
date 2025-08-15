@@ -107,6 +107,7 @@ const AddNewProperty = () => {
     formData.append("roofing", data.roofing);
     formData.append("ownerNote", data.ownerNote);
     formData.append("paymentStatus", "Unpaid");
+    formData.append("approval", "Pending");
 
     formData.append("equippedKitchen", data.equippedKitchen);
     formData.append("gym", data.gym);

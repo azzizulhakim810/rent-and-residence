@@ -314,6 +314,7 @@ async function run() {
           description,
           price,
           propertyStatus,
+          approval,
           listedIn,
           afterPriceLabel,
           category,
@@ -382,6 +383,7 @@ async function run() {
           afterPriceLabel,
           category,
           propertyStatus,
+          approval,
           listedIn,
           address: {
             street: address,

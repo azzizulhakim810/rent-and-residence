@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const MyPropertyList = () => {
   const [currentUserFromDB] = useSignedInUser();
@@ -49,10 +49,10 @@ const MyPropertyList = () => {
                     <th>Title</th>
                     <th>Category</th>
 
-                    <th>Pay Status</th>
-                    <th>Price</th>
-                    <th>Approval</th>
-                    <th>Details</th>
+                    <th className="text-center">Pay Status</th>
+                    <th className="text-center">Price</th>
+                    <th className="text-center">Approval</th>
+                    <th className="text-center">Details</th>
                   </tr>
                 </thead>
                 <tbody>
