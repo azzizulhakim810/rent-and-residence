@@ -50,6 +50,7 @@ const AllProperties = () => {
                 {/* head */}
                 <thead>
                   <tr className="font-Nunito text-black text-[16px]">
+                    <th>Serial</th>
                     <th>Title</th>
 
                     <th>Owner</th>
@@ -57,6 +58,7 @@ const AllProperties = () => {
                     <th>Pay Status</th>
                     <th>Price</th>
                     <th>Approval</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,11 +68,12 @@ const AllProperties = () => {
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
                   ) : (
-                    allProperties?.map((property) => (
+                    allProperties?.map((property, idx) => (
                       <AllPropertiesTable
                         key={property._id}
                         property={property}
                         refetch={refetch}
+                        idx={idx}
                       />
                     ))
                   )}

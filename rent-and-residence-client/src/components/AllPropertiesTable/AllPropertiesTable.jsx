@@ -1,10 +1,11 @@
 // import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const AllPropertiesTable = ({ property, refetch }) => {
+const AllPropertiesTable = ({ property, refetch, idx }) => {
   // const [owner, setOwner] = useState();
   const axiosSecure = UseAxiosSecure();
 
@@ -16,9 +17,11 @@ const AllPropertiesTable = ({ property, refetch }) => {
     images,
     address,
     // category,
-    // propertyStatus,
+    approval,
     ownerId,
   } = property || {};
+
+  // console.log(approval);
 
   const {
     isPending,
@@ -32,11 +35,6 @@ const AllPropertiesTable = ({ property, refetch }) => {
     },
   });
 
-  // console.log(ownerInfo);
-  /*   useEffect(() => {
-    axiosSecure.get(`/api/users/${ownerId}`).then((res) => setOwner(res.data));
-  }, [axiosSecure, ownerId]); */
-
   // Destructure Details from Property
   const {
     // _id,
@@ -44,8 +42,20 @@ const AllPropertiesTable = ({ property, refetch }) => {
     // profileImage,
   } = ownerInfo || {};
 
+  const handleChangeApproval = (e) => {
+    console.log(e.target.innerText);
+
+    const { data: approvalStatus, refetch: approvalRefetch } = useQuery({
+      queryKey: ["approvalStatus"],
+      queryFn: async () => {
+        const res = axiosSecure.patch(`/api/property/approvalUpdate/${_id}`);
+        return res.data;
+      },
+    });
+  };
+
   const handleDeleteProperty = (id) => {
-    console.log(id);
+    // console.log(id);
 
     toast.warning("Are you sure?", {
       action: {
@@ -70,6 +80,7 @@ const AllPropertiesTable = ({ property, refetch }) => {
   // console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
+      <td className="text-center">{idx + 1}</td>
       <td>
         <Link to={`/propertyDetails/${_id}`}>
           <div className="flex items-center gap-3">
@@ -100,31 +111,30 @@ const AllPropertiesTable = ({ property, refetch }) => {
       <td className="text-C_LightGray/90">Unpaid</td>
       <td className="text-C_LightGray/90">{price}€</td>
       <td>
-        {/*  <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
-          Details
-        </button> */}
-        <form className="filter">
-          <input className="btn btn-square" type="reset" value="×" />
-          <input
-            className="btn bg-yellow-200 text-yellow-800  py-[1px] px-[16px] rounded-3xl"
-            type="radio"
-            name="frameworks"
-            aria-label="Pending"
-          />
-          <input
-            className="btn bg-green-200 text-green-700 py-[1px] px-[16px] rounded-3xl"
-            type="radio"
-            name="frameworks"
-            aria-label="Approved"
-          />
-          <input
-            onClick={() => handleDeleteProperty(_id)}
-            className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-3xl"
-            type="radio"
-            name="frameworks"
-            aria-label="Delete"
-          />
-        </form>
+        {approval && approval === "Pending" ? (
+          <button
+            onClick={(e) => handleChangeApproval(e)}
+            className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
+          >
+            Pending
+          </button>
+        ) : (
+          <button
+            onClick={(e) => handleChangeApproval(e)}
+            className="cursor-pointer bg-green-200 text-green-700 py-[5px] px-[16px] rounded-3xl"
+          >
+            Approved
+          </button>
+        )}
+      </td>
+
+      <td>
+        <button
+          onClick={() => handleDeleteProperty(_id)}
+          className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
+        >
+          <RiDeleteBinLine className="text-lg" />
+        </button>
       </td>
     </tr>
   );

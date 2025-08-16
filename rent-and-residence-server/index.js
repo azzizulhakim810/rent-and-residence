@@ -539,6 +539,17 @@ async function run() {
       }
     );
 
+    // Update property approval
+    app.patch(
+      "/api/property/approvalUpdate/:id",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const id = req.params._id;
+        console.log(id);
+      }
+    );
+
     // Update an user Info
     app.put(
       "/api/user/:id",

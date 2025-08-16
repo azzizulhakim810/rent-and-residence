@@ -71,7 +71,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
       <td className="capitalize text-C_LightGray/90">
         {/* {role} */}
         <select
-          className="border-[1px] px-5 py-2 border-C_LightGray/30  focus:border-[1px] focus:outline-0 rounded-4xl  focus:rounded-xl"
+          className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
           onChange={(e) => handleRoleChange(e, _id)}
           defaultValue={role}
         >
@@ -85,7 +85,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
         {/* <Link to={`/propertyDetails/${_id}`}> */}
         <button
           onClick={() => handleDelete(_id)}
-          className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-3 py-5 font-[700] bg-red-600/70 hover:bg-red-600 text-white duration-300 uppercase "
+          className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
         >
           {/* <img className="text-sm w-6" src={deleteBtn} alt="" srcset="" /> */}
           <RiDeleteBin3Line className="text-lg" />
