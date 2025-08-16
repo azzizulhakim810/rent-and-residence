@@ -1,8 +1,8 @@
 // import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import { toast } from "sonner";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const AllPropertiesTable = ({ property, refetch }) => {
   // const [owner, setOwner] = useState();
@@ -106,20 +106,20 @@ const AllPropertiesTable = ({ property, refetch }) => {
         <form className="filter">
           <input className="btn btn-square" type="reset" value="×" />
           <input
-            className="btn bg-yellow-300 py-[1px] px-[15px] rounded-3xl"
+            className="btn bg-yellow-200 text-yellow-800  py-[1px] px-[16px] rounded-3xl"
             type="radio"
             name="frameworks"
             aria-label="Pending"
           />
           <input
-            className="btn bg-green-300 py-[1px] px-[15px] rounded-3xl"
+            className="btn bg-green-200 text-green-700 py-[1px] px-[16px] rounded-3xl"
             type="radio"
             name="frameworks"
             aria-label="Approved"
           />
           <input
             onClick={() => handleDeleteProperty(_id)}
-            className="btn bg-red-300 py-[1px] px-[15px] rounded-3xl"
+            className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-3xl"
             type="radio"
             name="frameworks"
             aria-label="Delete"
