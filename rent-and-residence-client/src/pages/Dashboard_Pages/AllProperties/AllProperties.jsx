@@ -51,8 +51,9 @@ const AllProperties = () => {
                 <thead>
                   <tr className="font-Nunito text-black text-[16px]">
                     <th>Title</th>
-                    {/* <th>Category</th> */}
+
                     <th>Owner</th>
+                    {/* <th>Category</th> */}
                     <th>Pay Status</th>
                     <th>Price</th>
                     <th>Approval</th>

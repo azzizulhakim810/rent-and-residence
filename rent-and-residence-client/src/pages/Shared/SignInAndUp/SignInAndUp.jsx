@@ -8,7 +8,7 @@ import UseAuth from "../../../hooks/UseAuth/UseAuth";
 
 const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
-  const { user, signOutUser, loading, setUser } = UseAuth();
+  const { user, signOutUser, setLoading, setUser } = UseAuth();
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const SignInAndUp = () => {
         console.log("Sign Out Successfully");
         setUser(null);
         navigate("/", { state: { showModal: true }, replace: true });
-        loading(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.message);

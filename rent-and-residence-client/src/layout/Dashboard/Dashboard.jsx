@@ -18,7 +18,7 @@ import useRole from "../../hooks/useRole/useRole";
 const Dashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id, name, profileImage } = currentUserFromDB;
-  const { signOutUser, loading } = UseAuth();
+  const { signOutUser, loading, setLoading } = UseAuth();
 
   const [isRole] = useRole();
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
     signOutUser()
       .then(() => {
         console.log("Sign Out Successfully");
-        loading(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.message);

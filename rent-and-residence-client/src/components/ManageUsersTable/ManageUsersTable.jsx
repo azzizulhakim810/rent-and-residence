@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import { RiDeleteBin3Line } from "react-icons/ri";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import { toast } from "sonner";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const ManageUsersTable = ({ user, i, refetch }) => {
   const axiosSecure = UseAxiosSecure();
@@ -71,7 +71,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
       <td className="capitalize text-C_LightGray/90">
         {/* {role} */}
         <select
-          className="border-[1px] px-4 py-1 border-C_LightGray/30 rounded focus:border-[1px] focus:outline-0"
+          className="border-[1px] px-5 py-2 border-C_LightGray/30  focus:border-[1px] focus:outline-0 rounded-4xl  focus:rounded-xl"
           onChange={(e) => handleRoleChange(e, _id)}
           defaultValue={role}
         >
