@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -42,16 +42,21 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     // profileImage,
   } = ownerInfo || {};
 
-  const handleChangeApproval = (e) => {
-    console.log(e.target.innerText);
+  const handleApproval = (e, id) => {
+    console.log(e.target.value, id);
 
-    const { data: approvalStatus, refetch: approvalRefetch } = useQuery({
+    axiosSecure
+      .patch(`/api/property/approvalUpdate/${id}`, { approval: e.target.value })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+
+    /*   const { data: approvalStatus, refetch: approvalRefetch } = useQuery({
       queryKey: ["approvalStatus"],
       queryFn: async () => {
         const res = axiosSecure.patch(`/api/property/approvalUpdate/${_id}`);
         return res.data;
       },
-    });
+    }); */
   };
 
   const handleDeleteProperty = (id) => {
@@ -111,7 +116,23 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
       <td className="text-C_LightGray/90">Unpaid</td>
       <td className="text-C_LightGray/90">{price}€</td>
       <td>
-        {approval && approval === "Pending" ? (
+        {/* <button
+          onClick={(e) => handleChangeApproval(e)}
+          className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
+        >
+          {approval && approval === "Pending" ? "Pending" : "Approved"}
+        </button> */}
+
+        <select
+          className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
+          onChange={(e) => handleApproval(e, _id)}
+          defaultValue={approval}
+        >
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+        </select>
+
+        {/* {approval && approval === "Pending" ? (
           <button
             onClick={(e) => handleChangeApproval(e)}
             className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
@@ -125,7 +146,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
           >
             Approved
           </button>
-        )}
+        )} */}
       </td>
 
       <td>
@@ -133,7 +154,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
           onClick={() => handleDeleteProperty(_id)}
           className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
         >
-          <RiDeleteBinLine className="text-lg" /> Delete
+          <RiDeleteBinLine className="text-lg" />
         </button>
       </td>
     </tr>

@@ -521,10 +521,10 @@ async function run() {
         const userId = req.params.id;
         const newRole = req.body.role;
 
-        // console.log(newRole);
+        console.log(newRole);
         const filter = { _id: new ObjectId(userId) };
 
-        const updateRole = {
+        const updatedRole = {
           $set: {
             role: newRole,
           },
@@ -533,7 +533,7 @@ async function run() {
         // console.log(userId, newRole);
         // console.log(userId);
 
-        const result = await userCollection.updateOne(filter, updateRole);
+        const result = await userCollection.updateOne(filter, updatedRole);
 
         res.send(result);
       }
@@ -545,8 +545,21 @@ async function run() {
       verifyToken,
       verifyAdmin,
       async (req, res) => {
-        const id = req.params._id;
-        console.log(id);
+        const id = req.params.id;
+        const approvalText = req.body.approval;
+        console.log(approvalText);
+
+        const filter = { _id: new ObjectId(id) };
+        // const options = {upsert: true};
+        const updatedApproval = {
+          $set: {
+            approval: approvalText,
+          },
+        };
+
+        const result = await propertyCollection.updateOne(filter, approvalText);
+
+        res.send(result);
       }
     );
 
