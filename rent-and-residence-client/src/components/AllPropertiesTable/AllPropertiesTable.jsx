@@ -133,7 +133,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
           onClick={() => handleDeleteProperty(_id)}
           className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
         >
-          <RiDeleteBinLine className="text-lg" />
+          <RiDeleteBinLine className="text-lg" /> Delete
         </button>
       </td>
     </tr>
