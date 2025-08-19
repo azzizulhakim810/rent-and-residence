@@ -58,7 +58,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
   // console.log(user);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
-      <td className="capitalize text-C_LightGray/90">{i + 1}</td>
+      <td className="capitalize text-C_LightGray/90 text-center">{i + 1}</td>
       <td>
         <div className="avatar">
           <div className="mask mask-squircle h-12 w-12">
@@ -68,7 +68,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
       </td>
       <td className="capitalize text-C_LightGray/90">{name}</td>
       <td className="capitalize text-C_LightGray/90">{email}</td>
-      <td className="capitalize text-C_LightGray/90">
+      <td className="capitalize text-C_LightGray/90 text-center">
         {/* {role} */}
         <select
           className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"

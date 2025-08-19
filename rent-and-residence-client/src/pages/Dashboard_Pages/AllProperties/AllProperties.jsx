@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 // import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
 import AllPropertiesTable from "../../../components/AllPropertiesTable/AllPropertiesTable";
 
 const AllProperties = () => {
@@ -48,8 +47,8 @@ const AllProperties = () => {
             <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
               <table className="table">
                 {/* head */}
-                <thead>
-                  <tr className="font-Nunito text-black text-[16px]">
+                <thead className="bg-C_purple rounded-5xl ">
+                  <tr className="font-Nunito text-white text-[16px] ">
                     <th>Serial</th>
                     <th>Title</th>
 
@@ -57,7 +56,7 @@ const AllProperties = () => {
                     {/* <th>Category</th> */}
                     <th>Pay Status</th>
                     <th>Price</th>
-                    <th>Approval</th>
+                    <th className="text-center">Approval</th>
                     <th>Delete</th>
                   </tr>
                 </thead>

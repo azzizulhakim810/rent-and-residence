@@ -1,9 +1,5 @@
 // import { useEffect, useState } from "react";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import ManageUsersTable from "../../../components/ManageUsersTable/ManageUsersTable";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -51,11 +47,11 @@ const ManageUsers = () => {
                 {/* head */}
                 <thead className="bg-C_purple rounded-5xl ">
                   <tr className="font-Nunito text-[16px] text-white rounded-4xl">
-                    <th>Serial</th>
+                    <th className="text-center">Serial</th>
                     <th>Profile</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th className="text-center">Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>

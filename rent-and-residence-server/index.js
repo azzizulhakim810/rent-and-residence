@@ -521,7 +521,7 @@ async function run() {
         const userId = req.params.id;
         const newRole = req.body.role;
 
-        console.log(newRole);
+        // console.log(newRole);
         const filter = { _id: new ObjectId(userId) };
 
         const updatedRole = {
@@ -542,22 +542,28 @@ async function run() {
     // Update property approval
     app.patch(
       "/api/property/approvalUpdate/:id",
-      verifyToken,
-      verifyAdmin,
+      // verifyToken,
+      // verifyAdmin,
       async (req, res) => {
         const id = req.params.id;
         const approvalText = req.body.approval;
-        console.log(approvalText);
+        // console.log(approvalText, id);
 
         const filter = { _id: new ObjectId(id) };
-        const options = {upsert: true};
+
+        const options = { upsert: true };
         const updatedApproval = {
           $set: {
             approval: approvalText,
           },
         };
 
-        const result = await propertyCollection.updateOne(filter, options approvalText);
+        // console.log(updatedApproval);
+
+        const result = await propertyCollection.updateOne(
+          filter,
+          updatedApproval
+        );
 
         res.send(result);
       }

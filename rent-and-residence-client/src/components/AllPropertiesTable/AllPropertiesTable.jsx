@@ -43,11 +43,16 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
   } = ownerInfo || {};
 
   const handleApproval = (e, id) => {
-    console.log(e.target.value, id);
+    // console.log(e.target.value, id);
+    const approvalStatus = e.target.value;
 
     axiosSecure
-      .patch(`/api/property/approvalUpdate/${id}`, { approval: e.target.value })
-      .then((res) => console.log(res.data))
+      .patch(`/api/property/approvalUpdate/${id}`, { approval: approvalStatus })
+      .then((res) => {
+        console.log(res.data);
+        toast.success(`This property is now ${approvalStatus}`);
+        refetch();
+      })
       .catch((err) => console.log(err));
 
     /*   const { data: approvalStatus, refetch: approvalRefetch } = useQuery({
@@ -115,7 +120,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
 
       <td className="text-C_LightGray/90">Unpaid</td>
       <td className="text-C_LightGray/90">{price}€</td>
-      <td>
+      <td className="text-center">
         {/* <button
           onClick={(e) => handleChangeApproval(e)}
           className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
