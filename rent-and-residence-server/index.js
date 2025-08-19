@@ -550,14 +550,14 @@ async function run() {
         console.log(approvalText);
 
         const filter = { _id: new ObjectId(id) };
-        // const options = {upsert: true};
+        const options = {upsert: true};
         const updatedApproval = {
           $set: {
             approval: approvalText,
           },
         };
 
-        const result = await propertyCollection.updateOne(filter, approvalText);
+        const result = await propertyCollection.updateOne(filter, options approvalText);
 
         res.send(result);
       }
