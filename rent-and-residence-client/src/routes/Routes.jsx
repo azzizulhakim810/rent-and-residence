@@ -23,6 +23,7 @@ import ManageUsers from "../pages/Dashboard_Pages/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AllProperties from "../pages/Dashboard_Pages/AllProperties/AllProperties";
 import AgentRoute from "./AgentRoute";
+import Cart from "../pages/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,11 @@ export const router = createBrowserRouter([
       {
         path: "/comparison",
         element: <Comparison />,
+      },
+
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

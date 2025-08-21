@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -76,7 +76,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
             .delete(`/api/properties/${id}`)
             .then((res) => {
               console.log(res.data);
-              toast.success("Item has deleted");
+              toast.success("Item has been deleted");
               refetch();
             })
             .catch((err) => {

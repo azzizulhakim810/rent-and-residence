@@ -542,8 +542,8 @@ async function run() {
     // Update property approval
     app.patch(
       "/api/property/approvalUpdate/:id",
-      // verifyToken,
-      // verifyAdmin,
+      verifyToken,
+      verifyAdmin,
       async (req, res) => {
         const id = req.params.id;
         const approvalText = req.body.approval;
