@@ -11,6 +11,7 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
+import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
@@ -25,7 +26,7 @@ const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
 
   const { user, signOutUser, loading } = UseAuth();
-  // console.log(user);
+  // console.log(user.email);
   const [{ _id, profileImage, role }] = useSignedInUser();
   // const { _id, profileImage, role } = currentUserFromDB;
   console.log(role);
@@ -46,9 +47,7 @@ const Navbar = () => {
   const handleDeleteItem = (_id) => {
     // console.log("Id", _id);
     axiosSecure
-      .delete(
-        `/api/carts?userEmail=${currentUserFromDB.email}&propertyId=${_id}`
-      )
+      .delete(`/api/carts?userEmail=${user.email}&propertyId=${_id}`)
       .then((res) => {
         console.log(res);
         toast.success("Property has removed from the cart");
@@ -522,17 +521,21 @@ const Navbar = () => {
                   <div className="divider"></div>
                   <div className="text-lg flex justify-between font-Nunito font-bold px-4 py-2">
                     <h2>Total Price :</h2>
-                    <span>{totalPrice} €</span>
+                    <span>{totalPrice.toFixed(2)} €</span>
                   </div>
                 </ul>
 
-                <button
-                  // onClick={() => handleAddToCart(property)}
-                  className="btn absolute bottom-0 w-[360px] flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-2 cursor-pointer border-0"
-                >
-                  {/* <LiaCartPlusSolid /> */}
-                  Proceed to Checkout
-                </button>
+                <div className="absolute bottom-0 ">
+                  <Link to="/cart">
+                    <button
+                      // onClick={() => handleAddToCart(property)}
+                      className=" w-[360px] flex items-center justify-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-4 cursor-pointer border-0"
+                    >
+                      <LiaCartPlusSolid className="text-2xl" />
+                      Proceed to Checkout
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
             {/* <div className="dropdown dropdown-end mt-2">
