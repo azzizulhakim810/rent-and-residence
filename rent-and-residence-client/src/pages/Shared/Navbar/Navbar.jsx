@@ -528,6 +528,7 @@ const Navbar = () => {
                 <div className="absolute bottom-0 ">
                   <Link to="/cart">
                     <button
+                      disabled={!cart.length}
                       // onClick={() => handleAddToCart(property)}
                       className=" w-[360px] flex items-center justify-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-4 cursor-pointer border-0"
                     >
