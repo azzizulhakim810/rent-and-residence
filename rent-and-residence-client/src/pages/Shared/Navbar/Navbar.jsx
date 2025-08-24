@@ -15,11 +15,12 @@ import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
-import CartSidebar from "../../../components/CartSidebar/CartSidebar";
+
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 // import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
@@ -510,7 +511,7 @@ const Navbar = () => {
                         key={item._id}
                         className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
                       >
-                        <CartSidebar
+                        <OffCanvasCart
                           item={item}
                           handleDeleteItem={handleDeleteItem}
                         />
@@ -528,9 +529,10 @@ const Navbar = () => {
                 <div className="absolute bottom-0 ">
                   <Link to="/cart">
                     <button
-                      disabled={!cart.length}
+                      disabled={!cart.length ? true : false}
                       // onClick={() => handleAddToCart(property)}
-                      className=" w-[360px] flex items-center justify-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none  py-4 cursor-pointer border-0"
+                      className="border border-transparent outline-none focus:outline-none w-[360px] flex items-center justify-center gap-2 bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none py-4 cursor-pointer transition-colors
+    disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
                     >
                       <LiaCartPlusSolid className="text-2xl" />
                       Proceed to Checkout

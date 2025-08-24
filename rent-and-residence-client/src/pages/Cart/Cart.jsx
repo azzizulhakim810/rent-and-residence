@@ -1,9 +1,13 @@
 import { Helmet } from "react-helmet";
 import { RiRefund2Fill } from "react-icons/ri";
 import { TbHomeDollar } from "react-icons/tb";
-import Sidebar from "../Shared/Sidebar/Sidebar";
+import UseCart from "../../hooks/UseCart/UseCart";
+// import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Cart = () => {
+  const [cart] = UseCart();
+
+  // console.log(cart);
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
@@ -13,14 +17,14 @@ const Cart = () => {
         <div className="grid grid-cols-12 gap-10">
           {/* Info column  */}
           <div className="lg:col-span-5 col-span-10 ">
-            <div className=" flex justify-start">
+            <div className=" flex justify-center">
               <img
-                className=" w-[50%] hidden rotate-35  lg:flex"
-                src="https://i.ibb.co.com/MXQshqk/checkout-One.png"
+                className=" w-[50%] hidden rotate-35 lg:flex -mb-5"
+                src="https://i.ibb.co.com/gLtdNHKv/checkout-One.png"
                 alt="logo"
               />
             </div>
-            <div className="flex  flex-col justify-start w-full py-5">
+            <div className="flex flex-col justify-start w-full py-5">
               {/* { <Link className="lg:w-1/2 w-full" to="/blogDetails">
                 <div className=" bg-white  shadow-lg rounded-lg">
                   <div className=" p-3 mb-2 w-full rounded-md bg-white">
@@ -71,7 +75,7 @@ const Cart = () => {
             </div>
 
             {/* Refund & Obligation  */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               <div className=" flex flex-col gap-2 p-2">
                 <RiRefund2Fill className="text-4xl text-C_purple" />
                 <h4 className=" font-Nunito font-[800] text-C_gray text-[18px] py-2 uppercase">
@@ -98,8 +102,9 @@ const Cart = () => {
           </div>
 
           {/* Payment Form  */}
-          <div className="lg:col-span-7 col-span-10">
-            <Sidebar />
+          <div className="lg:col-span-7 col-span-10 bg-white">
+            {/* <Sidebar /> */}
+            <p> Hello </p>
           </div>
         </div>
       </div>

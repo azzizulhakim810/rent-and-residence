@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CartSidebar = ({ item, handleDeleteItem }) => {
+const OffCanvasCart = ({ item, handleDeleteItem }) => {
   // Destructure Details from Property
   const { _id, title, price } = item || {};
 
@@ -33,4 +33,4 @@ const CartSidebar = ({ item, handleDeleteItem }) => {
   );
 };
 
-export default CartSidebar;
+export default OffCanvasCart;
