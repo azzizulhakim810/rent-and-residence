@@ -137,7 +137,7 @@ const Checkout = () => {
                 stripe={stripePromise}
                 // options={options}
               >
-                <CheckoutForm />
+                <CheckoutForm totalPrice={totalPrice} />
               </Elements>
             </div>
           </div>

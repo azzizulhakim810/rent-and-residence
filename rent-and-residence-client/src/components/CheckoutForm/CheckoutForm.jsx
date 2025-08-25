@@ -1,12 +1,24 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TbCreditCardPay } from "react-icons/tb";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ totalPrice }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const axiosSecure = UseAxiosSecure();
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    axiosSecure
+      .post("/create-payment-intent", { price: totalPrice })
+      .then((res) => {
+        console.log(res.data.clientSecret);
+        setClientSecret(res.data.clientSecret);
+      });
+  }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,7 +70,7 @@ const CheckoutForm = () => {
       <button
         className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-6"
         type="submit"
-        disabled={!stripe}
+        disabled={!stripe || !clientSecret}
       >
         <TbCreditCardPay class="text-lg" />
         Pay
