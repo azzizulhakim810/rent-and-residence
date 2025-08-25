@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectId } = require("mongodb");
@@ -681,6 +682,9 @@ async function run() {
 
       res.send(result);
     });
+
+    // Stripe
+    app.post("/payment_intent", async (req, res) => {});
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
