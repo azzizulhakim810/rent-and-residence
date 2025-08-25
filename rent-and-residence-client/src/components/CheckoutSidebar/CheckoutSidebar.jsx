@@ -3,9 +3,13 @@
 const CheckoutSidebar = ({ item }) => {
   console.log(item);
   // Destructure Details from Property
-  const { _id, title, price, category, address, description } = item || {};
+  const { _id, title, price, address } = item || {};
 
   const propImg = item?.images?.[0];
+
+  // Make the address
+  const propAddress =
+    address?.city + ", " + address?.state + ", " + address?.country;
 
   return (
     <div>
@@ -23,7 +27,7 @@ const CheckoutSidebar = ({ item }) => {
             </h4>
 
             <p className=" text-C_LightGray/80 font-Nunito_Sans font-[600] text-[15px] leading-5 pt-2">
-              {description}
+              {propAddress}
             </p>
           </span>
         </div>

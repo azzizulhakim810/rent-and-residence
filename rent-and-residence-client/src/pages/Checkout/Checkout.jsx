@@ -8,6 +8,10 @@ import UseCart from "../../hooks/UseCart/UseCart";
 const Checkout = () => {
   const [cart] = UseCart();
 
+  const totalPrice = cart.reduce((total, item) => {
+    return total + parseInt(item.price);
+  }, 0);
+
   // console.log(cart);
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -18,14 +22,14 @@ const Checkout = () => {
         <div className="grid grid-cols-12 gap-10">
           {/* Info column  */}
           <div className="lg:col-span-5 col-span-10 ">
-            <div className=" flex justify-center">
+            <div className=" relative flex justify-center z-0 opacity-50 -mb-25">
               <img
-                className=" w-[50%] hidden rotate-35 lg:flex -mb-5"
+                className=" w-[50%] rotate-35 lg:flex  "
                 src="https://i.ibb.co.com/gLtdNHKv/checkout-One.png"
                 alt="logo"
               />
             </div>
-            <div className="flex flex-col justify-start w-full py-5">
+            <div className="relative flex flex-col justify-start w-full py-5 z-100">
               {/* { <Link className="lg:w-1/2 w-full" to="/blogDetails">
                 <div className=" bg-white  shadow-lg rounded-lg">
                   <div className=" p-3 mb-2 w-full rounded-md bg-white">
@@ -118,6 +122,10 @@ const Checkout = () => {
               </div>
             ))}
             <div className="divider"></div>
+            <div className="text-lg flex justify-between font-Nunito font-bold  ">
+              <h2>Total Price :</h2>
+              <span>{totalPrice.toFixed(2)} €</span>
+            </div>
           </div>
         </div>
       </div>
