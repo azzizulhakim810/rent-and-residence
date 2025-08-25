@@ -1,14 +1,12 @@
-import {
-  PaymentElement,
-  Elements,
-  useStripe,
-  useElements,
-  CardElement,
-} from "@stripe/react-stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useState } from "react";
+import { TbCreditCardPay } from "react-icons/tb";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,10 +22,18 @@ const CheckoutForm = () => {
       return;
     }
 
+    // Create Payment Method
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
+
+    if (error) {
+      console.log("[Error]", error);
+      setErrorMessage(error.message);
+    } else {
+      console.log("[PaymentMethod]", paymentMethod);
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -47,8 +53,14 @@ const CheckoutForm = () => {
           },
         }}
       />
+      <p className="text-red-500 text-[14px]">{errorMessage}</p>
 
-      <button type="submit" disabled={!stripe}>
+      <button
+        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-6"
+        type="submit"
+        disabled={!stripe}
+      >
+        <TbCreditCardPay class="text-lg" />
         Pay
       </button>
     </form>
