@@ -16,11 +16,11 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
+import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 // import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
@@ -509,7 +509,7 @@ const Navbar = () => {
                     {cart.map((item) => (
                       <div
                         key={item._id}
-                        className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
+                        className=" bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
                       >
                         <OffCanvasCart
                           item={item}
@@ -527,7 +527,7 @@ const Navbar = () => {
                 </ul>
 
                 <div className="absolute bottom-0 ">
-                  <Link to="/cart">
+                  <Link to="/checkout">
                     <button
                       disabled={!cart.length ? true : false}
                       // onClick={() => handleAddToCart(property)}

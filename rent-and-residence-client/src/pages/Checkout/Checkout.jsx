@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet";
 import { RiRefund2Fill } from "react-icons/ri";
 import { TbHomeDollar } from "react-icons/tb";
+import CheckoutSidebar from "../../components/CheckoutSidebar/CheckoutSidebar";
 import UseCart from "../../hooks/UseCart/UseCart";
 // import Sidebar from "../Shared/Sidebar/Sidebar";
 
-const Cart = () => {
+const Checkout = () => {
   const [cart] = UseCart();
 
   // console.log(cart);
@@ -102,9 +103,21 @@ const Cart = () => {
           </div>
 
           {/* Payment Form  */}
-          <div className="lg:col-span-7 col-span-10 bg-white">
-            {/* <Sidebar /> */}
-            <p> Hello </p>
+          <div className="lg:col-span-7 col-span-10 bg-white px-10 py-6 rounded">
+            <h1 className="font-Nunito text-[25px] leading-15 font-[700] pb-3">
+              Order Summery
+            </h1>
+
+            {/* Cart items  */}
+            {cart.map((item) => (
+              <div
+                key={item._id}
+                className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
+              >
+                <CheckoutSidebar item={item} />
+              </div>
+            ))}
+            <div className="divider"></div>
           </div>
         </div>
       </div>
@@ -112,4 +125,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Checkout;

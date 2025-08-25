@@ -23,7 +23,8 @@ import ManageUsers from "../pages/Dashboard_Pages/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AllProperties from "../pages/Dashboard_Pages/AllProperties/AllProperties";
 import AgentRoute from "./AgentRoute";
-import Cart from "../pages/Cart/Cart";
+
+import Checkout from "../pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -83,8 +84,8 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/cart",
-        element: <Cart />,
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },
