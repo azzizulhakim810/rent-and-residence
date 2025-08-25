@@ -1,9 +1,11 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Helmet } from "react-helmet";
 import { RiRefund2Fill } from "react-icons/ri";
 import { TbHomeDollar } from "react-icons/tb";
 import CheckoutSidebar from "../../components/CheckoutSidebar/CheckoutSidebar";
 import UseCart from "../../hooks/UseCart/UseCart";
-// import Sidebar from "../Shared/Sidebar/Sidebar";
+import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
 
 const Checkout = () => {
   const [cart] = UseCart();
@@ -12,7 +14,9 @@ const Checkout = () => {
     return total + parseInt(item.price);
   }, 0);
 
-  // console.log(cart);
+  // Create Publishing Key
+  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
+
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
@@ -106,7 +110,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Payment Form  */}
+          {/* Order Details & Payment Form  */}
           <div className="lg:col-span-7 col-span-10 bg-white px-10 py-6 rounded">
             <h1 className="font-Nunito text-[25px] leading-15 font-[700] pb-3">
               Order Summery
@@ -125,6 +129,16 @@ const Checkout = () => {
             <div className="text-lg flex justify-between font-Nunito font-bold  ">
               <h2>Total Price :</h2>
               <span>{totalPrice.toFixed(2)} €</span>
+            </div>
+
+            {/* Checkout Form  */}
+            <div>
+              <Elements
+                stripe={stripePromise}
+                // options={options}
+              >
+                <CheckoutForm />
+              </Elements>
             </div>
           </div>
         </div>
