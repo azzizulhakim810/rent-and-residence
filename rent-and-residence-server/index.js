@@ -70,6 +70,7 @@ async function run() {
     // JWT Related API
     app.post("/jwt", async (req, res) => {
       const user = req.body;
+      console.log(user);
 
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1h",
@@ -103,7 +104,7 @@ async function run() {
     // Verify Admin whether he is Admin or not. If not then don't let him Admin controlled info
     const verifyAdmin = async (req, res, next) => {
       const email = req.decoded.email;
-      // console.log("Verify Admin Email", email);
+      console.log("Verify Admin Email", email);
 
       const query = { email: email };
       const user = await userCollection.findOne(query);
@@ -704,10 +705,10 @@ async function run() {
 
     // Add payment to database
     app.post("/payment", async (req, res) => {
-      const payment = req.body;
+      const payment = req.body.payment;
 
-      const result = await paymentCollection.insertOne(payment);
-      res.send(result);
+      const paymentResult = await paymentCollection.insertOne(payment);
+      res.send(paymentResult);
     });
   } finally {
     // Ensures that the client will close when you finish/error

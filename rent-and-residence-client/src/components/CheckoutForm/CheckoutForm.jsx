@@ -5,6 +5,7 @@ import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import { toast } from "sonner";
 import UseCart from "../../hooks/UseCart/UseCart";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 const CheckoutForm = ({ totalPrice }) => {
   const stripe = useStripe();
@@ -12,7 +13,8 @@ const CheckoutForm = ({ totalPrice }) => {
   const axiosSecure = UseAxiosSecure();
   const { user } = UseAuth();
   const [cart] = UseCart();
-  console.log(user);
+  const [currentUserFromDB] = useSignedInUser();
+  // console.log(currentUserFromDB._id);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -82,7 +84,7 @@ const CheckoutForm = ({ totalPrice }) => {
           data: new Date(),
           cartId: cart.map((item) => item._id),
           propertyId: cart.map((item) => item.propertyId),
-          userId: user._id,
+          userId: currentUserFromDB._id,
         };
 
         const res = await axiosSecure.post("payment", { payment: payment });
