@@ -2,14 +2,18 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import { TbCreditCardPay } from "react-icons/tb";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import UseAuth from "../../hooks/UseAuth/UseAuth";
+import { toast } from "sonner";
 
 const CheckoutForm = ({ totalPrice }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = UseAxiosSecure();
+  const { user } = UseAuth();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
     axiosSecure
@@ -35,7 +39,7 @@ const CheckoutForm = ({ totalPrice }) => {
     }
 
     // Create Payment Method
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -45,6 +49,28 @@ const CheckoutForm = ({ totalPrice }) => {
       setErrorMessage(error.message);
     } else {
       console.log("[PaymentMethod]", paymentMethod);
+    }
+
+    // Confirm Payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+
+    if (confirmError) {
+      console.log("Confirm Error", confirmError);
+    } else {
+      console.log("Payment Intent", paymentIntent);
+      if (paymentIntent.status == "succeeded") {
+        toast.success("You've paid the amount");
+        setTransactionId(paymentIntent.id);
+      }
     }
   };
   return (
@@ -66,6 +92,11 @@ const CheckoutForm = ({ totalPrice }) => {
         }}
       />
       <p className="text-red-500 text-[14px]">{errorMessage}</p>
+      {transactionId && (
+        <p className="text-green-500 text-[14px]">
+          Transaction Id is {transactionId}
+        </p>
+      )}
 
       <button
         className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-6"
