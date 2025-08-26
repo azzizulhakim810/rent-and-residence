@@ -270,13 +270,16 @@ async function run() {
 
       // console.log(propertyIds);
 
-      const result = await propertyCollection
+      const cartProperties = await propertyCollection
         .find({
           _id: { $in: propertyIds },
         })
         .toArray();
 
-      res.send(result);
+      res.send({
+        cartProperties: cartProperties,
+        cartItems: cartItems,
+      });
     });
 
     // Add a User
@@ -705,9 +708,11 @@ async function run() {
 
     // Add payment to database
     app.post("/payment", async (req, res) => {
-      const payment = req.body.payment;
+      const payment = req.body;
 
       const paymentResult = await paymentCollection.insertOne(payment);
+
+      console.log("Payment Info", payment);
       res.send(paymentResult);
     });
   } finally {

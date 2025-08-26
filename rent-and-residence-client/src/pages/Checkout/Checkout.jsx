@@ -9,8 +9,9 @@ import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
 
 const Checkout = () => {
   const [cart] = UseCart();
+  const { cartProperties, cartItems } = cart;
 
-  const totalPrice = cart.reduce((total, item) => {
+  const totalPrice = cartProperties?.reduce((total, item) => {
     return total + parseInt(item.price);
   }, 0);
 
@@ -117,7 +118,7 @@ const Checkout = () => {
             </h1>
 
             {/* Cart items  */}
-            {cart.map((item) => (
+            {cartProperties?.map((item) => (
               <div
                 key={item._id}
                 className="bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
@@ -128,7 +129,7 @@ const Checkout = () => {
             <div className="divider"></div>
             <div className="text-lg flex justify-between font-Nunito font-bold  ">
               <h2>Total Price :</h2>
-              <span>{totalPrice.toFixed(2)} €</span>
+              <span>{totalPrice?.toFixed(2)} €</span>
             </div>
 
             {/* Checkout Form  */}

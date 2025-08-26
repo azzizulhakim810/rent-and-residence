@@ -36,12 +36,13 @@ const Navbar = () => {
 
   // Load the cart items from useCart Hook
   const [cart, refetch] = UseCart();
+  const { cartProperties, cartItems } = cart;
   // const [isRole, isRolePending] = useRole();
   // console.log(isRole);
 
-  // console.log(cart);
+  console.log(cart.cartProperties, cart.cartItems);
 
-  const totalPrice = cart.reduce((total, item) => {
+  const totalPrice = cartProperties?.reduce((total, item) => {
     return total + parseInt(item.price);
   }, 0);
 
@@ -490,7 +491,7 @@ const Navbar = () => {
                   <div className="indicator">
                     <LuShoppingCart className="text-[#222222] text-2xl" />
                     <span className="badge badge-sm indicator-item">
-                      {cart.length}
+                      {cartItems?.length}
                     </span>
                   </div>
                 </label>
@@ -506,7 +507,7 @@ const Navbar = () => {
                 <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
                   {/* Sidebar content here */}
                   <li>
-                    {cart.map((item) => (
+                    {cartProperties?.map((item) => (
                       <div
                         key={item._id}
                         className=" bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
@@ -522,14 +523,14 @@ const Navbar = () => {
                   <div className="divider"></div>
                   <div className="text-lg flex justify-between font-Nunito font-bold px-4 py-2">
                     <h2>Total Price :</h2>
-                    <span>{totalPrice.toFixed(2)} €</span>
+                    <span>{totalPrice?.toFixed(2)} €</span>
                   </div>
                 </ul>
 
                 <div className="absolute bottom-0 ">
                   <Link to="/checkout">
                     <button
-                      disabled={!cart.length ? true : false}
+                      disabled={!cartItems?.length ? true : false}
                       // onClick={() => handleAddToCart(property)}
                       className="border border-transparent outline-none focus:outline-none w-[360px] flex items-center justify-center gap-2 bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none py-4 cursor-pointer transition-colors
     disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"

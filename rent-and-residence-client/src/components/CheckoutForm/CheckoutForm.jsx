@@ -13,8 +13,9 @@ const CheckoutForm = ({ totalPrice }) => {
   const axiosSecure = UseAxiosSecure();
   const { user } = UseAuth();
   const [cart] = UseCart();
+  const { cartProperties, cartItems } = cart;
   const [currentUserFromDB] = useSignedInUser();
-  // console.log(currentUserFromDB._id);
+  // console.log(cart);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -81,14 +82,15 @@ const CheckoutForm = ({ totalPrice }) => {
           email: user.email,
           price: totalPrice,
           transactionId: paymentIntent.id,
-          data: new Date(),
-          cartId: cart.map((item) => item._id),
-          propertyId: cart.map((item) => item.propertyId),
+          date: new Date(), // need to use moment.js
+          cartId: cartItems.map((item) => item._id),
+          propertyId: cartItems.map((item) => item._id),
           userId: currentUserFromDB._id,
+          status: "pending",
         };
 
-        const res = await axiosSecure.post("payment", { payment: payment });
-        console.log(res);
+        const res = await axiosSecure.post("payment", payment);
+        console.log("Payment saved to database", res);
       }
     }
   };
