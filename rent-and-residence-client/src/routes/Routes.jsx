@@ -26,6 +26,9 @@ import AgentRoute from "./AgentRoute";
 
 import Checkout from "../pages/Checkout/Checkout";
 
+import MyOrders from "../pages/Dashboard_Pages/MyOrders/MyOrders";
+import PaymentHistory from "../pages/Dashboard_Pages/PaymentHistory/PaymentHistory";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -87,6 +90,10 @@ export const router = createBrowserRouter([
         path: "/checkout",
         element: <Checkout />,
       },
+      /* {
+        path: "/paymentHistory",
+        element: <PaymentHistory />,
+      }, */
     ],
   },
   {
@@ -145,6 +152,24 @@ export const router = createBrowserRouter([
           <AgentRoute>
             <AddNewProperty />
           </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myOrders",
+
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/paymentHistory",
+
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
         ),
       },
       {

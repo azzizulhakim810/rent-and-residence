@@ -8,7 +8,7 @@ const TestimonialCard = ({ review }) => {
   const [user, setUser] = useState(null);
   const axiosPublic = useAxiosPublic();
 
-  const { userId, rating, comment, designation, name } = review || {};
+  const { userId, rating, comment, designation, name } = review;
 
   // console.log(review);
 
@@ -17,11 +17,19 @@ const TestimonialCard = ({ review }) => {
       .then((res) => res.json())
       .then((data) => setUser(data)); */
 
-    axiosPublic.get(`/api/users/${userId}`).then((res) => {
-      // console.log(res.data);
-      setUser(res.data);
-    });
-  }, [userId, axiosPublic]);
+    /* if (review) {
+      axiosPublic.get(`/api/users/${userId}`).then((res) => {
+        // console.log(res.data);
+        setUser(res.data);
+      });
+    } */
+    const loadReviewer = async () => {
+      const rev = await axiosPublic.get(`/api/users/${userId}`);
+      console.log(rev.data);
+      setUser(rev.data);
+    };
+    loadReviewer();
+  }, [userId, axiosPublic, review]);
 
   // console.log(user);
   const { profileImage } = user || {};

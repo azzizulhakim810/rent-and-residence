@@ -6,7 +6,7 @@ import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {

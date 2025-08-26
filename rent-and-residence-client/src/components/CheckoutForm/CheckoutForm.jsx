@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TbCreditCardPay } from "react-icons/tb";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
@@ -10,11 +11,13 @@ import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 const CheckoutForm = ({ totalPrice }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
   const { user } = UseAuth();
-  const [cart] = UseCart();
+  const [cart, refetch] = UseCart();
   const { cartProperties, cartItems } = cart;
   const [currentUserFromDB] = useSignedInUser();
+
   // console.log(cart);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,12 +25,14 @@ const CheckoutForm = ({ totalPrice }) => {
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
@@ -74,7 +79,6 @@ const CheckoutForm = ({ totalPrice }) => {
     } else {
       console.log("Payment Intent", paymentIntent);
       if (paymentIntent.status == "succeeded") {
-        toast.success("You've paid the amount");
         setTransactionId(paymentIntent.id);
 
         // Save the payment in the database
@@ -83,14 +87,18 @@ const CheckoutForm = ({ totalPrice }) => {
           price: totalPrice,
           transactionId: paymentIntent.id,
           date: new Date(), // need to use moment.js
-          cartId: cartItems.map((item) => item._id),
-          propertyId: cartItems.map((item) => item._id),
           userId: currentUserFromDB._id,
-          status: "pending",
+          cartIds: cartItems.map((item) => item._id),
+          propertyIds: cartItems.map((item) => item.propertyId),
+          status: "Pending",
         };
 
         const res = await axiosSecure.post("payment", payment);
-        console.log("Payment saved to database", res);
+        refetch();
+
+        toast.success("You've paid the amount");
+        navigate("/dashboard/myOrders");
+        console.log("Payment saved to database", res.data);
       }
     }
   };

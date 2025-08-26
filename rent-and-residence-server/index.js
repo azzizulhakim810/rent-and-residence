@@ -282,6 +282,18 @@ async function run() {
       });
     });
 
+    // Get the payment history
+    app.get("/api/payment/:email", verifyToken, async (req, res) => {
+      const query = { email: req.params.email };
+
+      if (req.params.email !== req.decoded.email) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+
+      const result = await paymentCollection.find(query).toArray();
+      res.send(result);
+    });
+
     // Add a User
     app.post("/api/auth/register", async (req, res) => {
       const newUser = req.body;
@@ -706,14 +718,23 @@ async function run() {
       res.send({ clientSecret: paymentIntent.client_secret });
     });
 
-    // Add payment to database
+    // Save payment & clear cart to database
     app.post("/payment", async (req, res) => {
       const payment = req.body;
 
       const paymentResult = await paymentCollection.insertOne(payment);
 
-      console.log("Payment Info", payment);
-      res.send(paymentResult);
+      // console.log("Payment Info", payment);
+
+      // Delete each item from the cart
+      const query = {
+        _id: {
+          $in: payment.cartIds.map((id) => new ObjectId(id)),
+        },
+      };
+
+      const removeFromCart = await cartCollection.deleteMany(query);
+      res.send({ paymentResult, removeFromCart });
     });
   } finally {
     // Ensures that the client will close when you finish/error
