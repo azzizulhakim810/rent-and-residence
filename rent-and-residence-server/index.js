@@ -63,6 +63,10 @@ async function run() {
       .db("wp_residence_DB")
       .collection("blogsCollection");
 
+    const paymentCollection = client
+      .db("wp_residence_DB")
+      .collection("payments");
+
     // JWT Related API
     app.post("/jwt", async (req, res) => {
       const user = req.body;
@@ -696,6 +700,14 @@ async function run() {
       });
 
       res.send({ clientSecret: paymentIntent.client_secret });
+    });
+
+    // Add payment to database
+    app.post("/payment", async (req, res) => {
+      const payment = req.body;
+
+      const result = await paymentCollection.insertOne(payment);
+      res.send(result);
     });
   } finally {
     // Ensures that the client will close when you finish/error

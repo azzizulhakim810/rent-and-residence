@@ -4,12 +4,15 @@ import { TbCreditCardPay } from "react-icons/tb";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import { toast } from "sonner";
+import UseCart from "../../hooks/UseCart/UseCart";
 
 const CheckoutForm = ({ totalPrice }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = UseAxiosSecure();
   const { user } = UseAuth();
+  const [cart] = UseCart();
+  console.log(user);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -70,6 +73,20 @@ const CheckoutForm = ({ totalPrice }) => {
       if (paymentIntent.status == "succeeded") {
         toast.success("You've paid the amount");
         setTransactionId(paymentIntent.id);
+
+        // Save the payment in the database
+        const payment = {
+          email: user.email,
+          price: totalPrice,
+          transactionId: paymentIntent.id,
+          data: new Date(),
+          cartId: cart.map((item) => item._id),
+          propertyId: cart.map((item) => item.propertyId),
+          userId: user._id,
+        };
+
+        const res = await axiosSecure.post("payment", { payment: payment });
+        console.log(res);
       }
     }
   };
