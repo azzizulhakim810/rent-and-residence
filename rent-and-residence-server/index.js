@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+/* const stripe = require("stripe")(
+  "sk_test_51S0FqC9NH5J0nkPNlG8ZiSGmRyVj133S4oFuBlyfCSZJyYi7ujeoFphDsuf0hb7ierEpy1QMQVeaovnDnG1Aw6pf00SJWU75Ko"
+); */
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectId } = require("mongodb");
