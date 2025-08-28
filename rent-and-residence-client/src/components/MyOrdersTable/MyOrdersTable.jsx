@@ -9,7 +9,25 @@ const MyOrdersTable = ({ order, refetch }) => {
   const [propertyId, setPropertyId] = useState();
   const axiosSecure = UseAxiosSecure();
 
+  const [properties, setProperties] = useState([]);
+
+  // Click here - https://chatgpt.com/share/68afe875-ad24-8003-9ddf-8d7fee2f8174
+  // To see what nothing worked except promise.all
+
   useEffect(() => {
+    Promise.all(
+      order.propertyIds.map((id) => axiosSecure.get(`/api/properties/${id}`))
+    )
+      .then((responses) => setProperties(responses.map((r) => r.data)))
+      .catch((err) => console.error(err));
+  }, [order.propertyIds, axiosSecure]);
+
+  console.log(properties);
+
+  /*   useEffect(() => {
+    // order.propertyIds.map((propId) => setPropertyId(propId));
+    // order.propertyIds.map((propId) => setPropertyId(propId));
+
     const fetchPropId = async () => {
       const usingfetch = await order.propertyIds.map((propId) =>
         setPropertyId(propId)
@@ -18,21 +36,21 @@ const MyOrdersTable = ({ order, refetch }) => {
     };
 
     fetchPropId();
-  }, [order.propertyIds]);
+  }, [order.propertyIds]); */
 
-  console.log(propertyId);
+  // console.log(propertyId);
 
-  const {
+  /*  const {
     isPending,
 
-    data: property,
+    data: property = [],
   } = useQuery({
     queryKey: ["property", propertyId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/api/properties/${propertyId}`);
       return res.data;
     },
-  });
+  }); */
 
   // property?.map((propInfo) => console.log(propInfo));
 
@@ -102,12 +120,18 @@ const MyOrdersTable = ({ order, refetch }) => {
     });
   }; */
 
-  console.log(property);
+  // console.log(property);
 
   return (
     <>
-      {property?.map((propInfo, idx) => (
-        <tr>{isPending ? <p>Wait</p> : <p>{propInfo._id}</p>}</tr>
+      {properties.map((prop, idx) => (
+        <tr key={prop[0]._id}>
+          <td>{idx + 1}</td>
+          <td>{prop[0]._id}</td>
+          <td>{prop[0].title}</td>
+          <td>{prop[0].price}€</td>
+          {/* <td>{order[0].status}</td> */}
+        </tr>
       ))}
     </>
   );

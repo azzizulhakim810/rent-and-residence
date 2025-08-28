@@ -54,24 +54,31 @@ const MyOrders = () => {
                 </thead>
                 <tbody>
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
+                    <tr>
+                      <td colSpan={6} className="text-center py-4">
+                        <p className="text-lg text-C_purple flex items-center justify-center gap-4">
+                          Loading{" "}
+                          <span className="loading loading-dots loading-lg"></span>
+                        </p>
+                      </td>
+                    </tr>
                   ) : myOrders?.length !== 0 ? (
-                    myOrders?.map((order, i) => (
+                    myOrders.map((order, i) => (
                       <MyOrdersTable
                         key={order._id}
                         order={order}
                         i={i}
                         refetch={refetch}
-                        // setLoading={setLoading}
                       />
                     ))
                   ) : (
-                    <span className="text-lg font-Nunito_Sans block mt-4">
-                      There is no user!
-                    </span>
+                    <tr>
+                      <td colSpan={6} className="text-center py-4">
+                        <span className="text-lg font-Nunito_Sans">
+                          There is no property!
+                        </span>
+                      </td>
+                    </tr>
                   )}
                 </tbody>
               </table>
