@@ -10,10 +10,17 @@ const MyOrdersTable = ({ order, refetch }) => {
   const axiosSecure = UseAxiosSecure();
 
   useEffect(() => {
-    order.propertyIds.map((propId) => setPropertyId(propId));
+    const fetchPropId = async () => {
+      const usingfetch = await order.propertyIds.map((propId) =>
+        setPropertyId(propId)
+      );
+      // setPropertyId(usingfetch);
+    };
+
+    fetchPropId();
   }, [order.propertyIds]);
 
-  // console.log(propertyId);
+  console.log(propertyId);
 
   const {
     isPending,
@@ -95,83 +102,12 @@ const MyOrdersTable = ({ order, refetch }) => {
     });
   }; */
 
-  // console.log(property);
+  console.log(property);
 
   return (
     <>
-      {property?.map((propInfo) => (
-        <tr className="font-Nunito_Sans text-C_LightGray">
-          <td className="text-center">idx + 1</td>
-          <td>
-            {/* <Link to={`/propertyDetails/${_id}`}> */}
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle h-12 w-12">
-                  {/* <img
-                  src={
-                    images
-                      ? images[0]
-                      : "https://i.ibb.co.com/jkGkX8fs/default-user.png"
-                  }
-                  alt="Avatar Tailwind CSS Component"
-                /> */}
-                </div>
-              </div>
-              <div>
-                {/* <div className="font-bold uppercase">{title.slice(0, 20)}...</div> */}
-                <div className="text-sm opacity-50">{propInfo._id}</div>
-              </div>
-            </div>
-            {/* </Link> */}
-          </td>
-          <td className="capitalize text-C_LightGray/90">name</td>
-          {/* <td className="capitalize text-C_LightGray/90">{category}</td> */}
-
-          <td className="text-C_LightGray/90">Unpaid</td>
-          <td className="text-C_LightGray/90">price€</td>
-          <td className="text-center">
-            {/* <button
-          onClick={(e) => handleChangeApproval(e)}
-          className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
-        >
-          {approval && approval === "Pending" ? "Pending" : "Approved"}
-        </button> */}
-
-            <select
-              className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
-              // onChange={(e) => handleApproval(e, _id)}
-              // defaultValue={approval}
-            >
-              <option value="Pending">Pending</option>
-              <option value="Approved">Approved</option>
-            </select>
-
-            {/* {approval && approval === "Pending" ? (
-          <button
-            onClick={(e) => handleChangeApproval(e)}
-            className="cursor-pointer bg-yellow-200 text-yellow-800  py-[5px] px-[16px] rounded-3xl"
-          >
-            Pending
-          </button>
-        ) : (
-          <button
-            onClick={(e) => handleChangeApproval(e)}
-            className="cursor-pointer bg-green-200 text-green-700 py-[5px] px-[16px] rounded-3xl"
-          >
-            Approved
-          </button>
-        )} */}
-          </td>
-
-          <td>
-            {/* <button
-          onClick={() => handleDeleteProperty(_id)}
-          className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
-        >
-          <RiDeleteBinLine className="text-lg" />
-        </button> */}
-          </td>
-        </tr>
+      {property?.map((propInfo, idx) => (
+        <tr>{isPending ? <p>Wait</p> : <p>{propInfo._id}</p>}</tr>
       ))}
     </>
   );
