@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import PaymentHistoryTable from "../../../components/PaymentHistoryTable/PaymentHistoryTable";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import MyOrdersTable from "../../../components/MyOrdersTable/MyOrdersTable";
 
 const MyOrders = () => {
   const { user } = UseAuth();
@@ -24,7 +25,9 @@ const MyOrders = () => {
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
-      <h1 className="font-Nunito text-5xl font-[800]">Dashboard – My Orders</h1>
+      <h1 className="font-Nunito text-5xl font-[800]">
+        Dashboard – My Payment History
+      </h1>
 
       <div className="grid  grid-cols-12 gap-6 pt-10">
         <div className="lg:col-span-12 col-span-12 lg:order-1 order-2 flex flex-col gap-10">
@@ -41,10 +44,11 @@ const MyOrders = () => {
                 <thead className="bg-C_purple rounded-5xl ">
                   <tr className="font-Nunito text-[16px] text-white rounded-4xl">
                     <th className="text-center">Serial</th>
-                    <th>Traansaction Id</th>
-                    <th>Price</th>
+                    <th>Transaction Id</th>
+                    <th>Amount</th>
+                    <th className="text-center">Quantity</th>
 
-                    <th>Date</th>
+                    <th>Order Created</th>
                     <th className="text-center">Status</th>
                   </tr>
                 </thead>
@@ -57,7 +61,7 @@ const MyOrders = () => {
                     </p>
                   ) : myOrders?.length !== 0 ? (
                     myOrders?.map((order, i) => (
-                      <PaymentHistoryTable
+                      <MyOrdersTable
                         key={order._id}
                         order={order}
                         i={i}
