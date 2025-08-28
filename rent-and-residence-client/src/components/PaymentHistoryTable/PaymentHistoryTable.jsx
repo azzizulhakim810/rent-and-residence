@@ -1,13 +1,13 @@
 // import { useState } from "react";
-import { toast } from "sonner";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+// import { toast } from "sonner";
+// import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const PaymentHistoryTable = ({ order, i, refetch }) => {
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
   // const [selectedRole, setSelectedRole] = useState("");
 
   // Destructure Details from Property
-  const { _id, date, price, transactionId, status } = order || {};
+  const { _id, date, price, transactionId, status, cartIds } = order || {};
 
   const orderCreated = new Date(date);
 
@@ -24,21 +24,21 @@ const PaymentHistoryTable = ({ order, i, refetch }) => {
     options
   );
 
-  console.log(order);
+  // console.log(order.cartIds.length);
 
-  const handleRoleChange = (e, id) => {
+  /*  const handleRoleChange = (e, id) => {
     const updatedRole = e.target.value;
     console.log(updatedRole, id);
 
-    /* axiosSecure
+    axiosSecure
       .patch(`/api/updateUserRole/${id}`, {
         role: updatedRole,
       })
       .then((res) => {
         console.log(res.data);
         toast.success(`${name} is now ${updatedRole}`);
-      }); */
-  };
+      });
+  }; */
 
   /* const handleDelete = (id) => {
     console.log(id);
@@ -68,14 +68,29 @@ const PaymentHistoryTable = ({ order, i, refetch }) => {
 
   // console.log(user);
   return (
-    <tr className="font-Nunito_Sans text-C_LightGray">
+    <tr className="font-Nunito_Sans text-C_LightGray gap-10">
       <td className="capitalize text-C_LightGray/90 text-center">{i + 1}</td>
       <td className="capitalize text-C_LightGray/90">{transactionId}</td>
       <td className="capitalize text-C_LightGray/90">{price}€</td>
+      <td className="capitalize text-C_LightGray/90 text-center">
+        {cartIds?.length} Items
+      </td>
       <td className="capitalize text-C_LightGray/90">
         {formattedOrderCreated}
       </td>
-      <td className="capitalize text-C_LightGray/90 text-center">
+      <td className="text-center">
+        <span
+          className={
+            status === "Pending"
+              ? "bg-yellow-200 text-yellow-600 border-yellow-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+              : "bg-green-200 text-green-600 border-green-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+          }
+        >
+          {status}
+        </span>
+      </td>
+
+      {/* <td className="capitalize text-C_LightGray/90 text-center">
         {status && (
           <select
             className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
@@ -86,7 +101,7 @@ const PaymentHistoryTable = ({ order, i, refetch }) => {
             <option value="Pending">Pending</option>
           </select>
         )}
-      </td>
+      </td> */}
 
       {/* <td>
    

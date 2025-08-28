@@ -4,7 +4,7 @@ import PaymentHistoryTable from "../../../components/PaymentHistoryTable/Payment
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const paymentHistory = () => {
+const PaymentHistory = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 
@@ -20,7 +20,7 @@ const paymentHistory = () => {
     },
   });
 
-  // console.log(paymentHistory);
+  // console.log(paymentHistory.map((item) => item.cartIds));
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -43,8 +43,9 @@ const paymentHistory = () => {
                 <thead className="bg-C_purple rounded-5xl ">
                   <tr className="font-Nunito text-[16px] text-white rounded-4xl">
                     <th className="text-center">Serial</th>
-                    <th>Traansaction Id</th>
+                    <th>Transaction Id</th>
                     <th>Amount</th>
+                    <th className="text-center">Quantity</th>
 
                     <th>Order Created</th>
                     <th className="text-center">Status</th>
@@ -82,4 +83,4 @@ const paymentHistory = () => {
   );
 };
 
-export default paymentHistory;
+export default PaymentHistory;
