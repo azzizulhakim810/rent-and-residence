@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 // import { RiDeleteBinLine } from "react-icons/ri";
 // import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const MyOrdersTable = ({ order, refetch }) => {
-  const [propertyId, setPropertyId] = useState();
+  // const [propertyId, setPropertyId] = useState();
   const axiosSecure = UseAxiosSecure();
 
   const [properties, setProperties] = useState([]);

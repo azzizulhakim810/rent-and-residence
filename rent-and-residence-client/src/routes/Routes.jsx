@@ -28,6 +28,7 @@ import Checkout from "../pages/Checkout/Checkout";
 
 import MyOrders from "../pages/Dashboard_Pages/MyOrders/MyOrders";
 import PaymentHistory from "../pages/Dashboard_Pages/PaymentHistory/PaymentHistory";
+import AllOrders from "../pages/Dashboard_Pages/AllOrders/AllOrders";
 
 export const router = createBrowserRouter([
   {
@@ -160,6 +161,15 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyOrders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allOrders",
+
+        element: (
+          <PrivateRoute>
+            <AllOrders />
           </PrivateRoute>
         ),
       },

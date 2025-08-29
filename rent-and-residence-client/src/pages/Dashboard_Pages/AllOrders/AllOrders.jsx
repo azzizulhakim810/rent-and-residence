@@ -1,26 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import MyOrdersTable from "../../../components/MyOrdersTable/MyOrdersTable";
 
-const MyOrders = () => {
+const AllOrders = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 
   const {
-    data: myOrders = [],
+    data: allOrders = [],
     refetch,
     isPending,
   } = useQuery({
-    queryKey: ["myOrders", user?.email],
+    queryKey: ["allOrders", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/api/payment/${user.email}`);
       return res.data;
     },
   });
 
-  console.log(myOrders);
+  console.log(allOrders);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -61,8 +60,8 @@ const MyOrders = () => {
                         </p>
                       </td>
                     </tr>
-                  ) : myOrders?.length !== 0 ? (
-                    myOrders.map((order, i) => (
+                  ) : allOrders?.length !== 0 ? (
+                    allOrders.map((order, i) => (
                       <MyOrdersTable
                         key={order._id}
                         order={order}
@@ -89,4 +88,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default AllOrders;
