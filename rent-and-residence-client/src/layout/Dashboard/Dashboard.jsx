@@ -225,7 +225,7 @@ const Dashboard = () => {
         ""
       )}
 
-      {/*  <li className="hover:bg-C_purple hover:rounded-md">
+      <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
           to="/dashboard/paymentHistory"
           className={({ isActive }) =>
@@ -239,7 +239,7 @@ const Dashboard = () => {
             Payment History
           </span>
         </NavLink>
-      </li> */}
+      </li>
 
       <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink

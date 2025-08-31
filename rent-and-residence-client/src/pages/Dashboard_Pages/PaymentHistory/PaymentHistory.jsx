@@ -68,7 +68,7 @@ const PaymentHistory = () => {
                       />
                     ))
                   ) : (
-                    <tr className="  text-lg font-Nunito_Sans block mt-4">
+                    <tr className="text-lg font-Nunito_Sans block mt-4">
                       You don't make any payment!
                     </tr>
                   )}

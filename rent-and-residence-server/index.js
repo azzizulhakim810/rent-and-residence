@@ -722,6 +722,8 @@ async function run() {
     app.post("/payment", async (req, res) => {
       const payment = req.body;
 
+      console.log(payment);
+
       const paymentResult = await paymentCollection.insertOne(payment);
 
       // console.log("Payment Info", payment);

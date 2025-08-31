@@ -18,7 +18,7 @@ const CheckoutForm = ({ totalPrice }) => {
   const { cartProperties, cartItems } = cart;
   const [currentUserFromDB] = useSignedInUser();
 
-  // console.log(cart);
+  console.log(cart);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -88,12 +88,12 @@ const CheckoutForm = ({ totalPrice }) => {
           transactionId: paymentIntent.id,
           date: new Date(), // need to use moment.js
           userId: currentUserFromDB._id,
-          cartIds: cartItems.map((item) => item._id),
+          // cartIds: cartItems.map((item) => item._id),
           propertyIds: cartItems.map((item) => item.propertyId),
           status: "Pending",
         };
 
-        const res = await axiosSecure.post("payment", payment);
+        const res = await axiosSecure.post("/payment", payment);
         refetch();
 
         toast.success("You've paid the amount");
