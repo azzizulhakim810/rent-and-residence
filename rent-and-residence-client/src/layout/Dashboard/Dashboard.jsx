@@ -72,7 +72,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple hover:rounded-md">
+      {/* <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
           to="/dashboard/myOrders"
           className={({ isActive }) =>
@@ -86,7 +86,7 @@ const Dashboard = () => {
             My Orders
           </span>
         </NavLink>
-      </li>
+      </li> */}
 
       {isRole?.toLowerCase() === "admin" ? (
         <li className="hover:bg-C_purple hover:rounded-md">
@@ -108,6 +108,25 @@ const Dashboard = () => {
         ""
       )}
 
+      {isRole?.toLowerCase() === "admin" ? (
+        <li className="hover:bg-C_purple hover:rounded-md">
+          <NavLink
+            to="/dashboard/allOrders"
+            className={({ isActive }) =>
+              isActive
+                ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+            }
+          >
+            <span className="flex items-center gap-4 justify-start">
+              <MdOutlineManageAccounts />
+              All Orders
+            </span>
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
       {isRole?.toLowerCase() === "admin" ? (
         <li className="hover:bg-C_purple hover:rounded-md">
           <NavLink
@@ -168,7 +187,45 @@ const Dashboard = () => {
         ""
       )}
 
-      <li className="hover:bg-C_purple hover:rounded-md">
+      {isRole?.toLowerCase() === "user" ? (
+        <>
+          <li className="hover:bg-C_purple hover:rounded-md">
+            <NavLink
+              to="/dashboard/myOrders"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                  : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-4 justify-start">
+                <TfiLayoutListThumb />
+                My Orders
+              </span>
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-C_purple hover:rounded-md">
+            <NavLink
+              to="/dashboard/paymentHistory"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-white bg-C_purple hover:text-white border-t-[#7854f6] rounded-md  hover:ms-3 transition-all duration-300   ps-6 py-3 "
+                  : "text-[##222222] hover:bg-transparent rounded-md  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-4 justify-start">
+                <VscHistory />
+                Payment History
+              </span>
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        ""
+      )}
+
+      {/*  <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
           to="/dashboard/paymentHistory"
           className={({ isActive }) =>
@@ -182,7 +239,7 @@ const Dashboard = () => {
             Payment History
           </span>
         </NavLink>
-      </li>
+      </li> */}
 
       <li className="hover:bg-C_purple hover:rounded-md">
         <NavLink
