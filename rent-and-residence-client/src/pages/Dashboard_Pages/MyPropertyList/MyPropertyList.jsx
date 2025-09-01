@@ -44,8 +44,8 @@ const MyPropertyList = () => {
             <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
               <table className="table">
                 {/* head */}
-                <thead>
-                  <tr className="font-Nunito text-black text-[16px]">
+                <thead className="bg-C_purple rounded-5xl ">
+                  <tr className="font-Nunito text-white text-[16px]">
                     <th>Title</th>
                     <th>Category</th>
 

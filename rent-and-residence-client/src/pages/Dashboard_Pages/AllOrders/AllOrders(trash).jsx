@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-import AllOrdersTable from "../../../components/AllOrdersTable/AllOrdersTable";
+import AllOrdersTable from "../../../components/AllOrdersTable/AllOrdersTable(Trash)";
+import AllOrdersTableTrash from "../../../components/AllOrdersTable/AllOrdersTable(Trash)";
 
 const AllOrdersTrash = () => {
   const { user } = UseAuth();
@@ -63,7 +64,7 @@ const AllOrdersTrash = () => {
                     </tr>
                   ) : allOrders?.length !== 0 ? (
                     allOrders.map((order, i) => (
-                      <AllOrdersTable
+                      <AllOrdersTableTrash
                         key={order._id}
                         order={order}
                         i={i}

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import PaymentHistoryTable from "../../../components/PaymentHistoryTable/PaymentHistoryTable";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import AllOrdersTable from "../../../components/AllOrdersTable/AllOrdersTable";
 
 const AllOrders = () => {
   const { user } = UseAuth();
@@ -15,12 +16,14 @@ const AllOrders = () => {
   } = useQuery({
     queryKey: ["allOrders", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/api/payment/${user.email}`);
+      const res = await axiosSecure.get(`/api/allPayments/${user.email}`);
       return res.data;
     },
   });
 
   // console.log(paymentHistory.map((item) => item.cartIds));
+
+  console.log(allOrders);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -46,6 +49,7 @@ const AllOrders = () => {
                     <th>Transaction Id</th>
                     <th>Amount</th>
                     <th className="text-center">Quantity</th>
+                    <th className="text-center">Properties</th>
 
                     <th>Order Created</th>
                     <th className="text-center">Status</th>
@@ -59,7 +63,7 @@ const AllOrders = () => {
                     </p>
                   ) : allOrders?.length !== 0 ? (
                     allOrders?.map((order, i) => (
-                      <PaymentHistoryTable
+                      <AllOrdersTable
                         key={order._id}
                         order={order}
                         i={i}

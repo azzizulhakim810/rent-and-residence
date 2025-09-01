@@ -294,6 +294,23 @@ async function run() {
       res.send(result);
     });
 
+    // Get the payment history
+    app.get(
+      "/api/allPayments/:email",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        // const query = { email: req.params.email };
+
+        if (req.params.email !== req.decoded.email) {
+          return res.status(403).send({ message: "forbidden access" });
+        }
+
+        const result = await paymentCollection.find().toArray();
+        res.send(result);
+      }
+    );
+
     // Add a User
     app.post("/api/auth/register", async (req, res) => {
       const newUser = req.body;

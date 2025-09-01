@@ -1,115 +1,73 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-// import { RiDeleteBinLine } from "react-icons/ri";
-// import { Link } from "react-router-dom";
 // import { toast } from "sonner";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+// import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const AllOrdersTable = ({ order, refetch }) => {
-  // const [propertyId, setPropertyId] = useState();
-  const axiosSecure = UseAxiosSecure();
+const AllOrdersTable = ({ order, i, refetch }) => {
+  // const axiosSecure = UseAxiosSecure();
+  // const [selectedRole, setSelectedRole] = useState("");
+  const [allPropIds, setAllPropIds] = useState([]);
 
-  const [properties, setProperties] = useState([]);
+  // Destructure Details from Property
+  const { _id, date, price, transactionId, status, cartIds, propertyIds } =
+    order || {};
 
-  // Click here - https://chatgpt.com/share/68afe875-ad24-8003-9ddf-8d7fee2f8174
-  // To see what nothing worked except promise.all
+  // setAllPropIds(...propertyIds);
+  // console.log(allPropIds);
 
   useEffect(() => {
-    Promise.all(
-      order.propertyIds.map((id) => axiosSecure.get(`/api/properties/${id}`))
-    )
-      .then((responses) => setProperties(responses.map((r) => r.data)))
-      .catch((err) => console.error(err));
-  }, [order.propertyIds, axiosSecure]);
+    if (propertyIds?.length) {
+      // const ids = propertyIds?.map((singleId) => singleId);
+      setAllPropIds(propertyIds);
+    }
+  }, [propertyIds]);
 
-  // console.log(order);
+  console.log(allPropIds.join(","));
 
-  /* useEffect(() => {
-    // order.propertyIds.map((propId) => setPropertyId(propId));
-    // order.propertyIds.map((propId) => setPropertyId(propId));
+  const orderCreated = new Date(date);
 
-    // const fetchPropId = async () => {
-    //   const usingfetch = await order.propertyIds.map((propId) =>
-    //     setPropertyId(propId)
-    //   );
-    //   // setPropertyId(usingfetch);
-    // };
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
 
-    // fetchPropId();
-  }, [order.propertyIds]); */
+  const formattedOrderCreated = orderCreated.toLocaleDateString(
+    "en-US",
+    options
+  );
 
-  // console.log(propertyId);
+  // console.log(order.cartIds.length);
 
-  /*   const {
-    isPending,
-
-    data: property = [],
-  } = useQuery({
-    queryKey: ["property", propertyId],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/api/properties/${propertyId}`);
-      return res.data;
-    },
-  }); */
-
-  // property?.map((propInfo) => console.log(propInfo));
-
-  // Destructure Details from Property
-  /*  const {
-    _id,
-    title,
-    price,
-    images,
-    address,
-    // category,
-    approval,
-    ownerId,
-  } = property || {}; */
-
-  // console.log(approval);
-
-  // Destructure Details from Property
-  /*   const {
-    // _id,
-    name,
-    // profileImage,
-  } = ownerInfo || {}; */
-
-  /* const handleApproval = (e, id) => {
-    // console.log(e.target.value, id);
-    const approvalStatus = e.target.value;
+  /*  const handleRoleChange = (e, id) => {
+    const updatedRole = e.target.value;
+    console.log(updatedRole, id);
 
     axiosSecure
-      .patch(`/api/property/approvalUpdate/${id}`, { approval: approvalStatus })
+      .patch(`/api/updateUserRole/${id}`, {
+        role: updatedRole,
+      })
       .then((res) => {
         console.log(res.data);
-        toast.success(`This property is now ${approvalStatus}`);
-        refetch();
-      })
-      .catch((err) => console.log(err));
-
-      const { data: approvalStatus, refetch: approvalRefetch } = useQuery({
-      queryKey: ["approvalStatus"],
-      queryFn: async () => {
-        const res = axiosSecure.patch(`/api/property/approvalUpdate/${_id}`);
-        return res.data;
-      },
-    });
+        toast.success(`${name} is now ${updatedRole}`);
+      });
   }; */
 
-  /*  const handleDeleteProperty = (id) => {
-    // console.log(id);
-
+  /* const handleDelete = (id) => {
+    console.log(id);
     toast.warning("Are you sure?", {
       action: {
         label: "Yes",
 
         onClick: () => {
           axiosSecure
-            .delete(`/api/properties/${id}`)
+            .delete(`/api/users/${id}`)
             .then((res) => {
               console.log(res.data);
-              toast.success("Item has been deleted");
+              toast.success("User Deleted");
+
+              // setLoading(false);
               refetch();
             })
             .catch((err) => {
@@ -118,22 +76,62 @@ const AllOrdersTable = ({ order, refetch }) => {
         },
       },
     });
+
+   
   }; */
 
-  console.log(properties);
-
+  // console.log(user);
   return (
-    <>
-      {properties.map((prop, idx) => (
-        <tr key={prop[0]?._id}>
-          <td>{idx + 1}</td>
-          <td>{prop[0]?._id}</td>
-          <td>{prop[0]?.title}</td>
-          <td>{prop[0]?.price}€</td>
-          <td>{prop[0]?.approval}</td>
-        </tr>
-      ))}
-    </>
+    <tr className="font-Nunito_Sans text-C_LightGray gap-10">
+      <td className="capitalize text-C_LightGray/90 text-center">{i + 1}</td>
+      <td className="capitalize text-C_LightGray/90">{transactionId}</td>
+      <td className="capitalize text-C_LightGray/90">{price}€</td>
+      <td className="capitalize text-C_LightGray/90 text-center">
+        {cartIds?.length} Items
+      </td>
+      <td className="capitalize text-C_LightGray/90 text-center">
+        {propertyIds}
+      </td>
+      <td className="capitalize text-C_LightGray/90">
+        {formattedOrderCreated}
+      </td>
+      <td className="text-center">
+        <span
+          className={
+            status === "Pending"
+              ? "bg-yellow-200 text-yellow-600 border-yellow-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+              : "bg-green-200 text-green-600 border-green-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+          }
+        >
+          {status}
+        </span>
+      </td>
+
+      {/* <td className="capitalize text-C_LightGray/90 text-center">
+        {status && (
+          <select
+            className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
+            onChange={(e) => handleRoleChange(e, _id)}
+            defaultValue={status}
+          >
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+          </select>
+        )}
+      </td> */}
+
+      {/* <td>
+   
+        <button
+          onClick={() => handleDelete(_id)}
+          className="btn bg-red-200 text-red-700 py-[1px] px-[16px] rounded-lg"
+        >
+         
+          <RiDeleteBin3Line className="text-lg" />
+        </button>
+ 
+      </td> */}
+    </tr>
   );
 };
 
