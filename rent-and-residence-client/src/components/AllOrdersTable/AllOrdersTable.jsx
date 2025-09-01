@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 // import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
@@ -94,7 +95,7 @@ const AllOrdersTable = ({ order, i, refetch }) => {
         {cartIds?.length} Items
       </td>
       <td className="capitalize text-C_LightGray/90 text-center">
-        {propertyIds}
+        {propertyIds?.join(", ")}
       </td>
       <td className="capitalize text-C_LightGray/90">
         {formattedOrderCreated}

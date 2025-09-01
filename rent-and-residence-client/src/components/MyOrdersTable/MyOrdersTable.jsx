@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import { useQuery } from "@tanstack/react-query";
 // import { RiDeleteBinLine } from "react-icons/ri";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
@@ -22,7 +22,7 @@ const MyOrdersTable = ({ order, refetch }) => {
       .catch((err) => console.error(err));
   }, [order.propertyIds, axiosSecure]);
 
-  console.log(properties);
+  // console.log(properties);
 
   /*   useEffect(() => {
     // order.propertyIds.map((propId) => setPropertyId(propId));
@@ -126,11 +126,43 @@ const MyOrdersTable = ({ order, refetch }) => {
     <>
       {properties.map((prop, idx) => (
         <tr key={prop[0]._id}>
-          <td>{idx + 1}</td>
-          <td>{prop[0]._id}</td>
-          <td>{prop[0].title}</td>
-          <td>{prop[0].price}€</td>
-          {/* <td>{order[0].status}</td> */}
+          <td className="text-center">{idx + 1}</td>
+          <td>
+            <div className="flex items-center gap-3">
+              <div className="avatar">
+                <div className="mask mask-squircle h-12 w-12">
+                  <img
+                    src={
+                      prop[0]?.images
+                        ? prop[0]?.images[0]
+                        : "https://i.ibb.co.com/jkGkX8fs/default-user.png"
+                    }
+                    alt="Avatar Tailwind CSS Component"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="font-bold uppercase">
+                  {prop[0]?.title.slice(0, 20)}...
+                </div>
+                <div className="text-sm opacity-50">
+                  {prop[0]?.address?.city}, {prop[0]?.address?.country}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>{prop[0].category}</td>
+
+          <td>
+            {prop[0].price}€{prop[0]?.afterPriceLabel}
+          </td>
+          <td>
+            <Link to={`/propertyDetails/${prop[0]?._id}`}>
+              <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
+                View
+              </button>
+            </Link>
+          </td>
         </tr>
       ))}
     </>
