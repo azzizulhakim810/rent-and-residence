@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 // import { RiDeleteBinLine } from "react-icons/ri";
 // import { Link } from "react-router-dom";
 // import { toast } from "sonner";
@@ -22,25 +22,25 @@ const AllOrdersTable = ({ order, refetch }) => {
       .catch((err) => console.error(err));
   }, [order.propertyIds, axiosSecure]);
 
-  console.log(properties);
+  // console.log(order);
 
-  /*   useEffect(() => {
+  /* useEffect(() => {
     // order.propertyIds.map((propId) => setPropertyId(propId));
     // order.propertyIds.map((propId) => setPropertyId(propId));
 
-    const fetchPropId = async () => {
-      const usingfetch = await order.propertyIds.map((propId) =>
-        setPropertyId(propId)
-      );
-      // setPropertyId(usingfetch);
-    };
+    // const fetchPropId = async () => {
+    //   const usingfetch = await order.propertyIds.map((propId) =>
+    //     setPropertyId(propId)
+    //   );
+    //   // setPropertyId(usingfetch);
+    // };
 
-    fetchPropId();
+    // fetchPropId();
   }, [order.propertyIds]); */
 
   // console.log(propertyId);
 
-  /*  const {
+  /*   const {
     isPending,
 
     data: property = [],
@@ -120,17 +120,17 @@ const AllOrdersTable = ({ order, refetch }) => {
     });
   }; */
 
-  // console.log(property);
+  console.log(properties);
 
   return (
     <>
       {properties.map((prop, idx) => (
-        <tr key={prop[0]._id}>
+        <tr key={prop[0]?._id}>
           <td>{idx + 1}</td>
-          <td>{prop[0]._id}</td>
-          <td>{prop[0].title}</td>
-          <td>{prop[0].price}€</td>
-          {/* <td>{order[0].status}</td> */}
+          <td>{prop[0]?._id}</td>
+          <td>{prop[0]?.title}</td>
+          <td>{prop[0]?.price}€</td>
+          <td>{prop[0]?.approval}</td>
         </tr>
       ))}
     </>

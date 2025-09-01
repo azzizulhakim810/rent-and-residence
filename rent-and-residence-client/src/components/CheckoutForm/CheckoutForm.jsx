@@ -88,7 +88,7 @@ const CheckoutForm = ({ totalPrice }) => {
           transactionId: paymentIntent.id,
           date: new Date(), // need to use moment.js
           userId: currentUserFromDB._id,
-          // cartIds: cartItems.map((item) => item._id),
+          cartIds: cartItems.map((item) => item._id),
           propertyIds: cartItems.map((item) => item.propertyId),
           status: "Pending",
         };

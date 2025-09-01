@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-
-import PaymentHistoryTable from "../../../components/PaymentHistoryTable/PaymentHistoryTable";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const AllOrders = () => {
+import AllOrdersTable from "../../../components/AllOrdersTable/AllOrdersTable";
+
+const AllOrdersTrash = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 
@@ -20,12 +20,12 @@ const AllOrders = () => {
     },
   });
 
-  // console.log(paymentHistory.map((item) => item.cartIds));
+  console.log(allOrders);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
       <h1 className="font-Nunito text-5xl font-[800]">
-        Dashboard – All Orders History
+        Dashboard – My Payment History
       </h1>
 
       <div className="grid  grid-cols-12 gap-6 pt-10">
@@ -53,23 +53,30 @@ const AllOrders = () => {
                 </thead>
                 <tbody>
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
+                    <tr>
+                      <td colSpan={6} className="text-center py-4">
+                        <p className="text-lg text-C_purple flex items-center justify-center gap-4">
+                          Loading{" "}
+                          <span className="loading loading-dots loading-lg"></span>
+                        </p>
+                      </td>
+                    </tr>
                   ) : allOrders?.length !== 0 ? (
-                    allOrders?.map((order, i) => (
-                      <PaymentHistoryTable
+                    allOrders.map((order, i) => (
+                      <AllOrdersTable
                         key={order._id}
                         order={order}
                         i={i}
                         refetch={refetch}
-                        // setLoading={setLoading}
                       />
                     ))
                   ) : (
-                    <tr className="text-lg font-Nunito_Sans block mt-4">
-                      You don't make any payment!
+                    <tr>
+                      <td colSpan={6} className="text-center py-4">
+                        <span className="text-lg font-Nunito_Sans">
+                          There is no property!
+                        </span>
+                      </td>
                     </tr>
                   )}
                 </tbody>
@@ -82,4 +89,4 @@ const AllOrders = () => {
   );
 };
 
-export default AllOrders;
+export default AllOrdersTrash;
