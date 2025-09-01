@@ -12,16 +12,20 @@ const AllOrdersTable = ({ order, i, refetch }) => {
     order || {};
 
   // setAllPropIds(...propertyIds);
-  // console.log(allPropIds);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (propertyIds?.length) {
       // const ids = propertyIds?.map((singleId) => singleId);
-      setAllPropIds(propertyIds);
+      setAllPropIds(...propertyIds);
     }
-  }, [propertyIds]);
+  }, [propertyIds]); */
 
-  console.log(allPropIds.join(","));
+  // console.log(allPropIds);
+
+  // const chunkSize = 24;
+  // const ids = allPropIds?.match(new RegExp(`.{1,${chunkSize}}`, "g"));
+
+  // console.log(ids);
 
   const orderCreated = new Date(date);
 
