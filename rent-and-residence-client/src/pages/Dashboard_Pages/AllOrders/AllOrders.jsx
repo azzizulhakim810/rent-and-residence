@@ -46,12 +46,14 @@ const AllOrders = () => {
                 <thead className="bg-C_purple rounded-5xl ">
                   <tr className="font-Nunito text-[16px] text-white rounded-4xl">
                     <th className="text-center">Serial</th>
-                    <th>Transaction Id</th>
-                    <th>Amount</th>
-                    <th className="text-center">Quantity</th>
+                    {/* <th>Transaction Id</th> */}
+                    <th>Email</th>
+
+                    {/* <th className="text-center">Quantity</th> */}
                     <th className="text-center">Properties</th>
 
                     <th>Order Created</th>
+                    <th>Amount</th>
                     <th className="text-center">Status</th>
                   </tr>
                 </thead>

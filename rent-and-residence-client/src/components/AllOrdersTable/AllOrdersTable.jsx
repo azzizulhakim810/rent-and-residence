@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { toast } from "sonner";
-// import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import { toast } from "sonner";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const AllOrdersTable = ({ order, i, refetch }) => {
-  // const axiosSecure = UseAxiosSecure();
+  const axiosSecure = UseAxiosSecure();
   // const [selectedRole, setSelectedRole] = useState("");
   const [allPropIds, setAllPropIds] = useState([]);
 
   // Destructure Details from Property
-  const { _id, date, price, transactionId, status, cartIds, propertyIds } =
-    order || {};
+  const {
+    _id,
+    date,
+    price,
+    email,
+    transactionId,
+    status,
+    cartIds,
+    propertyIds,
+  } = order || {};
 
   // setAllPropIds(...propertyIds);
 
@@ -45,19 +53,20 @@ const AllOrdersTable = ({ order, i, refetch }) => {
 
   // console.log(order.cartIds.length);
 
-  /*  const handleRoleChange = (e, id) => {
-    const updatedRole = e.target.value;
-    console.log(updatedRole, id);
+  const handleRoleChange = (e, paymentId) => {
+    const updatedApproval = e.target.value;
+    console.log(updatedApproval, paymentId);
 
     axiosSecure
-      .patch(`/api/updateUserRole/${id}`, {
-        role: updatedRole,
+      .patch(`/api/updatePaymentStatus/${paymentId}`, {
+        role: updatedApproval,
       })
       .then((res) => {
+        refetch();
         console.log(res.data);
-        toast.success(`${name} is now ${updatedRole}`);
+        toast.success(`This purchase is now ${updatedApproval}`);
       });
-  }; */
+  };
 
   /* const handleDelete = (id) => {
     console.log(id);
@@ -85,22 +94,24 @@ const AllOrdersTable = ({ order, i, refetch }) => {
    
   }; */
 
-  // console.log(user);
+  console.log(order);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray gap-10">
       <td className="capitalize text-C_LightGray/90 text-center">{i + 1}</td>
-      <td className="capitalize text-C_LightGray/90">{transactionId}</td>
-      <td className="capitalize text-C_LightGray/90">{price}€</td>
-      <td className="capitalize text-C_LightGray/90 text-center">
+      {/* <td className="capitalize text-C_LightGray/90">{transactionId}</td> */}
+      <td className=" text-C_LightGray/90">{email}</td>
+
+      {/* <td className="capitalize text-C_LightGray/90 text-center">
         {cartIds?.length} Items
-      </td>
+      </td> */}
       <td className="capitalize text-C_LightGray/90 text-center">
         {propertyIds?.join(", ")}
       </td>
       <td className="capitalize text-C_LightGray/90">
         {formattedOrderCreated}
       </td>
-      <td className="text-center">
+      <td className="capitalize text-C_LightGray/90">{price}€</td>
+      {/* <td className="text-center">
         <span
           className={
             status === "Pending"
@@ -110,20 +121,21 @@ const AllOrdersTable = ({ order, i, refetch }) => {
         >
           {status}
         </span>
-      </td>
+      </td> */}
 
-      {/* <td className="capitalize text-C_LightGray/90 text-center">
+      <td className="capitalize text-C_LightGray/90 text-center">
         {status && (
           <select
-            className="border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
+            className="cursor-pointer border-[1px] px-5 py-2 border-C_purple  focus:border-[1px] focus:outline-0 rounded-lg  focus:rounded-lg"
             onChange={(e) => handleRoleChange(e, _id)}
             defaultValue={status}
           >
-            <option value="Approved">Approved</option>
-            <option value="Pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="onHold">On Hold</option>
+            <option value="cancelled">Cancelled</option>
           </select>
         )}
-      </td> */}
+      </td>
 
       {/* <td>
    

@@ -81,8 +81,10 @@ const PaymentHistoryTable = ({ order, i, refetch }) => {
       <td className="text-center">
         <span
           className={
-            status === "Pending"
+            status === "onHold"
               ? "bg-yellow-200 text-yellow-600 border-yellow-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+              : status === "cancelled"
+              ? "bg-red-200 text-red-600 border-red-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
               : "bg-green-200 text-green-600 border-green-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
           }
         >

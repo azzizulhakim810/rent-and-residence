@@ -90,7 +90,7 @@ const CheckoutForm = ({ totalPrice }) => {
           userId: currentUserFromDB._id,
           cartIds: cartItems.map((item) => item._id),
           propertyIds: cartItems.map((item) => item.propertyId),
-          status: "Pending",
+          status: "onHold",
         };
 
         const res = await axiosSecure.post("/payment", payment);

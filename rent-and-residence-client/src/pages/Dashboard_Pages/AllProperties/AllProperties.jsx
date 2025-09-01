@@ -54,7 +54,7 @@ const AllProperties = () => {
 
                     <th>Owner</th>
                     {/* <th>Category</th> */}
-                    <th>Pay Status</th>
+                    {/* <th>Pay Status</th> */}
                     <th>Price</th>
                     <th className="text-center">Approval</th>
                     <th>Delete</th>

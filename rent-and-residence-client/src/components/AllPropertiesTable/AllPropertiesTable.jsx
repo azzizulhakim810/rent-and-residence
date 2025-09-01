@@ -87,7 +87,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     });
   };
 
-  // console.log(property);
+  console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
       <td className="text-center">{idx + 1}</td>
@@ -118,7 +118,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
       <td className="capitalize text-C_LightGray/90">{name}</td>
       {/* <td className="capitalize text-C_LightGray/90">{category}</td> */}
 
-      <td className="text-C_LightGray/90">Unpaid</td>
+      {/* <td className="text-C_LightGray/90">Unpaid</td> */}
       <td className="text-C_LightGray/90">{price}€</td>
       <td className="text-center">
         {/* <button

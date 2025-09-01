@@ -577,6 +577,36 @@ async function run() {
       }
     );
 
+    // update a payment
+    app.patch(
+      "/api/updatePaymentStatus/:id",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const paymentId = req.params.id;
+        const approvalText = req.body.role;
+
+        console.log(paymentId, approvalText);
+        const filter = { _id: new ObjectId(paymentId) };
+
+        const updatedApproval = {
+          $set: {
+            status: approvalText,
+          },
+        };
+
+        // console.log(userId, newRole);
+        // console.log(userId);
+
+        const result = await paymentCollection.updateOne(
+          filter,
+          updatedApproval
+        );
+
+        res.send(result);
+      }
+    );
+
     // Update property approval
     app.patch(
       "/api/property/approvalUpdate/:id",

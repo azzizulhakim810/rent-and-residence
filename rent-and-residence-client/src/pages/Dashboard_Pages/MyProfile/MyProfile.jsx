@@ -198,11 +198,11 @@ const MyProfile = () => {
 
                     <select
                       className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      value={role}
+                      defaultValue={role}
                       {...register("role", { required: role ? false : true })}
                     >
-                      <option value="user">User</option>
-                      <option value="agent">Agent</option>
+                      <option value="User">User</option>
+                      <option value="Agent">Agent</option>
                     </select>
                   </div>
                 </div>
