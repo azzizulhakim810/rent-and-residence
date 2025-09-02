@@ -789,6 +789,12 @@ async function run() {
       const registeredUser = await userCollection.estimatedDocumentCount();
       const propertyItems = await propertyCollection.estimatedDocumentCount();
 
+      const approvedProperties = await propertyCollection
+        .find({
+          approval: "Approved",
+        })
+        .toArray();
+
       /*  const totalPayment = await paymentCollection.find().toArray();
       const revenue = totalPayment.reduce(
         (total, payment) => total + payment.price,
@@ -810,7 +816,7 @@ async function run() {
 
       const revenue = result.length > 0 ? result[0].totalRevenue : 0;
 
-      res.send({ registeredUser, propertyItems, revenue });
+      res.send({ revenue, registeredUser, propertyItems, approvedProperties });
     });
   } finally {
     // Ensures that the client will close when you finish/error

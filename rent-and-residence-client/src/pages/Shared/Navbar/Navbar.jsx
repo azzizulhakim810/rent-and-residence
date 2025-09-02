@@ -7,6 +7,8 @@ import SignInAndUp from "../SignInAndUp/SignInAndUp";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { BsBuilding, BsPerson } from "react-icons/bs";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import { VscHistory } from "react-icons/vsc";
+import { TfiLayoutListThumb } from "react-icons/tfi";
 
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -15,6 +17,7 @@ import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
+import { HiArrowsRightLeft } from "react-icons/hi2";
 
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
@@ -303,6 +306,22 @@ const Navbar = () => {
 
           <li className="hover:bg-C_purple">
             <NavLink
+              to="/dashboard/allOrders"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <HiArrowsRightLeft />
+                Transactions
+              </span>
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-C_purple">
+            <NavLink
               to="/dashboard/manageUsers"
               className={({ isActive }) =>
                 isActive
@@ -351,6 +370,44 @@ const Navbar = () => {
               <span className="flex items-center gap-2 justify-start">
                 <BiMessageSquareAdd />
                 Add New Property
+              </span>
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        ""
+      )}
+
+      {role?.toLowerCase() === "user" ? (
+        <>
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/myOrders"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <TfiLayoutListThumb />
+                My Orders
+              </span>
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-C_purple">
+            <NavLink
+              to="/dashboard/paymentHistory"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              }
+            >
+              <span className="flex items-center gap-2 justify-start">
+                <VscHistory />
+                Payment History
               </span>
             </NavLink>
           </li>

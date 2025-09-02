@@ -5,7 +5,7 @@ import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 const Statistics = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data } = useQuery({
+  const { data: stats } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/api/admin-stats");
@@ -13,7 +13,7 @@ const Statistics = () => {
     },
   });
 
-  console.log(data);
+  console.log((stats?.revenue / 100).toFixed(2));
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -28,9 +28,9 @@ const Statistics = () => {
             </h1>
 
             <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 font-Nunito_Sans text-C_LightGray">
-              <h3>Total Properties: 0</h3>
-              <h3>Published Properties: 0</h3>
-              <h3>Saved Searches: 0</h3>
+              <h3>Total Properties: {stats?.propertyItems}</h3>
+              <h3>Published Properties: {stats?.approvedProperties.length}</h3>
+              {/* <h3>Saved Searches: 0</h3> */}
               <h3>Favorite Properties: 0</h3>
             </div>
           </div>
@@ -48,12 +48,12 @@ const Statistics = () => {
           {/* Account History  */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
-              Account History <br />
-              (last 7 days)
+              Account History
+              {/* <br /> (last 7 days) */}
             </h1>
 
             <div className="font-Nunito_Sans text-C_LightGray">
-              <h3>Total Sell: $100K</h3>
+              <h3>Total Sell: {(stats?.revenue / 100).toFixed(2)}€</h3>
             </div>
           </div>
         </div>
