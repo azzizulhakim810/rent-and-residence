@@ -1,7 +1,7 @@
-import StatisticsChart from "../../../components/StatisticsChart/StatisticsChart";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import BarChartStat from "../../../components/BarChartStat/BarChartStat";
+import PieChartStat from "../../../components/PieChartStat/PieChartStat";
+import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const Statistics = () => {
   const axiosSecure = useAxiosSecure();
@@ -46,18 +46,29 @@ const Statistics = () => {
           </div>
 
           {/* Listing Views */}
-          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
-            <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
-              Listing Views
-            </h1>
-
+          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] px-2 py-8 w-full rounded-xl bg-white">
             {/* {chartData &&
               chartData?.map((singleData) => (
                 <StatisticsChart key={singleData._id} singleData={singleData} />
               ))} */}
 
-            <div className="flex">
-              {chartData && <BarChartStat chartData={chartData} />}
+            <div className="grid grid-cols-2 text-center">
+              <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
+                Sales per Category
+              </h1>
+
+              <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
+                Revenue per Category
+              </h1>
+            </div>
+            <div className="grid grid-cols-2 ">
+              <div>
+                <BarChartStat chartData={chartData} />
+              </div>
+
+              <div>
+                <PieChartStat chartData={chartData} />
+              </div>
             </div>
           </div>
         </div>
