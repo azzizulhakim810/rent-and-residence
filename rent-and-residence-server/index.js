@@ -820,7 +820,7 @@ async function run() {
     });
 
     // Order Statistics using aggregate pipeline
-    app.get("/api/order-stats", async (req, res) => {
+    app.get("/api/order-stats", verifyToken, verifyAdmin, async (req, res) => {
       const result = await paymentCollection
         .aggregate([
           {
@@ -846,7 +846,15 @@ async function run() {
             $group: {
               _id: "$propertyItems.category",
               quantity: { $sum: 1 },
-              totalRevenue: { $sum: parseFloat("$propertyItems.price") },
+              totalRevenue: { $sum: { $toDouble: "$propertyItems.price" } },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              category: "$_id",
+              quantity: "$quantity",
+              revenue: "$totalRevenue",
             },
           },
         ])

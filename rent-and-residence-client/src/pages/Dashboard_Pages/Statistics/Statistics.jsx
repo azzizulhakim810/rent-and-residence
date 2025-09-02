@@ -1,6 +1,7 @@
 import StatisticsChart from "../../../components/StatisticsChart/StatisticsChart";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import BarChartStat from "../../../components/BarChartStat/BarChartStat";
 
 const Statistics = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +14,15 @@ const Statistics = () => {
     },
   });
 
-  console.log((stats?.revenue / 100).toFixed(2));
+  const { data: chartData = [] } = useQuery({
+    queryKey: ["chartData"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/api/order-stats");
+      return res.data;
+    },
+  });
+
+  // console.log(chartData);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -41,7 +50,15 @@ const Statistics = () => {
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
               Listing Views
             </h1>
-            <StatisticsChart />
+
+            {/* {chartData &&
+              chartData?.map((singleData) => (
+                <StatisticsChart key={singleData._id} singleData={singleData} />
+              ))} */}
+
+            <div className="flex">
+              {chartData && <BarChartStat chartData={chartData} />}
+            </div>
           </div>
         </div>
 
