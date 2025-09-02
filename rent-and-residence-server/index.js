@@ -826,10 +826,35 @@ async function run() {
           {
             $unwind: "$propertyIds",
           },
+          {
+            $addFields: {
+              propertyIdObj: { $toObjectId: "$propertyIds" },
+            },
+          },
+          {
+            $lookup: {
+              from: "properties",
+              localField: "propertyIdObj",
+              foreignField: "_id",
+              as: "propertyItems",
+            },
+          },
+          {
+            $unwind: "$propertyItems",
+          },
+          {
+            $group: {
+              _id: "$propertyItems.category",
+              quantity: { $sum: 1 },
+              totalRevenue: { $sum: parseFloat("$propertyItems.price") },
+            },
+          },
         ])
         .toArray();
 
-      console.log(result);
+      res.send(result);
+
+      // console.log(result);
     });
   } finally {
     // Ensures that the client will close when you finish/error
