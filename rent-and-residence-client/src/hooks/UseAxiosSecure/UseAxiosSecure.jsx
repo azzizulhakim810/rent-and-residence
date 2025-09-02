@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UseAuth from "../UseAuth/UseAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5123",
+  baseURL: "https://rent-and-residence-server.vercel.app",
   // headers: { "Content-Type": "application/json" },
   // withCredentials: true,
 });

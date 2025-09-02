@@ -125,7 +125,7 @@ const MyOrdersTable = ({ order, refetch }) => {
   return (
     <>
       {properties.map((prop, idx) => (
-        <tr key={prop[0]._id}>
+        <tr key={prop[0]?._id}>
           <td className="text-center">{idx + 1}</td>
           <td>
             <div className="flex items-center gap-3">
@@ -151,10 +151,10 @@ const MyOrdersTable = ({ order, refetch }) => {
               </div>
             </div>
           </td>
-          <td>{prop[0].category}</td>
+          <td>{prop[0]?.category}</td>
 
           <td>
-            {prop[0].price}€{prop[0]?.afterPriceLabel}
+            {prop[0]?.price}€{prop[0]?.afterPriceLabel}
           </td>
           <td>
             <Link to={`/propertyDetails/${prop[0]?._id}`}>

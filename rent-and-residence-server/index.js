@@ -873,7 +873,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello from WP Residence");
+  res.send("Hello from Rent & Residence");
 });
 
 app.listen(port, () => {
