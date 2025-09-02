@@ -786,7 +786,7 @@ async function run() {
 
     // Statistic for admin dashboard
     app.get("/api/admin-stats", verifyToken, verifyAdmin, async (req, res) => {
-      const registeredUser = await userCollection.estimatedDocumentCount();
+      const registeredUsers = await userCollection.estimatedDocumentCount();
       const propertyItems = await propertyCollection.estimatedDocumentCount();
 
       const approvedProperties = await propertyCollection
@@ -816,7 +816,20 @@ async function run() {
 
       const revenue = result.length > 0 ? result[0].totalRevenue : 0;
 
-      res.send({ revenue, registeredUser, propertyItems, approvedProperties });
+      res.send({ revenue, registeredUsers, propertyItems, approvedProperties });
+    });
+
+    // Order Statistics using aggregate pipeline
+    app.get("/api/order-stats", async (req, res) => {
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $unwind: "$propertyIds",
+          },
+        ])
+        .toArray();
+
+      console.log(result);
     });
   } finally {
     // Ensures that the client will close when you finish/error
