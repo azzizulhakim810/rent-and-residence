@@ -1,6 +1,19 @@
 import StatisticsChart from "../../../components/StatisticsChart/StatisticsChart";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const Statistics = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const { data } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/api/admin-stats");
+      return res.data;
+    },
+  });
+
+  console.log(data);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>

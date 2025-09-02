@@ -751,7 +751,7 @@ async function run() {
     });
 
     // Stripe
-    app.post("/create-payment-intent", async (req, res) => {
+    app.post("/api/create-payment-intent", async (req, res) => {
       const { price } = req.body;
 
       const amount = parseInt(price * 100);
@@ -766,7 +766,7 @@ async function run() {
     });
 
     // Save payment & clear cart to database
-    app.post("/payment", async (req, res) => {
+    app.post("/api/payment", async (req, res) => {
       const payment = req.body;
 
       const paymentResult = await paymentCollection.insertOne(payment);
@@ -782,6 +782,35 @@ async function run() {
 
       const removeFromCart = await cartCollection.deleteMany(query);
       res.send({ paymentResult, removeFromCart });
+    });
+
+    // Statistic for admin dashboard
+    app.get("/api/admin-stats", verifyToken, verifyAdmin, async (req, res) => {
+      const registeredUser = await userCollection.estimatedDocumentCount();
+      const propertyItems = await propertyCollection.estimatedDocumentCount();
+
+      /*  const totalPayment = await paymentCollection.find().toArray();
+      const revenue = totalPayment.reduce(
+        (total, payment) => total + payment.price,
+        0
+      ); */
+
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              totalRevenue: {
+                $sum: "$price",
+              },
+            },
+          },
+        ])
+        .toArray();
+
+      const revenue = result.length > 0 ? result[0].totalRevenue : 0;
+
+      res.send({ registeredUser, propertyItems, revenue });
     });
   } finally {
     // Ensures that the client will close when you finish/error

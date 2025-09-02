@@ -27,7 +27,7 @@ const CheckoutForm = ({ totalPrice }) => {
   useEffect(() => {
     if (totalPrice > 0) {
       axiosSecure
-        .post("/create-payment-intent", { price: totalPrice })
+        .post("/api/create-payment-intent", { price: totalPrice })
         .then((res) => {
           console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
@@ -93,7 +93,7 @@ const CheckoutForm = ({ totalPrice }) => {
           status: "onHold",
         };
 
-        const res = await axiosSecure.post("/payment", payment);
+        const res = await axiosSecure.post("/api/payment", payment);
         refetch();
 
         toast.success("You've paid the amount");
