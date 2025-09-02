@@ -58,7 +58,7 @@ const SocialLogin = () => {
             }) */
 
         axiosPublic
-          .post("http://localhost:5123/api/auth/register", newUser)
+          .post("/api/auth/register", newUser)
           .then((res) => {
             if (res.statusText !== "OK") {
               toast.error("There is having issues to POST");

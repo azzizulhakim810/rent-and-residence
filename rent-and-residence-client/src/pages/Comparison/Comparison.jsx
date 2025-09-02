@@ -33,7 +33,7 @@ const Comparison = () => {
       .then((data) => setPropertyOwner(data)); */
 
     axiosPublic
-      .get(`http://localhost:5123/api/users/${ownerId}`)
+      .get(`/api/users/${ownerId}`)
       .then((res) => {
         // console.log(res.data);
         setPropertyOwner(res.data);

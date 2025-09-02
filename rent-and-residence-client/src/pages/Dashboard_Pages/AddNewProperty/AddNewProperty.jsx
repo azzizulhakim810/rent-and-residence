@@ -137,7 +137,7 @@ const AddNewProperty = () => {
     console.log(Object.fromEntries(formData.entries()));
 
     axiosSecure
-      .post(`http://localhost:5123/api/properties/${_id}`, formData)
+      .post(`/api/properties/${_id}`, formData)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {

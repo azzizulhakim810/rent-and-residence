@@ -59,6 +59,7 @@ import "@smastrom/react-rating/style.css";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -85,6 +86,7 @@ const PropertyDetails = () => {
   // console.log(currentUserFromDB);
 
   const axiosSecure = UseAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [, refetch] = UseCart();
 
   const {
@@ -118,7 +120,24 @@ const PropertyDetails = () => {
 
     console.log(Object.fromEntries(formData.entries()));
 
-    fetch("http://localhost:5123/api/reviews", {
+    axiosPublic
+      .post("/api/reviews", formData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.ok) {
+          toast.success("Successfully submitted review");
+          reset();
+          refetchReviews();
+          setRating(0);
+          window.scrollTo({
+            top: 0,
+            behavior: "auto",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+
+    /* fetch("http://localhost:5123/api/reviews", {
       method: "POST",
       body: formData,
     })
@@ -134,15 +153,19 @@ const PropertyDetails = () => {
           });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); */
   };
 
   // Fetch the Property
   useEffect(() => {
-    fetch(`http://localhost:5123/api/properties/${propertyId}`)
+    axiosPublic
+      .get(`/api/properties/${propertyId}`)
+      .then((res) => setProperty(res.data[0]));
+
+    /* fetch(`http://localhost:5123/api/properties/${propertyId}`)
       .then((res) => res.json())
-      .then((data) => setProperty(data[0]));
-  }, [propertyId]);
+      .then((data) => setProperty(data[0])); */
+  }, [axiosPublic, propertyId]);
 
   // Destructure Details from Property
   const {
@@ -174,10 +197,14 @@ const PropertyDetails = () => {
 
   // Fetch the owner of each Property
   useEffect(() => {
-    fetch(`http://localhost:5123/api/users/${ownerId}`)
+    axiosPublic
+      .get(`/api/users/${ownerId}`)
+      .then((res) => setPropertyOwner(res.data));
+
+    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
       .then((res) => res.json())
-      .then((data) => setPropertyOwner(data));
-  }, [ownerId]);
+      .then((data) => setPropertyOwner(data)); */
+  }, [axiosPublic, ownerId]);
 
   // Destructure Details from Owner
   const {
@@ -220,9 +247,7 @@ const PropertyDetails = () => {
   const { refetch: refetchReviews, data: reviews } = useQuery({
     queryKey: ["reviews", propertyId],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `http://localhost:5123/api/reviews/${propertyId}`
-      );
+      const res = await axiosSecure.get(`/api/reviews/${propertyId}`);
       return res.data;
     },
     enabled: !!propertyId,
@@ -302,10 +327,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
       };
 
       axiosSecure
-        .post(
-          `http://localhost:5123/api/carts?userEmail=${userEmail}`,
-          cartItem
-        )
+        .post(`/api/carts?userEmail=${userEmail}`, cartItem)
         .then((res) => {
           console.log(res);
           if (res.data.insertedId) {

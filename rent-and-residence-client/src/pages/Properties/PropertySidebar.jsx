@@ -3,17 +3,23 @@ import { FaWhatsapp } from "react-icons/fa";
 import { IoCallOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
+  const axiosSecure = UseAxiosSecure();
 
   // console.log(reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
-    fetch(`http://localhost:5123/api/users/${ownerId}`)
+    axiosSecure
+      .get(`/api/users/${ownerId}`)
+      .then((res) => setPropertyOwner(res.data));
+
+    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
       .then((res) => res.json())
-      .then((data) => setPropertyOwner(data));
-  }, [ownerId]);
+      .then((data) => setPropertyOwner(data)); */
+  }, [axiosSecure, ownerId]);
 
   // console.log(reviews);
 

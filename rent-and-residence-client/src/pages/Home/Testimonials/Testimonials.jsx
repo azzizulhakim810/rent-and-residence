@@ -7,9 +7,7 @@ const Testimonials = () => {
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    axiosPublic
-      .get("http://localhost:5123/api/reviews")
-      .then((res) => setReviews(res.data));
+    axiosPublic.get("/api/reviews").then((res) => setReviews(res.data));
   }, [axiosPublic]);
 
   return (

@@ -17,11 +17,13 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 
 const AgentDetails = () => {
   const [agentOwnedProperty, setAgentOwnedProperty] = useState({});
 
   const agent = useLoaderData([]);
+  const axiosPublic = useAxiosPublic();
   // console.log(agent[0]);
 
   // Destructure Details from Agent
@@ -62,10 +64,14 @@ const AgentDetails = () => {
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
   useEffect(() => {
-    fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
+    axiosPublic
+      .get(`/api/agentOwnedProperty/${_id}`)
+      .then((res) => setAgentOwnedProperty(res.data[0]));
+
+    /* fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
       .then((res) => res.json())
-      .then((data) => setAgentOwnedProperty(data[0]));
-  }, [_id]);
+      .then((data) => setAgentOwnedProperty(data[0])); */
+  }, [axiosPublic, _id]);
 
   return (
     <div className="bg-C_LightGray/5 py-6">

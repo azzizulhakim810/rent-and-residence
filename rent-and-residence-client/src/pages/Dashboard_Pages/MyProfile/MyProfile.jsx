@@ -6,10 +6,12 @@ import { toast } from "sonner";
 import { RxUpdate } from "react-icons/rx";
 
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const MyProfile = () => {
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
+  const axiosSecure = UseAxiosSecure();
 
   const navigate = useNavigate();
 
@@ -110,11 +112,27 @@ const MyProfile = () => {
 
     console.log(Object.fromEntries(formData.entries()));
 
-    fetch(`http://localhost:5123/api/user/${_id}`, {
+    axiosSecure
+      .put(`/api/user/${_id}`, formData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.ok) {
+          toast.success("Profile Updated Successfully");
+          reset();
+          navigate("/dashboard/stat");
+          window.scrollTo({
+            top: 0,
+            behavior: "auto",
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+
+    /* fetch(`http://localhost:5123/api/user/${_id}`, {
       method: "PUT",
-      /* headers: {
-        "content-type": "multipart/form-data",
-      }, */
+      // headers: {
+      //   "content-type": "multipart/form-data",
+      // },
       body: formData,
     })
       .then((res) => res)
@@ -130,7 +148,7 @@ const MyProfile = () => {
           });
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error)); */
   };
 
   // console.log(profilePreview);

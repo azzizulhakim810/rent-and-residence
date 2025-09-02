@@ -70,7 +70,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
           // Save the user to Database
 
           axiosPublic
-            .post("http://localhost:5123/api/auth/register", newUser)
+            .post("/api/auth/register", newUser)
             .then((res) => {
               console.log(res.data);
 
