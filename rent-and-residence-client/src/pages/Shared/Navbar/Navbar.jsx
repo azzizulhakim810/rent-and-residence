@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+
 import { toast } from "sonner";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
@@ -82,7 +82,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] font-medium tracking-wide  hover:bg-transparent border-t-[#7854f6] rounded-none"
-              : " nav-item text-[##222222] font-medium tracking-wide hover:bg-transparent "
+              : " nav-item text-[#222222] font-medium tracking-wide hover:bg-transparent "
           }
         >
           Home
@@ -260,7 +260,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -276,7 +276,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -294,7 +294,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -310,7 +310,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -326,7 +326,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -348,7 +348,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -364,7 +364,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -386,7 +386,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -402,7 +402,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-                  : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+                  : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
               }
             >
               <span className="flex items-center gap-2 justify-start">
@@ -422,7 +422,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -438,7 +438,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? " text-[#7854f6] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
@@ -454,8 +454,8 @@ const Navbar = () => {
           onClick={handleSignOut}
           className={({ isActive }) =>
             isActive
-              ? " text-[##222222] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
-              : "text-[##222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              ? " text-[#222222] border-t-[#7854f6] rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
+              : "text-[#222222] hover:bg-transparent rounded-none  hover:ms-3 transition-all duration-300  hover:text-white ps-6 py-3"
           }
         >
           <span className="flex items-center gap-2 justify-start">
