@@ -20,16 +20,17 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 
 const AgentDetails = () => {
-  const [agentOwnedProperty, setAgentOwnedProperty] = useState({});
+  const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
 
   const agent = useLoaderData([]);
   const axiosPublic = useAxiosPublic();
-  // console.log(agent[0]);
+  console.log(agent);
 
   // Destructure Details from Agent
   const {
     _id,
     name,
+    bio,
     profileImage,
     email,
     role,
@@ -66,12 +67,15 @@ const AgentDetails = () => {
   useEffect(() => {
     axiosPublic
       .get(`/api/agentOwnedProperty/${_id}`)
-      .then((res) => setAgentOwnedProperty(res.data[0]));
+      .then((res) => setAgentOwnedProperty(res.data))
+      .catch((err) => console.log(err));
 
     /* fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
       .then((res) => res.json())
       .then((data) => setAgentOwnedProperty(data[0])); */
   }, [axiosPublic, _id]);
+
+  console.log(agentOwnedProperty);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -90,7 +94,7 @@ const AgentDetails = () => {
             {/* Profile  */}
             <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
               <nav className="flex flex-col gap-2">
-                <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-26">
+                <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-36">
                   <div className=" lg:w-1/2 w-full ">
                     <img
                       className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
@@ -193,6 +197,17 @@ const AgentDetails = () => {
                   </span>
                 </div>
 
+                {/* Bio  */}
+                <div>
+                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    Bio
+                  </h4>
+
+                  <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
+                    {bio}
+                  </p>
+                </div>
+
                 {/* Contact Me */}
                 <div className="pt-10">
                   <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
@@ -259,9 +274,10 @@ const AgentDetails = () => {
             {/* Properties  */}
             {/* First Row  */}
             <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
-              {agentOwnedProperty && (
-                <PropertyCard property={agentOwnedProperty} />
-              )}
+              {agentOwnedProperty.length !== 0 &&
+                agentOwnedProperty?.map((eachProp) => (
+                  <PropertyCard key={eachProp._id} eachProp={eachProp} />
+                ))}
             </div>
 
             {/* Pagination  */}

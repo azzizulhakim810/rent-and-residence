@@ -49,7 +49,7 @@ const MyPropertyList = () => {
                     <th>Title</th>
                     <th>Category</th>
 
-                    <th className="text-center">Pay Status</th>
+                    <th className="text-center">Sell/Quantity</th>
                     <th className="text-center">Price</th>
                     <th className="text-center">Approval</th>
                     <th className="text-center">Details</th>

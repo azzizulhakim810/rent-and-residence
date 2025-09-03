@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 const MyPropertyTable = ({ property }) => {
   // Destructure Details from Property
-  const { _id, title, price, images, address, category, propertyStatus } =
+  const { _id, title, price, images, address, category, approval } =
     property || {};
 
-  console.log(property);
+  // console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
       <td>
@@ -31,11 +31,23 @@ const MyPropertyTable = ({ property }) => {
       </td>
       <td className="capitalize text-C_LightGray/90">{category}</td>
 
-      <td className="text-C_LightGray/90  text-center">Unpaid</td>
+      <td className="text-C_LightGray/90  text-center">0</td>
       <td className="text-C_LightGray/90  text-center">{price}€</td>
-      <td className="capitalize text-center text-black/70">
+      {/* <td className="capitalize text-center text-black/70">
         <span className="bg-green-200 text-green-600 border-green-400 py-1 px-[13px] rounded-4xl">
           Approved
+        </span>
+      </td> */}
+
+      <td className="text-center">
+        <span
+          className={
+            approval === "Pending"
+              ? "bg-yellow-200 text-yellow-600 border-yellow-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+              : "bg-green-200 text-green-600 border-green-400 capitalize text-[14px] rounded-full px-3 py-1 border-1"
+          }
+        >
+          {approval}
         </span>
       </td>
       <td className="text-center">

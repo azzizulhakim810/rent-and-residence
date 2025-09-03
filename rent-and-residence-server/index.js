@@ -183,7 +183,7 @@ async function run() {
     });
 
     // Get all the users
-    app.get("/api/users", verifyToken, verifyAdmin, async (req, res) => {
+    app.get("/api/users", verifyToken, async (req, res) => {
       // console.log(req.headers);
 
       const result = await userCollection.find().toArray();
@@ -208,7 +208,7 @@ async function run() {
     });
 
     // Get each Agent Owned Property
-    app.get("/api/agentOwnedProperty/:id", verifyToken, async (req, res) => {
+    app.get("/api/agentOwnedProperty/:id", async (req, res) => {
       const id = req.params.id;
       console.log(id);
 

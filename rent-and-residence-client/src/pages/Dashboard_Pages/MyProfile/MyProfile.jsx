@@ -115,11 +115,12 @@ const MyProfile = () => {
     axiosSecure
       .put(`/api/user/${_id}`, formData)
       .then((res) => {
-        console.log(res.data);
-        if (res.data.ok) {
+        console.log(res);
+        if (res.statusText === "OK") {
           toast.success("Profile Updated Successfully");
           reset();
-          navigate("/dashboard/stat");
+          // navigate("/dashboard/stat");
+          navigate("/allAgents");
           window.scrollTo({
             top: 0,
             behavior: "auto",
@@ -326,8 +327,8 @@ const MyProfile = () => {
                     {...register("bio", {
                       required: "This is required",
                       maxLength: {
-                        value: 150,
-                        message: "Bio should be less than 150 Characters",
+                        value: 300,
+                        message: "Bio should be less than 300 Characters",
                       },
                       minLength: {
                         value: 50,
@@ -536,7 +537,11 @@ const MyProfile = () => {
               >
                 <img
                   className="w-full object-fill "
-                  src={profilePreview ? profilePreview : profileImage}
+                  src={
+                    profilePreview
+                      ? profilePreview
+                      : "https://i.ibb.co/jkGkX8fs/default-user.png"
+                  }
                 />
 
                 <div id="img-preview"></div>
