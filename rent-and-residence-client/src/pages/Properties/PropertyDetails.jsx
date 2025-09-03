@@ -209,13 +209,13 @@ const PropertyDetails = () => {
   // Destructure Details from Owner
   const {
     name,
-    bio,
+    // bio,
     profileImage,
     email,
     role,
     phone,
     facebookUrl,
-    instagramUrl,
+    // instagramUrl,
     linkedinUrl,
     pinterestUrl,
     twitterUrl,
@@ -1322,7 +1322,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 {/* Profile  */}
                 <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                   <nav className="flex flex-col gap-2">
-                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-36">
+                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-50">
                       <div className=" lg:w-1/2 w-full ">
                         <img
                           className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
@@ -1426,7 +1426,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     </div>
 
                     {/* Bio  */}
-                    <div>
+                    {/* <div>
                       <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
                         Bio
                       </h4>
@@ -1434,7 +1434,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
                         {bio}
                       </p>
-                    </div>
+                    </div> */}
 
                     {/* Contact Me */}
                     <div className="pt-10">
