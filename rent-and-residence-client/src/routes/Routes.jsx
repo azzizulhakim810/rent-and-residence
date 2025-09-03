@@ -60,18 +60,21 @@ export const router = createBrowserRouter([
             <AgentDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
+        /* loader: ({ params }) =>
           fetch(
             `https://rent-and-residence-server.vercel.app/api/users/${params.id}`
-          ),
+          ), */
+        loader: ({ params }) =>
+          fetch(`http://localhost:5123/api/users/${params.id}`),
       },
 
       {
         path: "/allAgents",
         element: <AllAgents />,
 
-        loader: () =>
-          fetch("https://rent-and-residence-server.vercel.app/api/users"),
+        /* loader: () =>
+          fetch("https://rent-and-residence-server.vercel.app/api/users"), */
+        loader: () => fetch("http://localhost:5123/api/users"),
       },
       {
         path: "/blogs",
