@@ -2,12 +2,25 @@ import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import UserCard from "../../../components/AgentCard/AgentCard";
+import { useQuery } from "@tanstack/react-query";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import AgentCard from "../../../components/AgentCard/AgentCard";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const AllAgents = () => {
-  const agents = useLoaderData([]);
+  // const agents = useLoaderData([]);
+  const axiosSecure = UseAxiosSecure();
   // console.log(users);
+
+  const { data: allAgents } = useQuery({
+    queryKey: ["allAgents"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/api/users");
+      return res.data;
+    },
+  });
+
+  console.log(allAgents);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -44,7 +57,7 @@ const AllAgents = () => {
             {/* All Agents  */}
 
             <div className="grid grid-cols-2 justify-start w-full gap-4 py-5">
-              {agents?.map((agent) => (
+              {allAgents?.map((agent) => (
                 <AgentCard key={agent._id} agent={agent} />
               ))}
             </div>

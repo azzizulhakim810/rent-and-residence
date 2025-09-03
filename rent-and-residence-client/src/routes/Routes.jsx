@@ -71,10 +71,6 @@ export const router = createBrowserRouter([
       {
         path: "/allAgents",
         element: <AllAgents />,
-
-        /* loader: () =>
-          fetch("https://rent-and-residence-server.vercel.app/api/users"), */
-        loader: () => fetch("http://localhost:5123/api/users"),
       },
       {
         path: "/blogs",
