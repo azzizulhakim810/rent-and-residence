@@ -10,7 +10,7 @@ import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/Skel
 const Properties = () => {
   // const allProperties = useLoaderData([]);
 
-  const [properties, loading] = useProperties();
+  const [properties, favourites, loading] = useProperties();
   // console.log(properties);
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -89,7 +89,11 @@ const Properties = () => {
                 <SkeletonOfPropertyCard />
               ) : (
                 properties?.map((property) => (
-                  <PropertyCard key={property._id} property={property} />
+                  <PropertyCard
+                    key={property._id}
+                    property={property}
+                    favourites={favourites}
+                  />
                 ))
               )}
             </div>

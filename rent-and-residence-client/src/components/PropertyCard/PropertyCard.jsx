@@ -7,10 +7,16 @@ import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import UseAuth from "../../hooks/UseAuth/UseAuth";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 const PropertyCard = ({ property }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
+  const [{ _id: userId }] = useSignedInUser();
+  // console.log(currentUserFromDB._id);
 
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
   // Destructure Details from Property
   const {
     _id,
@@ -40,13 +46,16 @@ const PropertyCard = ({ property }) => {
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};
 
-  // console.log(images.at(0));
-  // console.log(images.find((item) => item !== undefined));
-  // console.log(images.forEach((img, i) => img));
+  const handleAddToFavourites = (propertyId) => {
+    // console.log(propertyId);
+    axiosPublic
+      .patch(`/api/${userId}/favourites/${propertyId}`)
+      .then((res) => console.log(res.data));
+  };
   return (
-    <Link to={`/propertyDetails/${_id}`}>
-      <div className=" bg-white w-full shadow-lg rounded-lg">
-        {/* Image  */}
+    <div className=" bg-white w-full shadow-lg rounded-lg">
+      {/* Image  */}
+      <Link to={`/propertyDetails/${_id}`}>
         {images?.[0] && (
           <figure
             className="w-full h-64 bg-cover bg-center relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg"
@@ -81,74 +90,75 @@ const PropertyCard = ({ property }) => {
             </div>
           </figure>
         )}
+      </Link>
 
-        {/* Features  */}
-        <div className="card-body ">
-          <div className="flex justify-between">
-            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-              <VscHome className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">{propertyDetails?.rooms} Rooms</p>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-              <LiaBedSolid className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">{propertyDetails?.bedrooms} Beds</p>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-              <PiBathtub className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">
-                {propertyDetails?.bathrooms ? propertyDetails?.bathrooms : "No"}{" "}
-                Baths
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px] ">
-              <BsBoundingBoxCircles className="text-[20px] text-[#3f3f3f]" />
-              <p className="text-[#6f6f6f]">
-                {propertyDetails?.sizeInMeter} m<sup>2</sup>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Divider  */}
-        <div className="bg-gray-300 h-[.5px] mt-0 mb-0"></div>
-
-        {/* Property Owner Info  */}
-        <div className="px-5 py-4 flex justify-between">
-          <div className="avatar flex items-center gap-4">
-            <div className="w-8 rounded-full">
-              <img src={profileImage} />
-            </div>
-            <p className="font-bold">{name}</p>
+      {/* Features  */}
+      <div className="card-body ">
+        <div className="flex justify-between">
+          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+            <VscHome className="text-[20px] text-[#3f3f3f]" />
+            <p className="text-[#6f6f6f]">{propertyDetails?.rooms} Rooms</p>
           </div>
 
-          <div className="flex gap-1">
-            <button
-              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-              data-tip="share"
-            >
-              <IoShareSocialOutline />
-            </button>
+          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+            <LiaBedSolid className="text-[20px] text-[#3f3f3f]" />
+            <p className="text-[#6f6f6f]">{propertyDetails?.bedrooms} Beds</p>
+          </div>
 
-            <button
-              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-              data-tip="add to favourites"
-            >
-              <FaRegHeart />
-            </button>
+          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+            <PiBathtub className="text-[20px] text-[#3f3f3f]" />
+            <p className="text-[#6f6f6f]">
+              {propertyDetails?.bathrooms ? propertyDetails?.bathrooms : "No"}{" "}
+              Baths
+            </p>
+          </div>
 
-            <button
-              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-              data-tip="compare"
-            >
-              <FaPlus />
-            </button>
+          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px] ">
+            <BsBoundingBoxCircles className="text-[20px] text-[#3f3f3f]" />
+            <p className="text-[#6f6f6f]">
+              {propertyDetails?.sizeInMeter} m<sup>2</sup>
+            </p>
           </div>
         </div>
       </div>
-    </Link>
+
+      {/* Divider  */}
+      <div className="bg-gray-300 h-[.5px] mt-0 mb-0"></div>
+
+      {/* Property Owner Info  */}
+      <div className="px-5 py-4 flex justify-between">
+        <div className="avatar flex items-center gap-4">
+          <div className="w-8 rounded-full">
+            <img src={profileImage} />
+          </div>
+          <p className="font-bold">{name}</p>
+        </div>
+
+        <div className="flex gap-1">
+          <button
+            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+            data-tip="share"
+          >
+            <IoShareSocialOutline />
+          </button>
+
+          <button
+            onClick={() => handleAddToFavourites(_id)}
+            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+            data-tip="add to favourites"
+          >
+            <FaRegHeart />
+          </button>
+
+          <button
+            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+            data-tip="compare"
+          >
+            <FaPlus />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

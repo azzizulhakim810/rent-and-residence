@@ -170,8 +170,11 @@ async function run() {
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
-      const result = await propertyCollection.find().toArray();
-      res.send(result);
+      const allProperties = await propertyCollection.find().toArray();
+
+      const favourites = await favouriteCollection.find().toArray();
+
+      res.send({ allProperties, favourites });
     });
 
     // Get an individual Property
@@ -524,34 +527,38 @@ async function run() {
     });
 
     // Add to Favourites
-    app.patch("/api/:userId/favourites/:propertyId", async (req, res) => {
-      const { userId, propertyId } = req.params;
+    app.patch(
+      "/api/:userId/favourites/:propertyId",
 
-      // console.log(userId, propertyId);
+      async (req, res) => {
+        const { userId, propertyId } = req.params;
 
-      const user = await favouriteCollection.findOne({
-        _id: new ObjectId(userId),
-      });
+        // console.log(userId, propertyId);
 
-      let result;
+        const user = await favouriteCollection.findOne({
+          _id: new ObjectId(userId),
+        });
 
-      // If exists, remove it. Otherwise Add it
-      if (user?.propertyIds?.includes(propertyId)) {
-        result = await favouriteCollection.findOneAndUpdate(
-          { _id: new ObjectId(userId) },
-          { $pull: { propertyIds: propertyId } },
-          { returnDocument: "after", upsert: true }
-        );
-      } else {
-        result = await favouriteCollection.findOneAndUpdate(
-          { _id: new ObjectId(userId) },
-          { $addToSet: { propertyIds: propertyId } },
-          { returnDocument: "after", upsert: true }
-        );
+        let result;
+
+        // If exists, remove it. Otherwise Add it
+        if (user?.propertyIds?.includes(propertyId)) {
+          result = await favouriteCollection.findOneAndUpdate(
+            { _id: new ObjectId(userId) },
+            { $pull: { propertyIds: propertyId } },
+            { returnDocument: "after", upsert: true }
+          );
+        } else {
+          result = await favouriteCollection.findOneAndUpdate(
+            { _id: new ObjectId(userId) },
+            { $addToSet: { propertyIds: propertyId } },
+            { returnDocument: "after", upsert: true }
+          );
+        }
+
+        res.send(result);
       }
-
-      res.send(result);
-    });
+    );
 
     // Update a property Info
     app.patch("/api/properties/:id", verifyToken, async (req, res) => {

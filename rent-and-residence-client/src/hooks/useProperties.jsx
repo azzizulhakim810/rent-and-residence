@@ -4,6 +4,7 @@ const useProperties = () => {
   const axiosPublic = useAxiosPublic();
 
   const [properties, setProperties] = useState([]);
+  const [favourites, setFavourites] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,11 +17,12 @@ const useProperties = () => {
 
     axiosPublic.get("/api/properties").then((res) => {
       // console.log(res.data);
-      setProperties(res.data);
+      setProperties(res.data.allProperties);
+      setFavourites(res.data.favourites);
       setLoading(false);
     });
   }, [axiosPublic]);
-  return [properties, loading];
+  return [properties, favourites, loading];
 };
 
 export default useProperties;
