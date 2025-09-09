@@ -173,8 +173,11 @@ async function run() {
       const allProperties = await propertyCollection.find().toArray();
 
       const favourites = await favouriteCollection.find().toArray();
+      const favouritePropertyIds = favourites.map(
+        (EachProp) => EachProp.propertyIds
+      );
 
-      res.send({ allProperties, favourites });
+      res.send({ allProperties, favouritePropertyIds });
     });
 
     // Get an individual Property

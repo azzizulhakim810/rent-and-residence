@@ -18,7 +18,7 @@ const useProperties = () => {
     axiosPublic.get("/api/properties").then((res) => {
       // console.log(res.data);
       setProperties(res.data.allProperties);
-      setFavourites(res.data.favourites);
+      setFavourites(res.data.favouritePropertyIds);
       setLoading(false);
     });
   }, [axiosPublic]);

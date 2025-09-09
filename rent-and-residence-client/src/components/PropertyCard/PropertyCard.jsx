@@ -10,10 +10,12 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
-const PropertyCard = ({ property }) => {
+
+const PropertyCard = ({ property, favourites }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
+  const [isFavourite, setIsFavourite] = useState();
   const [{ _id: userId }] = useSignedInUser();
-  // console.log(currentUserFromDB._id);
+  // console.log(favourites);
 
   const axiosPublic = useAxiosPublic();
   const axiosSecure = UseAxiosSecure();
@@ -31,6 +33,10 @@ const PropertyCard = ({ property }) => {
   } = property || {};
 
   // console.log(property);
+
+  useEffect(() => {
+    favourites.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
+  }, []);
 
   // Fetch the owner of each Property
   useEffect(() => {
