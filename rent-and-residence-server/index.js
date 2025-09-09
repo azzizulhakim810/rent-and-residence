@@ -525,40 +525,32 @@ async function run() {
 
     // Add to Favourites
     app.patch("/api/:userId/favourites/:propertyId", async (req, res) => {
-      // const userId = req.params.userId;
-      // const propertyId = req.params.propertyId;
-
       const { userId, propertyId } = req.params;
 
       // console.log(userId, propertyId);
 
-      /*       const filter = { _id: new ObjectId(userId) };
+      const user = await favouriteCollection.findOne({
+        _id: new ObjectId(userId),
+      });
 
-      const updatedInfo = {
-        $set: {
-          ids: propertyId,
-        },
-      };
+      let result;
 
-      const options = { upsert: true }; */
-
-      // Remove the Item If exists
-      let result = await favouriteCollection.findOneAndUpdate(
-        { _id: new ObjectId(userId) },
-        { $pull: { productIds: propertyId } },
-        { returnDocument: "after", upsert: true }
-      );
-
-      if (!result.value.productIds.includes(propertyId)) {
+      // If exists, remove it. Otherwise Add it
+      if (user?.propertyIds?.includes(propertyId)) {
         result = await favouriteCollection.findOneAndUpdate(
           { _id: new ObjectId(userId) },
-          { $addToSet: { productIds: propertyId } },
+          { $pull: { propertyIds: propertyId } },
+          { returnDocument: "after", upsert: true }
+        );
+      } else {
+        result = await favouriteCollection.findOneAndUpdate(
+          { _id: new ObjectId(userId) },
+          { $addToSet: { propertyIds: propertyId } },
           { returnDocument: "after", upsert: true }
         );
       }
 
       res.send(result);
-      // res.json(result.value);
     });
 
     // Update a property Info
