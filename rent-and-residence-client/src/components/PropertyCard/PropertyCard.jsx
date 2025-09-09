@@ -134,7 +134,7 @@ const PropertyCard = ({ property }) => {
 
             <button
               className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-              data-tip="add to favourits"
+              data-tip="add to favourites"
             >
               <FaRegHeart />
             </button>

@@ -67,6 +67,10 @@ async function run() {
       .db("wp_residence_DB")
       .collection("payments");
 
+    const favouriteCollection = client
+      .db("wp_residence_DB")
+      .collection("favourites");
+
     // JWT Related API
     app.post("/jwt", async (req, res) => {
       const user = req.body;
@@ -517,6 +521,25 @@ async function run() {
         res.send(result);
         console.log("This item is added in the cart");
       }
+    });
+
+    // Add to Favourites
+    app.put("/api/favourites/:id", async (req, res) => {
+      const userId = req.params.id;
+      const newFavourite = req.body;
+
+      const filter = { _id: new ObjectId(userId) };
+      const options = { upsert: true };
+      const updatedInfo = {
+        $set: {
+          ids: newFavourite,
+        },
+      };
+      const result = await favouriteCollection.updateOne(
+        filter,
+        options,
+        updatedInfo
+      );
     });
 
     // Update a property Info
