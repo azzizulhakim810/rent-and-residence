@@ -11,7 +11,7 @@ const Properties = () => {
   // const allProperties = useLoaderData([]);
 
   const [properties, loading] = useProperties();
-  // console.log(allProperties);
+  // console.log(properties);
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>

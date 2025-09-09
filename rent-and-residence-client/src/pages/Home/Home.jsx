@@ -40,7 +40,7 @@ const Home = () => {
       </div>
       <div className="bg-[#F0F5FF]">
         <div className="w-10/12 mx-auto ">
-          <Featured properties={properties} loading={loading} />
+          <Featured loading={loading} />
         </div>
       </div>
 

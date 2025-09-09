@@ -12,10 +12,11 @@ import "swiper/css/pagination";
 import { Keyboard, Pagination } from "swiper/modules";
 import FeatureCard from "../../../components/FeatureCard/FeatureCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useProperties from "../../../hooks/useProperties";
 
 // import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
-const Featured = ({ properties }) => {
+const Featured = () => {
   // const [properties, setProperties] = useState([]);
 
   /*   useEffect(() => {
@@ -24,8 +25,10 @@ const Featured = ({ properties }) => {
       .then((data) => setProperties(data));
   }, []); */
 
+  const [properties, loading] = useProperties();
+
   const featuredProperties = properties.filter(
-    (property) => property.isFeatured == true
+    (property) => property.propertyStatus == "Hot Offer"
   );
   // properties.map((property) => console.log(property));
 

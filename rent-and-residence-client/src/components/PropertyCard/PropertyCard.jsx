@@ -7,7 +7,7 @@ import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-const PropertyCard = ({ eachProp }) => {
+const PropertyCard = ({ property }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
 
   const axiosPublic = useAxiosPublic();
@@ -19,21 +19,21 @@ const PropertyCard = ({ eachProp }) => {
     images,
     ownerId,
     listedIn,
-    category,
+    // category,
     propertyStatus,
     propertyDetails,
-  } = eachProp || {};
+  } = property || {};
 
-  // console.log(eachProp);
+  // console.log(property);
 
   // Fetch the owner of each Property
   useEffect(() => {
-    Promise.all(
-      axiosPublic.get(`/api/users/${ownerId}`).then((res) => {
-        // console.log(res.data);
-        setPropertyOwner(res.data);
-      })
-    );
+    // Promise.all(
+    axiosPublic.get(`/api/users/${ownerId}`).then((res) => {
+      // console.log(res.data);
+      setPropertyOwner(res.data);
+    });
+    // );
   }, [ownerId, axiosPublic]);
   // console.log(propertyOwner);
 
