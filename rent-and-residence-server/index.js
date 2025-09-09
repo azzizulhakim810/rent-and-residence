@@ -524,22 +524,41 @@ async function run() {
     });
 
     // Add to Favourites
-    app.put("/api/favourites/:id", async (req, res) => {
-      const userId = req.params.id;
-      const newFavourite = req.body;
+    app.patch("/api/:userId/favourites/:propertyId", async (req, res) => {
+      // const userId = req.params.userId;
+      // const propertyId = req.params.propertyId;
 
-      const filter = { _id: new ObjectId(userId) };
-      const options = { upsert: true };
+      const { userId, propertyId } = req.params;
+
+      // console.log(userId, propertyId);
+
+      /*       const filter = { _id: new ObjectId(userId) };
+
       const updatedInfo = {
         $set: {
-          ids: newFavourite,
+          ids: propertyId,
         },
       };
-      const result = await favouriteCollection.updateOne(
-        filter,
-        options,
-        updatedInfo
+
+      const options = { upsert: true }; */
+
+      // Remove the Item If exists
+      let result = await favouriteCollection.findOneAndUpdate(
+        { _id: new ObjectId(userId) },
+        { $pull: { productIds: propertyId } },
+        { returnDocument: "after", upsert: true }
       );
+
+      if (!result.value.productIds.includes(propertyId)) {
+        result = await favouriteCollection.findOneAndUpdate(
+          { _id: new ObjectId(userId) },
+          { $addToSet: { productIds: propertyId } },
+          { returnDocument: "after", upsert: true }
+        );
+      }
+
+      res.send(result);
+      // res.json(result.value);
     });
 
     // Update a property Info
@@ -721,7 +740,7 @@ async function run() {
         const result = await userCollection.findOneAndUpdate(
           { _id: new ObjectId(id) },
           { $set: updateProfile },
-          { returnDocument: "after" }
+          { returnDocument: "after" } // So that we can the updated one not old one
         );
 
         res.json(result.value);
