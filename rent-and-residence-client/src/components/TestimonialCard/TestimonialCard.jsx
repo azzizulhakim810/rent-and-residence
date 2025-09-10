@@ -24,9 +24,9 @@ const TestimonialCard = ({ review }) => {
       });
     } */
     const loadReviewer = async () => {
-      const rev = await axiosPublic.get(`/api/users/${userId}`);
-      console.log(rev.data);
-      setUser(rev.data);
+      const res = await axiosPublic.get(`/api/users/${userId}`);
+      // console.log(res.data);
+      setUser(res.data);
     };
     loadReviewer();
   }, [userId, axiosPublic, review]);

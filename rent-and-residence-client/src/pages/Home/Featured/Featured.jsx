@@ -25,9 +25,11 @@ const Featured = () => {
       .then((data) => setProperties(data));
   }, []); */
 
-  const [properties, loading] = useProperties();
+  // const [properties, loading] = useProperties();
+  const [allPropInfo] = useProperties();
+  const { allProperties, favouritePropertyIds } = allPropInfo || [];
 
-  const featuredProperties = properties.filter(
+  const featuredProperties = allProperties?.filter(
     (property) => property.propertyStatus == "Hot Offer"
   );
   // properties.map((property) => console.log(property));

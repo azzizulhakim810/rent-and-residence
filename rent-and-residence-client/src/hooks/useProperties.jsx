@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic/useAxiosPublic";
 const useProperties = () => {
   const axiosPublic = useAxiosPublic();
 
-  const [properties, setProperties] = useState([]);
-  const [favourites, setFavourites] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: allPropInfo,
+    refetch,
+    isPending,
+  } = useQuery({
+    queryKey: ["allPropInfo"],
+    queryFn: async () => {
+      const result = await axiosPublic.get("/api/properties");
 
-  useEffect(() => {
-    /* fetch("http://localhost:5123/api/properties")
-      .then((res) => res.json())
-      .then((data) => {
-        setProperties(data);
-        setLoading(false);
-      }); */
+      return result.data;
+    },
+  });
 
-    axiosPublic.get("/api/properties").then((res) => {
-      // console.log(res.data);
-      setProperties(res.data.allProperties);
-      setFavourites(res.data.favouritePropertyIds);
-      setLoading(false);
-    });
-  }, [axiosPublic]);
-  return [properties, favourites, loading];
+  return [allPropInfo, refetch, isPending];
 };
 
 export default useProperties;

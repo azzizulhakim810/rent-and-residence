@@ -2,7 +2,12 @@
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-const HomeProperties = ({ properties, loading }) => {
+import useProperties from "../../../hooks/useProperties";
+const HomeProperties = () => {
+  // const [properties = [], favourites, loading] = useProperties();
+  const [allPropInfo, refetch, isPending] = useProperties();
+  const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
+
   return (
     <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -16,9 +21,7 @@ const HomeProperties = ({ properties, loading }) => {
 
         {/* Property Cards  */}
         <div className="grid lg:grid-cols-3 grid-cols-1 justify-start w-full gap-6 py-5">
-          {}
-
-          {loading ? (
+          {isPending ? (
             <div className="flex">
               <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
                 Properties are loading
@@ -27,8 +30,13 @@ const HomeProperties = ({ properties, loading }) => {
               <span className=" loading loading-ring loading-xl text-C_purple"></span>
             </div>
           ) : (
-            properties?.map((property) => (
-              <PropertyCard key={property._id} property={property} />
+            allProperties?.map((property) => (
+              <PropertyCard
+                key={property._id}
+                property={property}
+                favourites={favouritePropertyIds}
+                refetch={refetch}
+              />
             ))
           )}
         </div>

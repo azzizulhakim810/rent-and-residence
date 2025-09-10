@@ -11,10 +11,11 @@ import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   // const allProperties = useLoaderData([]);
-  const [properties, loading] = useProperties();
+  const [allPropInfo] = useProperties();
+  const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
 
-  // console.log(properties);
+  // console.log(allProperties, favouritePropertyIds);
 
   useEffect(() => {
     if (locationHook.state?.showModal) {
@@ -36,11 +37,11 @@ const Home = () => {
       <Banner />
       <div className="w-10/12 mx-auto">
         <Services />
-        <HomeProperties properties={properties} loading={loading} />
+        <HomeProperties />
       </div>
       <div className="bg-[#F0F5FF]">
         <div className="w-10/12 mx-auto ">
-          <Featured loading={loading} />
+          <Featured />
         </div>
       </div>
 
