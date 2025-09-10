@@ -11,9 +11,8 @@ const Properties = () => {
   // const allProperties = useLoaderData([]);
 
   // const [properties, favourites, loading] = useProperties();
-    const [allPropInfo] = useProperties();
-  const { allProperties, favouritePropertyIds } = allPropInfo;
-  // console.log(properties);
+  const [allPropInfo, refetch, isPending] = useProperties();
+  const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
@@ -87,7 +86,7 @@ const Properties = () => {
             {/* Property Cards  */}
             <div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
               {/* <SkeletonOfPropertyCard /> */}
-              {loading ? (
+              {isPending ? (
                 <SkeletonOfPropertyCard />
               ) : (
                 allProperties?.map((property) => (
@@ -95,6 +94,7 @@ const Properties = () => {
                     key={property._id}
                     property={property}
                     favourites={favouritePropertyIds}
+                    refetch={refetch}
                   />
                 ))
               )}

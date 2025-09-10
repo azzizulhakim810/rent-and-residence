@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus, FaRegHeart } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
@@ -34,12 +35,6 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // console.log(property);
 
-  useEffect(() => {
-    favourites.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
-  }, []);
-
-  console.log(isFavourite);
-
   // Fetch the owner of each Property
   useEffect(() => {
     // Promise.all(
@@ -55,11 +50,18 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   const { name, profileImage } = propertyOwner || {};
 
   const handleAddToFavourites = (propertyId) => {
-    // console.log(propertyId);
-    axiosPublic
-      .patch(`/api/${userId}/favourites/${propertyId}`)
-      .then((res) => console.log(res.data));
+    axiosPublic.patch(`/api/${userId}/favourites/${propertyId}`).then((res) => {
+      refetch();
+      console.log(res.data);
+    });
   };
+
+  useEffect(() => {
+    favourites.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
+  }, [favourites, _id]);
+
+  // console.log(isFavourite);
+
   return (
     <div className=" bg-white w-full shadow-lg rounded-lg">
       {/* Image  */}
@@ -155,7 +157,8 @@ const PropertyCard = ({ property, favourites, refetch }) => {
             className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
             data-tip="add to favourites"
           >
-            <FaRegHeart />
+            {isFavourite ? <FaHeart /> : <FaRegHeart />}
+            {/* <FaRegHeart /> <FaHeart /> */}
           </button>
 
           <button
