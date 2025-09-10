@@ -235,8 +235,39 @@ async function run() {
     });
 
     // Get all the saved properties
-    app.get("/api/savedProperties", verifyToken, async (req, res) => {
-      const result = await favouriteCollection.find().toArray();
+    app.get("/api/favouriteProperties/:id", verifyToken, async (req, res) => {
+      // const result = await favouriteCollection.find().toArray();
+      // console.log(result);
+      const userId = req.params.id;
+      /* const findTheCollection = await favouriteCollection.findOne({
+        _id: new ObjectId(userId),
+      }); */
+      // console.log(findTheCollection);
+
+      const result = await favouriteCollection
+        .aggregate([
+          {
+            $unwind: "$propertyIds",
+          },
+          /* {
+            $addFields: {
+              propertyIdObj: { $toObjectId: "$propertyIds" },
+            },
+          }, */
+          {
+            $lookup: {
+              from: "properties",
+              localField: "propertyIdObj",
+              foreignField: "_id",
+              as: "propertyItems",
+            },
+          },
+          {
+            $unwind: "$propertyItems",
+          },
+        ])
+        .toArray();
+
       res.send(result);
     });
 
