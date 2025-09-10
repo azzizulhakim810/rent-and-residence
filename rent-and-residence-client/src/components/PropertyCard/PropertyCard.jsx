@@ -19,7 +19,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   // console.log(favourites);
 
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
   // Destructure Details from Property
   const {
     _id,
