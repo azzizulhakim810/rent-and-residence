@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePropCard";
+import SkeletonOfPropertyCard from "../../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import PropertyCard from "../../../components/PropertyCard/PropertyCard";
-import SkeletonOfPropertyCard from "../../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 
 const Favorites = () => {
   // const [favouriteProperties, setFavouriteProperties] = useState();
@@ -22,9 +21,6 @@ const Favorites = () => {
       return res.data;
     },
   });
-
-  const { onlyTheFavouritesObj = [] } = favouriteProperties || {};
-  console.log(onlyTheFavouritesObj);
 
   // Fetch the Property
   /*   useEffect(() => {
@@ -49,19 +45,23 @@ const Favorites = () => {
               Account Summary
             </h1>
 
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 font-Nunito_Sans text-C_LightGray">
-              {/* {isPending ? (
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+              <SkeletonOfPropertyCard />
+            </div>
+
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+              {!isPending ? (
                 <SkeletonOfPropertyCard />
               ) : (
-                onlyTheFavouritesObj?.map((property) => (
-                  <PropertyCard
-                    key={property._id}
-                    property={property}
-                    favourites={favourites}
+                favouriteProperties?.map((favProperty) => (
+                  <FavouritePropCard
+                    key={favProperty?.propertyItems._id}
+                    // property={property}
+                    favProperty={favProperty?.propertyItems}
                     refetch={refetch}
                   />
                 ))
-              )} */}
+              )}
             </div>
           </div>
         </div>
