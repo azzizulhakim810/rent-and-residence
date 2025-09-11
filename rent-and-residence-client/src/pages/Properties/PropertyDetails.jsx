@@ -136,24 +136,6 @@ const PropertyDetails = () => {
         }
       })
       .catch((err) => console.log(err));
-
-    /* fetch("http://localhost:5123/api/reviews", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => {
-        if (res.ok) {
-          toast.success("Successfully submitted review");
-          reset();
-          refetchReviews();
-          setRating(0);
-          window.scrollTo({
-            top: 0,
-            behavior: "auto",
-          });
-        }
-      })
-      .catch((err) => console.log(err)); */
   };
 
   // Fetch the Property

@@ -94,7 +94,7 @@ const AllOrdersTable = ({ order, i, refetch }) => {
    
   }; */
 
-  console.log(order);
+  // console.log(order);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray gap-10">
       <td className="capitalize text-C_LightGray/90 text-center">{i + 1}</td>
@@ -105,7 +105,12 @@ const AllOrdersTable = ({ order, i, refetch }) => {
         {cartIds?.length} Items
       </td> */}
       <td className="capitalize text-C_LightGray/90 text-center">
-        {propertyIds?.join(", ")}
+        {/* {propertyIds?.join(", ")} */}
+        {propertyIds.length > 1 ? (
+          <p>{propertyIds.length} Items</p>
+        ) : (
+          <p>{propertyIds.length} Item</p>
+        )}
       </td>
       <td className="capitalize text-C_LightGray/90">
         {formattedOrderCreated}

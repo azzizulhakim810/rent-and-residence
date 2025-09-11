@@ -6,6 +6,7 @@ import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const Favorites = () => {
   // const [favouriteProperties, setFavouriteProperties] = useState();
+  const value = "favourites";
 
   const axiosSecure = UseAxiosSecure();
   const [{ _id }] = useSignedInUser();
@@ -13,7 +14,7 @@ const Favorites = () => {
   const {
     data: favouriteProperties,
     isPending,
-    refetch,
+    refetch: refetchFavProperty,
   } = useQuery({
     queryKey: ["favouriteProperties", _id],
     queryFn: async () => {
@@ -41,26 +42,26 @@ const Favorites = () => {
         <div className="lg:col-span-12 col-span-10 flex flex-col gap-8">
           {/* Account Summary  */}
           <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
-            <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
-              Account Summary
-            </h1>
-
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+            {/* <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
               <SkeletonOfPropertyCard />
-            </div>
+            </div> */}
 
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
-              {!isPending ? (
-                <SkeletonOfPropertyCard />
+            <div>
+              {isPending ? (
+                <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+                  <SkeletonOfPropertyCard value={value} />
+                </div>
               ) : (
-                favouriteProperties?.map((favProperty) => (
-                  <FavouritePropCard
-                    key={favProperty?.propertyItems._id}
-                    // property={property}
-                    favProperty={favProperty?.propertyItems}
-                    refetch={refetch}
-                  />
-                ))
+                <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+                  {favouriteProperties?.map((favProperty) => (
+                    <FavouritePropCard
+                      key={favProperty?.propertyItems._id}
+                      // property={property}
+                      favProperty={favProperty?.propertyItems}
+                      refetchFavProperty={refetchFavProperty}
+                    />
+                  ))}
+                </div>
               )}
             </div>
           </div>

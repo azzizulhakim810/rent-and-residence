@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react";
+
 import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { LiaBedSolid } from "react-icons/lia";
+import { LiaBedSolid, LiaCartPlusSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
-import UseAuth from "../../hooks/UseAuth/UseAuth";
+import UseCart from "../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
-const FavouritePropCard = ({ favProperty, refetch }) => {
+const FavouritePropCard = ({ favProperty }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   // const [isFavourite, setIsFavourite] = useState();
-  const [{ _id: userId }] = useSignedInUser();
-  console.log(favProperty);
+  const [currentUserFromDB] = useSignedInUser();
+  const [, refetch] = UseCart();
+
+  const { _id: userId, email: userEmail } = currentUserFromDB;
+  // console.log(favProperty);
 
   const axiosPublic = useAxiosPublic();
-  // const axiosSecure = UseAxiosSecure();
+  const axiosSecure = UseAxiosSecure();
   // Destructure Details from Property
   const {
     _id,
@@ -61,6 +64,37 @@ const FavouritePropCard = ({ favProperty, refetch }) => {
   }, [favourites, _id]); */
 
   // console.log(isFavourite);
+
+  // Add to Cart
+  const handleAddToCart = (_id) => {
+    if (currentUserFromDB && userEmail) {
+      // console.log(_id);
+
+      const cartItem = {
+        propertyId: _id,
+        userId,
+        userEmail,
+      };
+
+      axiosSecure
+        .post(`/api/carts?userEmail=${userEmail}`, cartItem)
+        .then((res) => {
+          console.log(res.data.insertedId);
+          if (res?.data?.insertedId) {
+            refetch();
+            toast.success("This property is added to cart");
+          } else {
+            toast.error("Item already exists in the cart.");
+          }
+        })
+        .catch((err) => {
+          toast.error("Item already exists in the cart.");
+          console.log(err);
+        });
+    } else {
+      toast.error("You must login to add items");
+    }
+  };
 
   return (
     <div className=" bg-white w-full shadow-lg rounded-lg">
@@ -136,7 +170,7 @@ const FavouritePropCard = ({ favProperty, refetch }) => {
       <div className="bg-gray-300 h-[.5px] mt-0 mb-0"></div>
 
       {/* Property Owner Info  */}
-      <div className="px-5 py-4 flex justify-between">
+      <div className="px-3 py-4 flex justify-between">
         <div className="avatar flex items-center gap-4">
           <div className="w-8 rounded-full">
             <img src={profileImage} />
@@ -144,30 +178,15 @@ const FavouritePropCard = ({ favProperty, refetch }) => {
           <p className="font-bold">{name}</p>
         </div>
 
-        {/* <div className="flex gap-1">
+        <div className="flex gap-1">
           <button
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="share"
+            onClick={() => handleAddToCart(_id)}
+            className=" flex items-center gap-2  border-C_purple border-[1px] bg-transparent text-C_purple hover:bg-C_purple duration-200 hover:text-white font-Nunito_Sans font-[700] shadow-sm text-[14px] rounded px-2 py-2 cursor-pointer"
           >
-            <IoShareSocialOutline />
+            <LiaCartPlusSolid className="text-[20px]" />
+            Add to Cart
           </button>
-
-          <button
-            
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="add to favourites"
-          >
-           
-            <FaRegHeart /> <FaHeart />
-          </button>
-
-          <button
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="compare"
-          >
-            <FaPlus />
-          </button>
-        </div> */}
+        </div>
       </div>
     </div>
   );

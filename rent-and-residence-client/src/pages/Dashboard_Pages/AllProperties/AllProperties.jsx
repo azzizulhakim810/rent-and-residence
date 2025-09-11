@@ -14,9 +14,9 @@ const AllProperties = () => {
   const axiosSecure = UseAxiosSecure();
 
   const {
+    data: allPropertiesInfo,
     isPending,
     refetch,
-    data: allProperties,
   } = useQuery({
     queryKey: ["allProperties"],
     queryFn: async () => {
@@ -25,6 +25,8 @@ const AllProperties = () => {
     },
     // enabled: !!_id,
   });
+
+  const { allProperties = [] } = allPropertiesInfo || {};
 
   // console.log(allProperties);
 

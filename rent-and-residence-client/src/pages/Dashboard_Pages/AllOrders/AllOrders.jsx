@@ -49,8 +49,8 @@ const AllOrders = () => {
                     {/* <th>Transaction Id</th> */}
                     <th>Email</th>
 
-                    {/* <th className="text-center">Quantity</th> */}
-                    <th className="text-center">Properties</th>
+                    <th className="text-center">Quantity</th>
+                    {/* <th className="text-center">Properties</th> */}
 
                     <th>Order Created</th>
                     <th>Amount</th>
