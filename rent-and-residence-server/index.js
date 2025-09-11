@@ -238,22 +238,22 @@ async function run() {
     app.get("/api/favouriteProperties/:id", verifyToken, async (req, res) => {
       // const result = await favouriteCollection.find().toArray();
       // console.log(result);
-      const userId = req.params.id;
+      const userId = req.params._id;
       /* const findTheCollection = await favouriteCollection.findOne({
         _id: new ObjectId(userId),
       }); */
       // console.log(findTheCollection);
 
-      const result = await favouriteCollection
+      const onlyTheFavouritesObj = await favouriteCollection
         .aggregate([
           {
             $unwind: "$propertyIds",
           },
-          /* {
+          {
             $addFields: {
               propertyIdObj: { $toObjectId: "$propertyIds" },
             },
-          }, */
+          },
           {
             $lookup: {
               from: "properties",
@@ -265,10 +265,21 @@ async function run() {
           {
             $unwind: "$propertyItems",
           },
+          /* {
+            $replaceWith: {
+              eachProp: "$propertyItems",
+            },
+          }, */
+          {
+            $project: {
+              _id: 0,
+              propertyItems: 1,
+            },
+          },
         ])
         .toArray();
 
-      res.send(result);
+      res.send(onlyTheFavouritesObj);
     });
 
     // Fetch the current user

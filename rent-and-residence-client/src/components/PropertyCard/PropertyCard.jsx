@@ -33,7 +33,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     propertyDetails,
   } = property || {};
 
-  // console.log(property);
+  console.log(property);
 
   // Fetch the owner of each Property
   useEffect(() => {

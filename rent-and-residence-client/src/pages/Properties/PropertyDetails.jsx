@@ -161,10 +161,6 @@ const PropertyDetails = () => {
     axiosPublic
       .get(`/api/properties/${propertyId}`)
       .then((res) => setProperty(res.data[0]));
-
-    /* fetch(`http://localhost:5123/api/properties/${propertyId}`)
-      .then((res) => res.json())
-      .then((data) => setProperty(data[0])); */
   }, [axiosPublic, propertyId]);
 
   // Destructure Details from Property
