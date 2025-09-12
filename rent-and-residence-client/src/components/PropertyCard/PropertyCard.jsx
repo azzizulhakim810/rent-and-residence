@@ -49,11 +49,29 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};
 
+  // Add To Favourites
   const handleAddToFavourites = (propertyId) => {
     axiosPublic.patch(`/api/${userId}/favourites/${propertyId}`).then((res) => {
       refetch();
       console.log(res.data);
     });
+  };
+
+  // Comparison Properties
+  const handleComparison = (propertyId) => {
+    console.log(propertyId);
+    const isExisting = localStorage.getItem("property");
+
+    if (isExisting?.filter((prop) => prop.id !== propertyId)) {
+      localStorage.setItem("property", propertyId);
+    } else {
+      console.log("Sorry! Already added to Comparison");
+    }
+
+    /* axiosPublic.patch(`/api/${userId}/favourites/${propertyId}`).then((res) => {
+      refetch();
+      console.log(res.data);
+    }); */
   };
 
   useEffect(() => {
@@ -162,6 +180,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
           </button>
 
           <button
+            onClick={() => handleComparison(_id)}
             className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
             data-tip="compare"
           >
