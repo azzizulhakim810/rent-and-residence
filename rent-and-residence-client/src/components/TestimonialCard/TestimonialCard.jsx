@@ -29,7 +29,7 @@ const TestimonialCard = ({ review }) => {
       setUser(res.data);
     };
     loadReviewer();
-  }, [userId, axiosPublic, review]);
+  }, [userId, axiosPublic]);
 
   // console.log(user);
   const { profileImage } = user || {};

@@ -13,6 +13,7 @@ const useRole = () => {
       // console.log(res.data?.role);
       return res.data?.role;
     },
+    enabled: !!user?.email,
   });
   return [isRole, isRolePending];
 };

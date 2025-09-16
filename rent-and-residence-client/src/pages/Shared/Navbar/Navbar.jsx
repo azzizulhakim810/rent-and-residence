@@ -33,7 +33,7 @@ const Navbar = () => {
   // console.log(user.email);
   const [{ _id, profileImage, role }] = useSignedInUser();
   // const { _id, profileImage, role } = currentUserFromDB;
-  console.log(role);
+  // console.log(role);
 
   const axiosSecure = UseAxiosSecure();
 
@@ -43,7 +43,7 @@ const Navbar = () => {
   // const [isRole, isRolePending] = useRole();
   // console.log(isRole);
 
-  console.log(cart.cartProperties, cart.cartItems);
+  // console.log(cart.cartProperties, cart.cartItems);
 
   const totalPrice = cartProperties?.reduce((total, item) => {
     return total + parseInt(item.price);
