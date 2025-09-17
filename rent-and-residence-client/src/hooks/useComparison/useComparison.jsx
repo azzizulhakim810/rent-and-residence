@@ -22,11 +22,11 @@ const useComparison = () => {
   }, [axiosPublic, fetchProperties]);
 
   const handleRemoveComparison = () => {
-    console.log("id");
-    setIsShowed(false);
-
     const popUp = document.getElementById("comparisonPopUp");
-    popUp.style.display = "none";
+    popUp.style.animation = "fadeOutDown 0.5s ease forwards";
+
+    // Clear localStorage
+    localStorage.removeItem("properties");
   };
 
   return [handleRemoveComparison, comparisonProperty, setIsShowed, isShowed];
