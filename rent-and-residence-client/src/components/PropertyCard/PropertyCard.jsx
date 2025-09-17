@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -59,13 +60,20 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // Comparison Properties
   const handleComparison = (propertyId) => {
-    console.log(propertyId);
-    const isExisting = localStorage.getItem("property");
+    // console.log(propertyId);
 
-    if (isExisting?.filter((prop) => prop.id !== propertyId)) {
-      localStorage.setItem("property", propertyId);
+    const isExisting = JSON.parse(localStorage.getItem("properties")) || [];
+    // console.log(isExisting.length);
+
+    if (isExisting.find((id) => id === propertyId)) {
+      toast.error("Sorry! Already added to Comparison");
+      // console.log("Sorry! Already added to Comparison");
+    } else if (isExisting.length > 1) {
+      toast.error("Maximum 2 Properties at a time");
     } else {
-      console.log("Sorry! Already added to Comparison");
+      isExisting.push(propertyId);
+      localStorage.setItem("properties", JSON.stringify(isExisting));
+      toast.success("Added to Comparison");
     }
 
     /* axiosPublic.patch(`/api/${userId}/favourites/${propertyId}`).then((res) => {
@@ -175,7 +183,11 @@ const PropertyCard = ({ property, favourites, refetch }) => {
             className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
             data-tip="add to favourites"
           >
-            {isFavourite ? <FaHeart /> : <FaRegHeart />}
+            {isFavourite ? (
+              <FaHeart className="text-C_purple" />
+            ) : (
+              <FaRegHeart />
+            )}
             {/* <FaRegHeart /> <FaHeart /> */}
           </button>
 
