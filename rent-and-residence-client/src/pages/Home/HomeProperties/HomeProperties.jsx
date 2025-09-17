@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+// import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 import useProperties from "../../../hooks/useProperties";
 const HomeProperties = () => {
   // const [properties = [], favourites, loading] = useProperties();
-  const [comparisonProperty, setComparisonProperty] = useState();
+  // const [comparisonProperty, setComparisonProperty] = useState();
   // const [p, setP] = useState();
   const [allPropInfo, refetch, isPending] = useProperties();
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
 
-  const axiosPublic = useAxiosPublic();
-  const fetchProperties = JSON.parse(localStorage.getItem("properties"));
+  // const axiosPublic = useAxiosPublic();
+  // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
   // console.log(fetchProperties);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     Promise.all(
       fetchProperties.map((propertyId) =>
         axiosPublic.get(`/api/properties/${propertyId}`)
       )
     ).then((res) => setComparisonProperty(res));
-  }, [axiosPublic, fetchProperties]);
+  }, [axiosPublic, fetchProperties]); */
 
   return (
     <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">

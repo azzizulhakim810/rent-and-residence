@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import useProperties from "../../hooks/useProperties";
 import Banner from "./Banner/Banner";
 import Featured from "./Featured/Featured";
@@ -12,7 +13,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Home = () => {
   const [comparisonProperty, setComparisonProperty] = useState();
-  const [allPropInfo] = useProperties();
+  // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
 
@@ -52,6 +53,9 @@ const Home = () => {
           {comparisonProperty?.map((prop) => (
             <img className="w-16" src={prop?.data[0]?.images?.[0]} />
           ))}
+          <Link className="btn w-1/6 mx-auto my-5 bg-C_purple text-white hover:bg-transparent hover:border-2 hover:border-C_purple hover:text-C_purple border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-5">
+            Compare
+          </Link>
         </div>
         <HomeProperties />
       </div>
