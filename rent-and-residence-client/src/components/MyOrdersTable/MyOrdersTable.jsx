@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const MyOrdersTable = ({ order, refetch }) => {
+const MyOrdersTable = ({ order }) => {
   // const [propertyId, setPropertyId] = useState();
   const axiosSecure = UseAxiosSecure();
 

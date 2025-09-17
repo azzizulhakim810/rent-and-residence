@@ -24,7 +24,7 @@ const MyProfile = () => {
   const fileInputRef = useRef();
   // console.log(fileInputRef.current.value);
 
-  const { _id, name, email, profileImage, role } = currentUserFromDB;
+  const { _id, name, email, role } = currentUserFromDB;
   const firstName = name?.split(" ")?.[0];
   const lastName = name?.split(" ")?.[1];
   // console.log(firstName, lastName, role);
