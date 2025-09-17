@@ -8,25 +8,28 @@ import HomeProperties from "./HomeProperties/HomeProperties";
 import Location from "./Location/Location";
 import Services from "./Services/Services";
 import Testimonials from "./Testimonials/Testimonials";
+import useComparison from "../../hooks/useComparison/useComparison";
 
 const Home = () => {
-  const [comparisonProperty, setComparisonProperty] = useState();
-  const [isShowed, setIsShowed] = useState(true);
+  // const [comparisonProperty, setComparisonProperty] = useState();
+  // const [isShowed, setIsShowed] = useState(true);
   // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
+  const [handleRemoveComparison, comparisonProperty, isShowed] =
+    useComparison();
 
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
   const fetchProperties = JSON.parse(localStorage.getItem("properties"));
   // console.log(fetchProperties);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     Promise.all(
       fetchProperties.map((propertyId) =>
         axiosPublic.get(`/api/properties/${propertyId}`)
       )
     ).then((res) => setComparisonProperty(res));
-  }, [axiosPublic, fetchProperties]);
+  }, [axiosPublic, fetchProperties]); */
 
   useEffect(() => {
     if (locationHook.state?.showModal) {
@@ -34,9 +37,9 @@ const Home = () => {
     }
   }, [locationHook.state]);
 
-  const handleRemoveComparison = () => {
+  /*   const handleRemoveComparison = () => {
     setIsShowed(!isShowed);
-  };
+  }; */
 
   return (
     <div className="relative">
@@ -62,7 +65,7 @@ const Home = () => {
         <Testimonials />
       </div>
 
-      {isShowed ? (
+      {isShowed && fetchProperties?.length !== 0 ? (
         <div
           id="comparisonPopUp"
           className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-4 rounded-xl bg-white z-100"

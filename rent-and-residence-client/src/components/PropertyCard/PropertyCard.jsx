@@ -12,10 +12,12 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import useComparison from "../../hooks/useComparison/useComparison";
 
 const PropertyCard = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const [isFavourite, setIsFavourite] = useState();
+  const [handleRemoveComparison, comparisonProperty] = useComparison();
   const [{ _id: userId }] = useSignedInUser();
   // console.log(favourites);
 
@@ -61,6 +63,9 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   // Comparison Properties
   const handleComparison = (propertyId) => {
     // console.log(propertyId);
+
+    const popUp = document.getElementById("comparisonPopUp");
+    popUp.style.display = "block";
 
     const isExisting = JSON.parse(localStorage.getItem("properties")) || [];
     // console.log(isExisting.length);
