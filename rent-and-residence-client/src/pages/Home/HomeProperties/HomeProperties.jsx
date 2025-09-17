@@ -2,32 +2,26 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import useProperties from "../../../hooks/useProperties";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import useProperties from "../../../hooks/useProperties";
 const HomeProperties = () => {
   // const [properties = [], favourites, loading] = useProperties();
   const [comparisonProperty, setComparisonProperty] = useState();
+  // const [p, setP] = useState();
   const [allPropInfo, refetch, isPending] = useProperties();
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
 
   const axiosPublic = useAxiosPublic();
+  const fetchProperties = JSON.parse(localStorage.getItem("properties"));
+  // console.log(fetchProperties);
 
   useEffect(() => {
-    const fetchProperties = JSON.parse(localStorage.getItem("properties"));
-    // setComparisonProperties(fetchProperties);
-
-    fetchProperties.map((propertyId) =>
-      axiosPublic
-        .get(`/api/properties/${propertyId}`)
-        .then((res) => setComparisonProperty(res.data[0]))
-    );
-  }, [axiosPublic]);
-
-  console.log(comparisonProperty);
-
-  // useEffect(() => {
-  //   comparisonProperties.map((property) => console.log(property));
-  // }, [comparisonProperties]);
+    Promise.all(
+      fetchProperties.map((propertyId) =>
+        axiosPublic.get(`/api/properties/${propertyId}`)
+      )
+    ).then((res) => setComparisonProperty(res));
+  }, [axiosPublic, fetchProperties]);
 
   return (
     <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">
@@ -40,7 +34,11 @@ const HomeProperties = () => {
           Discover the latest properties available today in Madrid area
         </h1>
 
-        <div className="w-[200px] h-[50px] shadow-[0px_0px_20px_rgba(0,0,0,0.25)] p-8 rounded-xl bg-white"></div>
+        {/* <div className="w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] p-8 rounded-xl bg-white flex gap-2">
+          {comparisonProperty?.map((prop) => (
+            <img className="w-16" src={prop?.data[0]?.images?.[0]} />
+          ))}
+        </div> */}
 
         {/* Property Cards  */}
         <div className="grid lg:grid-cols-3 grid-cols-1 justify-start w-full gap-6 py-5">
