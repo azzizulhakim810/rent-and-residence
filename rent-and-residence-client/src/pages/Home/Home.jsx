@@ -15,8 +15,9 @@ const Home = () => {
   // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
-  const [handleRemoveComparison, comparisonProperty] = useComparison();
+  const [handleRemoveComparison, comparisonProperty, results] = useComparison();
 
+  results.map((q) => console.log(q.data[0]));
   // const axiosPublic = useAxiosPublic();
   // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
   // console.log(fetchProperties);
@@ -66,10 +67,10 @@ const Home = () => {
       {/* Comparison Popup  */}
       <div
         id="comparisonPopUp"
-        className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-4 rounded-xl bg-white z-100"
+        className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
       >
         <div className="flex align-middle items-center">
-          <h1 className=" w-full pt-4 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
+          <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
             Compare Listings
           </h1>
 
@@ -81,7 +82,23 @@ const Home = () => {
           </button>
         </div>
         <div className="flex gap-2">
-          {comparisonProperty?.map((prop, i) => (
+          {/* {comparisonProperty?.map((prop, i) => (
+            <figure
+              key={i}
+              className="w-20 h-16 bg-cover bg-center relative rounded-lg"
+              style={{
+                backgroundImage: prop?.data[0]?.images
+                  ? `url(${prop?.data[0]?.images?.[0]})`
+                  : "none",
+                backgroundColor: prop?.data[0]?.images
+                  ? undefined
+                  : `<div class="flex justify-center items-center ">
+                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                    </div>`,
+              }}
+            ></figure>
+          ))} */}
+          {results?.map((prop, i) => (
             <figure
               key={i}
               className="w-20 h-16 bg-cover bg-center relative rounded-lg"
