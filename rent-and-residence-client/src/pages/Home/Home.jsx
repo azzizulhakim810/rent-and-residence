@@ -16,36 +16,14 @@ const Home = () => {
   // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
-  const [handleRemoveComparison, comparisonProperties, comparisonRefetch] =
+  const [handleRemoveComparison, comparisonProperties, , isPending, isLoading] =
     useComparison();
 
-  // console.log(comparisonProperties);
-  // comparisonProperties.map((eachProp) => console.log(eachProp));
-  // results.map((q) => console.log(q?.data[0]));
-  // const axiosPublic = useAxiosPublic();
-  // const [propertyIds, setPropertyIds] = useState(
-  // () => JSON.parse(localStorage.getItem("properties")) || []
-  // );
-  // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
-  // console.log(fetchProperties);
-
-  /*   useEffect(() => {
-    Promise.all(
-      propertyIds.map((propertyId) =>
-        axiosPublic.get(`/api/properties/${propertyId}`)
-      )
-    ).then((res) => setComparisonProperty(res));
-  }, [axiosPublic, fetchProperties]);
-*/
   useEffect(() => {
     if (locationHook.state?.showModal) {
       document.getElementById("signUpAndInPopUp").showModal();
     }
   }, [locationHook.state]);
-
-  /*   const handleRemoveComparison = () => {
-    setIsShowed(!isShowed);
-  }; */
 
   return (
     <div className="relative">
@@ -78,7 +56,7 @@ const Home = () => {
       >
         <div className="flex align-middle items-center">
           <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
-            Compare Listings
+            Compare Listings ({comparisonProperties?.length} Items)
           </h1>
 
           <button
@@ -89,22 +67,53 @@ const Home = () => {
           </button>
         </div>
         <div className="flex gap-2">
-          {comparisonProperties?.map((eachProp) => (
-            <figure
-              key={eachProp?._id}
-              className="w-20 h-16 bg-cover bg-center relative rounded-lg"
-              style={{
-                backgroundImage: eachProp?.images
-                  ? `url(${eachProp?.images?.[0]})`
-                  : "none",
-                backgroundColor: eachProp?.images
-                  ? undefined
-                  : `<div class="flex justify-center items-center ">
-                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
-                    </div>`,
-              }}
-            ></figure>
-          ))}
+          {isLoading ? (
+            <div className="flex justify-center items-center">
+              <span className="loading loading-ring loading-xl text-C_purple"></span>
+            </div>
+          ) : (
+            comparisonProperties?.map((eachProp) => (
+              <figure
+                key={eachProp?._id}
+                className="w-20 h-16 bg-cover bg-center relative rounded-lg"
+                style={{
+                  backgroundImage: eachProp?.images
+                    ? `url(${eachProp?.images?.[0]})`
+                    : "none",
+                }}
+              >
+                {!eachProp?.images && (
+                  <div className="flex justify-center items-center w-full h-full">
+                    <span className="loading loading-ring loading-md text-C_purple"></span>
+                  </div>
+                )}
+              </figure>
+            ))
+          )}
+
+          {/*  {isLoading ? (
+            <div class="flex justify-center items-center ">
+              <span className=" loading loading-ring loading-xl text-C_purple"></span>
+            </div>
+          ) : (
+            comparisonProperties?.map((eachProp) => (
+              <figure
+                key={eachProp?._id}
+                className="w-20 h-16 bg-cover bg-center relative rounded-lg"
+                style={{
+                  backgroundImage: eachProp?.images
+                    ? `url(${eachProp?.images?.[0]})`
+                    : "none",
+                }}
+              >
+                {!eachProp?.images && (
+                  <div className="flex justify-center items-center w-full h-full">
+                    <span className="loading loading-ring loading-md text-C_purple"></span>
+                  </div>
+                )}
+              </figure>
+            ))
+          )} */}
           {/*  {results?.map((prop, i) => (
             <figure
               key={i}
@@ -122,6 +131,9 @@ const Home = () => {
             ></figure>
           ))} */}
         </div>
+        {/* <h1 className=" w-full pt-2 pb-2 text-[14px] font-[600] font-Nunito text-title_color lg:text-left text-center">
+          
+        </h1> */}
         <Link className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2">
           Compare
         </Link>

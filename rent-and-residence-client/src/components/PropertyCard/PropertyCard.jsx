@@ -17,7 +17,7 @@ import useComparison from "../../hooks/useComparison/useComparison";
 const PropertyCard = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const [isFavourite, setIsFavourite] = useState();
-  const [, , comparisonRefetch] = useComparison();
+  const [, , , , , setSelectedComparePropIds] = useComparison();
   const [{ _id: userId }] = useSignedInUser();
   // console.log(favourites);
 
@@ -62,31 +62,27 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // Comparison Properties
   const handleComparison = (propertyId) => {
-    // console.log(propertyId);
-
     const popUp = document.getElementById("comparisonPopUp");
     popUp.style.display = "block";
     popUp.style.animation = "fadeInUp 0.5s ease forwards";
 
     const isExisting = JSON.parse(localStorage.getItem("properties")) || [];
-    // console.log(isExisting.length);
 
     if (isExisting.find((id) => id === propertyId)) {
       toast.error("Sorry! Already added to Comparison");
-      // console.log("Sorry! Already added to Comparison");
     } else if (isExisting?.length > 1) {
       toast.error("Maximum 2 Properties at a time");
     } else {
-      isExisting.push(propertyId);
-      localStorage.setItem("properties", JSON.stringify(isExisting));
-      toast.success("Added to Comparison");
-      comparisonRefetch();
-    }
+      const updated = [...isExisting, propertyId];
 
-    /* axiosPublic.patch(`/api/${userId}/favourites/${propertyId}`).then((res) => {
-      refetch();
-      console.log(res.data);
-    }); */
+      // isExisting.push(propertyId);
+
+      localStorage.setItem("properties", JSON.stringify(updated));
+      setSelectedComparePropIds(updated);
+
+      toast.success("Added to Comparison");
+      // comparisonRefetch();
+    }
   };
 
   useEffect(() => {
