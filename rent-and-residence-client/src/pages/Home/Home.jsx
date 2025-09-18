@@ -16,10 +16,13 @@ const Home = () => {
   // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
-  const [handleRemoveComparison] = useComparison();
+  const [handleRemoveComparison, comparisonProperties, comparisonRefetch] =
+    useComparison();
 
+  // console.log(comparisonProperties);
+  // comparisonProperties.map((eachProp) => console.log(eachProp));
   // results.map((q) => console.log(q?.data[0]));
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
   // const [propertyIds, setPropertyIds] = useState(
   // () => JSON.parse(localStorage.getItem("properties")) || []
   // );
@@ -86,22 +89,22 @@ const Home = () => {
           </button>
         </div>
         <div className="flex gap-2">
-          {/* {comparisonProperty?.map((prop, i) => (
+          {comparisonProperties?.map((eachProp) => (
             <figure
-              key={i}
+              key={eachProp?._id}
               className="w-20 h-16 bg-cover bg-center relative rounded-lg"
               style={{
-                backgroundImage: prop?.data[0]?.images
-                  ? `url(${prop?.data[0]?.images?.[0]})`
+                backgroundImage: eachProp?.images
+                  ? `url(${eachProp?.images?.[0]})`
                   : "none",
-                backgroundColor: prop?.data[0]?.images
+                backgroundColor: eachProp?.images
                   ? undefined
                   : `<div class="flex justify-center items-center ">
                       <span className=" loading loading-ring loading-xl text-C_purple"></span>
                     </div>`,
               }}
             ></figure>
-          ))} */}
+          ))}
           {/*  {results?.map((prop, i) => (
             <figure
               key={i}

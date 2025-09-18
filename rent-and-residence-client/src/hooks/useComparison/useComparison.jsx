@@ -3,19 +3,45 @@ import { useQuery, useQueries } from "@tanstack/react-query";
 import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
 
 const useComparison = () => {
-  const [comparisonProperty, setComparisonProperty] = useState();
+  // const [comparisonProperty, setComparisonProperty] = useState();
   // const [propertyIds, setPropertyIds] = useState([]);
-  const [isShowed, setIsShowed] = useState();
+  // const [isShowed, setIsShowed] = useState();
   // const [p, setP] = useState();
 
   const axiosPublic = useAxiosPublic();
 
-  // console.log(fetchProperties);
+  const selectedComparePropIds = JSON.parse(localStorage.getItem("properties"));
+
+  // console.log(selectedComparePropIds);
 
   // const fetchProperty = async () => {
-  //   const result = await fetchProperties.map((propertyId) => setP(propertyId));
+  //   const result = await axiosPublic.post(
+  //     "/api/comparisonProperties",
+  //     selectedComparePropIds
+  //   );
+  //   return result;
+  //   // console.log(result);
   // };
+
   // fetchProperty();
+
+  const {
+    data: comparisonProperties,
+    isPending,
+    refetch: comparisonRefetch,
+  } = useQuery({
+    queryKey: ["properties", selectedComparePropIds],
+    queryFn: async () => {
+      const result = await axiosPublic.post(
+        "/api/comparisonProperties",
+        selectedComparePropIds
+      );
+      return result.data;
+    },
+    enabled: selectedComparePropIds?.length > 0,
+  });
+
+  // console.log(comparisonProperties);
 
   // useEffect(() => {
   //   Promise?.all(fetchProperties.map((propertyId) => setP(propertyId)));
@@ -38,7 +64,6 @@ const useComparison = () => {
 
   // console.log(ComparisonProp);
 
-  const fetchProperties = JSON.parse(localStorage.getItem("properties"));
   /* 
   const [propertyIds, setPropertyIds] = useState(
     () => JSON.parse(localStorage.getItem("properties")) || []
@@ -84,7 +109,7 @@ const useComparison = () => {
     localStorage.removeItem("properties");
   };
 
-  return [handleRemoveComparison];
+  return [handleRemoveComparison, comparisonProperties, comparisonRefetch];
 };
 
 export default useComparison;

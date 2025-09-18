@@ -571,6 +571,22 @@ async function run() {
       }
     });
 
+    // Get Comparison Properties
+    app.post("/api/comparisonProperties", async (req, res) => {
+      const propIds = req.body;
+      // console.log(propIds);
+
+      // const query = { _id: new ObjectId(id) };
+
+      const result = await propertyCollection
+        .find({
+          _id: { $in: propIds?.map((id) => new ObjectId(id)) },
+        })
+        .toArray();
+
+      res.send(result);
+    });
+
     // Add to Favourites
     app.patch(
       "/api/:userId/favourites/:propertyId",
