@@ -38,8 +38,8 @@ const useComparison = () => {
 
   // console.log(ComparisonProp);
 
-  // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
-
+  const fetchProperties = JSON.parse(localStorage.getItem("properties"));
+  /* 
   const [propertyIds, setPropertyIds] = useState(
     () => JSON.parse(localStorage.getItem("properties")) || []
   );
@@ -61,19 +61,20 @@ const useComparison = () => {
   });
 
   const refetchAll = () => results.forEach((q) => q.refetch());
+  const isLoading = () => results.some((q) => q.isPending); */
 
   // const properties = results.map((q) => q.data);
   // console.log(properties);
   // console.log(results);
   // results.map((q) => console.log(q.data[0]));
 
-  // useEffect(() => {
-  //   Promise?.all(
-  //     propertyIds?.map((propertyId) =>
-  //       axiosPublic.get(`/api/properties/${propertyId}`)
-  //     )
-  //   ).then((res) => setComparisonProperty(res));
-  // }, [axiosPublic, propertyIds]);
+  /*   useEffect(() => {
+    Promise?.all(
+      propertyIds?.map((propertyId) =>
+        axiosPublic.get(`/api/properties/${propertyId}`)
+      )
+    ).then((res) => setComparisonProperty(res));
+  }, [axiosPublic, propertyIds]); */
 
   const handleRemoveComparison = () => {
     const popUp = document.getElementById("comparisonPopUp");
@@ -81,17 +82,9 @@ const useComparison = () => {
 
     // Clear localStorage
     localStorage.removeItem("properties");
-    refetchAll();
   };
 
-  return [
-    handleRemoveComparison,
-    comparisonProperty,
-    results,
-    setIsShowed,
-    isShowed,
-    refetchAll,
-  ];
+  return [handleRemoveComparison];
 };
 
 export default useComparison;

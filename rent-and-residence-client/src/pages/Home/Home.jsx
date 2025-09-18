@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from "react-router-dom";
 import useComparison from "../../hooks/useComparison/useComparison";
@@ -8,6 +8,7 @@ import HomeProperties from "./HomeProperties/HomeProperties";
 import Location from "./Location/Location";
 import Services from "./Services/Services";
 import Testimonials from "./Testimonials/Testimonials";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Home = () => {
   // const [comparisonProperty, setComparisonProperty] = useState();
@@ -15,21 +16,24 @@ const Home = () => {
   // const [allPropInfo] = useProperties();
   // const { allProperties, favouritePropertyIds } = allPropInfo || [];
   const locationHook = useLocation();
-  const [handleRemoveComparison, comparisonProperty, results] = useComparison();
+  const [handleRemoveComparison] = useComparison();
 
-  results.map((q) => console.log(q.data[0]));
-  // const axiosPublic = useAxiosPublic();
+  // results.map((q) => console.log(q?.data[0]));
+  const axiosPublic = useAxiosPublic();
+  // const [propertyIds, setPropertyIds] = useState(
+  // () => JSON.parse(localStorage.getItem("properties")) || []
+  // );
   // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
   // console.log(fetchProperties);
 
   /*   useEffect(() => {
     Promise.all(
-      fetchProperties.map((propertyId) =>
+      propertyIds.map((propertyId) =>
         axiosPublic.get(`/api/properties/${propertyId}`)
       )
     ).then((res) => setComparisonProperty(res));
-  }, [axiosPublic, fetchProperties]); */
-
+  }, [axiosPublic, fetchProperties]);
+*/
   useEffect(() => {
     if (locationHook.state?.showModal) {
       document.getElementById("signUpAndInPopUp").showModal();
@@ -98,7 +102,7 @@ const Home = () => {
               }}
             ></figure>
           ))} */}
-          {results?.map((prop, i) => (
+          {/*  {results?.map((prop, i) => (
             <figure
               key={i}
               className="w-20 h-16 bg-cover bg-center relative rounded-lg"
@@ -113,7 +117,7 @@ const Home = () => {
                     </div>`,
               }}
             ></figure>
-          ))}
+          ))} */}
         </div>
         <Link className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2">
           Compare
