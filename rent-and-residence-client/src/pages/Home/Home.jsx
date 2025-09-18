@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from "react-router-dom";
 import useComparison from "../../hooks/useComparison/useComparison";
@@ -8,15 +8,14 @@ import HomeProperties from "./HomeProperties/HomeProperties";
 import Location from "./Location/Location";
 import Services from "./Services/Services";
 import Testimonials from "./Testimonials/Testimonials";
-import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import { usePopup } from "../../providers/PopupProvider";
+// import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Home = () => {
-  // const [comparisonProperty, setComparisonProperty] = useState();
-  // const [isShowed, setIsShowed] = useState(true);
-  // const [allPropInfo] = useProperties();
-  // const { allProperties, favouritePropertyIds } = allPropInfo || [];
+  // const [isShow, setIsShow] = useState(false);
+  const { isShow } = usePopup();
   const locationHook = useLocation();
-  const [handleRemoveComparison, comparisonProperties, , isPending, isLoading] =
+  const [handleRemoveComparison, comparisonProperties, , , isLoading, ,] =
     useComparison();
 
   useEffect(() => {
@@ -24,6 +23,8 @@ const Home = () => {
       document.getElementById("signUpAndInPopUp").showModal();
     }
   }, [locationHook.state]);
+
+  // console.log(isShow);
 
   return (
     <div className="relative">
@@ -50,93 +51,62 @@ const Home = () => {
       </div>
 
       {/* Comparison Popup  */}
-      <div
-        id="comparisonPopUp"
-        className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
-      >
-        <div className="flex align-middle items-center">
-          <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
-            Compare Listings ({comparisonProperties?.length} Items)
-          </h1>
-
-          <button
-            onClick={handleRemoveComparison}
-            className=" absolute top-0 right-0 bg-C_purple text-white px-4 py-2 rounded-tr-lg rounded-bl-lg cursor-pointer"
+      <div>
+        {isShow ? (
+          <div
+            id="comparisonPopUp"
+            className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
           >
-            X
-          </button>
-        </div>
-        <div className="flex gap-2">
-          {isLoading ? (
-            <div className="flex justify-center items-center">
-              <span className="loading loading-ring loading-xl text-C_purple"></span>
-            </div>
-          ) : (
-            comparisonProperties?.map((eachProp) => (
-              <figure
-                key={eachProp?._id}
-                className="w-20 h-16 bg-cover bg-center relative rounded-lg"
-                style={{
-                  backgroundImage: eachProp?.images
-                    ? `url(${eachProp?.images?.[0]})`
-                    : "none",
-                }}
-              >
-                {!eachProp?.images && (
-                  <div className="flex justify-center items-center w-full h-full">
-                    <span className="loading loading-ring loading-md text-C_purple"></span>
-                  </div>
-                )}
-              </figure>
-            ))
-          )}
+            <div className="flex align-middle items-center">
+              <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
+                Compare Listings
+              </h1>
 
-          {/*  {isLoading ? (
-            <div class="flex justify-center items-center ">
-              <span className=" loading loading-ring loading-xl text-C_purple"></span>
-            </div>
-          ) : (
-            comparisonProperties?.map((eachProp) => (
-              <figure
-                key={eachProp?._id}
-                className="w-20 h-16 bg-cover bg-center relative rounded-lg"
-                style={{
-                  backgroundImage: eachProp?.images
-                    ? `url(${eachProp?.images?.[0]})`
-                    : "none",
-                }}
+              <button
+                onClick={handleRemoveComparison}
+                className=" absolute top-0 right-0 bg-C_purple text-white px-4 py-2 rounded-tr-lg rounded-bl-lg cursor-pointer"
               >
-                {!eachProp?.images && (
-                  <div className="flex justify-center items-center w-full h-full">
-                    <span className="loading loading-ring loading-md text-C_purple"></span>
-                  </div>
-                )}
-              </figure>
-            ))
-          )} */}
-          {/*  {results?.map((prop, i) => (
-            <figure
-              key={i}
-              className="w-20 h-16 bg-cover bg-center relative rounded-lg"
-              style={{
-                backgroundImage: prop?.data[0]?.images
-                  ? `url(${prop?.data[0]?.images?.[0]})`
-                  : "none",
-                backgroundColor: prop?.data[0]?.images
-                  ? undefined
-                  : `<div class="flex justify-center items-center ">
-                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
-                    </div>`,
-              }}
-            ></figure>
-          ))} */}
-        </div>
-        {/* <h1 className=" w-full pt-2 pb-2 text-[14px] font-[600] font-Nunito text-title_color lg:text-left text-center">
+                X
+              </button>
+            </div>
+            <div className="flex gap-2">
+              {isLoading ? (
+                <div className="flex justify-center items-center">
+                  <span className="loading loading-ring loading-xl text-C_purple"></span>
+                </div>
+              ) : (
+                comparisonProperties?.map((eachProp) => (
+                  <figure
+                    key={eachProp?._id}
+                    className="w-20 h-16 bg-cover bg-center relative rounded-lg"
+                    style={{
+                      backgroundImage: eachProp?.images
+                        ? `url(${eachProp?.images?.[0]})`
+                        : "none",
+                    }}
+                  >
+                    {!eachProp?.images && (
+                      <div className="flex justify-center items-center w-full h-full">
+                        <span className="loading loading-ring loading-md text-C_purple"></span>
+                      </div>
+                    )}
+                  </figure>
+                ))
+              )}
+            </div>
+            {/* <h1 className=" w-full pt-2 pb-2 text-[14px] font-[600] font-Nunito text-title_color lg:text-left text-center">
           
         </h1> */}
-        <Link className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2">
-          Compare
-        </Link>
+            <Link
+              to="/comparison"
+              className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2"
+            >
+              Compare
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

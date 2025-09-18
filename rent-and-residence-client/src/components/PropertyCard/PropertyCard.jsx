@@ -13,10 +13,13 @@ import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import useComparison from "../../hooks/useComparison/useComparison";
+import { usePopup } from "../../providers/PopupProvider";
 
 const PropertyCard = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const [isFavourite, setIsFavourite] = useState();
+  const { setIsShow } = usePopup();
+
   const [, , , , , setSelectedComparePropIds] = useComparison();
   const [{ _id: userId }] = useSignedInUser();
   // console.log(favourites);
@@ -47,7 +50,6 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     });
     // );
   }, [ownerId, axiosPublic]);
-  // console.log(propertyOwner);
 
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};
@@ -62,9 +64,12 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // Comparison Properties
   const handleComparison = (propertyId) => {
-    const popUp = document.getElementById("comparisonPopUp");
-    popUp.style.display = "block";
-    popUp.style.animation = "fadeInUp 0.5s ease forwards";
+    setIsShow(true);
+    // console.log(isShow);
+    // const popUp = document.getElementById("comparisonPopUp");
+
+    // popUp.style.display = "block";
+    // popUp.style.animation = "fadeInUp 0.5s ease forwards";
 
     const isExisting = JSON.parse(localStorage.getItem("properties")) || [];
 
@@ -73,6 +78,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     } else if (isExisting?.length > 1) {
       toast.error("Maximum 2 Properties at a time");
     } else {
+      console.log("hello");
       const updated = [...isExisting, propertyId];
 
       // isExisting.push(propertyId);

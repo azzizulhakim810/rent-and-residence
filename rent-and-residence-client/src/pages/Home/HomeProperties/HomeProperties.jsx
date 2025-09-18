@@ -5,23 +5,8 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 import useProperties from "../../../hooks/useProperties";
 const HomeProperties = () => {
-  // const [properties = [], favourites, loading] = useProperties();
-  // const [comparisonProperty, setComparisonProperty] = useState();
-  // const [p, setP] = useState();
   const [allPropInfo, refetch, isPending] = useProperties();
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
-
-  // const axiosPublic = useAxiosPublic();
-  // const fetchProperties = JSON.parse(localStorage.getItem("properties"));
-  // console.log(fetchProperties);
-
-  /*   useEffect(() => {
-    Promise.all(
-      fetchProperties.map((propertyId) =>
-        axiosPublic.get(`/api/properties/${propertyId}`)
-      )
-    ).then((res) => setComparisonProperty(res));
-  }, [axiosPublic, fetchProperties]); */
 
   return (
     <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">

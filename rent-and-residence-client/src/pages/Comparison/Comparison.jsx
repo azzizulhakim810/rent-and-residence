@@ -5,10 +5,13 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
+import useComparison from "../../hooks/useComparison/useComparison";
 
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const Comparison = () => {
   // const [propertyOwner, setPropertyOwner] = useState([]);
+  const [comparisonProperties] = useComparison();
+  console.log(comparisonProperties);
 
   // const axiosPublic = useAxiosPublic();
   // Destructure Details from Property
@@ -40,8 +43,12 @@ const Comparison = () => {
   // console.log(propertyOwner);
 
   // Destructure Details from Owner
-  const { name, profileImage } = propertyOwner || {};
-  return <div className="grid grid-cols-2 gap-5"></div>;
+  // const { name, profileImage } = propertyOwner || {};
+  return (
+    <div className="grid grid-cols-2 gap-5">
+      <p>Hello</p>
+    </div>
+  );
 };
 
 export default Comparison;

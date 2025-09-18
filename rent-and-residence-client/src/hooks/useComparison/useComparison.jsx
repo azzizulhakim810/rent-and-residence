@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useQuery, useQueries } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
+import { usePopup } from "../../providers/PopupProvider";
 
 const useComparison = () => {
   const [selectedComparePropIds, setSelectedComparePropIds] = useState(
@@ -8,6 +9,7 @@ const useComparison = () => {
   );
 
   const axiosPublic = useAxiosPublic();
+  const { setIsShow } = usePopup();
 
   // keep localStorage in sync whenever state changes
   useEffect(() => {
@@ -38,6 +40,7 @@ const useComparison = () => {
     // Clear localStorage
     // localStorage.removeItem("properties");
     setSelectedComparePropIds([]);
+    setIsShow(false);
   };
 
   return [

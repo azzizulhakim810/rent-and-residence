@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
       } else {
         // 1. Remove token from storage
         localStorage.removeItem("access-token");
+        localStorage.removeItem("properties");
 
         // 2. Cancel all active queries
         // queryClient.cancelQueries();
