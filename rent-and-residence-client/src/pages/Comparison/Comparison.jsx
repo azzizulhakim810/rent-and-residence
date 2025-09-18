@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
-import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus, FaRegHeart } from "react-icons/fa6";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtub } from "react-icons/pi";
-import { VscHome } from "react-icons/vsc";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import ComparisonTable from "../../components/ComparisonTable/ComparisonTable";
 import useComparison from "../../hooks/useComparison/useComparison";
 
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const Comparison = () => {
   // const [propertyOwner, setPropertyOwner] = useState([]);
-  const [comparisonProperties] = useComparison();
+  const [, comparisonProperties, , isPending, isLoading, ,] = useComparison();
   console.log(comparisonProperties);
 
   // const axiosPublic = useAxiosPublic();
@@ -45,8 +40,22 @@ const Comparison = () => {
   // Destructure Details from Owner
   // const { name, profileImage } = propertyOwner || {};
   return (
-    <div className="grid grid-cols-2 gap-5">
-      <p>Hello</p>
+    <div className="w-10/12 mx-auto pt-4 ">
+      {/* Breadcrumbs */}
+
+      <Breadcrumb pageName={"Comparison"} />
+
+      {/* Rest  */}
+      <div className="w-full grid grid-cols-12 gap-10 bg-green-200">
+        {comparisonProperties?.map((eachProp) => (
+          <ComparisonTable key={eachProp._id} eachProp={eachProp} />
+        ))}
+        {/* <div className="bg-yellow-200 col-span-6">Hello</div> */}
+        {/* <div className="bg-blue-200 col-span-6">Hello</div> */}
+
+        {/* Sidebar  */}
+        {/* <div className="lg:col-span-4 col-span-10"></div> */}
+      </div>
     </div>
   );
 };
