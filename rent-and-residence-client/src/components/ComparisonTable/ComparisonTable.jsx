@@ -32,7 +32,6 @@ const ComparisonTable = ({ eachProp }) => {
   return (
     <div className="bg-yellow-200 col-span-6">
       <tr>
-        <td className="text-center"></td>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">
@@ -47,27 +46,28 @@ const ComparisonTable = ({ eachProp }) => {
                 />
               </div>
             </div>
-            <div>
-              <div className="font-bold uppercase">
-                {eachProp?.title.slice(0, 20)}...
-              </div>
-              <div className="text-sm opacity-50">
-                {eachProp?.address?.city}, {eachProp?.address?.country}
-              </div>
-            </div>
           </div>
         </td>
-        <td>{eachProp?.category}</td>
-
+      </tr>
+      <tr>
         <td>
           {eachProp?.price}€{eachProp?.afterPriceLabel}
         </td>
+      </tr>
+      <tr>
         <td>
-          {/* <Link to={`/propertyDetails/${prop[0]?._id}`}> */}
+          <td>{eachProp?.category}</td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {/* <td>
+          <Link to={`/propertyDetails/${prop[0]?._id}`}>
           <button className="btn btn-xs font-Nunito_Sans border-[1px] rounded-lg px-4 py-4 font-[700] hover:bg-C_purple hover:text-white duration-300 uppercase">
             View
           </button>
-          {/* </Link> */}
+          </Link>
+        </td> */}
         </td>
       </tr>
     </div>
