@@ -1,12 +1,44 @@
+// import { useState, useEffect } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ComparisonTable from "../../components/ComparisonTable/ComparisonTable";
 import useComparison from "../../hooks/useComparison/useComparison";
 
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const Comparison = () => {
-  // const [propertyOwner, setPropertyOwner] = useState([]);
+  // const [properties, setProperties] = useState([]);
   const [, comparisonProperties, , isPending, isLoading, ,] = useComparison();
   console.log(comparisonProperties);
+  const attributes = [
+    "title",
+    "price",
+    "afterPriceLabel",
+    "category",
+    "listedIn",
+    "propertyStatus",
+    "approval",
+    "energyClass",
+    "energyIndex",
+    "garageSize",
+    "garages",
+    "neighborhood",
+    "ownerNote",
+    "description",
+    "address.street",
+    "address.city",
+    "address.state",
+    "address.zip",
+    "address.country",
+    "propertyDetails.rooms",
+    "propertyDetails.bedrooms",
+    "propertyDetails.bathrooms",
+    "propertyDetails.sizeInMeter",
+    "propertyDetails.lotInInch",
+    "amenities.equippedKitchen",
+    "amenities.gym",
+    "amenities.laundry",
+    "amenities.mediaRoom",
+    "amenities.backYard",
+  ];
 
   // const axiosPublic = useAxiosPublic();
   // Destructure Details from Property
@@ -65,7 +97,32 @@ const Comparison = () => {
 
       {/* /////////////////////// */}
       {/* Property Table  */}
-      <div className=" py-0">
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border-collapse border border-gray-300">
+          <thead className="border-0">
+            <tr className="font-Nunito text-C_DarkGray text-[22px] w-full  border-0 bg-gray-100">
+              <th className="border px-4 py-2 text-left">Attribute</th>
+              {comparisonProperties?.map((eachProp) => (
+                <th key={eachProp._id} className="border px-4 py-2 text-center">
+                  {eachProp?.title}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+
+
+            {
+              attributes.map((attr) => (
+                
+              ))
+            }
+
+
+
+          </tbody>
+        </table>
+
         {/* <table className="table">
           <thead className="border-0">
             <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
@@ -92,7 +149,7 @@ const Comparison = () => {
               ))}
             </tr>
 
-            <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
+            <tr className="font-Nunito text-C_DarkGray text-[22px] w-full  border-0">
               {comparisonProperties?.map((eachProp) => (
                 <th key={eachProp._id} className="h-10 col-span-6">
                   {eachProp?.title}
@@ -100,7 +157,7 @@ const Comparison = () => {
               ))}
             </tr>
 
-            <tr className="font-Nunito text-C_purple text-[20px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
+            <tr className="font-Nunito text-C_purple text-[20px] w-full  border-0">
               {comparisonProperties?.map((eachProp) => (
                 <th key={eachProp._id} className="h-8 col-span-6 font-[600]">
                   {eachProp?.price} € {eachProp?.afterPriceLabel}
@@ -108,7 +165,7 @@ const Comparison = () => {
               ))}
             </tr>
 
-            <tr className="font-Nunito_Sans  text-[16px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
+            <tr className="font-Nunito_Sans  text-[16px]  w-full border-0">
               {comparisonProperties?.map((eachProp) => (
                 <th
                   key={eachProp._id}
@@ -122,59 +179,56 @@ const Comparison = () => {
               ))}
             </tr>
           </thead>
-          {isPending ? (
-            <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-              Loading <span className="loading loading-dots loading-lg"></span>
-            </p>
-          ) : (
-            comparisonProperties?.map((eachProp) => (
-              <ComparisonTable key={eachProp._id} eachProp={eachProp} />
-            ))
-          )}
+          <tbody>
+            {isPending ? (
+              <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                Loading{" "}
+                <span className="loading loading-dots loading-lg"></span>
+              </p>
+            ) : (
+              comparisonProperties?.map((eachProp) => (
+                <ComparisonTable key={eachProp._id} eachProp={eachProp} />
+              ))
+            )}
+          </tbody>
         </table> */}
 
-        {isPending ? (
+        {/*  {isPending ? (
           <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
             Loading <span className="loading loading-dots loading-lg"></span>
           </p>
         ) : (
-          <div>
-            {comparisonProperties?.map((eachProp) => (
-              <table key={eachProp._id} className="table">
-                <thead className="border-0">
-                  <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0"></tr>
+          // comparisonProperties?.map((eachProp) => (
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+             
+              <thead className="flex">
+                <tr className="font-Nunito text-C_DarkGray text-[22px]  gap-0 border-0">
+                  <th className="h-10 col-span-6 bg-amber-500 ">
+                    {properties?.title}
+                  </th>
+                </tr>
+              </thead>
 
-                  <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className="h-10 col-span-6">{eachProp?.title}</th>
-                  </tr>
+              <tbody>
+                <tr>
+                    <th>1</th>
+                    <td>Cy Ganderton</td>
 
-                  <tr className="font-Nunito text-C_purple text-[20px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className="h-8 col-span-6 font-[600]">
-                      {eachProp?.price} € {eachProp?.afterPriceLabel}
-                    </th>
+                    <td>Blue</td>
                   </tr>
+                
+                  <tr>
+                    <th>2</th>
+                    <td>Hart Hagerty</td>
 
-                  <tr className="font-Nunito_Sans  text-[16px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className=" text-C_LightGray h-10 col-span-6 font-[500]">
-                      Type:{" "}
-                      <span className=" text-C_DarkGray capitalize">
-                        {eachProp?.category}
-                      </span>
-                    </th>
+                    <td>Purple</td>
                   </tr>
-                </thead>
-
-                <tbody>
-                  <tr className="font-Nunito_Sans text-C_LightGray flex justify-between">
-                    <td className="capitalize text-C_LightGray/90  bg-amber-400">
-                      {/* {listedIn} */}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            ))}
+              </tbody>
+            </table>
           </div>
-        )}
+          // ))
+        )} */}
       </div>
     </div>
   );

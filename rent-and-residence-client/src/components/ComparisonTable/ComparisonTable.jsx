@@ -32,13 +32,11 @@ const ComparisonTable = ({ eachProp }) => {
   console.log(eachProp);
 
   return (
-    <>
-      <tr className="font-Nunito_Sans text-C_LightGray flex justify-between">
-        <td className="capitalize text-C_LightGray/90  bg-amber-400">
-          {listedIn}
-        </td>
-      </tr>
-    </>
+    <tr className="font-Nunito_Sans text-C_LightGray">
+      <td className="capitalize text-C_LightGray/90  bg-amber-400 col-span-6">
+        {listedIn}
+      </td>
+    </tr>
   );
 };
 
