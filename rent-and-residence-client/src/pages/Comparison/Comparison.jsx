@@ -110,16 +110,22 @@ const Comparison = () => {
             </tr>
           </thead>
           <tbody>
+            {attributes.map((attr) => (
+              <tr key={attr}>
+                <td className="border px-4 py-2 font-semibold capitalize">
+                  {attr}
+                </td>
 
-
-            {
-              attributes.map((attr) => (
-                
-              ))
-            }
-
-
-
+                {comparisonProperties?.map((eachProp) => (
+                  <td
+                    key={eachProp._id}
+                    className="border px-4 py-2 text-center"
+                  >
+                    {eachProp[attr]}
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
 
