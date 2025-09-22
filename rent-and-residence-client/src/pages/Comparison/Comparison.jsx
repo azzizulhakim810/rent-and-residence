@@ -1,6 +1,7 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { IoMdCheckmark, IoMdClose } from "react-icons/io";
+import { Link, useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import ComparisonTable from "../../components/ComparisonTable/ComparisonTable";
 import useComparison from "../../hooks/useComparison/useComparison";
 
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
@@ -8,120 +9,174 @@ const Comparison = () => {
   // const [properties, setProperties] = useState([]);
   const [, comparisonProperties, , isPending, isLoading, ,] = useComparison();
   console.log(comparisonProperties);
-  const attributes = [
-    "title",
-    "price",
-    "afterPriceLabel",
-    "category",
-    "listedIn",
-    "propertyStatus",
-    "approval",
-    "energyClass",
-    "energyIndex",
-    "garageSize",
-    "garages",
-    "neighborhood",
-    "ownerNote",
-    "description",
-    "address.street",
-    "address.city",
-    "address.state",
-    "address.zip",
-    "address.country",
-    "propertyDetails.rooms",
-    "propertyDetails.bedrooms",
-    "propertyDetails.bathrooms",
-    "propertyDetails.sizeInMeter",
-    "propertyDetails.lotInInch",
-    "amenities.equippedKitchen",
-    "amenities.gym",
-    "amenities.laundry",
-    "amenities.mediaRoom",
-    "amenities.backYard",
-  ];
+  const attributeLabels = {
+    // Address
+    "address.city": "City",
+    "address.state": "Area",
+    "address.zip": "Zip",
 
-  // const axiosPublic = useAxiosPublic();
-  // Destructure Details from Property
-  /*  const {
-    _id,
-    title,
-    price,
-    images,
-    ownerId,
-    listedIn,
-    category,
-    propertyStatus,
-    propertyDetails,
-  } = property || {}; */
+    // Property Details
+    "propertyDetails.sizeInMeter": "Size (m²)",
+    "propertyDetails.lotInInch": "Lot Size (m²)",
+    "propertyDetails.rooms": "Rooms",
+    "propertyDetails.bedrooms": "Bedrooms",
+    "propertyDetails.bathrooms": "Bathrooms",
 
-  // console.log(property);
+    // Energy
+    energyIndex: "Energy Index",
+    energyClass: "Energy Class",
 
-  // Fetch the owner of each Property
-  /*   useEffect(() => {
-    
+    // Identity
+    _id: "Property ID",
 
-    axiosPublic
-      .get(`/api/users/${ownerId}`)
-      .then((res) => {
-        // console.log(res.data);
-        setPropertyOwner(res.data);
-      });
-  }, [ownerId, axiosPublic]); */
-  // console.log(propertyOwner);
+    // Construction
+    "propertyDetails.yearBuilt": "Year Built",
+    garages: "Garages",
+    garageSize: "Garage Size",
+    "propertyDetails.availableFrom": "Available From",
+    "propertyDetails.basement": "Basement",
+    "propertyDetails.externalConstruction": "External Construction",
+    "propertyDetails.roofing": "Roofing",
 
-  // Destructure Details from Owner
-  // const { name, profileImage } = propertyOwner || {};
+    // Amenities
+    "amenities.backYard": "Back Yard",
+    "amenities.basketballCourt": "Basketball Court",
+    "amenities.centralAir": "Central Air",
+    "amenities.chairAccessible": "Chair Accessible",
+    "amenities.electricity": "Electricity",
+    "amenities.elevator": "Elevator",
+    "amenities.equippedKitchen": "Equipped Kitchen",
+    "amenities.fireplace": "Fireplace",
+    "amenities.garageAttached": "Garage Attached",
+    "amenities.gym": "Gym",
+    "amenities.heating": "Heating",
+    "amenities.hotBath": "Hot Bath",
+    "amenities.laundry": "Laundry",
+    "amenities.mediaRoom": "Media Room",
+    "amenities.naturalGas": "Natural Gas",
+    "amenities.pool": "Pool",
+    "amenities.smokeDetectors": "Smoke Detectors",
+    "amenities.ventilation": "Ventilation",
+    "amenities.washerDryer": "Washer & Dryer",
+    "amenities.water": "Water",
+    "amenities.wifi": "WiFi",
+  };
+
+  const location = useLocation();
+  console.log(location.pathname);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const getNestedValue = (eachProp, attr) => {
+    return attr.split(".").reduce((current, key) => {
+      // return current && current[key] !== undefined ? current[key] : null;
+      return current[key] == "true" ? (
+        <IoMdCheckmark className="text-green-500 text-2xl" />
+      ) : current[key] == "false" ? (
+        <IoMdClose className="text-red-500 text-2xl" />
+      ) : (
+        current[key]
+      );
+    }, eachProp);
+  };
+
   return (
     <div className="w-10/12 mx-auto pt-4 ">
       {/* Breadcrumbs */}
 
       <Breadcrumb pageName={"Comparison"} />
 
-      <div className="bg-white w-full p-0 mb-2  ">
+      <div className="bg-white w-full p-0 mb-6  ">
         <h1 className="font-Nunito lg:text-[34px] text-[32px]  font-[700]">
           Compare Listings
         </h1>
-
-        {/* Image  */}
-        {/* <div className=" mt-10 w-full">
-          <figure className="bg-[url(https://i.ibb.co/DPynHVLF/team.jpg)] lg:h-[350px] h-[300px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
-        </div> */}
       </div>
 
-      {/* Rest  */}
-      {/* <div className="w-full grid grid-cols-12 gap-10 bg-green-200">
-        {comparisonProperties?.map((eachProp) => (
-          <ComparisonTable key={eachProp._id} eachProp={eachProp} />
-        ))}
-      </div> */}
-
-      {/* /////////////////////// */}
       {/* Property Table  */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
+      <div className="overflow-x-auto mb-10">
+        <table className="table-auto w-full  border-collapse border-0 border-gray-300">
           <thead className="border-0">
-            <tr className="font-Nunito text-C_DarkGray text-[22px] w-full  border-0 bg-gray-100">
-              <th className="border px-4 py-2 text-left">Attribute</th>
+            <tr className="font-Nunito w-full border-0 ">
+              <th></th>
               {comparisonProperties?.map((eachProp) => (
-                <th key={eachProp._id} className="border px-4 py-2 text-center">
-                  {eachProp?.title}
+                <th key={eachProp._id} className=" w-[40%] h-[350px]  pe-2">
+                  <Link to={`/propertyDetails/${eachProp._id}`}>
+                    <figure
+                      className="w-full h-full bg-cover bg-center relative rounded-lg"
+                      style={{
+                        backgroundImage: eachProp?.images
+                          ? `url(${eachProp?.images?.[0]})`
+                          : "none",
+                      }}
+                    >
+                      {!eachProp?.images && (
+                        <div className="flex justify-center items-center w-full h-full">
+                          <span className="loading loading-ring loading-md text-C_purple"></span>
+                        </div>
+                      )}
+                    </figure>
+                  </Link>
+                </th>
+              ))}
+            </tr>
+
+            <tr className="font-Nunito text-C_DarkGray text-[22px] w-full  border-0 ">
+              <th className="border-0 px-4 py-2 text-left"></th>
+              {comparisonProperties?.map((eachProp) => (
+                <th key={eachProp._id} className="border-0 px-4 py-2 text-left">
+                  <Link to={`/propertyDetails/${eachProp._id}`}>
+                    {eachProp?.title}
+                  </Link>
+                </th>
+              ))}
+            </tr>
+
+            <tr className="font-Nunito text-C_DarkGray text-[22px] w-full  border-0 ">
+              <th className="border-0 px-4 py-2 text-left"></th>
+              {comparisonProperties?.map((eachProp) => (
+                <th
+                  key={eachProp._id}
+                  className="border-0 px-4  text-left font-[500] text-C_purple"
+                >
+                  {eachProp?.price} €{" "}
+                  <span className="text-[18px] ">
+                    {eachProp?.afterPriceLabel}
+                  </span>
+                </th>
+              ))}
+            </tr>
+
+            <tr className="font-Nunito text-C_DarkGray text-[17px] w-full  border-0">
+              <th className="border-0 px-4 py-2 text-left"></th>
+              {comparisonProperties?.map((eachProp) => (
+                <th
+                  key={eachProp._id}
+                  className="border-0 px-4 py-2 text-left text-C_LightGray font-[500]"
+                >
+                  Type:{" "}
+                  <span className=" text-C_DarkGray capitalize">
+                    {eachProp?.category}
+                  </span>
                 </th>
               ))}
             </tr>
           </thead>
+
           <tbody>
-            {attributes.map((attr) => (
-              <tr key={attr}>
-                <td className="border px-4 py-2 font-semibold capitalize">
-                  {attr}
+            {Object.keys(attributeLabels).map((attr) => (
+              <tr key={attr} className="even:bg-C_purple/10 text-C_LightGray">
+                <td className="border-0 px-4 py-4 font-semibold text-md">
+                  {attributeLabels[attr] || attr}
                 </td>
 
                 {comparisonProperties?.map((eachProp) => (
                   <td
                     key={eachProp._id}
-                    className="border px-4 py-2 text-center"
+                    className="border-0 px-4 py-2 text-left  text-md"
                   >
-                    {eachProp[attr]}
+                    {getNestedValue(eachProp, attr) || "--"}
                   </td>
                 ))}
               </tr>
