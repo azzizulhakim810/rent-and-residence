@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import UserCard from "../../../components/AgentCard/AgentCard";
@@ -20,7 +20,7 @@ const AllAgents = () => {
     },
   });
 
-  console.log(allAgents);
+  // console.log(allAgents);
 
   return (
     <div className="bg-C_LightGray/5 py-6">

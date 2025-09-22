@@ -91,7 +91,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   };
 
   useEffect(() => {
-    favourites.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
+    favourites?.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
   }, [favourites, _id]);
 
   // console.log(isFavourite);

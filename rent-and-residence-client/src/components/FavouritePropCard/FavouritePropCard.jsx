@@ -5,24 +5,26 @@ import { LiaBedSolid, LiaCartPlusSolid } from "react-icons/lia";
 import { PiBathtub } from "react-icons/pi";
 import { VscHome } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../hooks/UseCart/UseCart";
-import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+// import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import useAddToCard from "../../hooks/useAddToCard/useAddToCard";
 
 const FavouritePropCard = ({ favProperty }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   // const [isFavourite, setIsFavourite] = useState();
-  const [currentUserFromDB] = useSignedInUser();
-  const [, refetch] = UseCart();
+  // const [currentUserFromDB] = useSignedInUser();
+  // const [, refetch] = UseCart();
+  const [handleAddToCart] = useAddToCard();
 
-  const { _id: userId, email: userEmail } = currentUserFromDB;
+  // const { _id: userId, email: userEmail } = currentUserFromDB;
   // console.log(favProperty);
 
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
   // Destructure Details from Property
   const {
     _id,
@@ -36,7 +38,7 @@ const FavouritePropCard = ({ favProperty }) => {
     propertyDetails,
   } = favProperty || {};
 
-  console.log(favProperty);
+  // console.log(favProperty);
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -66,7 +68,7 @@ const FavouritePropCard = ({ favProperty }) => {
   // console.log(isFavourite);
 
   // Add to Cart
-  const handleAddToCart = (_id) => {
+  /*   const handleAddToCart = (_id) => {
     if (currentUserFromDB && userEmail) {
       // console.log(_id);
 
@@ -94,7 +96,7 @@ const FavouritePropCard = ({ favProperty }) => {
     } else {
       toast.error("You must login to add items");
     }
-  };
+  }; */
 
   return (
     <div className=" bg-white w-full shadow-lg rounded-lg">

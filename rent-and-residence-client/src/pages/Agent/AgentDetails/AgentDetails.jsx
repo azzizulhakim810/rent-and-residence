@@ -18,10 +18,13 @@ import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
+import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePropCard";
 
 const AgentDetails = () => {
   const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
 
+  useScrollToTop();
   const agent = useLoaderData([]);
   const axiosPublic = useAxiosPublic();
   console.log(agent);
@@ -36,7 +39,7 @@ const AgentDetails = () => {
     role,
     phone,
     facebookUrl,
-    instagramUrl,
+    // instagramUrl,
     linkedinUrl,
     pinterestUrl,
     twitterUrl,
@@ -61,7 +64,7 @@ const AgentDetails = () => {
   const formattedLinkedInURL = handleUrl(linkedinUrl);
   const formattedPinterestURL = handleUrl(pinterestUrl);
   const formattedTwitterURL = handleUrl(twitterUrl);
-  const formattedInstagramURL = handleUrl(instagramUrl);
+  // const formattedInstagramURL = handleUrl(instagramUrl);
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
   useEffect(() => {
@@ -69,10 +72,6 @@ const AgentDetails = () => {
       .get(`/api/agentOwnedProperty/${_id}`)
       .then((res) => setAgentOwnedProperty(res.data))
       .catch((err) => console.log(err));
-
-    /* fetch(`http://localhost:5123/api/agentOwnedProperty/${_id}`)
-      .then((res) => res.json())
-      .then((data) => setAgentOwnedProperty(data[0])); */
   }, [axiosPublic, _id]);
 
   console.log(agentOwnedProperty);
@@ -90,7 +89,6 @@ const AgentDetails = () => {
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
-            {/* Profile  */}
             {/* Profile  */}
             <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
               <nav className="flex flex-col gap-2">
@@ -274,9 +272,16 @@ const AgentDetails = () => {
             {/* Properties  */}
             {/* First Row  */}
             <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
+              {/* {agentOwnedProperty.length !== 0 &&
+                agentOwnedProperty?.map((eachProp) => (
+                  <PropertyCard key={eachProp._id} property={eachProp} />
+                ))} */}
               {agentOwnedProperty.length !== 0 &&
                 agentOwnedProperty?.map((eachProp) => (
-                  <PropertyCard key={eachProp._id} eachProp={eachProp} />
+                  <FavouritePropCard
+                    key={eachProp._id}
+                    favProperty={eachProp}
+                  />
                 ))}
             </div>
 

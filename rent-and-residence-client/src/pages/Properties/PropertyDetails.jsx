@@ -60,6 +60,8 @@ import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import useAddToCard from "../../hooks/useAddToCard/useAddToCard";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -72,10 +74,11 @@ const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
 
+  useScrollToTop();
+  const [handleAddToCart] = useAddToCard();
   const [currentUserFromDB] = useSignedInUser();
 
-  const { _id, email: userEmail } = currentUserFromDB;
-  // console.log(userEmail);
+  const { _id: userId } = currentUserFromDB;
 
   const [coordinates, setCoordinates] = useState(null);
 
@@ -87,7 +90,7 @@ const PropertyDetails = () => {
 
   const axiosSecure = UseAxiosSecure();
   const axiosPublic = useAxiosPublic();
-  const [, refetch] = UseCart();
+  // const [, refetch] = UseCart();
 
   const {
     register,
@@ -116,7 +119,7 @@ const PropertyDetails = () => {
     formData.append("rating", rating);
     formData.append("comment", data.comment);
     formData.append("propertyId", propertyId);
-    formData.append("userId", _id);
+    formData.append("userId", userId);
 
     console.log(Object.fromEntries(formData.entries()));
 
@@ -147,6 +150,7 @@ const PropertyDetails = () => {
 
   // Destructure Details from Property
   const {
+    _id,
     title,
     description,
     price,
@@ -178,10 +182,6 @@ const PropertyDetails = () => {
     axiosPublic
       .get(`/api/users/${ownerId}`)
       .then((res) => setPropertyOwner(res.data));
-
-    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
-      .then((res) => res.json())
-      .then((data) => setPropertyOwner(data)); */
   }, [axiosPublic, ownerId]);
 
   // Destructure Details from Owner
@@ -217,12 +217,6 @@ const PropertyDetails = () => {
   const formattedTwitterURL = handleUrl(twitterUrl);
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
-  /* useEffect(() => {
-    fetch(`http://localhost:5123/api/reviews/${propertyId}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, [propertyId]); */
-
   const { refetch: refetchReviews, data: reviews } = useQuery({
     queryKey: ["reviews", propertyId],
     queryFn: async () => {
@@ -231,8 +225,6 @@ const PropertyDetails = () => {
     },
     enabled: !!propertyId,
   });
-
-  // console.log(reviews);
 
   // Built Year Date Format
   const yearBuiltTimeStamp = propertyDetails?.yearBuilt;
@@ -291,37 +283,6 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
     } else {
       // console.log("No result for", propAddress);
       return null;
-    }
-  };
-
-  // Add to Cart
-  const handleAddToCart = (propertyItem) => {
-    if (currentUserFromDB && userEmail) {
-      // console.log(_id);
-
-      const cartItem = {
-        propertyId: propertyItem?._id,
-        userId: _id,
-        userEmail,
-      };
-
-      axiosSecure
-        .post(`/api/carts?userEmail=${userEmail}`, cartItem)
-        .then((res) => {
-          console.log(res);
-          if (res.data.insertedId) {
-            toast.success("This property is added to cart");
-            refetch();
-          } else {
-            toast.error("Item already exists in the cart.");
-          }
-        })
-        .catch((err) => {
-          toast.error("Item already exists in the cart.");
-          console.log(err);
-        });
-    } else {
-      toast.error("You must login to add items");
     }
   };
 
@@ -1461,7 +1422,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
           <div className="lg:col-span-4 col-span-10 ">
             <div className="flex justify-end -mt-[30px]">
               <button
-                onClick={() => handleAddToCart(property)}
+                onClick={() => handleAddToCart(_id)}
                 className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
               >
                 <LiaCartPlusSolid className="text-[24px] -mt-1" />
