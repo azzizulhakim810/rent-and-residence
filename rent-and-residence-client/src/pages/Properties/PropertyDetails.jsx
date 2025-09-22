@@ -157,7 +157,7 @@ const PropertyDetails = () => {
     ownerId,
     images,
     propertyStatus,
-    listedIn,
+    // listedIn,
     afterPriceLabel,
     category,
     address,
@@ -166,10 +166,10 @@ const PropertyDetails = () => {
 
     amenities,
 
-    neighborhood,
+    // neighborhood,
 
-    energyClass,
-    energyIndex,
+    // energyClass,
+    // energyIndex,
 
     garages,
     garageSize,

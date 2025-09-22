@@ -19,12 +19,6 @@ const HomeProperties = () => {
           Discover the latest properties available today in Madrid area
         </h1>
 
-        {/* <div className="w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] p-8 rounded-xl bg-white flex gap-2">
-          {comparisonProperty?.map((prop) => (
-            <img className="w-16" src={prop?.data[0]?.images?.[0]} />
-          ))}
-        </div> */}
-
         {/* Property Cards  */}
         <div className="grid lg:grid-cols-3 grid-cols-1 justify-start w-full gap-6 py-5">
           {isPending ? (
@@ -47,7 +41,10 @@ const HomeProperties = () => {
           )}
         </div>
 
-        <Link className="btn w-1/6 mx-auto my-5 bg-C_purple text-white hover:bg-transparent hover:border-2 hover:border-C_purple hover:text-C_purple border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-5">
+        <Link
+          to="/properties"
+          className="btn w-1/6 mx-auto my-5 bg-C_purple text-white hover:bg-transparent hover:border-2 hover:border-C_purple hover:text-C_purple border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-5"
+        >
           load more listings
         </Link>
       </div>

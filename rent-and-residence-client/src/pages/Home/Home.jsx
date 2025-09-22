@@ -94,52 +94,13 @@ const Home = () => {
                 ))
               )}
             </div>
-            {/* <h1 className=" w-full pt-2 pb-2 text-[14px] font-[600] font-Nunito text-title_color lg:text-left text-center">
-          
-        </h1> */}
+
             <Link
               to="/comparison"
               className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2"
             >
               Compare
             </Link>
-
-            {/*    <table className="table table-zebra">
-                
-                <thead className="border-0">
-                  <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0"></tr>
-
-                  <tr className="font-Nunito text-C_DarkGray text-[22px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className="h-10 col-span-6">{eachProp?.title}</th>
-                  </tr>
-
-                  <tr className="font-Nunito text-C_purple text-[20px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className="h-8 col-span-6 font-[600]">
-                      {eachProp?.price} € {eachProp?.afterPriceLabel}
-                    </th>
-                  </tr>
-
-                  <tr className="font-Nunito_Sans  text-[16px] grid lg:grid-cols-12 grid-cols-1 justify-start w-full gap-0 border-0">
-                    <th className=" text-C_LightGray h-10 col-span-6 font-[500]">
-                      Type:{" "}
-                      <span className=" text-C_DarkGray capitalize">
-                        {eachProp?.category}
-                      </span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                    <th>Man</th>
-                    <td>Cy Ganderton</td>
-                  </tr>
-
-                  <tr>
-                    <th>HTIT</th>
-                    <td>Hart Hagerty</td>
-                  </tr> 
-                </tbody>
-              </table> */}
           </div>
         ) : (
           ""

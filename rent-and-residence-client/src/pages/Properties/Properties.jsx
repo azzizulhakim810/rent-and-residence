@@ -6,11 +6,13 @@ import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import useProperties from "../../hooks/useProperties";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 
 const Properties = () => {
   // const allProperties = useLoaderData([]);
 
   // const [properties, favourites, loading] = useProperties();
+  useScrollToTop();
   const [allPropInfo, refetch, isPending] = useProperties();
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
   return (
