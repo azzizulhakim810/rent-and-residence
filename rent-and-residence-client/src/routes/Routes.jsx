@@ -29,6 +29,7 @@ import Checkout from "../pages/Checkout/Checkout";
 import MyOrders from "../pages/Dashboard_Pages/MyOrders/MyOrders";
 import PaymentHistory from "../pages/Dashboard_Pages/PaymentHistory/PaymentHistory";
 import AllOrders from "../pages/Dashboard_Pages/AllOrders/AllOrders";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
 export const router = createBrowserRouter([
   {

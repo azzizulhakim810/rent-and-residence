@@ -78,7 +78,6 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     } else if (isExisting?.length > 1) {
       toast.error("Maximum 2 Properties at a time");
     } else {
-      console.log("hello");
       const updated = [...isExisting, propertyId];
 
       // isExisting.push(propertyId);
