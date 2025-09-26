@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import { Keyboard, Pagination } from "swiper/modules";
 import FeatureCard from "../../../components/FeatureCard/FeatureCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import useProperties from "../../../hooks/useProperties";
+import useProperties from "../../../hooks/useProperties/useProperties";
 
 // import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
@@ -27,7 +27,7 @@ const Featured = () => {
 
   // const [properties, loading] = useProperties();
   const [allPropInfo] = useProperties();
-  const { allProperties, favouritePropertyIds } = allPropInfo || [];
+  const { allProperties } = allPropInfo || [];
 
   const featuredProperties = allProperties?.filter(
     (property) => property.propertyStatus == "Hot Offer"

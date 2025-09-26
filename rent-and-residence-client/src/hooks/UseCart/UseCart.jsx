@@ -1,11 +1,7 @@
-import UseAxiosSecure from "../UseAxiosSecure/UseAxiosSecure";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../useAxiosSecure/useAxiosSecure";
 // import useSignedInUser from "../useSignedInUser/useSignedInUser";
-import UseAuth from "../UseAuth/UseAuth";
+import UseAuth from "../useAuth/useAuth";
 
 const UseCart = () => {
   const axiosSecure = UseAxiosSecure();

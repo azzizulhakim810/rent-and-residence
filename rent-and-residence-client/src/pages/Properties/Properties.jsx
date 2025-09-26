@@ -3,10 +3,11 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
-import useProperties from "../../hooks/useProperties";
+
 import Sidebar from "../Shared/Sidebar/Sidebar";
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
+import useProperties from "../../hooks/useProperties/useProperties";
 
 const Properties = () => {
   // const allProperties = useLoaderData([]);

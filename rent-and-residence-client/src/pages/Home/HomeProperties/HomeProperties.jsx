@@ -2,8 +2,9 @@
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useProperties from "../../../hooks/useProperties/useProperties";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
-import useProperties from "../../../hooks/useProperties";
+
 const HomeProperties = () => {
   const [allPropInfo, refetch, isPending] = useProperties();
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};

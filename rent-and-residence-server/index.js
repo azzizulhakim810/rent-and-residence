@@ -170,6 +170,9 @@ async function run() {
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
+      const { page, skip, limit } = req.query;
+      console.log("Query parameters received:", { page, skip, limit });
+      // console.log(req.query)
       const allProperties = await propertyCollection.find().toArray();
 
       const favourites = await favouriteCollection.find().toArray();
