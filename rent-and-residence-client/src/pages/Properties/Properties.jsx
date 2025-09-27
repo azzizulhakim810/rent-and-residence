@@ -41,13 +41,14 @@ const Properties = () => {
   //   setLimit(e.target.value);
   // };
 
-  // console.log({ pages, currentPage, limit, numberOfPages });
+  console.log({ pages, currentPage, limit, numberOfPages });
   // console.log({ page, limit });
 
   // const handlePageNumber = (e) => {
   //   // console.log(e);
   //   setCurrentPage(e);
   // };
+  console.log(currentPage);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -141,7 +142,11 @@ const Properties = () => {
               {/* Previous Button  */}
 
               <button
-                onClick={() => setCurrentPage(currentPage - 1)}
+                onClick={() =>
+                  setCurrentPage(
+                    currentPage > 0 ? currentPage - 1 : currentPage
+                  )
+                }
                 className="join-item btn"
               >
                 <GrPrevious />
@@ -186,20 +191,29 @@ const Properties = () => {
 
               {/* Quantity Per page  */}
               <select
-                onChange={(e) => setLimit(e.target.value)}
+                onChange={(e) => {
+                  setLimit(parseInt(e.target.value));
+                  setCurrentPage(0);
+                }}
                 // defaultValue={limit}
                 value={limit}
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="6">6</option>
-                <option value="10">10</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={6}>6</option>
+                <option value={10}>10</option>
               </select>
 
               {/* Next Button  */}
               <button
-                onClick={() => setCurrentPage(currentPage + 1)}
+                onClick={() =>
+                  setCurrentPage(
+                    currentPage + 1 < numberOfPages
+                      ? currentPage + 1
+                      : currentPage
+                  )
+                }
                 className="join-item btn"
               >
                 <GrNext />
