@@ -5,21 +5,21 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
-import Sidebar from "../Shared/Sidebar/Sidebar";
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
-import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import useProperties from "../../hooks/useProperties/useProperties";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
+import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Properties = () => {
   // const allProperties = useLoaderData([]);
 
   // const [properties, favourites, loading] = useProperties();
   useScrollToTop();
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(4);
 
   const [allPropInfo, refetch, isPending] = useProperties({
-    page,
+    currentPage,
     limit,
   });
   const {
@@ -41,12 +41,12 @@ const Properties = () => {
   //   setLimit(e.target.value);
   // };
 
-  console.log({ pages, page, limit, numberOfPages });
+  console.log({ pages, currentPage, limit, numberOfPages });
   // console.log({ page, limit });
 
   const handlePageNumber = (e) => {
     console.log(e);
-    setPage(e + 1);
+    setCurrentPage(e + 1);
   };
 
   return (
@@ -136,9 +136,14 @@ const Properties = () => {
               )}
             </div>
 
+            <div className="text-center py-5">
+              <p>{currentPage}</p>
+            </div>
+
             {/* Pagination  */}
             <div className="join py-5">
               {/* Previous Button  */}
+
               <button className="join-item btn">
                 <GrPrevious />
               </button>
@@ -177,16 +182,14 @@ const Properties = () => {
               {/* Quantity Per page  */}
               <select
                 onChange={(e) => setLimit(e.target.value)}
-                // defaultValue="5"
+                // defaultValue={limit}
+                value={limit}
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
               >
-                <option
-                // disabled={true}
-                >
-                  5
-                </option>
-                <option>10</option>
-                <option>15</option>
+                <option value="2">2</option>
+                <option value="6">6</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
               </select>
 
               {/* Next Button  */}
