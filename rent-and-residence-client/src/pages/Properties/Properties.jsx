@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
@@ -14,8 +15,40 @@ const Properties = () => {
 
   // const [properties, favourites, loading] = useProperties();
   useScrollToTop();
-  const [allPropInfo, refetch, isPending] = useProperties();
-  const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(4);
+
+  const [allPropInfo, refetch, isPending] = useProperties({
+    page,
+    limit,
+  });
+  const {
+    allProperties = [],
+    favouritePropertyIds = [],
+    totalCount = 0,
+  } = allPropInfo || {};
+
+  const numberOfPages = Math.ceil(totalCount / limit);
+
+  const pages = [...Array(numberOfPages).keys()];
+  // console.log(pages);
+  // const pages = [];
+  // for (let i = 1; i < numberOfPages; i++) {
+  //   pages.push(i);
+  // }
+
+  // const handleShowPerPage = (e) => {
+  //   setLimit(e.target.value);
+  // };
+
+  console.log({ pages, page, limit, numberOfPages });
+  // console.log({ page, limit });
+
+  const handlePageNumber = (e) => {
+    console.log(e);
+    setPage(e + 1);
+  };
+
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
@@ -110,14 +143,19 @@ const Properties = () => {
                 <GrPrevious />
               </button>
 
-              <input
-                className="join-item btn btn-square ms-5"
-                type="radio"
-                name="options"
-                aria-label="1"
-                checked="checked"
-              />
-              <input
+              {pages.map((page) => (
+                <input
+                  key={page}
+                  // onClick={setPage(e.target.value)}
+                  onClick={() => handlePageNumber(page)}
+                  className="join-item btn btn-square"
+                  type="radio"
+                  name="options"
+                  aria-label={page}
+                />
+              ))}
+
+              {/* <input
                 className="join-item btn btn-square"
                 type="radio"
                 name="options"
@@ -134,14 +172,19 @@ const Properties = () => {
                 type="radio"
                 name="options"
                 aria-label="4"
-              />
+              /> */}
 
               {/* Quantity Per page  */}
               <select
-                defaultValue="5"
+                onChange={(e) => setLimit(e.target.value)}
+                // defaultValue="5"
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
               >
-                <option disabled={true}>5</option>
+                <option
+                // disabled={true}
+                >
+                  5
+                </option>
                 <option>10</option>
                 <option>15</option>
               </select>

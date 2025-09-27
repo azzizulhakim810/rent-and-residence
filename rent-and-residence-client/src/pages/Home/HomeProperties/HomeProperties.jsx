@@ -6,11 +6,11 @@ import useProperties from "../../../hooks/useProperties/useProperties";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 
 const HomeProperties = () => {
-  const page = 1;
-  const limit = 3;
+  // const page = 1;
+  // const limit = 3;
   const [allPropInfo, refetch, isPending] = useProperties({
-    page,
-    limit,
+    page: 1,
+    limit: 3,
   });
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
 
