@@ -26,7 +26,7 @@ const Featured = () => {
   }, []); */
 
   // const [properties, loading] = useProperties();
-  const [allPropInfo] = useProperties();
+  const [allPropInfo] = useProperties({ page: 1, limit: 8 });
   const { allProperties } = allPropInfo || [];
 
   const featuredProperties = allProperties?.filter(

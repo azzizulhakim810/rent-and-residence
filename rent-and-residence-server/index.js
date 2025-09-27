@@ -170,17 +170,30 @@ async function run() {
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
-      const { page, skip, limit } = req.query;
-      console.log("Query parameters received:", { page, skip, limit });
-      // console.log(req.query)
-      const allProperties = await propertyCollection.find().toArray();
+      // const { parseInt(page), parseInt(limit) } = req.query;
+      // console.log(req.query.page);
+
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 2;
+      const skip = (page - 1) * limit;
+
+      console.log("Query parameters received:", { page, limit, skip });
+
+      const allProperties = await propertyCollection
+        .find()
+        .skip(skip)
+        .limit(limit)
+        .toArray();
+
+      const totalCount = await propertyCollection.estimatedDocumentCount();
+      // console.log(totalCount);
 
       const favourites = await favouriteCollection.find().toArray();
       const favouritePropertyIds = favourites.map(
         (EachProp) => EachProp.propertyIds
       );
 
-      res.send({ allProperties, favouritePropertyIds });
+      res.send({ allProperties, favouritePropertyIds, totalCount });
     });
 
     // Get an individual Property
