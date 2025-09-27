@@ -326,7 +326,7 @@ const AddNewProperty = () => {
 
                   <div className=" lg:w-1/2">
                     <label className="label  mb-2 text-sm font-[600]">
-                      *After Price Label (ex: "/month")
+                      *After Price Label (ex: "/ month")
                     </label>
                     <input
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300  mb-2"

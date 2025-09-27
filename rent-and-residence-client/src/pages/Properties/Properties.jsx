@@ -16,7 +16,7 @@ const Properties = () => {
   // const [properties, favourites, loading] = useProperties();
   useScrollToTop();
   const [currentPage, setCurrentPage] = useState(0);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(4);
 
   const [allPropInfo, refetch, isPending] = useProperties({
     currentPage,
@@ -41,14 +41,14 @@ const Properties = () => {
   //   setLimit(e.target.value);
   // };
 
-  console.log({ pages, currentPage, limit, numberOfPages });
+  // console.log({ pages, currentPage, limit, numberOfPages });
   // console.log({ page, limit });
 
   // const handlePageNumber = (e) => {
   //   // console.log(e);
   //   setCurrentPage(e);
   // };
-  console.log(currentPage);
+  // console.log(currentPage);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -199,8 +199,8 @@ const Properties = () => {
                 value={limit}
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
               >
-                <option value={1}>1</option>
                 <option value={2}>2</option>
+                <option value={4}>4</option>
                 <option value={6}>6</option>
                 <option value={10}>10</option>
               </select>
