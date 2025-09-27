@@ -17,6 +17,15 @@ const Properties = () => {
   useScrollToTop();
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(4);
+  const [filters, setFilters] = useState({
+    city: "",
+    type: "",
+    category: "",
+    priceHighToLaw: "",
+    priceLowToHigh: "",
+    newest: "",
+    oldest: "",
+  });
 
   const [allPropInfo, refetch, isPending] = useProperties({
     currentPage,
@@ -31,24 +40,13 @@ const Properties = () => {
   const numberOfPages = Math.ceil(totalCount / limit);
 
   const pages = [...Array(numberOfPages).keys()];
-  // console.log(pages);
+
   // const pages = [];
   // for (let i = 1; i < numberOfPages; i++) {
   //   pages.push(i);
   // }
 
-  // const handleShowPerPage = (e) => {
-  //   setLimit(e.target.value);
-  // };
-
-  // console.log({ pages, currentPage, limit, numberOfPages });
-  // console.log({ page, limit });
-
-  // const handlePageNumber = (e) => {
-  //   // console.log(e);
-  //   setCurrentPage(e);
-  // };
-  // console.log(currentPage);
+  console.log(filters);
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -70,6 +68,9 @@ const Properties = () => {
             {/* Filter  */}
             <div className="lg:flex-row flex flex-col lg:gap-3 gap-5 bg-white lg:px-3 px-8 lg:py-4 py-8 rounded-md shadow-sm mt-6 mb-3 ">
               <select
+                onChange={(e) =>
+                  setFilters((prev) => ({ ...prev, type: e.target.value }))
+                }
                 defaultValue="Types"
                 className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
@@ -79,14 +80,29 @@ const Properties = () => {
               </select>
 
               <select
+                onChange={(e) =>
+                  setFilters((prev) => ({ ...prev, city: e.target.value }))
+                }
                 defaultValue="Cities"
                 className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Cities</option>
-                <option>Madrid</option>
+                <option>Manchester</option>
+                <option>Liverpool</option>
+                <option>Birmingham</option>
+                <option>Leeds</option>
+                <option>Bristol</option>
+                <option>Oxford</option>
+                <option>Edinburgh</option>
+                <option>Glasgow</option>
+                <option>Cardiff</option>
+                <option>Belfast</option>
               </select>
 
               <select
+                onChange={(e) =>
+                  setFilters((prev) => ({ ...prev, category: e.target.value }))
+                }
                 defaultValue="Categories"
                 className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
