@@ -173,9 +173,9 @@ async function run() {
       // const { parseInt(page), parseInt(limit) } = req.query;
       // console.log(req.query.page);
 
-      const page = parseInt(req.query.page);
-      const limit = parseInt(req.query.limit);
-      const skip = (page - 1) * limit;
+      const page = parseInt(req.query.page) || 0;
+      const limit = parseInt(req.query.limit) || 4;
+      const skip = page * limit;
 
       console.log("Query parameters received:", { page, limit, skip });
 

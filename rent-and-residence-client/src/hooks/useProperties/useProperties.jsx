@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
 
-const useProperties = ({ page, limit }) => {
+const useProperties = ({ currentPage, limit }) => {
   const axiosPublic = useAxiosPublic();
 
   const {
@@ -9,11 +9,11 @@ const useProperties = ({ page, limit }) => {
     refetch,
     isPending,
   } = useQuery({
-    queryKey: ["allPropInfo", { page, limit }],
+    queryKey: ["allPropInfo", { currentPage, limit }],
     queryFn: async ({ queryKey }) => {
-      const [_key, { page, limit }] = queryKey;
+      const [_key, { currentPage, limit }] = queryKey;
       const result = await axiosPublic.get(
-        `/api/properties?page=${page}&limit=${limit}`
+        `/api/properties?page=${currentPage}&limit=${limit}`
       );
 
       return result.data;

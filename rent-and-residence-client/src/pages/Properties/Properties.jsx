@@ -15,8 +15,8 @@ const Properties = () => {
 
   // const [properties, favourites, loading] = useProperties();
   useScrollToTop();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(4);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimit] = useState(2);
 
   const [allPropInfo, refetch, isPending] = useProperties({
     currentPage,
@@ -41,13 +41,13 @@ const Properties = () => {
   //   setLimit(e.target.value);
   // };
 
-  console.log({ pages, currentPage, limit, numberOfPages });
+  // console.log({ pages, currentPage, limit, numberOfPages });
   // console.log({ page, limit });
 
-  const handlePageNumber = (e) => {
-    console.log(e);
-    setCurrentPage(e + 1);
-  };
+  // const handlePageNumber = (e) => {
+  //   // console.log(e);
+  //   setCurrentPage(e);
+  // };
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -136,28 +136,33 @@ const Properties = () => {
               )}
             </div>
 
-            <div className="text-center py-5">
-              <p>{currentPage}</p>
-            </div>
-
             {/* Pagination  */}
             <div className="join py-5">
               {/* Previous Button  */}
 
-              <button className="join-item btn">
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className="join-item btn"
+              >
                 <GrPrevious />
               </button>
 
               {pages.map((page) => (
-                <input
+                <button
                   key={page}
                   // onClick={setPage(e.target.value)}
-                  onClick={() => handlePageNumber(page)}
-                  className="join-item btn btn-square"
-                  type="radio"
-                  name="options"
-                  aria-label={page}
-                />
+                  onClick={() => setCurrentPage(page)}
+                  className={
+                    currentPage == page
+                      ? "btn bg-C_purple text-white"
+                      : "btn bg-transparent text-C_DarkGray"
+                  }
+                  // type="radio"
+                  // name="options"
+                  // aria-label={page}
+                >
+                  {page + 1}
+                </button>
               ))}
 
               {/* <input
@@ -186,14 +191,17 @@ const Properties = () => {
                 value={limit}
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
               >
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="6">6</option>
                 <option value="10">10</option>
-                <option value="20">20</option>
               </select>
 
               {/* Next Button  */}
-              <button className="join-item btn">
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="join-item btn"
+              >
                 <GrNext />
               </button>
             </div>
