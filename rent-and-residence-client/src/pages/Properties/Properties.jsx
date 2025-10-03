@@ -5,13 +5,13 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
+import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import PropertyCardSingleView from "../../components/PropertyCardSingleView/PropertyCardSingleView";
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
+import SkeletonOfPropertyCardSingleView from "../../components/SkeletonOfPropertyCardSingleView/SkeletonOfPropertyCardSingleView";
 import useProperties from "../../hooks/useProperties/useProperties";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import Sidebar from "../Shared/Sidebar/Sidebar";
-import PropertyCardSingleView from "../../components/PropertyCardSingleView/PropertyCardSingleView";
-import SkeletonOfPropertyCardSingleView from "../../components/SkeletonOfPropertyCardSingleView/SkeletonOfPropertyCardSingleView";
-import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 const Properties = () => {
   useScrollToTop();
@@ -65,117 +65,129 @@ const Properties = () => {
             </h1>
 
             {/* Filter  */}
-            <div className="lg:flex-row flex flex-col lg:gap-3 gap-5 bg-white lg:px-3 px-8 lg:py-4 py-8 rounded-md shadow-sm mt-6 mb-3 ">
-              <select
-                onChange={(e) =>
-                  setFilters((prev) => ({ ...prev, type: e.target.value }))
-                }
-                value={filters.type}
-                className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
-              >
-                <option value="" disabled={true}>
-                  Types
-                </option>
-
-                <option value="Rentals">Rentals</option>
-                <option value="Sales">Sales</option>
-              </select>
-
-              <select
-                onChange={(e) =>
-                  setFilters((prev) => ({ ...prev, city: e.target.value }))
-                }
-                value={filters.city}
-                className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
-              >
-                <option value="" disabled={true}>
-                  Cities
-                </option>
-
-                <option value="Manchester">Manchester</option>
-                <option value="Liverpool">Liverpool</option>
-                <option value="Birmingham">Birmingham</option>
-                <option value="Leeds">Leeds</option>
-                <option value="Bristol">Bristol</option>
-                <option value="Oxford">Oxford</option>
-                <option value="Edinburgh">Edinburgh</option>
-                <option value="Glasgow">Glasgow</option>
-                <option value="Cardiff">Cardiff</option>
-                <option value="Belfast">Belfast</option>
-              </select>
-
-              <select
-                onChange={(e) =>
-                  setFilters((prev) => ({ ...prev, category: e.target.value }))
-                }
-                value={filters.category}
-                className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
-              >
-                <option value="" disabled={true}>
-                  Categories
-                </option>
-
-                <option value="Apartments">Apartments</option>
-                <option value="Condos">Condos</option>
-                <option value="Duplexes">Duplexes</option>
-                <option value="Houses">Houses</option>
-                <option value="Industrial">Industrial</option>
-                <option value="Land">Land</option>
-                <option value="Retail">Retail</option>
-                <option value="Villas">Villas</option>
-              </select>
-
-              <select
-                onChange={(e) =>
-                  setFilters((prev) => ({ ...prev, sort: e.target.value }))
-                }
-                value={filters.sort}
-                className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
-              >
-                <option value="" disabled={true}>
-                  Price/Date/Quantity
-                </option>
-
-                <option value="priceDesc">Price High to Low</option>
-                <option value="priceAsc">Price Low to High</option>
-                <option value="newest">Newest first</option>
-                <option value="oldest">Oldest first</option>
-                <option value="bedroomDesc">Bedrooms High to Low</option>
-                <option value="bedroomAsc">Bedrooms Low to high</option>
-              </select>
-
-              {Object.values(filters).every((val) => val == "") ? (
-                " "
-              ) : (
-                <button
-                  onClick={() =>
-                    setFilters({
-                      city: "",
-                      type: "",
-                      category: "",
-                      sort: "",
-                    })
-                  }
-                  className="btn bg-C_purple text-white 
-                       hover:bg-transparent hover:text-C_DarkGray"
+            <div className="flex justify-around items-center bg-white  rounded-md shadow-sm lg:px-3 px-8 lg:py-4 py-8">
+              <div className=" flex lg:flex-row flex-col lg:gap-3 gap-5 w-full  ">
+                <select
+                  onChange={(e) => {
+                    setFilters((prev) => ({ ...prev, type: e.target.value }));
+                    setCurrentPage(0);
+                  }}
+                  value={filters.type}
+                  className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
                 >
-                  X
+                  <option value="" disabled={true}>
+                    Types
+                  </option>
+
+                  <option value="Rentals">Rentals</option>
+                  <option value="Sales">Sales</option>
+                </select>
+
+                <select
+                  onChange={(e) => {
+                    setFilters((prev) => ({ ...prev, city: e.target.value }));
+                    setCurrentPage(0);
+                  }}
+                  value={filters.city}
+                  className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                >
+                  <option value="" disabled={true}>
+                    Cities
+                  </option>
+
+                  <option value="Manchester">Manchester</option>
+                  <option value="Liverpool">Liverpool</option>
+                  <option value="Birmingham">Birmingham</option>
+                  <option value="Leeds">Leeds</option>
+                  <option value="Bristol">Bristol</option>
+                  <option value="Oxford">Oxford</option>
+                  <option value="Edinburgh">Edinburgh</option>
+                  <option value="Glasgow">Glasgow</option>
+                  <option value="Cardiff">Cardiff</option>
+                  <option value="Belfast">Belfast</option>
+                </select>
+
+                <select
+                  onChange={(e) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      category: e.target.value,
+                    }));
+                    setCurrentPage(0);
+                  }}
+                  value={filters.category}
+                  className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                >
+                  <option value="" disabled={true}>
+                    Categories
+                  </option>
+
+                  <option value="Apartments">Apartments</option>
+                  <option value="Condos">Condos</option>
+                  <option value="Duplexes">Duplexes</option>
+                  <option value="Houses">Houses</option>
+                  <option value="Industrial">Industrial</option>
+                  <option value="Land">Land</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Villas">Villas</option>
+                </select>
+
+                <select
+                  onChange={(e) => {
+                    setFilters((prev) => ({ ...prev, sort: e.target.value }));
+                    setCurrentPage(0);
+                  }}
+                  value={filters.sort}
+                  className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                >
+                  <option value="" disabled={true}>
+                    Price/Date/Quantity
+                  </option>
+
+                  <option value="priceDesc">Price High to Low</option>
+                  <option value="priceAsc">Price Low to High</option>
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="bedroomDesc">Bedrooms High to Low</option>
+                  <option value="bedroomAsc">Bedrooms Low to high</option>
+                </select>
+
+                {/* Clear All Btn  */}
+                {Object.values(filters).every((val) => val == "") ? (
+                  ""
+                ) : (
+                  <button
+                    onClick={() =>
+                      setFilters({
+                        city: "",
+                        type: "",
+                        category: "",
+                        sort: "",
+                      })
+                    }
+                    className="btn   
+                       bg-transparent text-C_purple border-0 border-C_purple underline underline-offset-3"
+                  >
+                    Clear all Filters X
+                  </button>
+                )}
+              </div>
+
+              <div className=" flex items-center gap-3 w-[10%] pr-4">
+                <button
+                  onClick={() => setDoubleColumnView(true)}
+                  className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
+                >
+                  <FaGripVertical />
                 </button>
-              )}
 
-              <button
-                onClick={() => setDoubleColumnView(true)}
-                className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
-              >
-                <FaGripVertical />
-              </button>
-
-              <button
-                onClick={() => setDoubleColumnView(false)}
-                className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
-              >
-                <FaBars />
-              </button>
+                <button
+                  onClick={() => setDoubleColumnView(false)}
+                  className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
+                >
+                  <FaBars />
+                </button>
+              </div>
             </div>
 
             {/* Property Cards - Dual Grid View */}
