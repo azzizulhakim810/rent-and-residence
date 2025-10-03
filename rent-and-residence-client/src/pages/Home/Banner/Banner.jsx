@@ -2,38 +2,62 @@ import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 const Banner = () => {
-  const [selectDivision, setSelectDivision] = useState("");
-  const [selectPropertyType, setSelectPropertyType] = useState("");
-  const [selectTransactionType, setSelectTransactionType] = useState("");
+  // const [selectDivision, setSelectDivision] = useState("");
+  // const [selectPropertyType, setSelectPropertyType] = useState("");
+  // const [selectTransactionType, setSelectTransactionType] = useState("");
+  const [filters, setFilters] = useState({
+    city: "",
+    bedroom: "",
+    room: "",
+  });
 
-  // console.log(selectDivision, selectPropertyType, selectTransactionType);
-  const divisions = [
-    { value: "dhaka", label: "Dhaka" },
-    { value: "chittagong", label: "Chittagong" },
-    { value: "rajshahi", label: "Rajshahi" },
-    { value: "khulna", label: "Khulna" },
-    { value: "barisal", label: "Barisal" },
-    { value: "sylhet", label: "Sylhet" },
-    { value: "rangpur", label: "Rangpur" },
-    { value: "mymensingh", label: "Mymensingh" },
+  console.log(filters);
+
+  const cities = [
+    { value: "Manchester", label: "Manchester" },
+    { value: "Liverpool", label: "Liverpool" },
+    { value: "Birmingham", label: "Birmingham" },
+    { value: "Leeds", label: "Leeds" },
+    { value: "Bristol", label: "Bristol" },
+    { value: "Oxford", label: "Oxford" },
+    { value: "Edinburgh", label: "Edinburgh" },
+    { value: "Glasgow", label: "Glasgow" },
+    { value: "Cardiff", label: "Cardiff" },
+    { value: "Belfast", label: "Belfast" },
   ];
 
-  const propertyTypes = [
-    { value: "apartments", label: "Apartments" },
-    { value: "condos", label: "Condos" },
-    { value: "duplexes", label: "Duplexes" },
-    { value: "houses", label: "Houses" },
-    { value: "industrial", label: "Industrial" },
-    { value: "land", label: "Land" },
-    { value: "offices", label: "Offices" },
-    { value: "retail", label: "Retail" },
-    { value: "villas", label: "Villas" },
+  const bedrooms = [
+    { value: 1, label: "1" },
+    { value: 2, label: "2" },
+    { value: 3, label: "3" },
+    { value: 4, label: "4" },
+    { value: 5, label: "5" },
+    { value: 6, label: "6+" },
+  ];
+  const rooms = [
+    { value: 1, label: "1" },
+    { value: 2, label: "2" },
+    { value: 3, label: "3" },
+    { value: 4, label: "4" },
+    { value: 5, label: "5" },
+    { value: 6, label: "6+" },
   ];
 
-  const transactionTypes = [
-    { value: "rentals", label: "Rentals" },
-    { value: "sales", label: "Sales" },
-  ];
+  // const propertyTypes = [
+  //   { value: "Apartments", label: "Apartments" },
+  //   { value: "Condos", label: "Condos" },
+  //   { value: "Duplexes", label: "Duplexes" },
+  //   { value: "Houses", label: "Houses" },
+  //   { value: "Industrial", label: "Industrial" },
+  //   { value: "Land", label: "Land" },
+  //   { value: "Retail", label: "Retail" },
+  //   { value: "Villas", label: "Villas" },
+  // ];
+
+  // const transactionTypes = [
+  //   { value: "Rentals", label: "Rentals" },
+  //   { value: "Sales", label: "Sales" },
+  // ];
 
   return (
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
@@ -41,7 +65,7 @@ const Banner = () => {
         <div className="lg:text-left text-center">
           <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-16 leading-13 font-[700] lg:-me-15 font-Nunito">
             Find your next <br />
-            Perfect home in Madrid
+            Perfect home in UK
           </h1>
           <p className=" py-6 font-Nunito_Sans font-normal text-xl text-[#9b9b9b]">
             Through our proprietary platform, WpResidence is changing how agents
@@ -54,67 +78,74 @@ const Banner = () => {
           {/* Location  */}
           <div className="lg:w-1/4 w-full ">
             <label
-              htmlFor="division"
+              htmlFor="cities"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
             >
-              LOCATION
+              CITIES
             </label>
             <select
-              onChange={(e) => setSelectDivision(e.target.value)}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, city: e.target.value }))
+              }
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
               <option disabled selected>
-                Choose a division
+                Choose a city
               </option>
-              {divisions.map((division) => (
-                <option key={division.value} value={division.value}>
-                  {division.label}
+
+              {cities.map((city) => (
+                <option key={city.value} value={city.value}>
+                  {city.label}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Property Type  */}
+          {/* Bedrooms  */}
           <div className="lg:w-1/4 w-full">
             <label
-              htmlFor="propertyType"
+              htmlFor="bedrooms"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
             >
-              PROPERTY TYPE
+              BEDROOMS
             </label>
             <select
-              onChange={(e) => setSelectPropertyType(e.target.value)}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, bedroom: e.target.value }))
+              }
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
               <option disabled selected>
-                Property Type
+                Bedrooms
               </option>
-              {propertyTypes.map((property) => (
-                <option key={property.value} value={property.value}>
-                  {property.label}
+              {bedrooms.map((bedroom) => (
+                <option key={bedroom.value} value={bedroom.value}>
+                  {bedroom.label}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Transactional Type  */}
+          {/* Rooms  */}
           <div className="lg:w-1/4 w-full ">
             <label
               htmlFor="transactionType"
               className="block text-sm font-medium tracking-wider text-gray-700 mb-2"
             >
-              RENT OR SALE
+              ROOMS
             </label>
             <select
-              onChange={(e) => setSelectTransactionType(e.target.value)}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, room: e.target.value }))
+              }
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
               <option disabled selected>
-                Rend or Sale
+                Rooms
               </option>
-              {transactionTypes.map((transaction) => (
-                <option key={transaction.value} value={transaction.value}>
-                  {transaction.label}
+              {rooms.map((room) => (
+                <option key={room.value} value={room.value}>
+                  {room.label}
                 </option>
               ))}
             </select>
