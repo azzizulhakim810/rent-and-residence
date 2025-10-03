@@ -26,7 +26,16 @@ const Featured = () => {
   }, []); */
 
   // const [properties, loading] = useProperties();
-  const [allPropInfo] = useProperties({ page: 1, limit: 8 });
+  const [allPropInfo] = useProperties({
+    page: 1,
+    limit: 8,
+    filters: {
+      city: "",
+      type: "",
+      category: "",
+      sort: "",
+    },
+  });
   const { allProperties } = allPropInfo || [];
 
   const featuredProperties = allProperties?.filter(

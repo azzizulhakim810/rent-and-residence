@@ -1,27 +1,22 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
 
 import { FaBars, FaGripVertical } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
+import ComparisonFeature from "../../components/ComparisonFeature/ComparisonFeature";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import PropertyCardSingleView from "../../components/PropertyCardSingleView/PropertyCardSingleView";
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import SkeletonOfPropertyCardSingleView from "../../components/SkeletonOfPropertyCardSingleView/SkeletonOfPropertyCardSingleView";
-import useComparison from "../../hooks/useComparison/useComparison";
 import useProperties from "../../hooks/useProperties/useProperties";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
-import { usePopup } from "../../providers/PopupProvider";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Properties = () => {
   useScrollToTop();
-  const { isShow } = usePopup();
-  const [handleRemoveComparison, comparisonProperties, , , isLoading, ,] =
-    useComparison();
 
   const [doubleColumnView, setDoubleColumnView] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -53,7 +48,7 @@ const Properties = () => {
   //   pages.push(i);
   // }
 
-  console.log(Object.values(filters));
+  // console.log(Object.values(filters));
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -323,61 +318,7 @@ const Properties = () => {
       </div>
 
       {/* Comparison Popup  */}
-      <div>
-        {isShow ? (
-          <div
-            id="comparisonPopUp"
-            className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
-          >
-            <div className="flex align-middle items-center">
-              <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
-                Compare Listings
-              </h1>
-
-              <button
-                onClick={handleRemoveComparison}
-                className=" absolute top-0 right-0 bg-C_purple text-white px-4 py-2 rounded-tr-lg rounded-bl-lg cursor-pointer"
-              >
-                X
-              </button>
-            </div>
-            <div className="flex gap-2">
-              {isLoading ? (
-                <div className="flex justify-center items-center">
-                  <span className="loading loading-ring loading-xl text-C_purple"></span>
-                </div>
-              ) : (
-                comparisonProperties?.map((eachProp) => (
-                  <figure
-                    key={eachProp?._id}
-                    className="w-20 h-16 bg-cover bg-center relative rounded-lg"
-                    style={{
-                      backgroundImage: eachProp?.images
-                        ? `url(${eachProp?.images?.[0]})`
-                        : "none",
-                    }}
-                  >
-                    {!eachProp?.images && (
-                      <div className="flex justify-center items-center w-full h-full">
-                        <span className="loading loading-ring loading-md text-C_purple"></span>
-                      </div>
-                    )}
-                  </figure>
-                ))
-              )}
-            </div>
-
-            <Link
-              to="/comparison"
-              className="btn mx-auto my-2 bg-C_purple text-white hover:bg-transparent hover:text-C_purple  border-2 rounded-md hidden lg:flex capitalize text-[15px] font-Nunito_Sans py-2"
-            >
-              Compare
-            </Link>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+      <ComparisonFeature />
     </div>
   );
 };

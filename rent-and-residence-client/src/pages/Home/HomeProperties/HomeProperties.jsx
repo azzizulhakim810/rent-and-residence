@@ -11,6 +11,12 @@ const HomeProperties = () => {
   const [allPropInfo, refetch, isPending] = useProperties({
     page: 1,
     limit: 3,
+    filters: {
+      city: "",
+      type: "",
+      category: "",
+      sort: "newest",
+    },
   });
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
 
