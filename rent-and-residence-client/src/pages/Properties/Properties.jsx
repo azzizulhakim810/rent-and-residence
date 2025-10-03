@@ -18,11 +18,7 @@ const Properties = () => {
     city: "",
     type: "",
     category: "",
-    value: "",
-    // priceHighToLaw: "",
-    // priceLowToHigh: "",
-    // newest: "",
-    // oldest: "",
+    sort: "",
   });
 
   const [allPropInfo, refetch, isPending] = useProperties({
@@ -74,6 +70,7 @@ const Properties = () => {
                 className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Types</option>
+                <option value="">None</option>
                 <option>Rentals</option>
                 <option>Sales</option>
               </select>
@@ -86,6 +83,7 @@ const Properties = () => {
                 className="select select-ghost join-item block lg:w-[15%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Cities</option>
+                <option value="">None</option>
                 <option>Manchester</option>
                 <option>Liverpool</option>
                 <option>Birmingham</option>
@@ -106,7 +104,7 @@ const Properties = () => {
                 className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Categories</option>
-
+                <option value="">None</option>
                 <option value="Apartments">Apartments</option>
                 <option value="Condos">Condos</option>
                 <option value="Duplexes">Duplexes</option>
@@ -129,19 +127,30 @@ const Properties = () => {
 
               <select
                 onChange={(e) =>
-                  setFilters((prev) => ({ ...prev, value: e.target.value }))
+                  setFilters((prev) => ({ ...prev, sort: e.target.value }))
                 }
                 defaultValue="States"
                 className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >
                 <option disabled={true}>Price/Date/Quantity</option>
-                <option>Price High to Low</option>
-                <option>Price Low to High</option>
-                <option>Newest first</option>
-                <option>Oldest first</option>
-                <option>Bedrooms High to Low</option>
-                <option>Bedrooms Low to high</option>
+                <option value="">None</option>
+                <option value="priceDesc">Price High to Low</option>
+                <option value="priceAsc">Price Low to High</option>
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="bedroomDesc">Bedrooms High to Low</option>
+                <option value="bedroomAsc">Bedrooms Low to high</option>
               </select>
+
+              <button
+                onClick={() =>
+                  setFilters({ city: "", value: "", type: "", category: "" })
+                }
+                className="btn bg-C_purple text-white 
+                       hover:bg-transparent hover:text-C_DarkGray"
+              >
+                Clear Filter
+              </button>
             </div>
 
             {/* Property Cards  */}

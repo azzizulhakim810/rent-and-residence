@@ -178,13 +178,38 @@ async function run() {
       const skip = page * limit;
 
       const { city, category, type, value } = req.query;
-      console.log({ city, category, type, value });
+      // console.log({ city, category, type, value });
 
       // console.log("Query parameters received:", { page, limit, skip });
 
-      const filter = { category: category, listedIn: type };
+      // const filter = { category: category || "", listedIn: type || "" };
+
+      const filter = {};
+
+      // city
+      //   ? (filter.city = city)
+      //   : "" && category
+      //   ? (filter.category = category)
+      //   : "" && type
+      //   ? (filter.type = type)
+      //   : "" && value
+      //   ? (filter.value = value)
+      //   : "";
+
+      if (city) filter.city = city;
+      if (category) filter.category = category;
+      if (type) filter.type = type;
+
+      let sortOption = {};
+      if (sort == "priceDesc") sortOption = { price: -1 };
+      if (sort == "priceAsc") sortOption = { price: 1 };
+      if (sort == "newest") sortOption = { createdAt: -1 };
+      if (sort == "oldest") sortOption = { createdAt: 1 };
+
+      console.log(filter);
+
       const allProperties = await propertyCollection
-        .find(filter)
+        .find()
         .skip(skip)
         .limit(limit)
         .toArray();
