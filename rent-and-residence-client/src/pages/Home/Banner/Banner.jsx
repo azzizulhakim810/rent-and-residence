@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Banner = () => {
-  // const [selectDivision, setSelectDivision] = useState("");
-  // const [selectPropertyType, setSelectPropertyType] = useState("");
-  // const [selectTransactionType, setSelectTransactionType] = useState("");
+  const axiosPublic = useAxiosPublic();
+  const [searchedProp, setSearchedProp] = useState([]);
   const [filters, setFilters] = useState({
     city: "",
     bedroom: "",
@@ -20,6 +20,7 @@ const Banner = () => {
     { value: "Leeds", label: "Leeds" },
     { value: "Bristol", label: "Bristol" },
     { value: "Oxford", label: "Oxford" },
+    { value: "London", label: "London" },
     { value: "Edinburgh", label: "Edinburgh" },
     { value: "Glasgow", label: "Glasgow" },
     { value: "Cardiff", label: "Cardiff" },
@@ -34,6 +35,7 @@ const Banner = () => {
     { value: 5, label: "5" },
     { value: 6, label: "6+" },
   ];
+
   const rooms = [
     { value: 1, label: "1" },
     { value: 2, label: "2" },
@@ -42,6 +44,16 @@ const Banner = () => {
     { value: 5, label: "5" },
     { value: 6, label: "6+" },
   ];
+
+  const handleSearch = async () => {
+    const result = await axiosPublic.get(
+      `/api/search?city=${filters.city}&bedroom=${filters.bedroom}&room=${filters.room}`
+    );
+
+    setSearchedProp(result.data);
+  };
+
+  console.log(searchedProp);
 
   // const propertyTypes = [
   //   { value: "Apartments", label: "Apartments" },
@@ -153,7 +165,10 @@ const Banner = () => {
 
           {/* Search Button  */}
           <div className="lg:w-1/4 w-full">
-            <button className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3">
+            <button
+              onClick={handleSearch}
+              className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3"
+            >
               <FiSearch />
               <p>Search</p>
             </button>

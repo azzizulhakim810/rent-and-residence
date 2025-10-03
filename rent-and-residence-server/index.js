@@ -178,12 +178,7 @@ async function run() {
       const skip = page * limit;
 
       const { city, category, type, sort } = req.query;
-      // console.log({ city, category, type, sort });
       console.log(req.query);
-
-      // console.log("Query parameters received:", { page, limit, skip });
-
-      // const filter = { category: category || "", listedIn: type || "" };
 
       const filter = {};
 
@@ -228,6 +223,22 @@ async function run() {
       );
 
       res.send({ allProperties, favouritePropertyIds, totalCount });
+    });
+
+    // Get all the properties
+    app.get("/api/search", async (req, res) => {
+      const { city, bedroom, room } = req.query;
+      // console.log({ city, bedroom, room });
+
+      const filter = {
+        "address.city": city,
+        "propertyDetails.rooms": { $eq: room },
+        "propertyDetails.bedrooms": { $eq: bedroom },
+      };
+
+      const result = await propertyCollection.find(filter).toArray();
+
+      res.send(result);
     });
 
     // Get an individual Property
