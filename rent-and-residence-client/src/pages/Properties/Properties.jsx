@@ -10,9 +10,12 @@ import useProperties from "../../hooks/useProperties/useProperties";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 import PropertyCardSingleView from "../../components/PropertyCardSingleView/PropertyCardSingleView";
+import SkeletonOfPropertyCardSingleView from "../../components/SkeletonOfPropertyCardSingleView/SkeletonOfPropertyCardSingleView";
+import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 const Properties = () => {
   useScrollToTop();
+  const [doubleColumnView, setDoubleColumnView] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(4);
   const [filters, setFilters] = useState({
@@ -141,20 +144,6 @@ const Properties = () => {
                 <option value="bedroomAsc">Bedrooms Low to high</option>
               </select>
 
-              {/* <button
-                onClick={() =>
-                  setFilters({
-                    city: "",
-                    type: "",
-                    category: "",
-                    sort: "",
-                  })
-                }
-                className="btn bg-C_purple text-white 
-                       hover:bg-transparent hover:text-C_DarkGray"
-              >
-                Clear Filter X
-              </button> */}
               {Object.values(filters).every((val) => val == "") ? (
                 " "
               ) : (
@@ -174,47 +163,53 @@ const Properties = () => {
                 </button>
               )}
 
-              <button className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple ">
+              <button
+                onClick={() => setDoubleColumnView(true)}
+                className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
+              >
                 <FaGripVertical />
               </button>
-              <button className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple ">
+
+              <button
+                onClick={() => setDoubleColumnView(false)}
+                className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
+              >
                 <FaBars />
               </button>
             </div>
 
             {/* Property Cards - Dual Grid View */}
-            {/*  {<div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
-          
-              {isPending ? (
-                <SkeletonOfPropertyCard />
-              ) : (
-                allProperties?.map((property) => (
-                  <PropertyCard
-                    key={property._id}
-                    property={property}
-                    favourites={favouritePropertyIds}
-                    refetch={refetch}
-                  />
-                ))
-              )}
-            </div>} */}
-
-            {/* Property Cards - Single Grid View */}
-            <div className="grid lg:grid-cols-1 grid-cols-1  w-full mx-auto gap-6 py-5">
-              {/* <SkeletonOfPropertyCard /> */}
-              {isPending ? (
-                <SkeletonOfPropertyCard />
-              ) : (
-                allProperties?.map((property) => (
-                  <PropertyCardSingleView
-                    key={property._id}
-                    property={property}
-                    favourites={favouritePropertyIds}
-                    refetch={refetch}
-                  />
-                ))
-              )}
-            </div>
+            {doubleColumnView ? (
+              <div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
+                {isPending ? (
+                  <SkeletonOfPropertyCard />
+                ) : (
+                  allProperties?.map((property) => (
+                    <PropertyCard
+                      key={property._id}
+                      property={property}
+                      favourites={favouritePropertyIds}
+                      refetch={refetch}
+                    />
+                  ))
+                )}
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-1 grid-cols-1  w-full mx-auto gap-6 py-5">
+                {isPending ? (
+                  <SkeletonOfPropertyCardSingleView />
+                ) : (
+                  allProperties?.map((property) => (
+                    <PropertyCardSingleView
+                      key={property._id}
+                      property={property}
+                      favourites={favouritePropertyIds}
+                      refetch={refetch}
+                    />
+                  ))
+                )}
+              </div>
+            )}
 
             {/* Pagination  */}
             <div className="join py-5">
