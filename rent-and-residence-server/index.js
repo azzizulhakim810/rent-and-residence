@@ -197,15 +197,18 @@ async function run() {
       //   ? (filter.value = value)
       //   : "";
 
-      if (city) filter.city = city;
+      if (city) filter["address.city"] = city;
       if (category) filter.category = category;
-      if (type) filter.type = type;
+      if (type) filter.listedIn = type;
 
       let sortOption = {};
       if (sort == "priceDesc") sortOption = { price: -1 };
       if (sort == "priceAsc") sortOption = { price: 1 };
       if (sort == "newest") sortOption = { createdAt: -1 };
       if (sort == "oldest") sortOption = { createdAt: 1 };
+      if (sort == "bedroomDesc")
+        sortOption = { "propertyDetails.bedrooms": -1 };
+      if (sort == "bedroomAsc") sortOption = { "propertyDetails.bedrooms": 1 };
 
       const allProperties = await propertyCollection
         .find(filter)
