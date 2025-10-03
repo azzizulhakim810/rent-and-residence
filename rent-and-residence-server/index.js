@@ -177,10 +177,14 @@ async function run() {
       const limit = parseInt(req.query.limit) || 4;
       const skip = page * limit;
 
-      console.log("Query parameters received:", { page, limit, skip });
+      const { city, category, type, value } = req.query;
+      console.log({ city, category, type, value });
 
+      // console.log("Query parameters received:", { page, limit, skip });
+
+      const filter = { category: category, listedIn: type };
       const allProperties = await propertyCollection
-        .find()
+        .find(filter)
         .skip(skip)
         .limit(limit)
         .toArray();
