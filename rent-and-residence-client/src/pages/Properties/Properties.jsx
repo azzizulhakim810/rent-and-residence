@@ -11,9 +11,6 @@ import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Properties = () => {
-  // const allProperties = useLoaderData([]);
-
-  // const [properties, favourites, loading] = useProperties();
   useScrollToTop();
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(4);
@@ -21,10 +18,11 @@ const Properties = () => {
     city: "",
     type: "",
     category: "",
-    priceHighToLaw: "",
-    priceLowToHigh: "",
-    newest: "",
-    oldest: "",
+    value: "",
+    // priceHighToLaw: "",
+    // priceLowToHigh: "",
+    // newest: "",
+    // oldest: "",
   });
 
   const [allPropInfo, refetch, isPending] = useProperties({
@@ -123,6 +121,9 @@ const Properties = () => {
               </select>
 
               <select
+                onChange={(e) =>
+                  setFilters((prev) => ({ ...prev, value: e.target.value }))
+                }
                 defaultValue="States"
                 className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
               >

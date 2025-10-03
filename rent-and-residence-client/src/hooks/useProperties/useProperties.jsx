@@ -18,7 +18,7 @@ const useProperties = ({ currentPage, limit }) => {
 
       return result.data;
     },
-    // keepPreviousData: true,
+    keepPreviousData: true,
   });
 
   return [allPropInfo, refetch, isPending];
