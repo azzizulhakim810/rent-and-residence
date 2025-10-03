@@ -30,6 +30,7 @@ import MyOrders from "../pages/Dashboard_Pages/MyOrders/MyOrders";
 import PaymentHistory from "../pages/Dashboard_Pages/PaymentHistory/PaymentHistory";
 import AllOrders from "../pages/Dashboard_Pages/AllOrders/AllOrders";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
+import SearchResults from "../pages/SearchResults/SearchResults";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: "/comparison",
         element: <Comparison />,
+      },
+      {
+        path: "/searchResults",
+        element: <SearchResults />,
       },
 
       {

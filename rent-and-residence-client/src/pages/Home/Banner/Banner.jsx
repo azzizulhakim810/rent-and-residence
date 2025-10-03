@@ -51,6 +51,11 @@ const Banner = () => {
     );
 
     setSearchedProp(result.data);
+    setFilters({
+      city: "",
+      bedroom: "",
+      room: "",
+    });
   };
 
   console.log(searchedProp);
@@ -87,7 +92,7 @@ const Banner = () => {
 
         {/* Search Field  */}
         <div className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10">
-          {/* Location  */}
+          {/* Cities  */}
           <div className="lg:w-1/4 w-full ">
             <label
               htmlFor="cities"
@@ -99,9 +104,10 @@ const Banner = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, city: e.target.value }))
               }
+              value={filters.city}
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
-              <option disabled selected>
+              <option value="" disabled selected>
                 Choose a city
               </option>
 
@@ -125,9 +131,10 @@ const Banner = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, bedroom: e.target.value }))
               }
+              value={filters.bedroom}
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
-              <option disabled selected>
+              <option value="" disabled selected>
                 Bedrooms
               </option>
               {bedrooms.map((bedroom) => (
@@ -150,9 +157,10 @@ const Banner = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, room: e.target.value }))
               }
+              value={filters.room}
               className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
             >
-              <option disabled selected>
+              <option value="" disabled selected>
                 Rooms
               </option>
               {rooms.map((room) => (
