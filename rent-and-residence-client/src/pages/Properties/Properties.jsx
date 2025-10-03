@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { FaBars, FaGripVertical } from "react-icons/fa";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 import SkeletonOfPropertyCard from "../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import useProperties from "../../hooks/useProperties/useProperties";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import PropertyCardSingleView from "../../components/PropertyCardSingleView/PropertyCardSingleView";
 
 const Properties = () => {
   useScrollToTop();
@@ -41,7 +42,7 @@ const Properties = () => {
   //   pages.push(i);
   // }
 
-  console.log(Object.keys(filters));
+  console.log(Object.values(filters));
 
   return (
     <div className="bg-C_LightGray/5 py-6">
@@ -121,16 +122,6 @@ const Properties = () => {
                 <option value="Villas">Villas</option>
               </select>
 
-              {/* <select
-                defaultValue="Areas"
-                className="select select-ghost join-item block lg:w-[20%] w-full lg:px-4 py-0 bg-white lg:border-none border-[1px] border-C_purple rounded-full focus:outline-none lg:focus:ring-0 lg:focus:ring-none focus:ring-[1px] focus:ring-C_purple lg:focus:border-none text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
-              >
-                <option disabled={true}>Areas</option>
-                <option>Calle De Embajadores</option>
-                <option>El Cañaveral</option>
-                <option>Goya</option>
-              </select> */}
-
               <select
                 onChange={(e) =>
                   setFilters((prev) => ({ ...prev, sort: e.target.value }))
@@ -150,7 +141,7 @@ const Properties = () => {
                 <option value="bedroomAsc">Bedrooms Low to high</option>
               </select>
 
-              <button
+              {/* <button
                 onClick={() =>
                   setFilters({
                     city: "",
@@ -163,27 +154,59 @@ const Properties = () => {
                        hover:bg-transparent hover:text-C_DarkGray"
               >
                 Clear Filter X
-              </button>
-              {Object.keys(filters).length ? (
+              </button> */}
+              {Object.values(filters).every((val) => val == "") ? (
+                " "
+              ) : (
                 <button
-                  className="btn disabled bg-C_purple text-white 
+                  onClick={() =>
+                    setFilters({
+                      city: "",
+                      type: "",
+                      category: "",
+                      sort: "",
+                    })
+                  }
+                  className="btn bg-C_purple text-white 
                        hover:bg-transparent hover:text-C_DarkGray"
                 >
-                  Clear Filter X
+                  X
                 </button>
-              ) : (
-                ""
               )}
+
+              <button className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple ">
+                <FaGripVertical />
+              </button>
+              <button className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple ">
+                <FaBars />
+              </button>
             </div>
 
-            {/* Property Cards  */}
-            <div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
-              {/* <SkeletonOfPropertyCard /> */}
+            {/* Property Cards - Dual Grid View */}
+            {/*  {<div className="grid lg:grid-cols-2 grid-cols-1  w-full mx-auto gap-6 py-5">
+          
               {isPending ? (
                 <SkeletonOfPropertyCard />
               ) : (
                 allProperties?.map((property) => (
                   <PropertyCard
+                    key={property._id}
+                    property={property}
+                    favourites={favouritePropertyIds}
+                    refetch={refetch}
+                  />
+                ))
+              )}
+            </div>} */}
+
+            {/* Property Cards - Single Grid View */}
+            <div className="grid lg:grid-cols-1 grid-cols-1  w-full mx-auto gap-6 py-5">
+              {/* <SkeletonOfPropertyCard /> */}
+              {isPending ? (
+                <SkeletonOfPropertyCard />
+              ) : (
+                allProperties?.map((property) => (
+                  <PropertyCardSingleView
                     key={property._id}
                     property={property}
                     favourites={favouritePropertyIds}

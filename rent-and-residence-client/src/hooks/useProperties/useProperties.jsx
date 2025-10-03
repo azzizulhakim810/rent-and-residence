@@ -13,7 +13,7 @@ const useProperties = ({ currentPage, limit, filters }) => {
     queryFn: async ({ queryKey }) => {
       const [_key, { currentPage, limit, city, category, type, sort }] =
         queryKey;
-      console.log(queryKey);
+
       const result = await axiosPublic.get(
         `/api/properties?page=${currentPage}&limit=${limit}&type=${type}&city=${city}&category=${category}&sort=${sort}`
       );

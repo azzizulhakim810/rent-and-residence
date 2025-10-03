@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
-import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtub } from "react-icons/pi";
-import { VscHome } from "react-icons/vsc";
+import { PiBathtub, PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
-import UseAuth from "../../hooks/UseAuth/UseAuth";
-import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import useComparison from "../../hooks/useComparison/useComparison";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import { usePopup } from "../../providers/PopupProvider";
 
-const PropertyCard = ({ property, favourites, refetch }) => {
+const PropertyCardSingleView = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const [isFavourite, setIsFavourite] = useState();
   const { setIsShow } = usePopup();
@@ -98,12 +94,13 @@ const PropertyCard = ({ property, favourites, refetch }) => {
   // console.log(isFavourite);
 
   return (
-    <div className=" bg-white w-full shadow-lg rounded-lg">
+    <div className=" bg-white w-full grid grid-cols-2 shadow-lg rounded-lg">
+      {/* <div className="grid grid-cols-2"> */}
       {/* Image  */}
       <Link to={`/propertyDetails/${_id}`}>
         {images?.[0] && (
           <figure
-            className="w-full h-64 bg-cover bg-center relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-t-lg"
+            className="w-full h-full bg-cover bg-center relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-l-lg"
             style={{
               backgroundImage: images[0] ? `url(${images[0]})` : "none",
               backgroundColor: images[0]
@@ -122,95 +119,98 @@ const PropertyCard = ({ property, favourites, refetch }) => {
                 {propertyStatus}
               </span>
             </div>
-
-            {/* Price & Title  */}
-            <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
-              <span className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
-                {price} €
-              </span>
-
-              <span className=" text-white font-Nunito font-[700] text-[20px] rounded px-6 ">
-                {title}
-              </span>
-            </div>
           </figure>
         )}
       </Link>
 
       {/* Features  */}
-      <div className="card-body ">
-        <div className="flex justify-between">
-          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-            <PiCodesandboxLogoDuotone className="text-[20px] text-[#3f3f3f]" />
-            <p className="text-[#6f6f6f]">{propertyDetails?.rooms} Rooms</p>
+      <div className="p-2">
+        <div className="card-body ">
+          {/* Price & Title  */}
+          <div className=" mb-5 flex flex-col gap-1">
+            <span className=" text-C_DarkGray font-Nunito font-[700] text-[20px] rounded">
+              {title}
+            </span>
+
+            <span className=" text-C_purple font-Nunito font-[700] text-[18px] rounded">
+              {price} €
+            </span>
           </div>
 
-          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-            <LiaBedSolid className="text-[20px] text-[#3f3f3f]" />
-            <p className="text-[#6f6f6f]">{propertyDetails?.bedrooms} Beds</p>
+          <div className="flex justify-between">
+            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+              <PiCodesandboxLogoDuotone className="text-[20px] text-[#3f3f3f]" />
+              <p className="text-[#6f6f6f]">{propertyDetails?.rooms} Rooms</p>
+            </div>
+
+            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+              <LiaBedSolid className="text-[20px] text-[#3f3f3f]" />
+              <p className="text-[#6f6f6f]">{propertyDetails?.bedrooms} Beds</p>
+            </div>
+
+            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
+              <PiBathtub className="text-[20px] text-[#3f3f3f]" />
+              <p className="text-[#6f6f6f]">
+                {propertyDetails?.bathrooms ? propertyDetails?.bathrooms : "No"}{" "}
+                Baths
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-3 font-Nunito text-[14px] ">
+              <BsBoundingBoxCircles className="text-[20px] text-[#3f3f3f]" />
+              <p className="text-[#6f6f6f]">
+                {propertyDetails?.sizeInMeter} m<sup>2</sup>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider  */}
+        <div className="bg-gray-300 h-[.5px] mt-0 mb-0"></div>
+
+        {/* Property Owner Info  */}
+        <div className="px-5 py-4 flex justify-between">
+          <div className="avatar flex items-center gap-4">
+            <div className="w-8 rounded-full">
+              <img src={profileImage} />
+            </div>
+            <p className="font-bold">{name}</p>
           </div>
 
-          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px]">
-            <PiBathtub className="text-[20px] text-[#3f3f3f]" />
-            <p className="text-[#6f6f6f]">
-              {propertyDetails?.bathrooms ? propertyDetails?.bathrooms : "No"}{" "}
-              Baths
-            </p>
-          </div>
+          <div className="flex gap-1">
+            <button
+              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+              data-tip="share"
+            >
+              <IoShareSocialOutline />
+            </button>
 
-          <div className="flex flex-col items-center gap-3 font-Nunito text-[14px] ">
-            <BsBoundingBoxCircles className="text-[20px] text-[#3f3f3f]" />
-            <p className="text-[#6f6f6f]">
-              {propertyDetails?.sizeInMeter} m<sup>2</sup>
-            </p>
+            <button
+              onClick={() => handleAddToFavourites(_id)}
+              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+              data-tip="add to favourites"
+            >
+              {isFavourite ? (
+                <FaHeart className="text-C_purple" />
+              ) : (
+                <FaRegHeart />
+              )}
+              {/* <FaRegHeart /> <FaHeart /> */}
+            </button>
+
+            <button
+              onClick={() => handleComparison(_id)}
+              className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
+              data-tip="compare"
+            >
+              <FaPlus />
+            </button>
           </div>
         </div>
       </div>
-
-      {/* Divider  */}
-      <div className="bg-gray-300 h-[.5px] mt-0 mb-0"></div>
-
-      {/* Property Owner Info  */}
-      <div className="px-5 py-4 flex justify-between">
-        <div className="avatar flex items-center gap-4">
-          <div className="w-8 rounded-full">
-            <img src={profileImage} />
-          </div>
-          <p className="font-bold">{name}</p>
-        </div>
-
-        <div className="flex gap-1">
-          <button
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="share"
-          >
-            <IoShareSocialOutline />
-          </button>
-
-          <button
-            onClick={() => handleAddToFavourites(_id)}
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="add to favourites"
-          >
-            {isFavourite ? (
-              <FaHeart className="text-C_purple" />
-            ) : (
-              <FaRegHeart />
-            )}
-            {/* <FaRegHeart /> <FaHeart /> */}
-          </button>
-
-          <button
-            onClick={() => handleComparison(_id)}
-            className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
-            data-tip="compare"
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
 
-export default PropertyCard;
+export default PropertyCardSingleView;
