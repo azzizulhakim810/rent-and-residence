@@ -11,11 +11,11 @@ const useProperties = ({ currentPage, limit, filters }) => {
   } = useQuery({
     queryKey: ["allPropInfo", { currentPage, limit, ...filters }],
     queryFn: async ({ queryKey }) => {
-      const [_key, { currentPage, limit, city, category, type, value }] =
+      const [_key, { currentPage, limit, city, category, type, sort }] =
         queryKey;
       console.log(queryKey);
       const result = await axiosPublic.get(
-        `/api/properties?page=${currentPage}&limit=${limit}&type=${type}&city=${city}&category=${category}&value=${value}`
+        `/api/properties?page=${currentPage}&limit=${limit}&type=${type}&city=${city}&category=${category}&sort=${sort}`
       );
 
       return result.data;

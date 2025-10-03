@@ -70,7 +70,7 @@ const AddNewProperty = () => {
 
     // const files = chooseFiles.files;
     // const fileArray = Array.from(files);
-    const createdAt = Date.now();
+    const createdAt = new Date();
 
     const formData = new FormData();
 
@@ -78,7 +78,7 @@ const AddNewProperty = () => {
 
     formData.append("title", data.title);
     formData.append("description", data.description);
-    formData.append("price", data.price);
+    formData.append("price", parseInt(data.price));
     formData.append("propertyStatus", data.propertyStatus);
     formData.append("listedIn", data.listedIn);
     formData.append("afterPriceLabel", data.afterPriceLabel);

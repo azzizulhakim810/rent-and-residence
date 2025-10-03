@@ -177,8 +177,9 @@ async function run() {
       const limit = parseInt(req.query.limit) || 4;
       const skip = page * limit;
 
-      const { city, category, type, value } = req.query;
-      // console.log({ city, category, type, value });
+      const { city, category, type, sort } = req.query;
+      // console.log({ city, category, type, sort });
+      console.log(req.query);
 
       // console.log("Query parameters received:", { page, limit, skip });
 
@@ -206,13 +207,14 @@ async function run() {
       if (sort == "newest") sortOption = { createdAt: -1 };
       if (sort == "oldest") sortOption = { createdAt: 1 };
 
-      console.log(filter);
-
       const allProperties = await propertyCollection
-        .find()
+        .find(filter)
+        .sort(sortOption)
         .skip(skip)
         .limit(limit)
         .toArray();
+
+      console.log({ filter, sortOption });
 
       const totalCount = await propertyCollection.estimatedDocumentCount();
       // console.log(totalCount);
@@ -495,6 +497,7 @@ async function run() {
           smokeDetectors,
           washerDryer,
           wifi,
+          createdAt,
         } = req.body;
 
         const uploadPromises = images.map((img) => {
@@ -572,6 +575,7 @@ async function run() {
           energyClass,
           energyIndex,
           neighborhood,
+          createdAt,
         };
 
         const result = await propertyCollection.insertOne(propertyWithImg);

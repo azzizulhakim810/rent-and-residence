@@ -128,28 +128,6 @@ const MyProfile = () => {
         }
       })
       .catch((error) => console.log(error));
-
-    /* fetch(`http://localhost:5123/api/user/${_id}`, {
-      method: "PUT",
-      // headers: {
-      //   "content-type": "multipart/form-data",
-      // },
-      body: formData,
-    })
-      .then((res) => res)
-      .then((data) => {
-        console.log(data);
-        if (data.ok) {
-          toast.success("Profile Updated Successfully");
-          reset();
-          navigate("/dashboard/stat");
-          window.scrollTo({
-            top: 0,
-            behavior: "auto",
-          });
-        }
-      })
-      .catch((error) => console.log(error)); */
   };
 
   // console.log(profilePreview);
@@ -220,8 +198,8 @@ const MyProfile = () => {
                       defaultValue={role}
                       {...register("role", { required: role ? false : true })}
                     >
-                      <option value="User">User</option>
-                      <option value="Agent">Agent</option>
+                      <option value="user">User</option>
+                      <option value="agent">Agent</option>
                     </select>
                   </div>
                 </div>
