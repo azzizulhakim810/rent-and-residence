@@ -15,30 +15,29 @@ const SearchResults = () => {
   const bedroom = params.get("bedroom");
   const room = params.get("room");
 
-  const [filters, setFilters] = useState({
-    sort: "",
-  });
+  const [sort, setSort] = useState("");
 
   const {
     data: foundProperties,
     isPending,
     refetch,
   } = useQuery({
-    queryKey: ["searchResults", city, bedroom, room],
+    queryKey: ["searchResults", city, bedroom, room, sort],
     queryFn: async () => {
       const result = await axiosPublic.get(
-        `/api/search?city=${city}&bedroom=${bedroom}&room=${room}`
+        `/api/search?city=${city}&bedroom=${bedroom}&room=${room}&sort=${sort}`
       );
       return result.data;
     },
+    keepPreviousData: true,
   });
 
-  console.log(filters);
+  console.log(sort);
 
   return (
     <div className="bg-C_LightGray/5 pb-6 ">
       <Helmet>
-        <title>R & R | Contact</title>
+        <title>R & R | Search Results</title>
       </Helmet>
       {/* Map  */}
       {/* <Map
@@ -80,8 +79,8 @@ const SearchResults = () => {
                 </span>
 
                 <select
-                  onChange={(e) => setFilters({ sort: e.target.value })}
-                  className="select select-ghost join-item block lg:w-[25%] w-full lg:px-4 py-0 bg-white border-[1px] border-C_purple rounded-lg focus:outline-none focus:ring-[1px] focus:ring-C_purple text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans"
+                  onChange={(e) => setSort(e.target.value)}
+                  className="select block lg:w-[30%] w-full lg:px-4 py-0 bg-white border-[1px] border-C_purple focus:border-[1px] rounded-lg  focus:outline-none focus:ring-none  focus:bg-C_LightGray/5 text-[15px] text-gray-500 focus:text-gray-500 font-Nunito_Sans mb-2"
                 >
                   <option value="" disabled={true}>
                     Price/Date/Quantity
@@ -93,6 +92,8 @@ const SearchResults = () => {
                   <option value="oldest">Oldest first</option>
                   <option value="bedroomDesc">Bedrooms High to Low</option>
                   <option value="bedroomAsc">Bedrooms Low to high</option>
+                  <option value="roomDesc">Rooms High to Low</option>
+                  <option value="roomAsc">Rooms Low to high</option>
                 </select>
               </div>
 

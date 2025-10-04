@@ -182,16 +182,6 @@ async function run() {
 
       const filter = {};
 
-      // city
-      //   ? (filter.city = city)
-      //   : "" && category
-      //   ? (filter.category = category)
-      //   : "" && type
-      //   ? (filter.type = type)
-      //   : "" && value
-      //   ? (filter.value = value)
-      //   : "";
-
       if (city) filter["address.city"] = city;
       if (category) filter.category = category;
       if (type) filter.listedIn = type;
@@ -227,9 +217,10 @@ async function run() {
 
     // Get all the searched properties
     app.get("/api/search", async (req, res) => {
-      const { city, bedroom, room } = req.query;
-      console.log({ city, bedroom, room });
+      const { city, bedroom, room, sort } = req.query;
+      console.log({ city, bedroom, room, sort });
 
+      // Create filter Object
       const filter = {};
       if (city) {
         filter["address.city"] = city;
@@ -241,9 +232,25 @@ async function run() {
       if (room) {
         filter["propertyDetails.rooms"] = { $gte: room };
       }
-      console.log(filter);
 
-      const result = await propertyCollection.find(filter).toArray();
+      // Create sort options
+      let sortOption = {};
+      if (sort === "priceDesc") sortOption = { price: -1 };
+      if (sort === "priceAsc") sortOption = { price: 1 };
+      if (sort === "newest") sortOption = { createdAt: -1 };
+      if (sort === "oldest") sortOption = { createdAt: 1 };
+      if (sort === "bedroomDesc")
+        sortOption = { "propertyDetails.bedrooms": -1 };
+      if (sort === "bedroomAsc") sortOption = { "propertyDetails.bedrooms": 1 };
+      if (sort === "roomDesc") sortOption = { "propertyDetails.rooms": -1 };
+      if (sort === "roomAsc") sortOption = { "propertyDetails.rooms": 1 };
+
+      // console.log(sortOption, filter);
+
+      const result = await propertyCollection
+        .find(filter)
+        .sort(sortOption)
+        .toArray();
 
       res.send(result);
     });
