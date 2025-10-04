@@ -225,16 +225,23 @@ async function run() {
       res.send({ allProperties, favouritePropertyIds, totalCount });
     });
 
-    // Get all the properties
+    // Get all the searched properties
     app.get("/api/search", async (req, res) => {
       const { city, bedroom, room } = req.query;
       // console.log({ city, bedroom, room });
 
-      const filter = {
-        "address.city": city,
-        "propertyDetails.rooms": { $eq: room },
-        "propertyDetails.bedrooms": { $eq: bedroom },
-      };
+      const filter = {};
+      if (city) {
+        filter["address.city"] = city;
+      }
+      if (bedroom) {
+        filter["propertyDetails.bedrooms"] = { $gte: bedroom };
+      }
+
+      if (room) {
+        filter["propertyDetails.rooms"] = { $gte: room };
+      }
+      // console.log(filter);
 
       const result = await propertyCollection.find(filter).toArray();
 
