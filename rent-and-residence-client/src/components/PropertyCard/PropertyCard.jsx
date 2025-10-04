@@ -44,12 +44,9 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // Fetch the owner of each Property
   useEffect(() => {
-    // Promise.all(
     axiosPublic.get(`/api/users/${ownerId}`).then((res) => {
-      // console.log(res.data);
       setPropertyOwner(res.data);
     });
-    // );
   }, [ownerId, axiosPublic]);
 
   // Destructure Details from Owner

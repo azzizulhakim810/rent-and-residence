@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+import AllCategories from "../../../components/AllCategories/AllCategories";
 import LatestProps from "../../../components/LatestProps/LatestProps";
 
 const Sidebar = () => {
@@ -54,47 +53,7 @@ const Sidebar = () => {
           Our Listings
         </label>
 
-        <ul className="list bg-base-100 rounded-box">
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Apartments</h1>
-            <p>(2)</p>
-          </li>
-
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1>Condos</h1>
-            <p>(12)</p>
-          </li>
-
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Duplexes</h1>
-            <p>(3)</p>
-          </li>
-
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Houses</h1>
-            <p>(2)</p>
-          </li>
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Industrial</h1>
-            <p>(1)</p>
-          </li>
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Offices</h1>
-            <p>(2)</p>
-          </li>
-          <span className="bg-gray-400/50 h-[0.5px] my-4"></span>
-          <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
-            <h1 className="">Retail</h1>
-            <p>(5)</p>
-          </li>
-        </ul>
+        <AllCategories />
       </div>
 
       {/* Latest Listings */}

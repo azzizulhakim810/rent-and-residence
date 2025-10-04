@@ -4,6 +4,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import AllCategories from "../../components/AllCategories/AllCategories";
 const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const axiosSecure = UseAxiosSecure();
@@ -136,7 +137,9 @@ const PropertySidebar = ({ ownerId, reviews }) => {
           Our Listings
         </label>
 
-        <ul className="list bg-base-100 rounded-box">
+        <AllCategories />
+
+        {/* <ul className="list bg-base-100 rounded-box">
           <li className=" flex justify-between font-Nunito_Sans text-[15px] text-C_LightGray">
             <h1 className="">Apartments</h1>
             <p>(2)</p>
@@ -176,7 +179,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
             <h1 className="">Retail</h1>
             <p>(5)</p>
           </li>
-        </ul>
+        </ul> */}
       </div>
 
       {/* Latest Listings */}
