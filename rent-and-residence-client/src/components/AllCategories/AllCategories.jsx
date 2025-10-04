@@ -1,16 +1,7 @@
-import { useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import { useEffect } from "react";
+import useCategories from "../../hooks/UseCategories/useCategories";
 
 const AllCategories = () => {
-  const [categories, setCategories] = useState();
-  const axiosPublic = useAxiosPublic();
-
-  useEffect(() => {
-    axiosPublic.get("/api/allCategories").then((res) => {
-      setCategories(res.data);
-    });
-  }, [axiosPublic]);
+  const [categories] = useCategories();
   return (
     <ul className="list bg-base-100 rounded-box">
       {categories?.map((category, i) => (
