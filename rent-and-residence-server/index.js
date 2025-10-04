@@ -267,6 +267,22 @@ async function run() {
       res.send(result);
     });
 
+    // Get all cities along with Items they contain
+    app.get("/api/allCities", async (req, res) => {
+      const result = await propertyCollection
+        .aggregate([
+          {
+            $group: {
+              _id: "$address.city",
+              image: { $addToSet: "$images" },
+              totalItems: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+      res.send(result);
+    });
+
     // Get an individual Property
     app.get("/api/properties/:id", async (req, res) => {
       const id = req.params.id;
