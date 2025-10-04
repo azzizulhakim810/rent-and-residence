@@ -1,4 +1,20 @@
+import { Link } from "react-router-dom";
+import useProperties from "../../../hooks/useProperties/useProperties";
+
 const Sidebar = () => {
+  const [allPropInfo, refetch, isPending] = useProperties({
+    page: 1,
+    limit: 3,
+    filters: {
+      city: "",
+      type: "",
+      category: "",
+      sort: "newest",
+    },
+  });
+  const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
+
+  console.log(allProperties);
   return (
     <div className="flex flex-col gap-6">
       {/* Change Currency */}
@@ -103,37 +119,35 @@ const Sidebar = () => {
         </label>
 
         <nav className="flex flex-col gap-2">
-          <div className="flex justify-between items-center gap-3 pt-2">
-            <img
-              className="w-[40%] rounded"
-              src="https://i.ibb.co/BHpKRtMm/pexels-fotoaibe-1743229.jpg"
-              alt=""
-            />
-            <span className="w-full flex flex-col gap-2">
-              <h4 className="font-Nunito font-[700] text-C_gray text-[16px] leading-6">
-                Villa with Amazing View
-              </h4>
-              <p className=" text-C_purple font-Nunito_Sans font-[600] text-[16px] leading-6">
-                5.500.000 €
+          {isPending ? (
+            <div className="flex">
+              <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
+                Properties are loading
               </p>
-            </span>
-          </div>
-
-          <div className="flex justify-between items-center gap-3 mt-3">
-            <img
-              className="w-[40%] rounded"
-              src="https://i.ibb.co/9H0hN0Hh/pexels-fotoaibe-1643383.jpg"
-              alt=""
-            />
-            <span className="w-full flex flex-col gap-2">
-              <h4 className="font-Nunito font-[700] text-C_gray text-[16px] leading-6">
-                Townhouse for Rent
-              </h4>
-              <p className=" text-C_purple font-Nunito_Sans font-[600] text-[16px] leading-6">
-                2.100 € / month
-              </p>
-            </span>
-          </div>
+              <br />
+              <span className=" loading loading-ring loading-xl text-C_purple"></span>
+            </div>
+          ) : (
+            allProperties?.map((property) => (
+              <Link key={property._id} to={`/propertyDetails/${property._id}`}>
+                <div className="flex justify-between items-center gap-3 pt-2">
+                  <img
+                    className="w-[40%] rounded"
+                    src={property?.images[0]}
+                    alt=""
+                  />
+                  <span className="w-full flex flex-col gap-2">
+                    <h4 className="font-Nunito font-[700] text-C_gray text-[16px] leading-6">
+                      {property?.title}
+                    </h4>
+                    <p className=" text-C_purple font-Nunito_Sans font-[600] text-[16px] leading-6">
+                      {property?.price} €
+                    </p>
+                  </span>
+                </div>
+              </Link>
+            ))
+          )}
         </nav>
       </div>
     </div>

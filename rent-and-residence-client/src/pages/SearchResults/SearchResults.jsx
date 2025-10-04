@@ -107,7 +107,7 @@ const SearchResults = () => {
                     <br />
                     <span className=" loading loading-ring loading-xl text-C_purple"></span>
                   </div>
-                ) : (
+                ) : foundProperties.length ? (
                   foundProperties?.map((property) => (
                     <PropertyCard
                       key={property._id}
@@ -116,6 +116,10 @@ const SearchResults = () => {
                       refetch={refetch}
                     />
                   ))
+                ) : (
+                  <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[18px] pb-2 px-2">
+                    No results found!
+                  </p>
                 )}
               </div>
 
