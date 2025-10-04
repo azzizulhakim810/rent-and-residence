@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { FaBuilding, FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import LatestProps from "../../../components/LatestProps/LatestProps";
 
 const Footer = () => {
   // Go To Top
@@ -103,36 +104,7 @@ const Footer = () => {
             <h6 className=" font-semibold text-lg text-C_gray">
               Latest Properties
             </h6>
-            <div className="flex justify-between items-center gap-3 pt-2">
-              <img
-                className="w-[40%] rounded"
-                src="https://i.ibb.co/BHpKRtMm/pexels-fotoaibe-1743229.jpg"
-                alt=""
-              />
-              <span className="w-full flex flex-col gap-2">
-                <h4 className=" text-C_gray text-[16px] leading-6">
-                  Villa with Amazing View
-                </h4>
-                <p className=" text-C_gray text-[16px] leading-6">
-                  5.500.000 €
-                </p>
-              </span>
-            </div>
-            <div className="flex justify-between items-center gap-3 mt-3">
-              <img
-                className="w-[40%] rounded"
-                src="https://i.ibb.co/9H0hN0Hh/pexels-fotoaibe-1643383.jpg"
-                alt=""
-              />
-              <span className="w-full flex flex-col gap-2">
-                <h4 className=" text-C_gray text-[16px] leading-6">
-                  Townhouse for Rent
-                </h4>
-                <p className=" text-C_gray text-[16px] leading-6">
-                  2.100 € / month
-                </p>
-              </span>
-            </div>
+            <LatestProps />
           </nav>
         </footer>
       </div>

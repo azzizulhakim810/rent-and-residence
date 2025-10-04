@@ -3,7 +3,7 @@ import useProperties from "../../hooks/useProperties/useProperties";
 const LatestProps = () => {
   const [allPropInfo, , isPending] = useProperties({
     page: 1,
-    limit: 3,
+    limit: 2,
     filters: {
       city: "",
       type: "",
