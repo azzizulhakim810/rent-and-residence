@@ -170,9 +170,6 @@ async function run() {
 
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
-      // const { parseInt(page), parseInt(limit) } = req.query;
-      // console.log(req.query.page);
-
       const page = parseInt(req.query.page) || 0;
       const limit = parseInt(req.query.limit) || 4;
       const skip = page * limit;
@@ -255,6 +252,21 @@ async function run() {
       res.send(result);
     });
 
+    // Get all categories along with Items they contain
+    app.get("/api/allCategories", async (req, res) => {
+      const result = await propertyCollection
+        .aggregate([
+          {
+            $group: {
+              _id: "$category",
+              totalItems: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+      res.send(result);
+    });
+
     // Get an individual Property
     app.get("/api/properties/:id", async (req, res) => {
       const id = req.params.id;
@@ -309,7 +321,7 @@ async function run() {
       res.send(result);
     });
 
-    // Get all the saved properties
+    // Get all the favourite properties
     app.get("/api/favouriteProperties/:id", verifyToken, async (req, res) => {
       // const result = await favouriteCollection.find().toArray();
       // console.log(result);
