@@ -9,6 +9,7 @@ import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 const SearchResults = () => {
   const axiosPublic = useAxiosPublic();
@@ -73,101 +74,26 @@ const SearchResults = () => {
                     Calle de Toledo, 41, 28005 Madrid, Spain
                   </p>
 
-                  {/* Social Icons  */}
-                  <div className="bg-white text-C_LightGray mx-auto rounded flex justify-start align-middle items-center gap-6 py-4">
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaFacebookF />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaLinkedinIn />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaXTwitter />
-                    </button>
-
-                    <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                      <FaYoutube />
-                    </button>
-                  </div>
-
-                  {/* Details  */}
-                  <div className=" w-auto flex flex-col gap-2 ">
-                    <div className="overflow-x-auto  text-gray-600  my-3">
-                      <table className=" w-4/12 text-start ">
-                        <tbody className="font-Nunito_Sans text-[16px] tracking-wide">
-                          {/* row 1  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700] ">Phone:</td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                (305) 555-4555
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 2  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              Mobile:
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                (305) 555-4555
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 3  */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              Email:
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">
-                                realestate@inc.com
-                              </Link>
-                            </td>
-                          </tr>
-
-                          {/* row 4 */}
-                          <tr>
-                            <td className=" text-C_gray font-[700]  ">
-                              LinkedIn
-                            </td>
-                            <td className="text-C_DarkGray">
-                              <Link to="tel:+34 912 123 678">realestate</Link>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <p className="flex flex-col gap-4 text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 pt-2">
-                      <span>
-                        Whether you’re looking for property for sale in New York
-                        area or property for rent, WP Residence makes searching
-                        easy. Use our unique geolocation mapping feature to
-                        root-out your ideal villa, townhouse or apartment and
-                        contact the owners direct. We will help you find your
-                        dream house in just a few seconds.
-                      </span>
-
-                      <span>
-                        We offer our clients a wealth of knowledge regarding all
-                        aspects of purchasing or selling a home. Whether it is
-                        helping you search for your dream home, discussing new
-                        New York real estate developments, or assisting with the
-                        sale of your property, we would love the opportunity to
-                        help. Please feel free to contact us with any questions!
-                      </span>
-                    </p>
-                  </div>
-
-                  {/* Image  */}
-                  <div className=" mt-10 w-full">
-                    <figure className="bg-[url(https://i.ibb.co/DPynHVLF/team.jpg)] lg:h-[350px] h-[300px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
+                  {/* Property Cards  */}
+                  <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
+                    {isPending ? (
+                      <div className="flex">
+                        <p className="font-Nunito_Sans text-lg text-C_purple pe-2">
+                          Properties are loading
+                        </p>
+                        <br />
+                        <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                      </div>
+                    ) : (
+                      foundProperties?.map((property) => (
+                        <PropertyCard
+                          key={property._id}
+                          property={property}
+                          // favourites={favouritePropertyIds}
+                          refetch={refetch}
+                        />
+                      ))
+                    )}
                   </div>
                 </div>
 
