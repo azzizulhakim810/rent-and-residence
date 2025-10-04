@@ -228,7 +228,7 @@ async function run() {
     // Get all the searched properties
     app.get("/api/search", async (req, res) => {
       const { city, bedroom, room } = req.query;
-      // console.log({ city, bedroom, room });
+      console.log({ city, bedroom, room });
 
       const filter = {};
       if (city) {
@@ -241,7 +241,7 @@ async function run() {
       if (room) {
         filter["propertyDetails.rooms"] = { $gte: room };
       }
-      // console.log(filter);
+      console.log(filter);
 
       const result = await propertyCollection.find(filter).toArray();
 

@@ -62,10 +62,7 @@ export const router = createBrowserRouter([
             <AgentDetails />
           </PrivateRoute>
         ),
-        /* loader: ({ params }) =>
-          fetch(
-            `https://rent-and-residence-server.vercel.app/api/users/${params.id}`
-          ), */
+
         loader: ({ params }) =>
           fetch(`http://localhost:5123/api/users/${params.id}`),
       },
@@ -91,7 +88,7 @@ export const router = createBrowserRouter([
         element: <Comparison />,
       },
       {
-        path: "/searchResults",
+        path: "/search",
         element: <SearchResults />,
       },
 

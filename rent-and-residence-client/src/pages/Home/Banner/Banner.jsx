@@ -1,17 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
-  const axiosPublic = useAxiosPublic();
-  const [searchedProp, setSearchedProp] = useState([]);
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     city: "",
     bedroom: "",
     room: "",
   });
-
-  console.log(filters);
 
   const cities = [
     { value: "Manchester", label: "Manchester" },
@@ -45,36 +43,14 @@ const Banner = () => {
     { value: 6, label: "6+" },
   ];
 
-  const handleSearch = async () => {
-    const result = await axiosPublic.get(
-      `/api/search?city=${filters.city}&bedroom=${filters.bedroom}&room=${filters.room}`
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    // Send the filters through queries
+    navigate(
+      `/search?city=${filters.city}&bedroom=${filters.bedroom}&room=${filters.room}`
     );
-
-    setSearchedProp(result.data);
-    setFilters({
-      city: "",
-      bedroom: "",
-      room: "",
-    });
   };
-
-  console.log(searchedProp);
-
-  // const propertyTypes = [
-  //   { value: "Apartments", label: "Apartments" },
-  //   { value: "Condos", label: "Condos" },
-  //   { value: "Duplexes", label: "Duplexes" },
-  //   { value: "Houses", label: "Houses" },
-  //   { value: "Industrial", label: "Industrial" },
-  //   { value: "Land", label: "Land" },
-  //   { value: "Retail", label: "Retail" },
-  //   { value: "Villas", label: "Villas" },
-  // ];
-
-  // const transactionTypes = [
-  //   { value: "Rentals", label: "Rentals" },
-  //   { value: "Sales", label: "Sales" },
-  // ];
 
   return (
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
@@ -91,7 +67,10 @@ const Banner = () => {
         </div>
 
         {/* Search Field  */}
-        <div className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10">
+        <form
+          onSubmit={handleSearch}
+          className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10"
+        >
           {/* Cities  */}
           <div className="lg:w-1/4 w-full ">
             <label
@@ -173,15 +152,12 @@ const Banner = () => {
 
           {/* Search Button  */}
           <div className="lg:w-1/4 w-full">
-            <button
-              onClick={handleSearch}
-              className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3"
-            >
+            <button className="btn w-full rounded-full bg-C_purple text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3">
               <FiSearch />
-              <p>Search</p>
+              <span>Search</span>
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Hero Image  */}
