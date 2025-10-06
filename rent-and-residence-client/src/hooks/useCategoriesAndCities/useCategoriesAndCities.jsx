@@ -14,11 +14,6 @@ const useCategoriesAndCities = () => {
     },
   });
 
-  // useEffect(() => {
-  //   axiosPublic.get("/api/allCategoriesAndCities").then((res) => {
-  //     setCategoriesAndCities(res.data);
-  //   });
-  // }, [axiosPublic]);
   return [categoriesAndCities, isPending];
 };
 

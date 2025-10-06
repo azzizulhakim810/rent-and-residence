@@ -276,6 +276,9 @@ async function run() {
               count: { $sum: 1 },
             },
           },
+          {
+            $limit: 6,
+          },
         ])
         .toArray();
       res.json({
@@ -416,7 +419,7 @@ async function run() {
 
     // Get all the reviews
     app.get("/api/reviews", async (req, res) => {
-      const result = await reviewCollection.find().toArray();
+      const result = await reviewCollection.find().limit(6).toArray();
       res.send(result);
     });
 
