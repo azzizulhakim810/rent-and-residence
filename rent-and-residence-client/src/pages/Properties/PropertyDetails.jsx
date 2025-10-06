@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
@@ -73,6 +73,8 @@ const myStyles = {
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
+  const location = useLocation();
+  console.log(location);
 
   useScrollToTop();
   const [handleAddToCart] = useAddToCard();
@@ -636,7 +638,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <p className="block my-3"></p>
                           <tr className="text-C_gray">
                             {amenities?.mediaRoom ? (
                               <td className="w-1/3">
@@ -1376,7 +1378,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     </div> */}
 
                     {/* Contact Me */}
-                    <div className="pt-10">
+                    <div className="pt-30">
                       <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
                         Contact Me
                       </h4>

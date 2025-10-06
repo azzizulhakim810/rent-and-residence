@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   const navigate = useNavigate();
+
   const [filters, setFilters] = useState({
     city: "",
     bedroom: "",
@@ -50,6 +50,11 @@ const Banner = () => {
     navigate(
       `/search?city=${filters.city}&bedroom=${filters.bedroom}&room=${filters.room}`
     );
+
+    // <Navigate
+    //   to={`/search?city=${filters.city}&bedroom=${filters.bedroom}&room=${filters.room}`}
+    //   state={{ from: location }}
+    // />;
   };
 
   return (

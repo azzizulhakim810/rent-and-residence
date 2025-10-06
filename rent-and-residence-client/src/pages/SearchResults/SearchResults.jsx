@@ -6,9 +6,11 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ComparisonFeature from "../../components/ComparisonFeature/ComparisonFeature";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const SearchResults = () => {
+  useScrollToTop();
   const axiosPublic = useAxiosPublic();
   const [params] = useSearchParams();
   const city = params.get("city");
