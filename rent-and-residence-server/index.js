@@ -274,7 +274,9 @@ async function run() {
           {
             $group: {
               _id: "$address.city",
-              image: { $addToSet: "$images" },
+              // image: { $push: { $first: "$images" } },
+              // image: { $push: { $arrayElemAt: ["$images", 0] } },
+              image: { $first: { $arrayElemAt: ["$images", 0] } },
               totalItems: { $sum: 1 },
             },
           },

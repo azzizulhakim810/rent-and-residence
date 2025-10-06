@@ -2,6 +2,7 @@ import useCategories from "../../hooks/UseCategories/useCategories";
 
 const AllCategories = () => {
   const [categories] = useCategories();
+  console.log(categories);
   return (
     <ul className="list bg-base-100 rounded-box">
       {categories?.map((category, i) => (

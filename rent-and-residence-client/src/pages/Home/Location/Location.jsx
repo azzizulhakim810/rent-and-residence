@@ -3,6 +3,7 @@ import useCategories from "../../../hooks/UseCategories/useCategories";
 
 const Location = () => {
   const [categories] = useCategories();
+  console.log(categories);
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -20,13 +21,13 @@ const Location = () => {
               <figure className="bg-[url(https://i.ibb.co/kVZkcdjJ/catgeory-9-1.webp)] h-[250px] w-full bg-cover bg-no-repeat relative bg-black/20 hover:bg-black/10 duration-400 bg-blend-overlay cursor-pointer rounded-lg">
                 <div className="absolute top-0 left-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
                   <h1 className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
-                    Castellana
+                    {category._id}
                   </h1>
                 </div>
 
                 <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
                   <h1 className=" text-white font-Nunito font-[700] text-[15px] rounded px-6 ">
-                    1 Listing
+                    {category.totalItems} Listing
                   </h1>
                 </div>
               </figure>
