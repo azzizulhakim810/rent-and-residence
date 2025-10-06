@@ -253,8 +253,8 @@ async function run() {
     });
 
     // Get all categories along with Items they contain
-    app.get("/api/allCategories", async (req, res) => {
-      const result = await propertyCollection
+    app.get("/api/allCategoriesAndCities", async (req, res) => {
+      const allCategories = await propertyCollection
         .aggregate([
           {
             $group: {
@@ -264,7 +264,24 @@ async function run() {
           },
         ])
         .toArray();
-      res.send(result);
+
+      const allCities = await propertyCollection
+        .aggregate([
+          {
+            $group: {
+              _id: "$address.city",
+              // image: { $push: { $first: "$images" } },
+              // image: { $push: { $arrayElemAt: ["$images", 0] } },
+              image: { $first: { $arrayElemAt: ["$images", 0] } },
+              count: { $sum: 1 },
+            },
+          },
+        ])
+        .toArray();
+      res.json({
+        allCategories,
+        allCities,
+      });
     });
 
     // Get all cities along with Items they contain

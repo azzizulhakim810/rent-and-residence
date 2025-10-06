@@ -1,11 +1,12 @@
-import useCategories from "../../hooks/UseCategories/useCategories";
+import useCategoriesAndCities from "../../hooks/useCategoriesAndCities/useCategoriesAndCities";
 
 const AllCategories = () => {
-  const [categories] = useCategories();
-  console.log(categories);
+  const [categoriesAndCities] = useCategoriesAndCities();
+  const { allCategories } = categoriesAndCities || [];
+
   return (
     <ul className="list bg-base-100 rounded-box">
-      {categories?.map((category, i) => (
+      {allCategories?.map((category, i) => (
         <>
           <li
             key={i}
