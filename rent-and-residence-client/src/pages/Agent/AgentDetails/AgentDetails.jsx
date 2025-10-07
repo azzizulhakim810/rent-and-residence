@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useLoaderData, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import { BsEnvelope } from "react-icons/bs";
 import {
@@ -25,10 +26,20 @@ const AgentDetails = () => {
   const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
 
   useScrollToTop();
-  const agent = useLoaderData([]);
-  const params = useParams();
-  console.log(params);
+  // const agent = useLoaderData([]);
+  // console.log(agent);
+  const { id } = useParams();
+  console.log(id);
   const axiosPublic = useAxiosPublic();
+
+  const { data: agent, isPending } = useQuery({
+    queryKey: ["agent"],
+    queryFn: async () => {
+      const result = await axiosPublic.get(`/api/users/${id}`);
+      return result.data;
+    },
+  });
+
   console.log(agent);
 
   // Destructure Details from Agent
@@ -81,7 +92,7 @@ const AgentDetails = () => {
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
-        <title>R & R | {name}</title>
+        <title>R & R | {isPending ? "" : agent?.name}</title>
       </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}

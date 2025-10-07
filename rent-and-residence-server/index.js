@@ -342,6 +342,49 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const agent = await userCollection.findOne({ _id: new ObjectId(id) });
+
+      // const agentOwnedProperties = await propertyCollection
+      //   .aggregate([
+      //     {
+      //       $addFields: { agentId: { $toObjectId: id } },
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: "users",
+      //         localField: "agentId",
+      //         foreignField: "_id",
+      //         as: "agentDetails",
+      //       },
+      //     },
+      //   ])
+      //   .toArray();
+      const agentOwnedProperties = await userCollection
+        .aggregate([
+          // {
+          //   $addFields: { agentId: { $toObjectId: id } },
+          // },
+
+          {
+            $match: { _id: id },
+          },
+          // {
+          //   $lookup: {
+          //     from: "users",
+          //     localField: "agentId",
+          //     foreignField: "_id",
+          //     as: "agentDetails",
+          //   },
+          // },
+        ])
+        .toArray();
+
+      res.json({ agent, agentOwnedProperties });
+    });
+
     // Get each Agent Owned Property
     app.get("/api/agentOwnedProperty/:id", async (req, res) => {
       const id = req.params.id;
