@@ -343,7 +343,12 @@ async function run() {
     });
 
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
-      const id = req.params.id;
+      const agentId = new ObjectId(req.params.id);
+
+      // Validate the id
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID Format" });
+      }
 
       const agent = await userCollection.findOne({ _id: new ObjectId(id) });
 
@@ -362,27 +367,32 @@ async function run() {
       //     },
       //   ])
       //   .toArray();
+
       const agentOwnedProperties = await userCollection
         .aggregate([
+          // $toObjectId only works on the existing field not any dynamic value
           // {
-          //   $addFields: { agentId: { $toObjectId: id } },
+          //   $addFields: { agent: { $toObjectId: id } },
           // },
 
           {
-            $match: { _id: id },
+            $match: { _id: agentId },
           },
           // {
           //   $lookup: {
-          //     from: "users",
-          //     localField: "agentId",
-          //     foreignField: "_id",
+          //     from: "properties",
+          //     localField: "_id",
+          //     foreignField: "ownerId",
           //     as: "agentDetails",
           //   },
           // },
         ])
         .toArray();
 
-      res.json({ agent, agentOwnedProperties });
+      res.json({
+        // agent,
+        agentOwnedProperties,
+      });
     });
 
     // Get each Agent Owned Property
