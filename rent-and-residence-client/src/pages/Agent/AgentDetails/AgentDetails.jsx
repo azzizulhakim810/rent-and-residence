@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 
 import { BsEnvelope } from "react-icons/bs";
 import {
@@ -26,6 +26,8 @@ const AgentDetails = () => {
 
   useScrollToTop();
   const agent = useLoaderData([]);
+  const params = useParams();
+  console.log(params);
   const axiosPublic = useAxiosPublic();
   console.log(agent);
 
