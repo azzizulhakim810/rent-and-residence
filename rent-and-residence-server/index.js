@@ -383,14 +383,12 @@ async function run() {
           {
             $lookup: {
               from: "properties",
-              // localField: "_id",
-              // foreignField: "ownerId",
-              let: { localField: "$_id" },
+              let: { localAgentId: "$_id" },
               pipeline: [
                 {
                   $match: {
                     $expr: {
-                      $eq: ["$ownerId", { $toString: "$$localField" }],
+                      $eq: [{ $toObjectId: "$ownerId" }, "$$localAgentId"],
                     },
                   },
                 },
