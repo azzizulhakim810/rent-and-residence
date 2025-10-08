@@ -325,7 +325,7 @@ async function run() {
       res.send(result);
     });
 
-    // Get an individual user
+    // Get an individual user - No need
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
       // console.log(id);
@@ -342,8 +342,14 @@ async function run() {
       res.send(result);
     });
 
+    // Get the agent & his properties
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
       const id = req.params.id;
+      const category = req.query.category;
+      // console.log(category);
+
+      const sortByCategory = {};
+      // if(category) sortByCategory =
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
@@ -351,24 +357,6 @@ async function run() {
       }
 
       const agentId = new ObjectId(id);
-
-      const agent = await userCollection.findOne({ _id: new ObjectId(id) });
-
-      // const agentOwnedProperties = await propertyCollection
-      //   .aggregate([
-      //     {
-      //       $addFields: { agentId: { $toObjectId: id } },
-      //     },
-      //     {
-      //       $lookup: {
-      //         from: "users",
-      //         localField: "agentId",
-      //         foreignField: "_id",
-      //         as: "agentDetails",
-      //       },
-      //     },
-      //   ])
-      //   .toArray();
 
       const agentOwnedProperties = await userCollection
         .aggregate([
@@ -396,16 +384,35 @@ async function run() {
               as: "properties",
             },
           },
+          {
+            $addFields: {
+              categories: {
+                $map: {
+                  input: "$properties",
+                  as: "property",
+                  in: "$$property.category",
+                },
+              },
+            },
+          },
+          // {
+          //   $unwind: "$properties",
+          // },
+          // {
+          //   $group: {
+          //     id: "properties.category",
+          //     // count: { $sum: 1 },
+          //   },
+          // },
         ])
         .toArray();
 
       res.json({
-        agent,
         agentOwnedProperties,
       });
     });
 
-    // Get each Agent Owned Property
+    // Get each Agent Owned Property  - No need
     app.get("/api/agentOwnedProperty/:id", async (req, res) => {
       const id = req.params.id;
       console.log(id);

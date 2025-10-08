@@ -23,28 +23,27 @@ import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePropCard";
 
 const AgentDetails = () => {
-  const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({ category: "" });
 
   useScrollToTop();
-  // const agent = useLoaderData([]);
-  // console.log(agent);
   const { id } = useParams();
-  console.log(id);
   const axiosPublic = useAxiosPublic();
 
   const { data: agentAndHisListedProperties, isPending } = useQuery({
-    queryKey: ["agentAndHisListedProperties"],
-    queryFn: async () => {
+    queryKey: ["agentAndHisListedProperties", selectedCategory],
+    queryFn: async ({ queryKey }) => {
+      const [_key, { category }] = queryKey;
+      console.log(category);
       const result = await axiosPublic.get(
-        `/api/agentAndHisListedProperties/${id}`
+        `/api/agentAndHisListedProperties/${id}?category=${category}`
       );
       return result.data;
     },
   });
 
-  const { agent, agentOwnedProperties } = agentAndHisListedProperties || [];
+  const { agentOwnedProperties } = agentAndHisListedProperties || [];
 
-  console.log(agentOwnedProperties[0]);
+  // console.log(selectedCategory);
 
   // Destructure Details from Agent
   const {
@@ -61,7 +60,9 @@ const AgentDetails = () => {
     pinterestUrl,
     twitterUrl,
     websiteUrl,
-  } = agentOwnedProperties[0] || {};
+    properties,
+    categories,
+  } = agentAndHisListedProperties?.agentOwnedProperties[0] || {};
 
   // Check & validate URL
   const handleUrl = (url) => {
@@ -84,19 +85,10 @@ const AgentDetails = () => {
   // const formattedInstagramURL = handleUrl(instagramUrl);
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
-  useEffect(() => {
-    axiosPublic
-      .get(`/api/agentOwnedProperty/${_id}`)
-      .then((res) => setAgentOwnedProperty(res.data))
-      .catch((err) => console.log(err));
-  }, [axiosPublic, _id]);
-
-  console.log(agentOwnedProperty);
-
   return (
     <div className="bg-C_LightGray/5 py-6">
       <Helmet>
-        <title>R & R | {isPending ? "" : agent?.name}</title>
+        {/* <title>R & R | {agentOwnedProperties[0]?.name}</title> */}
       </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
@@ -273,9 +265,19 @@ const AgentDetails = () => {
                 className="btn border-none
                text-white bg-C_purple p-8 font-Nunito font-[700]"
               >
-                All (4)
+                All ({properties?.length})
               </button>
-              <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
+
+              {categories?.map((category, i) => (
+                <button
+                  onClick={() => setSelectedCategory({ category: category })}
+                  key={i}
+                  className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent"
+                >
+                  {category}
+                </button>
+              ))}
+              {/* <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
                 Duplexes (1)
               </button>
               <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
@@ -283,7 +285,7 @@ const AgentDetails = () => {
               </button>
               <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
                 Retail (2)
-              </button>
+              </button> */}
             </div>
 
             {/* Properties  */}
@@ -293,8 +295,8 @@ const AgentDetails = () => {
                 agentOwnedProperty?.map((eachProp) => (
                   <PropertyCard key={eachProp._id} property={eachProp} />
                 ))} */}
-              {agentOwnedProperty.length !== 0 &&
-                agentOwnedProperty?.map((eachProp) => (
+              {properties?.length !== 0 &&
+                properties?.map((eachProp) => (
                   <FavouritePropCard
                     key={eachProp._id}
                     favProperty={eachProp}
