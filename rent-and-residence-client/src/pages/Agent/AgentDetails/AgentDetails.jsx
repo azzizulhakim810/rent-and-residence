@@ -21,6 +21,8 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePropCard";
+import SkeletonOfPropertyCard from "../../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
+import SkeletonOfAgent from "../../../components/SkeletonOfAgent/SkeletonOfAgent";
 
 const AgentDetails = () => {
   const [selectedCategory, setSelectedCategory] = useState({ category: "" });
@@ -93,16 +95,14 @@ const AgentDetails = () => {
       </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-
         <Breadcrumb pageName={"Michaela Roja"} />
-
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             {/* Profile  */}
 
-            {isPending ? (
-              <span>Loading...</span>
+            {!isPending ? (
+              <SkeletonOfAgent />
             ) : (
               <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                 <nav className="flex flex-col gap-2">
@@ -284,36 +284,28 @@ const AgentDetails = () => {
                   {category}
                 </button>
               ))}
-              {/* <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
-                Duplexes (1)
-              </button>
-              <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
-                Industrial (1)
-              </button>
-              <button className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent">
-                Retail (2)
-              </button> */}
             </div>
 
             {/* Properties  */}
-            {/* First Row  */}
-            <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
-              {/* {agentOwnedProperty.length !== 0 &&
-                agentOwnedProperty?.map((eachProp) => (
-                  <PropertyCard key={eachProp._id} property={eachProp} />
-                ))} */}
-              {properties?.length !== 0 &&
-                properties?.map((eachProp) => (
-                  <FavouritePropCard
-                    key={eachProp._id}
-                    favProperty={eachProp}
-                  />
-                ))}
-            </div>
+            {isPending ? (
+              <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
+                <SkeletonOfPropertyCard />
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-6 py-5">
+                {properties?.length !== 0 &&
+                  properties?.map((eachProp) => (
+                    <FavouritePropCard
+                      key={eachProp._id}
+                      favProperty={eachProp}
+                    />
+                  ))}
+              </div>
+            )}
 
             {/* Pagination  */}
-            <div className="join py-5">
-              {/* Previous Button  */}
+            {/* <div className="join py-5">
+            
               <button className="join-item btn">
                 <GrPrevious />
               </button>
@@ -344,7 +336,7 @@ const AgentDetails = () => {
                 aria-label="4"
               />
 
-              {/* Quantity Per page  */}
+            
               <select
                 defaultValue="5"
                 className="btn join-item select block w-[80px] ms-3 mx-5 bg-transparent border-gray-300 border-[1px] rounded focus:outline-none focus:ring-0 focus:ring-gray-300 focus:border-[1px] text-[14px] text-C_DarkGray focus:text-C_DarkGray font-Nunito_Sans"
@@ -354,11 +346,10 @@ const AgentDetails = () => {
                 <option>15</option>
               </select>
 
-              {/* Next Button  */}
               <button className="join-item btn">
                 <GrNext />
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* Sidebar  */}
