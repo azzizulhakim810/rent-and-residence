@@ -17,18 +17,18 @@ const SkeletonOfAgent = () => {
           {/* Details  */}
           <span className="lg:w-1/2  w-auto flex flex-col gap-3 ps-3 pt-1 ">
             <h4 className="skeleton h-10 w-80"></h4>
-            <div className="skeleton h-4 w-20"></div>
-            <div className="skeleton h-4 w-50"></div>
-            <div className="skeleton h-4 w-50"></div>
-            <div className="skeleton h-4 w-50"></div>
-            <div className="skeleton h-4 w-50"></div>
+            <div className="skeleton h-4 w-26"></div>
+            <div className="skeleton h-4 w-60"></div>
+            <div className="skeleton h-4 w-60"></div>
+            <div className="skeleton h-4 w-60"></div>
+            <div className="skeleton h-4 w-60"></div>
           </span>
         </div>
 
         {/* Bio  */}
         <div className="mt-10 flex lg:flex-col gap-4">
           <h4 className="skeleton h-4 w-20 "></h4>
-          <h4 className="skeleton h-10 w-full pb-2"></h4>
+          <h4 className="skeleton h-16 w-full pb-2"></h4>
         </div>
 
         {/* Contact Me */}

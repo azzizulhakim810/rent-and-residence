@@ -101,7 +101,7 @@ const AgentDetails = () => {
           <div className="lg:col-span-8 col-span-10 ">
             {/* Profile  */}
 
-            {!isPending ? (
+            {isPending ? (
               <SkeletonOfAgent />
             ) : (
               <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
