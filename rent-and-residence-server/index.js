@@ -399,14 +399,26 @@ async function run() {
             },
           },
           {
-            $project: {
-              sorted: {
-                $filter: {
-                  input: "$properties",
-                  as: "property",
-                  cond: {
-                    $eq: ["$$property.category", selectedCategory],
+            $addFields: {
+              properties: {
+                $cond: {
+                  if: {
+                    $and: [
+                      { $ne: [selectedCategory, ""] },
+                      { $ne: [selectedCategory, null] },
+                      { $ne: [selectedCategory, undefined] },
+                    ],
                   },
+                  then: {
+                    $filter: {
+                      input: "$properties",
+                      as: "property",
+                      cond: {
+                        $eq: ["$$property.category", selectedCategory],
+                      },
+                    },
+                  },
+                  else: "$properties",
                 },
               },
             },

@@ -39,6 +39,7 @@ const AgentDetails = () => {
       );
       return result.data;
     },
+    keepPreviousData: true,
   });
 
   const { agentOwnedProperties } = agentAndHisListedProperties || [];
@@ -99,161 +100,166 @@ const AgentDetails = () => {
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
             {/* Profile  */}
-            <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
-              <nav className="flex flex-col gap-2">
-                <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-36">
-                  <div className=" lg:w-1/2 w-full ">
-                    <img
-                      className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
-                      src={profileImage}
-                      alt=""
-                    />
 
-                    {/* Social Icons  */}
-                    <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                      <a
-                        href={formattedFacebookURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                          <FaFacebookF />
-                        </button>
-                      </a>
-                      <a
-                        href={formattedLinkedInURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                          <FaLinkedinIn />
-                        </button>
-                      </a>
-                      <a
-                        href={formattedTwitterURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                          <FaXTwitter />
-                        </button>
-                      </a>
-                      <a
-                        href={formattedPinterestURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                          <FaPinterest />
-                        </button>
-                      </a>
+            {isPending ? (
+              <span>Loading...</span>
+            ) : (
+              <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
+                <nav className="flex flex-col gap-2">
+                  <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-36">
+                    <div className=" lg:w-1/2 w-full ">
+                      <img
+                        className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
+                        src={profileImage}
+                        alt=""
+                      />
+
+                      {/* Social Icons  */}
+                      <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
+                        <a
+                          href={formattedFacebookURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaFacebookF />
+                          </button>
+                        </a>
+                        <a
+                          href={formattedLinkedInURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaLinkedinIn />
+                          </button>
+                        </a>
+                        <a
+                          href={formattedTwitterURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaXTwitter />
+                          </button>
+                        </a>
+                        <a
+                          href={formattedPinterestURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                            <FaPinterest />
+                          </button>
+                        </a>
+                      </div>
                     </div>
+
+                    {/* Details  */}
+                    <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
+                      <div>
+                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                          {name}
+                        </h4>
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
+                          {role}
+                        </p>
+                      </div>
+
+                      <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
+                        <a href={`tel:${phone}`}>
+                          <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
+                            <FaPhoneAlt className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                              {phone}
+                            </p>
+                          </span>
+                        </a>
+
+                        <a href={`tel:${phone}`}>
+                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
+                            <FaPrint className="text-lg" />
+                            <p className=" text-C_gray text-[16px] leading-6  me-5">
+                              {phone}
+                            </p>
+                          </span>
+                        </a>
+
+                        <a href={`mailto:${email}`}>
+                          <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                            <BsEnvelope className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                              {email}
+                            </p>
+                          </span>
+                        </a>
+
+                        <a href={formattedWebsiteURL}>
+                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
+                            <FaGlobe className="text-lg" />
+
+                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                              {websiteUrl}
+                            </p>
+                          </span>
+                        </a>
+                      </nav>
+                    </span>
                   </div>
 
-                  {/* Details  */}
-                  <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
-                    <div>
-                      <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
-                        {name}
-                      </h4>
-                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
-                        {role}
-                      </p>
-                    </div>
+                  {/* Bio  */}
+                  <div>
+                    <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                      Bio
+                    </h4>
 
-                    <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                      <a href={`tel:${phone}`}>
-                        <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                          <FaPhoneAlt className="text-lg" />
-
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
-                            {phone}
-                          </p>
-                        </span>
-                      </a>
-
-                      <a href={`tel:${phone}`}>
-                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                          <FaPrint className="text-lg" />
-                          <p className=" text-C_gray text-[16px] leading-6  me-5">
-                            {phone}
-                          </p>
-                        </span>
-                      </a>
-
-                      <a href={`mailto:${email}`}>
-                        <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                          <BsEnvelope className="text-lg" />
-
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                            {email}
-                          </p>
-                        </span>
-                      </a>
-
-                      <a href={formattedWebsiteURL}>
-                        <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                          <FaGlobe className="text-lg" />
-
-                          <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
-                            {websiteUrl}
-                          </p>
-                        </span>
-                      </a>
-                    </nav>
-                  </span>
-                </div>
-
-                {/* Bio  */}
-                <div>
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                    Bio
-                  </h4>
-
-                  <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
-                    {bio}
-                  </p>
-                </div>
-
-                {/* Contact Me */}
-                <div className="pt-10">
-                  <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                    Contact Me
-                  </h4>
-
-                  <div className="flex flex-col gap-5 pt-2">
-                    <div className="flex lg:flex-row flex-col gap-3">
-                      <input
-                        type="text"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Name"
-                      />
-                      <input
-                        type="email"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Email"
-                      />
-                      <input
-                        type="tel"
-                        className="input font-Nunito_Sans font-[600] text-C_LightGray"
-                        placeholder="Your Phone"
-                      />
-                    </div>
-
-                    <textarea className="textarea w-full h-40 "></textarea>
-
-                    <label className="label">
-                      <input type="checkbox" className="checkbox" />I consent to
-                      the GDPR Terms
-                    </label>
-
-                    <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
-                      Send Email
-                    </button>
+                    <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
+                      {bio}
+                    </p>
                   </div>
-                </div>
-              </nav>
-            </div>
+
+                  {/* Contact Me */}
+                  <div className="pt-10">
+                    <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                      Contact Me
+                    </h4>
+
+                    <div className="flex flex-col gap-5 pt-2">
+                      <div className="flex lg:flex-row flex-col gap-3">
+                        <input
+                          type="text"
+                          className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                          placeholder="Your Name"
+                        />
+                        <input
+                          type="email"
+                          className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                          placeholder="Your Email"
+                        />
+                        <input
+                          type="tel"
+                          className="input font-Nunito_Sans font-[600] text-C_LightGray"
+                          placeholder="Your Phone"
+                        />
+                      </div>
+
+                      <textarea className="textarea w-full h-40 "></textarea>
+
+                      <label className="label">
+                        <input type="checkbox" className="checkbox" />I consent
+                        to the GDPR Terms
+                      </label>
+
+                      <button className="lg:w-3/12 w-full btn bg-C_purple border-2  text-white hover:text-C_purple hover:bg-transparent hover:border-C_purple rounded-md py-5 text-[16px] font-Nunito_Sans font-[600]">
+                        Send Email
+                      </button>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            )}
 
             <h1 className="font-Nunito text-[30px] font-[700] pt-5">
               My Listings
@@ -266,7 +272,7 @@ const AgentDetails = () => {
                 className="btn border-none
                text-white bg-C_purple p-8 font-Nunito font-[700]"
               >
-                All ({properties?.length})
+                All ({categories?.length})
               </button>
 
               {categories?.map((category, i) => (
