@@ -343,12 +343,14 @@ async function run() {
     });
 
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
-      const agentId = new ObjectId(req.params.id);
+      const id = req.params.id;
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
         return res.status(400).json({ error: "Invalid ID Format" });
       }
+
+      const agentId = new ObjectId(id);
 
       const agent = await userCollection.findOne({ _id: new ObjectId(id) });
 
@@ -378,14 +380,24 @@ async function run() {
           {
             $match: { _id: agentId },
           },
-          // {
-          //   $lookup: {
-          //     from: "properties",
-          //     localField: "_id",
-          //     foreignField: "ownerId",
-          //     as: "agentDetails",
-          //   },
-          // },
+          {
+            $lookup: {
+              from: "properties",
+              // localField: "_id",
+              // foreignField: "ownerId",
+              let: { localField: "$_id" },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $eq: ["$ownerId", { $toString: "$$localField" }],
+                    },
+                  },
+                },
+              ],
+              as: "properties",
+            },
+          },
         ])
         .toArray();
 
@@ -645,7 +657,7 @@ async function run() {
 
         const propertyWithImg = {
           images: imgUrls,
-          ownerId: id,
+          ownerId: new ObjectId(id),
           title,
           description,
           price,
