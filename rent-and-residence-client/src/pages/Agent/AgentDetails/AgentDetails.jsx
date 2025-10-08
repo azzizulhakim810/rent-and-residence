@@ -32,15 +32,19 @@ const AgentDetails = () => {
   console.log(id);
   const axiosPublic = useAxiosPublic();
 
-  const { data: agent, isPending } = useQuery({
-    queryKey: ["agent"],
+  const { data: agentAndHisListedProperties, isPending } = useQuery({
+    queryKey: ["agentAndHisListedProperties"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/api/users/${id}`);
+      const result = await axiosPublic.get(
+        `/api/agentAndHisListedProperties/${id}`
+      );
       return result.data;
     },
   });
 
-  console.log(agent);
+  const { agent, agentOwnedProperties } = agentAndHisListedProperties || [];
+
+  console.log(agentOwnedProperties[0]);
 
   // Destructure Details from Agent
   const {
@@ -57,7 +61,7 @@ const AgentDetails = () => {
     pinterestUrl,
     twitterUrl,
     websiteUrl,
-  } = agent || {};
+  } = agentOwnedProperties[0] || {};
 
   // Check & validate URL
   const handleUrl = (url) => {

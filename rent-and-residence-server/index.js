@@ -400,7 +400,7 @@ async function run() {
         .toArray();
 
       res.json({
-        // agent,
+        agent,
         agentOwnedProperties,
       });
     });
