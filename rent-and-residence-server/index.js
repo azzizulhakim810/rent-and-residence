@@ -345,11 +345,13 @@ async function run() {
     // Get the agent & his properties
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
       const id = req.params.id;
-      const category = req.query.category;
-      // console.log(category);
+      const selectedCategory = req.query.category;
 
-      const sortByCategory = {};
-      // if(category) sortByCategory =
+      const filterCategory = {};
+
+      if (selectedCategory) filterCategory.category = selectedCategory;
+
+      console.log(selectedCategory, filterCategory);
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
@@ -384,6 +386,7 @@ async function run() {
               as: "properties",
             },
           },
+
           {
             $addFields: {
               categories: {
@@ -395,6 +398,30 @@ async function run() {
               },
             },
           },
+          {
+            $project: {
+              sorted: {
+                $filter: {
+                  input: "$properties",
+                  as: "property",
+                  cond: {
+                    $eq: ["$$property.category", selectedCategory],
+                  },
+                },
+              },
+            },
+          },
+          // {
+          //   $project: {
+          //     items: {
+          //       $filter: {
+          //         input: "$categories",
+          //         as: "category",
+          //         cond: { $eq: ["category", "$$category"] },
+          //       },
+          //     },
+          //   },
+          // },
           // {
           //   $unwind: "$properties",
           // },

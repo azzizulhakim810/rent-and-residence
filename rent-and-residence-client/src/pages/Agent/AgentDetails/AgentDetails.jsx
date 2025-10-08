@@ -262,6 +262,7 @@ const AgentDetails = () => {
             {/* Filter  */}
             <div className="lg:flex-row flex flex-col lg:gap-0 gap-5 bg-white lg:px-0 px-8 lg:py-0 py-10 rounded-md shadow-sm mt-6 mb-3 ">
               <button
+                onClick={() => setSelectedCategory({ category: "" })}
                 className="btn border-none
                text-white bg-C_purple p-8 font-Nunito font-[700]"
               >
