@@ -326,21 +326,21 @@ async function run() {
     });
 
     // Get an individual user - No need
-    app.get("/api/users/:id", async (req, res) => {
-      const id = req.params.id;
-      // console.log(id);
+    // app.get("/api/users/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   // console.log(id);
 
-      // Validate the id
-      if (!ObjectId.isValid(id)) {
-        return res.status(400).json({ error: "Invalid ID Format" });
-      }
+    //   // Validate the id
+    //   if (!ObjectId.isValid(id)) {
+    //     return res.status(400).json({ error: "Invalid ID Format" });
+    //   }
 
-      const query = { _id: new ObjectId(id) };
+    //   const query = { _id: new ObjectId(id) };
 
-      const result = await userCollection.findOne(query);
+    //   const result = await userCollection.findOne(query);
 
-      res.send(result);
-    });
+    //   res.send(result);
+    // });
 
     // Get the agent & his properties
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
@@ -452,15 +452,15 @@ async function run() {
     });
 
     // Get each Agent Owned Property  - No need
-    app.get("/api/agentOwnedProperty/:id", async (req, res) => {
-      const id = req.params.id;
-      console.log(id);
+    // app.get("/api/agentOwnedProperty/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   console.log(id);
 
-      const query = { ownerId: id };
-      const result = await propertyCollection.find(query).toArray();
+    //   const query = { ownerId: id };
+    //   const result = await propertyCollection.find(query).toArray();
 
-      res.send(result);
-    });
+    //   res.send(result);
+    // });
 
     // Get all the blogs
     app.get("/api/blogs", async (req, res) => {
