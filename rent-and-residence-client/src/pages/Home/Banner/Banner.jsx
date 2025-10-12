@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -72,7 +73,9 @@ const Banner = () => {
         </div>
 
         {/* Search Field  */}
-        <form
+        <motion.form
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
           onSubmit={handleSearch}
           className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10"
         >
@@ -162,7 +165,7 @@ const Banner = () => {
               <span>Search</span>
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
 
       {/* Hero Image  */}
