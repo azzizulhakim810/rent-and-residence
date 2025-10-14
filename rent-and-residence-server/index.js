@@ -325,22 +325,22 @@ async function run() {
       res.send(result);
     });
 
-    // Get an individual user - No need
-    // app.get("/api/users/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   // console.log(id);
+    // Get an individual user
+    app.get("/api/users/:id", async (req, res) => {
+      const id = req.params.id;
+      // console.log(id);
 
-    //   // Validate the id
-    //   if (!ObjectId.isValid(id)) {
-    //     return res.status(400).json({ error: "Invalid ID Format" });
-    //   }
+      // Validate the id
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID Format" });
+      }
 
-    //   const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(id) };
 
-    //   const result = await userCollection.findOne(query);
+      const result = await userCollection.findOne(query);
 
-    //   res.send(result);
-    // });
+      res.send(result);
+    });
 
     // Get the agent & his properties
     app.get("/api/agentAndHisListedProperties/:id", async (req, res) => {
