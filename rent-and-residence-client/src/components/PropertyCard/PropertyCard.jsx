@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { BsBoundingBoxCircles } from "react-icons/bs";

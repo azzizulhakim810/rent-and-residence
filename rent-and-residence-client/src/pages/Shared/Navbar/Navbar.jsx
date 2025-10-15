@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import { toast } from "sonner";
@@ -466,6 +466,18 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  useEffect(() => {
+    if (window.scroll(0, 100)) {
+      console.log("yes");
+    } else {
+      console.log("no");
+    }
+
+    // return () => {
+    //   second
+    // }
+  }, []);
 
   return (
     <div id="top" className=" bg-white shadow-md">

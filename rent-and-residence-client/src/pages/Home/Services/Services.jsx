@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { PiGavelLight } from "react-icons/pi";
@@ -6,7 +7,7 @@ import { motion } from "motion/react";
 
 const Services = () => {
   return (
-    <div className="grid grid-cols-12 lg:py-28 py-20">
+    <div id="service" className="grid grid-cols-12 lg:py-28 py-20">
       {/* Section Title Desktop | Hidden on Mobile */}
       <SectionTitle title={"Services"} />
 
