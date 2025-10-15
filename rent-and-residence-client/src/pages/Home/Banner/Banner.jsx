@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 // import { motion } from "framer-motion";
-import { motion } from "motion/react";
+import { motion, useAnimate, useTransform, useScroll } from "motion/react";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -59,15 +59,13 @@ const Banner = () => {
     // />;
   };
 
-  const boxVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, 800]);
 
   return (
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
       <div className=" col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left  py-16">
-        <div className="lg:text-left text-center">
+        <motion.div style={{ y }} className="lg:text-left text-center">
           <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-16 leading-13 font-[700] lg:-me-15 font-Nunito">
             Find your next <br />
             Perfect home in UK
@@ -76,25 +74,21 @@ const Banner = () => {
             Through our proprietary platform, WpResidence is changing how agents
             and clients navigate the process of finding or selling a home.
           </p>
-        </div>
-        <motion.div
+        </motion.div>
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           Hello Motion!
-        </motion.div>
-
-        <motion.div
-          className="h-[50px] w-[50px] bg-C_purple"
-          variants={boxVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.5 }}
-        ></motion.div>
+        </motion.div> */}
 
         {/* Search Field  */}
-        <form
+        <motion.form
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
           onSubmit={handleSearch}
           className="lg:w-[60vw] w-full mt-5 bg-white px-5 ps-10 py-6 lg:rounded-full rounded-3xl lg:flex lg:flex-row flex flex-col items-center justify-around lg:gap-5 gap-6 -me-75 z-10"
         >
@@ -179,16 +173,17 @@ const Banner = () => {
 
           {/* Search Button  */}
           <div className="lg:w-1/4 w-full">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn w-full rounded-full bg-C_purple/80 hover:bg-C_purple duration-400 text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3"
-            >
-              <FiSearch />
+            <button className="btn w-full rounded-full bg-C_purple/80 hover:bg-C_purple duration-400 text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FiSearch />
+              </motion.div>
               <span>Search</span>
-            </motion.button>
+            </button>
           </div>
-        </form>
+        </motion.form>
       </div>
 
       {/* Hero Image  */}
