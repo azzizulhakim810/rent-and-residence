@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useState } from "react";
 import { FaAnglesDown } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -81,6 +81,7 @@ const Banner = () => {
               home.
             </p>
           </motion.div>
+
           {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -215,21 +216,27 @@ const Banner = () => {
         </div>
       </div>
 
-      <Link to="/#service">
-        <motion.div
-          className="-mt-20 flex justify-center"
-          animate={{
-            y: [0, -6, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <FaAnglesDown className="text-2xl " />
-        </motion.div>
-      </Link>
+      {/* <Link to="/#service"> */}
+      <motion.button
+        onClick={() => {
+          document.getElementById("service").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }}
+        className="-mt-20 flex justify-center text-center w-10 mx-auto cursor-pointer"
+        animate={{
+          y: [0, -6, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <FaAnglesDown className="text-2xl " />
+      </motion.button>
+      {/* </Link> */}
     </div>
   );
 };

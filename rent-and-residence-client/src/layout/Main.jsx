@@ -4,8 +4,11 @@ import Navbar from "../pages/Shared/Navbar/Navbar";
 
 const Main = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
+    <div className="min-h-screen bg-white ">
+      <div className="relative">
+        <Navbar />
+      </div>
+
       <Outlet />
       <Footer />
     </div>

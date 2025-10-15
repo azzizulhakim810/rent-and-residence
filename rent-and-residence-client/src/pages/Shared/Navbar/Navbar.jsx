@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 import { toast } from "sonner";
 import SignInAndUp from "../SignInAndUp/SignInAndUp";
@@ -7,18 +7,19 @@ import SignInAndUp from "../SignInAndUp/SignInAndUp";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { BsBuilding, BsPerson } from "react-icons/bs";
 import { MdOutlineManageAccounts } from "react-icons/md";
-import { VscHistory } from "react-icons/vsc";
 import { TfiLayoutListThumb } from "react-icons/tfi";
+import { VscHistory } from "react-icons/vsc";
 
 import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
+import { HiArrowsRightLeft } from "react-icons/hi2";
 import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
-import { HiArrowsRightLeft } from "react-icons/hi2";
 
+import { motion } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -28,6 +29,7 @@ import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { user, signOutUser, loading } = UseAuth();
   // console.log(user.email);
@@ -468,7 +470,7 @@ const Navbar = () => {
   );
 
   useEffect(() => {
-    if (window.scroll(0, 100)) {
+    if (window.scrollTo(50, 100)) {
       console.log("yes");
     } else {
       console.log("no");
@@ -479,9 +481,13 @@ const Navbar = () => {
     // }
   }, []);
 
+  // window.scrollBy(150, 100);
+
+  window.addEventListener("scroll", console.log("hello"));
+
   return (
-    <div id="top" className=" bg-white shadow-md">
-      <div className="navbar py-6 lg:w-11/12 w-11/12 mx-auto ">
+    <div id="top" className="w-11/12 mx-auto  bg-transparent shadow-md">
+      <div className="absolute navbar py-6 lg:w-11/12 w-11/12 mx-auto z-1000">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -557,12 +563,19 @@ const Navbar = () => {
                   htmlFor="cart-drawer"
                   className="drawer-button btn border-0 bg-transparent p-0 mx-2"
                 >
-                  <div className="indicator">
+                  <motion.div
+                    initial={{ rotate: 0 }}
+                    whileHover={{
+                      rotate: [0, -5, 5, -5, 0],
+                      transition: { duration: 0.5 },
+                    }}
+                    className="indicator"
+                  >
                     <LuShoppingCart className="text-[#222222] text-2xl" />
                     <span className="badge badge-sm indicator-item">
                       {cartItems?.length}
                     </span>
-                  </div>
+                  </motion.div>
                 </label>
               </div>
 

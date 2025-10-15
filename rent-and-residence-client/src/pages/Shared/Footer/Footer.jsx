@@ -15,6 +15,7 @@ import LatestProps from "../../../components/LatestProps/LatestProps";
 const Footer = () => {
   // Go To Top
   const [isVisible, setIsVisible] = useState(false);
+
   const toggleVisibility = () => {
     if (window.pageYOffset > 500) {
       setIsVisible(true);
