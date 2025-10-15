@@ -2,6 +2,7 @@ import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { PiGavelLight } from "react-icons/pi";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { motion } from "motion/react";
 
 const Services = () => {
   return (
@@ -15,7 +16,13 @@ const Services = () => {
         </h1>
 
         <div className="flex lg:flex-row flex-col justify-start gap-6 py-5">
-          <div className="shadow-[0px_0px_30px_rgba(100,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl ">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ amount: 0.5 }}
+            transition={{ duration: 1 }}
+            className="shadow-[0px_0px_30px_rgba(100,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl "
+          >
             <figure className="p-5 text-4xl bg-[#E0F0FD] text-[#959AF4] rounded-full w-20 h-20">
               <HiOutlineClipboardDocumentList />
             </figure>
@@ -32,7 +39,7 @@ const Services = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           <div className="shadow-[0px_0px_30px_rgba(119,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl ">
             <figure className="p-5 text-4xl bg-[#F9D9EA] text-[#EF8ABF] rounded-full w-20 h-20">
@@ -53,7 +60,13 @@ const Services = () => {
             </div>
           </div>
 
-          <div className="shadow-[0px_0px_30px_rgba(119,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl ">
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ amount: 0.5 }}
+            transition={{ duration: 1 }}
+            className="shadow-[0px_0px_30px_rgba(119,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl "
+          >
             <figure className="p-5 text-4xl bg-[#FDE2CD] text-[#F8B282] rounded-full w-20 h-20">
               <PiGavelLight />
             </figure>
@@ -70,7 +83,7 @@ const Services = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

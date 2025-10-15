@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaArrowDown } from "react-icons/fa";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { LiaBedSolid } from "react-icons/lia";
@@ -15,6 +15,7 @@ import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import useComparison from "../../hooks/useComparison/useComparison";
 import { usePopup } from "../../providers/PopupProvider";
+import { motion } from "motion/react";
 
 const PropertyCard = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
@@ -190,9 +191,21 @@ const PropertyCard = ({ property, favourites, refetch }) => {
             data-tip="add to favourites"
           >
             {isFavourite ? (
-              <FaHeart className="text-C_purple" />
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.3 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <FaHeart className="text-C_purple" />
+              </motion.div>
             ) : (
-              <FaRegHeart />
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.3 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <FaRegHeart />
+              </motion.div>
             )}
             {/* <FaRegHeart /> <FaHeart /> */}
           </button>
@@ -202,7 +215,13 @@ const PropertyCard = ({ property, favourites, refetch }) => {
             className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
             data-tip="compare"
           >
-            <FaPlus />
+            <motion.div
+              initial={{ rotate: 0 }}
+              whileHover={{ rotate: [0, 90] }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+            >
+              <FaPlus />
+            </motion.div>
           </button>
         </div>
       </div>

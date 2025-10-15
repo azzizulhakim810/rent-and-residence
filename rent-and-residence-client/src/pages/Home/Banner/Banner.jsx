@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-// import { motion } from "framer-motion";
-import { motion, useAnimate, useTransform, useScroll } from "motion/react";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -65,7 +65,10 @@ const Banner = () => {
   return (
     <div className="min-h-[80vh] bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
       <div className=" col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left  py-16">
-        <motion.div style={{ y }} className="lg:text-left text-center">
+        <motion.div
+          // style={{ y }}
+          className="lg:text-left text-center"
+        >
           <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-16 leading-13 font-[700] lg:-me-15 font-Nunito">
             Find your next <br />
             Perfect home in UK
@@ -173,15 +176,29 @@ const Banner = () => {
 
           {/* Search Button  */}
           <div className="lg:w-1/4 w-full">
-            <button className="btn w-full rounded-full bg-C_purple/80 hover:bg-C_purple duration-400 text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FiSearch />
-              </motion.div>
+            <motion.button
+              whileHover={{ scale: 1.05, rotate: 1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="btn w-full rounded-full bg-C_purple/80 hover:bg-C_purple duration-400 text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3"
+            >
+              <FiSearch />
               <span>Search</span>
-            </button>
+              {/*  <motion.span
+                className="absolute"
+                initial={{ opacity: 1, y: 0 }}
+                whileHover={{ opacity: 0, y: 10 }}
+              >
+                Search
+              </motion.span>
+              <motion.span
+                className="absolute"
+                initial={{ opacity: 0, y: 0 }}
+                whileHover={{ opacity: 1, y: -10 }}
+              >
+                Go
+              </motion.span> */}
+            </motion.button>
           </div>
         </motion.form>
       </div>
@@ -193,6 +210,19 @@ const Banner = () => {
           src="https://i.ibb.co/ZzSgjqsT/Home-hero.webp"
         /> */}
       </div>
+      <motion.div
+        className="bg-C_purple"
+        animate={{
+          y: [0, -6, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <FaArrowDown size={40} color="orange" />
+      </motion.div>
     </div>
   );
 };
