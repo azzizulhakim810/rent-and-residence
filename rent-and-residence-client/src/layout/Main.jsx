@@ -5,7 +5,7 @@ import Navbar from "../pages/Shared/Navbar/Navbar";
 const Main = () => {
   return (
     <div className="min-h-screen bg-white ">
-      <div className="relative">
+      <div className="sticky top-0 z-1000 shadow-md bg-C_purple">
         <Navbar />
       </div>
 

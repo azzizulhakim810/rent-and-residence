@@ -19,7 +19,7 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -469,7 +469,7 @@ const Navbar = () => {
     </>
   );
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (window.scrollTo(50, 100)) {
       console.log("yes");
     } else {
@@ -479,15 +479,26 @@ const Navbar = () => {
     // return () => {
     //   second
     // }
-  }, []);
+  }, []); */
 
   // window.scrollBy(150, 100);
 
-  window.addEventListener("scroll", console.log("hello"));
+  // const scrollToChange = () => {
+  //   // window.scrollBy(0, 100);
+  //   if (window.scrollTo(0, 50)) {
+  //     console.log("yes");
+  //   } else {
+  //     console.log("no");
+  //   }
+  // };
+
+  // window.addEventListener("scroll", scrollToChange);
+  const { scrollX, scrollY, scrollXProgress, scrollYProgress } = useScroll();
+  console.log(scrollX, scrollY, scrollXProgress, scrollYProgress);
 
   return (
-    <div id="top" className="w-11/12 mx-auto  bg-transparent shadow-md">
-      <div className="absolute navbar py-6 lg:w-11/12 w-11/12 mx-auto z-1000">
+    <div id="top" className="w-11/12 mx-auto">
+      <div className="navbar absolute py-6 lg:w-11/12 w-11/12 mx-auto">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

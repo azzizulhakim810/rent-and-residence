@@ -234,7 +234,7 @@ const Banner = () => {
           ease: "easeInOut",
         }}
       >
-        <FaAnglesDown className="text-2xl " />
+        <FaAnglesDown className="text-2xl text-C_purple" />
       </motion.button>
       {/* </Link> */}
     </div>
