@@ -183,7 +183,13 @@ const PropertyCard = ({ property, favourites, refetch }) => {
             className="btn tooltip text-gray-500 text-lg hover:text-C_purple hover:bg-transparent p-3"
             data-tip="share"
           >
-            <IoShareSocialOutline />
+            <motion.div
+              initial={{ rotate: 0 }}
+              whileHover={{ rotate: [0, -45, 0] }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <IoShareSocialOutline />
+            </motion.div>
           </button>
 
           <button

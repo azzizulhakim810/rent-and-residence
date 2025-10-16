@@ -18,8 +18,8 @@ const Services = () => {
 
         <div className="flex lg:flex-row flex-col justify-start gap-6 py-5">
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: -100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ amount: 0.5 }}
             transition={{ duration: 1 }}
             className="shadow-[0px_0px_30px_rgba(100,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl "
@@ -62,8 +62,8 @@ const Services = () => {
           </div>
 
           <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ amount: 0.5 }}
             transition={{ duration: 1 }}
             className="shadow-[0px_0px_30px_rgba(119,84,246,0.2)] hover:shadow-[0px_0px_30px_rgba(119,84,246,0.3)] flex flex-col justify-center items-center gap-5 p-2 py-12 rounded-xl "

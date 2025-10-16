@@ -19,7 +19,13 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
-import { motion, useScroll, useSpring } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+} from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -469,35 +475,17 @@ const Navbar = () => {
     </>
   );
 
-  /*   useEffect(() => {
-    if (window.scrollTo(50, 100)) {
-      console.log("yes");
-    } else {
-      console.log("no");
-    }
+  const x = useMotionValue(0);
+  const opacity = useTransform(x, [-500, 0, 500], [0, 1, 0]);
 
-    // return () => {
-    //   second
-    // }
-  }, []); */
-
-  // window.scrollBy(150, 100);
-
-  // const scrollToChange = () => {
-  //   // window.scrollBy(0, 100);
-  //   if (window.scrollTo(0, 50)) {
-  //     console.log("yes");
-  //   } else {
-  //     console.log("no");
-  //   }
-  // };
-
-  // window.addEventListener("scroll", scrollToChange);
-  const { scrollX, scrollY, scrollXProgress, scrollYProgress } = useScroll();
-  console.log(scrollX, scrollY, scrollXProgress, scrollYProgress);
+  const { scrollY } = useScroll();
+  console.log(scrollY);
 
   return (
     <div id="top" className="w-11/12 mx-auto">
+      <motion.div drag="x" style={{ x, opacity }}>
+        <button>Hello</button>
+      </motion.div>
       <div className="navbar absolute py-6 lg:w-11/12 w-11/12 mx-auto">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}

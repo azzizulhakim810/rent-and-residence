@@ -92,7 +92,7 @@ const Banner = () => {
 
           {/* Search Field  */}
           <motion.form
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
@@ -181,7 +181,7 @@ const Banner = () => {
             {/* Search Button  */}
             <div className="lg:w-1/4 w-full">
               <motion.button
-                whileHover={{ scale: 1.05, rotate: 1 }}
+                whileHover={{ scale: 1.02, rotate: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 className="btn w-full rounded-full bg-C_purple/80 hover:bg-C_purple duration-400 text-white hover:bg-C_gray font-medium text-lg px-10 lg:py-7 py-6 gap-3"
