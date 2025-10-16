@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { toast } from "sonner";
@@ -19,13 +19,7 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-} from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -474,19 +468,50 @@ const Navbar = () => {
       </li>
     </>
   );
-
-  const x = useMotionValue(0);
-  const opacity = useTransform(x, [-500, 0, 500], [0, 1, 0]);
-
   const { scrollY } = useScroll();
-  console.log(scrollY);
+
+  const bgOpacity = useTransform(
+    scrollY,
+    [0, 100],
+    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]
+  );
+  const boxShadowOpacity = useTransform(
+    scrollY,
+    [0, 100],
+    ["rgba(0, 0, 0, 0), 0px 2px 8px", "rgba(0, 0, 0, 0.1), 0px 2px 8px"]
+  );
+  const logoSwap = useTransform(scrollY, [0, 80], [0, 1]);
+
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   console.log("Page scroll: ", latest);
+  // });
+
+  // const x = useMotionValue(0);
+  // const opacity = useTransform(x, [-500, 0, 500], [0, 1, 0]);
+  // const backgroundColor = useTransform(x, [0, 100], ["#f00", "#00f"]);
+
+  // const rotate = useTransform(scrollY, [0, 100], [0, 360], { clamp: false });
+
+  // In your component
+  // const y = useTransform(x, [0, 1, 0], [0, 20, 0], { ease: circOut });
+
+  // const z = useTransform(x, [0, 1], [0, 2], {
+  //   ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
+  // });
+
+  // console.log(opacity);
 
   return (
     <div id="top" className="w-11/12 mx-auto">
-      <motion.div drag="x" style={{ x, opacity }}>
-        <button>Hello</button>
-      </motion.div>
-      <div className="navbar absolute py-6 lg:w-11/12 w-11/12 mx-auto">
+      <motion.div
+        initial={false}
+        style={{
+          backgroundColor: bgOpacity,
+          boxShadowOpacity,
+          transition: "background-color 0.8s ease, box-shadow 0.8s ease",
+        }}
+        className="navbar absolute py-6 lg:w-11/12 w-11/12 mx-auto"
+      >
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -516,8 +541,8 @@ const Navbar = () => {
           {/* Logo-Desktop  */}
           <Link to="/">
             <img
-              className="lg:w-[90%] w-full hidden lg:flex"
-              src="https://i.ibb.co/vxgxQBtr/beijing-logo.webp"
+              className="lg:w-[20%] w-full hidden lg:flex"
+              src="../../../../public/RentResidenceLogo1.1.png"
               alt="logo"
             />
           </Link>
@@ -706,7 +731,7 @@ const Navbar = () => {
 
           <SignInAndUp />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
