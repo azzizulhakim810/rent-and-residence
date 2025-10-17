@@ -19,7 +19,12 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -486,32 +491,20 @@ const Navbar = () => {
   //   console.log("Page scroll: ", latest);
   // });
 
-  // const x = useMotionValue(0);
-  // const opacity = useTransform(x, [-500, 0, 500], [0, 1, 0]);
-  // const backgroundColor = useTransform(x, [0, 100], ["#f00", "#00f"]);
-
-  // const rotate = useTransform(scrollY, [0, 100], [0, 360], { clamp: false });
-
-  // In your component
-  // const y = useTransform(x, [0, 1, 0], [0, 20, 0], { ease: circOut });
-
-  // const z = useTransform(x, [0, 1], [0, 2], {
-  //   ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-  // });
-
-  // console.log(opacity);
+  console.log("bgOpacity", bgOpacity);
 
   return (
-    <div id="top" className="w-11/12 mx-auto">
-      <motion.div
-        initial={false}
-        style={{
-          backgroundColor: bgOpacity,
-          boxShadowOpacity,
-          transition: "background-color 0.8s ease, box-shadow 0.8s ease",
-        }}
-        className="navbar absolute py-6 lg:w-11/12 w-11/12 mx-auto"
-      >
+    <motion.div
+      id="top"
+      initial={false}
+      style={{
+        backgroundColor: bgOpacity,
+        boxShadowOpacity,
+        transition: "background-color 0.8s ease, box-shadow 0.8s ease",
+      }}
+      className="bg-transparent"
+    >
+      <div className="navbar py-6 lg:w-11/12 w-11/12 mx-auto ">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -541,8 +534,8 @@ const Navbar = () => {
           {/* Logo-Desktop  */}
           <Link to="/">
             <img
-              className="lg:w-[20%] w-full hidden lg:flex"
-              src="../../../../public/RentResidenceLogo1.1.png"
+              className="lg:w-[30%] w-full hidden lg:flex"
+              src="../../../../public/Logor-01.png"
               alt="logo"
             />
           </Link>
@@ -731,8 +724,8 @@ const Navbar = () => {
 
           <SignInAndUp />
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
