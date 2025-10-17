@@ -504,7 +504,15 @@ const Navbar = () => {
       }}
       className="bg-transparent"
     >
-      <div className="navbar py-6 lg:w-11/12 w-11/12 mx-auto ">
+      <div
+        initial={false}
+        style={{
+          backgroundColor: bgOpacity,
+          boxShadowOpacity,
+          transition: "background-color 0.8s ease, box-shadow 0.8s ease",
+        }}
+        className="navbar py-6 lg:w-11/12 w-11/12 mx-auto "
+      >
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
