@@ -19,12 +19,7 @@ import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
 
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
@@ -483,7 +478,7 @@ const Navbar = () => {
   const boxShadowOpacity = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(0, 0, 0, 0), 0px 2px 8px", "rgba(0, 0, 0, 0.1), 0px 2px 8px"]
+    ["rgba(0, 0, 0, 0), 0px 2px 8px", "rgba(0, 0, 0, 0.5), 0px 20px 80px"]
   );
   const logoSwap = useTransform(scrollY, [0, 80], [0, 1]);
 
@@ -502,7 +497,7 @@ const Navbar = () => {
         boxShadowOpacity,
         transition: "background-color 0.8s ease, box-shadow 0.8s ease",
       }}
-      className="bg-transparent"
+      className="bg-transparent absolute"
     >
       <div
         initial={false}
@@ -542,8 +537,8 @@ const Navbar = () => {
           {/* Logo-Desktop  */}
           <Link to="/">
             <img
-              className="lg:w-[30%] w-full hidden lg:flex"
-              src="../../../../public/Logor-01.png"
+              className="lg:w-[20%] w-full hidden lg:flex -mt-5 -mb-5"
+              src="../../../../public/Logo(updated).png"
               alt="logo"
             />
           </Link>
