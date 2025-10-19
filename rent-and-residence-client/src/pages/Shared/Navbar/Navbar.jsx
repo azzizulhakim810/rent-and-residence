@@ -29,7 +29,6 @@ import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const { user, signOutUser, loading } = UseAuth();
   // console.log(user.email);
@@ -486,7 +485,7 @@ const Navbar = () => {
   //   console.log("Page scroll: ", latest);
   // });
 
-  console.log("bgOpacity", bgOpacity);
+  console.log("boxShadowOpacity", boxShadowOpacity);
 
   return (
     <motion.div
@@ -497,7 +496,8 @@ const Navbar = () => {
         boxShadowOpacity,
         transition: "background-color 0.8s ease, box-shadow 0.8s ease",
       }}
-      className="bg-transparent absolute"
+      transition={{ type: "spring" }}
+      className="bg-transparent absolute w-[100%]"
     >
       <div
         initial={false}
@@ -506,7 +506,7 @@ const Navbar = () => {
           boxShadowOpacity,
           transition: "background-color 0.8s ease, box-shadow 0.8s ease",
         }}
-        className="navbar py-6 lg:w-11/12 w-11/12 mx-auto "
+        className="navbar py-6 lg:w-11/12 w-auto mx-auto"
       >
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
@@ -522,7 +522,7 @@ const Navbar = () => {
           </div>
 
           {/* Sidebar - Mobile  */}
-          <div className="drawer-side  z-110">
+          <div className="drawer-side z-110">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"
@@ -551,8 +551,8 @@ const Navbar = () => {
           </ul>
           <Link to="/">
             <img
-              className="w-[90%] lg:hidden"
-              src="https://i.ibb.co/vxgxQBtr/beijing-logo.webp"
+              className="w-[5%] lg:hidden"
+              src="../../../../public/Short-Logo(updated).png"
               alt="logo"
             />
           </Link>
