@@ -474,18 +474,27 @@ const Navbar = () => {
     [0, 100],
     ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]
   );
-  const boxShadowOpacity = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(0, 0, 0, 0), 0px 2px 8px", "rgba(0, 0, 0, 0.5), 0px 20px 80px"]
+
+  const shadowOpacity = useTransform(scrollY, [0, 100], [0, 0.15]);
+
+  const boxShadow = useTransform(
+    shadowOpacity,
+    (o) => `0px 2px 8px rgba(0, 0, 0, ${o})`
   );
-  const logoSwap = useTransform(scrollY, [0, 80], [0, 1]);
+
+  // const boxShadowOpacity = useTransform(
+  //   scrollY,
+  //   [0, 100],
+  //   ["rgba(0, 0, 0, 0), 0px 2px 8px", "rgba(0, 0, 0, 0.5), 0px 20px 80px"]
+  // );
+
+  // const logoSwap = useTransform(scrollY, [0, 80], [0, 1]);
 
   // useMotionValueEvent(scrollY, "change", (latest) => {
   //   console.log("Page scroll: ", latest);
   // });
 
-  console.log("boxShadowOpacity", boxShadowOpacity);
+  // console.log("boxShadowOpacity", boxShadowOpacity);
 
   return (
     <motion.div
@@ -493,19 +502,19 @@ const Navbar = () => {
       initial={false}
       style={{
         backgroundColor: bgOpacity,
-        boxShadowOpacity,
+        boxShadow,
         transition: "background-color 0.8s ease, box-shadow 0.8s ease",
       }}
       transition={{ type: "spring" }}
       className="bg-transparent absolute w-[100%]"
     >
       <div
-        initial={false}
-        style={{
-          backgroundColor: bgOpacity,
-          boxShadowOpacity,
-          transition: "background-color 0.8s ease, box-shadow 0.8s ease",
-        }}
+        // initial={false}
+        // style={{
+        //   backgroundColor: bgOpacity,
+        //   boxShadow,
+        //   transition: "background-color 0.8s ease, box-shadow 0.8s ease",
+        // }}
         className="navbar py-6 lg:w-11/12 w-auto mx-auto"
       >
         <div className="navbar-start">
@@ -550,11 +559,13 @@ const Navbar = () => {
             {navOptions}
           </ul>
           <Link to="/">
-            <img
-              className="w-[5%] lg:hidden"
-              src="../../../../public/Short-Logo(updated).png"
-              alt="logo"
-            />
+            <div className="w-[120px] flex justify-center">
+              <img
+                className="w-[50%] lg:hidden "
+                src="../../../../public/Short-Logo(updated).png"
+                alt="logo"
+              />
+            </div>
           </Link>
         </div>
 

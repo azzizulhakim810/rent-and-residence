@@ -64,9 +64,9 @@ const Banner = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 800]);
 
   return (
-    <div className="min-h-[80vh] ">
-      <div className=" bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center ">
-        <div className="col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left  py-16">
+    <div className="min-h-[80vh]">
+      <div className=" bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center">
+        <div className="col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left lg:pb-5 pb-30 lg:pt-0 pt-30">
           <motion.div
             // style={{ y }}
             className="lg:text-left text-center"
@@ -81,14 +81,6 @@ const Banner = () => {
               home.
             </p>
           </motion.div>
-
-          {/* <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          Hello Motion!
-        </motion.div> */}
 
           {/* Search Field  */}
           <motion.form
@@ -208,15 +200,9 @@ const Banner = () => {
         </div>
 
         {/* Hero Image  */}
-        <div className="lg:flex hidden bg-white col-span-5  h-screen w-full bg-[url('https://i.ibb.co/ZzSgjqsT/Home-hero.webp')] bg-cover bg-center')]">
-          {/* <img
-          className="h-screen "
-          src="https://i.ibb.co/ZzSgjqsT/Home-hero.webp"
-        /> */}
-        </div>
+        <div className="lg:flex hidden bg-white col-span-5  h-screen w-full bg-[url('https://i.ibb.co/ZzSgjqsT/Home-hero.webp')] bg-cover bg-center')]"></div>
       </div>
 
-      {/* <Link to="/#service"> */}
       <motion.button
         onClick={() => {
           document.getElementById("service").scrollIntoView({
@@ -224,7 +210,7 @@ const Banner = () => {
             block: "start",
           });
         }}
-        className="-mt-20 flex justify-center text-center w-10 mx-auto cursor-pointer"
+        className="lg:-mt-20 -mt-20 flex justify-center text-center w-10 mx-auto cursor-pointer"
         animate={{
           y: [0, -6, 0],
         }}
@@ -236,7 +222,6 @@ const Banner = () => {
       >
         <FaAnglesDown className="text-2xl text-C_purple" />
       </motion.button>
-      {/* </Link> */}
     </div>
   );
 };
