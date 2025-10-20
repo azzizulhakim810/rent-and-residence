@@ -6,7 +6,7 @@ import Sidebar from "../Shared/Sidebar/Sidebar";
 
 const Blogs = () => {
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
         <title>R & R | Blogs</title>
       </Helmet>

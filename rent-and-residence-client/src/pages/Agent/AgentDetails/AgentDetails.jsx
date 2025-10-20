@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams, NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { BsEnvelope } from "react-icons/bs";
@@ -26,6 +26,7 @@ import SkeletonOfAgent from "../../../components/SkeletonOfAgent/SkeletonOfAgent
 
 const AgentDetails = () => {
   const [selectedCategory, setSelectedCategory] = useState({ category: "" });
+  const [isSelected, setIsSelected] = useState("");
 
   useScrollToTop();
   const { id } = useParams();
@@ -46,7 +47,7 @@ const AgentDetails = () => {
 
   const { agentOwnedProperties } = agentAndHisListedProperties || [];
 
-  // console.log(selectedCategory);
+  console.log(isSelected);
 
   // Destructure Details from Agent
   const {
@@ -89,7 +90,7 @@ const AgentDetails = () => {
   const formattedWebsiteURL = handleUrl(websiteUrl);
 
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
         {/* <title>R & R | {agentOwnedProperties[0]?.name}</title> */}
       </Helmet>
@@ -106,112 +107,122 @@ const AgentDetails = () => {
             ) : (
               <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                 <nav className="flex flex-col gap-2">
-                  <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-36">
-                    <div className=" lg:w-1/2 w-full ">
-                      <img
-                        className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
-                        src={profileImage}
-                        alt=""
-                      />
-
-                      {/* Social Icons  */}
-                      <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                        <a
-                          href={formattedFacebookURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaFacebookF />
-                          </button>
-                        </a>
-                        <a
-                          href={formattedLinkedInURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaLinkedinIn />
-                          </button>
-                        </a>
-                        <a
-                          href={formattedTwitterURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaXTwitter />
-                          </button>
-                        </a>
-                        <a
-                          href={formattedPinterestURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                            <FaPinterest />
-                          </button>
-                        </a>
-                      </div>
+                  <div className="flex lg:flex-row flex-col justify-start items-center gap-8 ">
+                    <div className="lg:w-1/2 w-full bg-C_purple rounded-xl">
+                      <figure
+                        className="w-full h-[320px] bg-cover bg-center relative duration-400 rounded-xl"
+                        style={{
+                          backgroundImage: profileImage
+                            ? `url(${profileImage})`
+                            : "none",
+                          backgroundColor: profileImage
+                            ? undefined
+                            : `<div class="flex justify-center items-center ">
+                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                    </div>`,
+                        }}
+                      >
+                        {/* Social Icons */}
+                        <div className="absolute bottom-0  -mb-10 flex flex-col gap-1 translate-x-[10%]">
+                          <div className="bg-white w-full z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1 px-15">
+                            <a
+                              href={formattedFacebookURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                <FaFacebookF />
+                              </button>
+                            </a>
+                            <a
+                              href={formattedLinkedInURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                <FaLinkedinIn />
+                              </button>
+                            </a>
+                            <a
+                              href={formattedTwitterURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                <FaXTwitter />
+                              </button>
+                            </a>
+                            <a
+                              href={formattedPinterestURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                <FaPinterest />
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+                      </figure>
                     </div>
 
                     {/* Details  */}
-                    <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
-                      <div>
-                        <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                    <span className="lg:w-1/2 w-auto flex flex-col gap-2 ps-3 pt-1 ">
+                      <div className="mb-4">
+                        <h4 className="font-Nunito font-[600] text-C_gray text-[32px] leading-6 pb-2">
                           {name}
                         </h4>
-                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
+                        <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[20px] leading-6 capitalize">
                           {role}
                         </p>
                       </div>
 
-                      <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                        <a href={`tel:${phone}`}>
-                          <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                            <FaPhoneAlt className="text-lg" />
+                      <nav className="flex flex-col gap-4 text-gray-600 font-Nunito_Sans">
+                        <span className="flex justify-start items-center text-[18px] gap-3 pt-1 pointer-cursor">
+                          <FaPhoneAlt className="text-lg" />
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                          <Link to={formattedWebsiteURL}>
+                            <p className=" text-C_gray hover:text-C_purple text-[18px] leading-6  me-5">
                               {phone}
                             </p>
-                          </span>
-                        </a>
+                          </Link>
+                        </span>
 
-                        <a href={`tel:${phone}`}>
-                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                            <FaPrint className="text-lg" />
-                            <p className=" text-C_gray text-[16px] leading-6  me-5">
+                        <span className="flex justify-start items-center gap-3 pt-1  text-[18px] pointer-cursor">
+                          <FaPrint className="text-lg" />
+
+                          <Link to={formattedWebsiteURL}>
+                            <p className="hover:text-C_purple text-C_gray text-[18px] leading-6  me-5">
                               {phone}
                             </p>
-                          </span>
-                        </a>
+                          </Link>
+                        </span>
 
-                        <a href={`mailto:${email}`}>
-                          <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                            <BsEnvelope className="text-lg" />
+                        <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                          <BsEnvelope className="text-lg" />
 
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                          <Link to={formattedWebsiteURL}>
+                            <p className=" text-C_gray hover:text-C_purple text-[18px] leading-6">
                               {email}
                             </p>
-                          </span>
-                        </a>
+                          </Link>
+                        </span>
 
-                        <a href={formattedWebsiteURL}>
-                          <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                            <FaGlobe className="text-lg" />
-
-                            <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                        <span className=" flex justify-start items-center gap-3 pt-1  ">
+                          <FaGlobe className="text-lg" />
+                          <Link to={formattedWebsiteURL}>
+                            <p className="block text-C_gray hover:text-C_purple text-[18px] leading-6">
                               {websiteUrl}
                             </p>
-                          </span>
-                        </a>
+                          </Link>
+                        </span>
                       </nav>
                     </span>
                   </div>
 
                   {/* Bio  */}
                   <div>
-                    <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
+                    <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pt-20 pb-2">
                       Bio
                     </h4>
 
@@ -269,17 +280,22 @@ const AgentDetails = () => {
             <div className="lg:flex-row flex flex-col lg:gap-0 gap-5 bg-white lg:px-0 px-8 lg:py-0 py-10 rounded-md shadow-sm mt-6 mb-3 ">
               <button
                 onClick={() => setSelectedCategory({ category: "" })}
-                className="btn border-none
-               text-white bg-C_purple p-8 font-Nunito font-[700]"
+                className={`btn border-none
+               text-white bg-C_purple p-8 font-Nunito font-[700]`}
               >
                 All ({categories?.length})
               </button>
 
               {categories?.map((category, i) => (
                 <button
-                  onClick={() => setSelectedCategory({ category: category })}
+                  onClick={(e) => {
+                    setSelectedCategory({ category: category });
+                    setIsSelected(e.target.value);
+                  }}
                   key={i}
-                  className="btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent"
+                  className={`btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent ${
+                    isSelected === category && "bg-C_purple"
+                  }`}
                 >
                   {category}
                 </button>

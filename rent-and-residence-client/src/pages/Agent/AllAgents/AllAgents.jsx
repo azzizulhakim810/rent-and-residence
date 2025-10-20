@@ -23,7 +23,7 @@ const AllAgents = () => {
   // console.log(allAgents);
 
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
         <title>R & R | Agents</title>
       </Helmet>
@@ -44,19 +44,11 @@ const AllAgents = () => {
                 the service you will only receive from a smaller business built
                 around 100% client and tenant focus.
               </span>
-
-              <span>
-                Whether you’re looking for property for sale in New York area or
-                property for rent, WP Residence makes searching easy. Use our
-                unique geolocation mapping feature to root-out your ideal villa,
-                townhouse or apartment and contact the owners direct. We will
-                help you find your dream house in just a few seconds.
-              </span>
             </p>
 
             {/* All Agents  */}
 
-            <div className="grid grid-cols-2 justify-start w-full gap-4 py-5">
+            <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-4 py-5">
               {allAgents?.map((agent) => (
                 <AgentCard key={agent._id} agent={agent} />
               ))}

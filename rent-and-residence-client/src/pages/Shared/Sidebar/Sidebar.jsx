@@ -24,7 +24,7 @@ const Sidebar = () => {
       </div>
 
       {/* Change Measurement */}
-      <div className="shadow-sm  p-8 w-full rounded-md bg-white">
+      {/* <div className="shadow-sm  p-8 w-full rounded-md bg-white">
         <label
           htmlFor="propertyType"
           className="block text-[16px] font-[700] font-Nunito tracking-wider text-gray-700 mb-2"
@@ -42,7 +42,7 @@ const Sidebar = () => {
           <option>square yards - yd2</option>
           <option>hectares - ha</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Our Listings */}
       <div className="shadow-sm  p-8 w-full rounded-md bg-white">

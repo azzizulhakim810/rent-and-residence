@@ -8,7 +8,7 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const BlogDetails = () => {
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
         <title>R & R | Blog Details</title>
       </Helmet>
@@ -24,26 +24,28 @@ const BlogDetails = () => {
 
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 pb-5">
               <div className=" ">
-                <div className="bg-white w-full shadow-lg p-10 mb-2  rounded-md ">
+                <div className="bg-white w-full shadow-lg lg:p-10 p-2 mb-2  rounded-md ">
                   <nav className="flex flex-col gap-2">
-                    <figure className="bg-[url(https://i.ibb.co/7dyjRcyn/interior-grey-bg-e1636449434931.jpg)] h-[400px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
+                    <figure className="bg-[url(https://i.ibb.co/7dyjRcyn/interior-grey-bg-e1636449434931.jpg)] lg:h-[400px] h-[300px] w-full bg-cover bg-no-repeat bg-center  rounded-lg"></figure>
 
                     {/* Details  */}
-                    <div className=" w-auto flex flex-col gap-2 p-2">
-                      <div>
+                    <div className=" w-auto flex flex-col gap-2 lg:p-2 p-3  pb-8">
+                      <div className="flex flex-col flex-wrap">
                         <h4 className=" font-Nunito font-[600] text-title_color text-[34px] leading-8 py-6">
                           Top 10 best appreciating condos in Madrid
                         </h4>
 
                         <p className="flex gap-2 items-center text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] pb-2">
                           <LuCalendarDays />
-                          Posted by NayyarShaikh on March 4, 2016
+                          Posted by Azzizul Hakim on March 4, 2016
                         </p>
 
-                        <p className="flex items-center  gap-8 text-C_DarkGray font-Nunito_Sans font-[500] text-[16px] ">
+                        <p className="flex flex-col items-start lg:gap-8 gap-3 text-C_DarkGray font-Nunito_Sans font-[500] text-[16px] ">
                           <span className="flex items-center gap-2">
                             <TbCategory />
-                            Buying Properties, Location, Price, Real Estate
+                            <span>
+                              Buying Properties, Location, Price, Real Estate
+                            </span>
                           </span>
 
                           <span className="flex items-center gap-2">

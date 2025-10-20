@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-export default function App() {
+const HomeLoader = () => {
   const globalStyle = {
     height: "80vh",
     display: "flex",
@@ -124,4 +125,6 @@ export default function App() {
       </motion.svg>
     </section>
   );
-}
+};
+
+export default HomeLoader;

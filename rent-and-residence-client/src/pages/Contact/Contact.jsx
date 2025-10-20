@@ -16,7 +16,7 @@ const Contact = () => {
   const price = "";
 
   return (
-    <div className="bg-C_LightGray/5 pb-6 ">
+    <div className="bg-C_LightGray/5 pb-6 pt-25">
       <Helmet>
         <title>R & R | Contact</title>
       </Helmet>
@@ -40,7 +40,7 @@ const Contact = () => {
             <div className="flex lg:flex-row flex-col justify-start w-full gap-6 pb-5">
               <div>
                 {/* Contact Info  */}
-                <div className="bg-white w-full shadow-lg p-8 mb-2  rounded-md ">
+                <div className="bg-white w-full shadow-lg lg:p-8 p-4 mb-2  rounded-md ">
                   <h1 className="font-Nunito lg:text-[34px] text-[32px]  font-[700]">
                     Real Estate Agency
                   </h1>
