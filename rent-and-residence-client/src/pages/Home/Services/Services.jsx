@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 
 const Services = () => {
   return (
-    <div id="service" className="grid grid-cols-12 lg:py-28 py-20">
+    <div id="service" className="grid grid-cols-12 py-28 ">
       {/* Section Title Desktop | Hidden on Mobile */}
       <SectionTitle title={"Services"} />
 

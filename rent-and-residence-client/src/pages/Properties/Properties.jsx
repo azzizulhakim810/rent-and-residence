@@ -51,7 +51,7 @@ const Properties = () => {
   // console.log(Object.values(filters));
 
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
         <title>R & R | Properties</title>
       </Helmet>
@@ -286,6 +286,7 @@ const Properties = () => {
                 onChange={(e) => {
                   setLimit(parseInt(e.target.value));
                   setCurrentPage(0);
+                  window.scrollTo(0, 0);
                 }}
                 // defaultValue={limit}
                 value={limit}

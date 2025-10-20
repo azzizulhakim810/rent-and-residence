@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -96,13 +97,13 @@ const PropertyCardSingleView = ({ property, favourites, refetch }) => {
 
   return (
     <motion.div
-      initial={{ y: 50 }}
+      initial={{ y: [40, 30, 20] }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{
         once: true,
         amount: 0.5,
       }}
-      transition={{ type: "spring", duration: 1.5 }}
+      transition={{ type: "spring", duration: 0.6 }}
       className=" bg-white w-full grid grid-cols-2 shadow-lg rounded-lg"
     >
       {/* <div className="grid grid-cols-2"> */}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyCard from "../../../components/PropertyCard/PropertyCard";
@@ -20,7 +21,7 @@ const HomeProperties = () => {
   const { allProperties = [], favouritePropertyIds = [] } = allPropInfo || {};
 
   return (
-    <div className="grid grid-cols-12 lg:pb-22 lg:pt-0 py-20 relative">
+    <div className="grid grid-cols-12 lg:pb-22 lg:mt-0 -mt-30 py-20 relative">
       {/* Section Title Desktop | Hidden on Mobile */}
 
       <SectionTitle title={"Properties"} />

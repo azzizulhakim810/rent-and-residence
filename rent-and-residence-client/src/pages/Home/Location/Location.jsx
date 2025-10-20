@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-vars */
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCategoriesAndCities from "../../../hooks/useCategoriesAndCities/useCategoriesAndCities";
-import { motion } from "motion/react";
+import { motion, useScroll } from "motion/react";
 
 const Location = () => {
   const [categoriesAndCities, isPending] = useCategoriesAndCities();
   const { allCities } = categoriesAndCities || [];
   // console.log(allCities);
+
+  const { scrollY } = useScroll();
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -21,16 +24,22 @@ const Location = () => {
             <span>Loading.......</span>
           ) : (
             allCities?.map((city, i) => {
-              const leftToRight = i < 3;
+              // const leftToRight = i < 3;
+
               return (
                 <motion.div
                   initial={{
-                    x: leftToRight ? -50 : 50,
+                    // x: leftToRight ? -50 : 50,
+                    x: scrollY,
                     opacity: 0,
                   }}
                   whileInView={{
                     x: 0,
                     opacity: 1,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.5,
                   }}
                   transition={{
                     duration: 0.6,
