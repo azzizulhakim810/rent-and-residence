@@ -1,5 +1,6 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCategoriesAndCities from "../../../hooks/useCategoriesAndCities/useCategoriesAndCities";
+import { motion } from "motion/react";
 
 const Location = () => {
   const [categoriesAndCities, isPending] = useCategoriesAndCities();
@@ -19,32 +20,51 @@ const Location = () => {
           {isPending ? (
             <span>Loading.......</span>
           ) : (
-            allCities?.map((city, i) => (
-              <div key={i} className="col-span-4 w-full shadow-md">
-                <figure
-                  style={{
-                    backgroundImage: `url(${
-                      isPending
-                        ? "https://ik.imagekit.io/jimfantasy/pexels-pixabay-276566.jpg-1759497404680_Ws27_YnM_M"
-                        : city.image
-                    })`,
+            allCities?.map((city, i) => {
+              const leftToRight = i < 3;
+              return (
+                <motion.div
+                  initial={{
+                    x: leftToRight ? -50 : 50,
+                    opacity: 0,
                   }}
-                  className={`h-[250px] w-full bg-cover bg-no-repeat relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay  rounded-lg`}
+                  whileInView={{
+                    x: 0,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.1,
+                    ease: "easeOut",
+                  }}
+                  key={i}
+                  className="col-span-4 w-full shadow-md"
                 >
-                  <div className="absolute top-0 left-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
-                    <h1 className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
-                      {city._id}
-                    </h1>
-                  </div>
+                  <figure
+                    style={{
+                      backgroundImage: `url(${
+                        isPending
+                          ? "https://ik.imagekit.io/jimfantasy/pexels-pixabay-276566.jpg-1759497404680_Ws27_YnM_M"
+                          : city.image
+                      })`,
+                    }}
+                    className={`h-[250px] w-full bg-cover bg-no-repeat relative bg-black/30 hover:bg-black/10 duration-400 bg-blend-overlay  rounded-lg`}
+                  >
+                    <div className="absolute top-0 left-0 mr-3 mt-5 flex gap-3 font-Nunito_Sans">
+                      <h1 className=" text-white font-Nunito font-[700] text-[18px] rounded px-6 ">
+                        {city._id}
+                      </h1>
+                    </div>
 
-                  <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
-                    <h1 className=" text-white font-Nunito font-[700] text-[15px] rounded px-6 ">
-                      {city.count} Listing
-                    </h1>
-                  </div>
-                </figure>
-              </div>
-            ))
+                    <div className="absolute bottom-0 left-0 mb-5 flex flex-col gap-1">
+                      <h1 className=" text-white font-Nunito font-[700] text-[15px] rounded px-6 ">
+                        {city.count} Listing
+                      </h1>
+                    </div>
+                  </figure>
+                </motion.div>
+              );
+            })
           )}
         </div>
 

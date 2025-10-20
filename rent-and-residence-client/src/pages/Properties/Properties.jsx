@@ -245,7 +245,10 @@ const Properties = () => {
                 <button
                   key={page}
                   // onClick={setPage(e.target.value)}
-                  onClick={() => setCurrentPage(page)}
+                  onClick={() => {
+                    setCurrentPage(page);
+                    window.scrollTo(0, 0);
+                  }}
                   className={
                     currentPage == page
                       ? "btn bg-C_purple text-white"

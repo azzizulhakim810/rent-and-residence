@@ -66,7 +66,7 @@ const Banner = () => {
   return (
     <div className="min-h-[80vh]">
       <div className=" bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center">
-        <div className="col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left lg:pb-5 pb-30 lg:pt-0 pt-30">
+        <div className="col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left lg:pb-0 pb-30 lg:pt-0 pt-30">
           <motion.div
             // style={{ y }}
             className="lg:text-left text-center"

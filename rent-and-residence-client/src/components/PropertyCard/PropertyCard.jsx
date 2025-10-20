@@ -94,10 +94,17 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     favourites?.map((eachProp) => setIsFavourite(eachProp.includes(_id)));
   }, [favourites, _id]);
 
-  // console.log(isFavourite);
-
   return (
-    <div className=" bg-white w-full shadow-lg rounded-lg">
+    <motion.div
+      initial={{ y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{
+        once: true,
+        amount: 0.5,
+      }}
+      transition={{ type: "spring", duration: 1.5 }}
+      className=" bg-white w-full shadow-lg rounded-lg"
+    >
       {/* Image  */}
       <Link to={`/propertyDetails/${_id}`}>
         {images?.[0] && (
@@ -232,7 +239,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

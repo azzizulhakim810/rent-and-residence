@@ -11,6 +11,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import useComparison from "../../hooks/useComparison/useComparison";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import { usePopup } from "../../providers/PopupProvider";
+import { motion } from "motion/react";
 
 const PropertyCardSingleView = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
@@ -94,7 +95,16 @@ const PropertyCardSingleView = ({ property, favourites, refetch }) => {
   // console.log(isFavourite);
 
   return (
-    <div className=" bg-white w-full grid grid-cols-2 shadow-lg rounded-lg">
+    <motion.div
+      initial={{ y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{
+        once: true,
+        amount: 0.5,
+      }}
+      transition={{ type: "spring", duration: 1.5 }}
+      className=" bg-white w-full grid grid-cols-2 shadow-lg rounded-lg"
+    >
       {/* <div className="grid grid-cols-2"> */}
       {/* Image  */}
       <Link to={`/propertyDetails/${_id}`}>
@@ -209,7 +219,7 @@ const PropertyCardSingleView = ({ property, favourites, refetch }) => {
         </div>
       </div>
       {/* </div> */}
-    </div>
+    </motion.div>
   );
 };
 

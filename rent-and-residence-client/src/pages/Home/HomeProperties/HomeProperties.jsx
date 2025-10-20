@@ -4,6 +4,7 @@ import PropertyCard from "../../../components/PropertyCard/PropertyCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useProperties from "../../../hooks/useProperties/useProperties";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import { motion } from "motion/react";
 
 const HomeProperties = () => {
   const [allPropInfo, refetch, isPending] = useProperties({
@@ -42,6 +43,9 @@ const HomeProperties = () => {
           ) : (
             allProperties?.map((property) => (
               <PropertyCard
+                // initial={{ opacity: 0, y: 50 }}
+                // whileInView={{ opacity: 1, y: 0 }}
+                // transition={{ duration: 0.5, ease: "easeInOut" }}
                 key={property._id}
                 property={property}
                 favourites={favouritePropertyIds}

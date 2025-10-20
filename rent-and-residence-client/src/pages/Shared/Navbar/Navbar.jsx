@@ -482,6 +482,7 @@ const Navbar = () => {
     (o) => `0px 2px 8px rgba(0, 0, 0, ${o})`
   );
 
+  // It doesn't work because of conflicting with each other as there are multiple values in the box shadow
   // const boxShadowOpacity = useTransform(
   //   scrollY,
   //   [0, 100],
@@ -495,6 +496,7 @@ const Navbar = () => {
   // });
 
   // console.log("boxShadowOpacity", boxShadowOpacity);
+  // shadowOpacity.on("change", (v) => console.log(v));
 
   return (
     <motion.div
