@@ -621,10 +621,9 @@ const Navbar = () => {
                   className="drawer-overlay"
                 ></label>
                 {cartItems?.length == 0 ? (
-                  <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
-                    {/* Sidebar content here */}
+                  <ul className="menu bg-base-200 text-base-content/50 min-h-full w-90 p-3 ">
                     <li>
-                      <span className="text-lg flex justify-between font-Nunito font-bold px-4 pt-10">
+                      <span className="text-lg flex justify-between font-Nunito font-medium my-3 px-4 pt-4 hover:bg-transparent  focus:bg-transparent">
                         Nothing Here
                       </span>
                     </li>

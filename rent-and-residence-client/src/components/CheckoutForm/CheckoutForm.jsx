@@ -104,7 +104,11 @@ const CheckoutForm = ({ totalPrice }) => {
   };
   return (
     <form onSubmit={handleSubmit}>
+      <h1 className="font-Nunito text-[25px] leading-15 font-[700] mt-10">
+        Pay with Stripe
+      </h1>
       <CardElement
+        className="my-4"
         options={{
           style: {
             base: {
@@ -113,6 +117,9 @@ const CheckoutForm = ({ totalPrice }) => {
               "::placeholder": {
                 color: "#aab7c4",
               },
+              // border: "5px",
+              borderColor: "#000",
+              // margin: "10px",
             },
             invalid: {
               color: "#9e2146",

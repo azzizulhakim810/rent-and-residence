@@ -19,7 +19,7 @@ const Checkout = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   return (
-    <div className="bg-C_LightGray/5 py-6">
+    <div className="bg-C_LightGray/5 py-6 pt-25 pb-16">
       <Helmet>
         <title>R & R | Checkout</title>
       </Helmet>
@@ -27,13 +27,13 @@ const Checkout = () => {
         <div className="grid grid-cols-12 gap-10">
           {/* Info column  */}
           <div className="lg:col-span-5 col-span-10 ">
-            <div className=" relative flex justify-center z-0 opacity-50 -mb-25">
+            {/* <div className=" relative flex justify-end z-0 opacity-50">
               <img
-                className=" w-[50%] rotate-35 lg:flex  "
+                className=" w-[30%] rotate-35 lg:flex   -mb-20"
                 src="https://i.ibb.co.com/gLtdNHKv/checkout-One.png"
                 alt="logo"
               />
-            </div>
+            </div> */}
             <div className="relative flex flex-col justify-start w-full py-5 z-100">
               {/* { <Link className="lg:w-1/2 w-full" to="/blogDetails">
                 <div className=" bg-white  shadow-lg rounded-lg">
