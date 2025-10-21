@@ -19,7 +19,7 @@ const Checkout = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   return (
-    <div className="bg-C_LightGray/5 py-6 pt-25 pb-16">
+    <div className="bg-C_LightGray/5 py-6 pt-30 pb-16">
       <Helmet>
         <title>R & R | Checkout</title>
       </Helmet>
@@ -126,7 +126,7 @@ const Checkout = () => {
                 <CheckoutSidebar item={item} />
               </div>
             ))}
-            <div className="divider"></div>
+            <div className="divider h-[1px]"></div>
             <div className="text-lg flex justify-between font-Nunito font-bold  ">
               <h2>Total Price :</h2>
               <span>{totalPrice?.toFixed(2)} €</span>

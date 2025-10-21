@@ -1,10 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { TbCreditCardPay } from "react-icons/tb";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
-import UseAuth from "../../hooks/UseAuth/UseAuth";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import UseAuth from "../../hooks/UseAuth/UseAuth";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
@@ -29,7 +29,7 @@ const CheckoutForm = ({ totalPrice }) => {
       axiosSecure
         .post("/api/create-payment-intent", { price: totalPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
+          // console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -107,8 +107,21 @@ const CheckoutForm = ({ totalPrice }) => {
       <h1 className="font-Nunito text-[25px] leading-15 font-[700] mt-10">
         Pay with Stripe
       </h1>
+
+      <input
+        className="w-full text-[18px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10 mb-4"
+        type="email"
+        name="Email"
+        placeholder="Your Email"
+      />
+      <input
+        className="w-full text-[18px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10"
+        type="text"
+        name="name"
+        placeholder="Fullname on Card"
+      />
       <CardElement
-        className="my-4"
+        className="my-4 border-1 border-C_LightGray/10 p-3 rounded-lg"
         options={{
           style: {
             base: {
@@ -142,6 +155,10 @@ const CheckoutForm = ({ totalPrice }) => {
         <TbCreditCardPay class="text-lg" />
         Pay
       </button>
+
+      <div className="w-[35%] pt-10">
+        <img src="/stripe.png" />
+      </div>
     </form>
   );
 };
