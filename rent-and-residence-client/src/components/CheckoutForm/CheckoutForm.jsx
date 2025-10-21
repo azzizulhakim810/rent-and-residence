@@ -109,13 +109,14 @@ const CheckoutForm = ({ totalPrice }) => {
       </h1>
 
       <input
-        className="w-full text-[18px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10 mb-4"
+        className="w-full text-[16px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10 mb-4"
         type="email"
         name="Email"
+        value={user.email}
         placeholder="Your Email"
       />
       <input
-        className="w-full text-[18px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10"
+        className="w-full text-[16px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10"
         type="text"
         name="name"
         placeholder="Fullname on Card"
@@ -125,7 +126,7 @@ const CheckoutForm = ({ totalPrice }) => {
         options={{
           style: {
             base: {
-              fontSize: "18px",
+              fontSize: "16px",
               color: "#424770",
               "::placeholder": {
                 color: "#aab7c4",

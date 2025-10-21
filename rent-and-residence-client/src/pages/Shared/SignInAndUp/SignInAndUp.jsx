@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { AuthContext } from "../../../providers/AuthProvider";
+import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
-import UseAuth from "../../../hooks/UseAuth/UseAuth";
 
 const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
@@ -30,14 +29,14 @@ const SignInAndUp = () => {
     <div>
       {user ? (
         <button
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex  border-0 lg:w-full w-[250px] shadow-none"
           onClick={handleSignOut}
         >
           Sign Out
         </button>
       ) : (
         <button
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
           onClick={() =>
             document.getElementById("signUpAndInPopUp").showModal()
           }

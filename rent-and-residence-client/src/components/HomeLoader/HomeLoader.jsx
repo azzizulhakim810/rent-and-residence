@@ -24,7 +24,7 @@ const HomeLoader = () => {
         viewBox="0 0 600 600"
         initial="hidden"
         animate="visible"
-        style={{ maxWidth: "20vw" }}
+        style={{ maxWidth: "30vw" }}
       >
         {/* Ground line */}
         <motion.line
@@ -33,7 +33,7 @@ const HomeLoader = () => {
           x2="550"
           y2="550"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           strokeLinecap="round"
           variants={draw}
           custom={1}
@@ -43,7 +43,7 @@ const HomeLoader = () => {
         <motion.path
           d="M 50 275 C 100 225, 200 150, 300 112.5 C 400 150, 500 225, 550 275"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           strokeLinecap="round"
           fill="none"
           variants={draw}
@@ -72,7 +72,7 @@ const HomeLoader = () => {
           x2="100"
           y2="237.5"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           strokeLinecap="round"
           variants={draw}
           custom={4}
@@ -85,7 +85,7 @@ const HomeLoader = () => {
           x2="500"
           y2="237.5"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           strokeLinecap="round"
           variants={draw}
           custom={5}
@@ -95,7 +95,7 @@ const HomeLoader = () => {
         <motion.path
           d="M 225 550 L 225 350 C 225 325, 375 325, 375 350 L 375 550"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           fill="none"
           opacity="0.5"
           variants={draw}
@@ -108,7 +108,7 @@ const HomeLoader = () => {
           cy="237.5"
           r="50"
           stroke="#7854F6"
-          strokeWidth="15"
+          strokeWidth="10"
           fill="none"
           opacity="0.5"
           variants={draw}

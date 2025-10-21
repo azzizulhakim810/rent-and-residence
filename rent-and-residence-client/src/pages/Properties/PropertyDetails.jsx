@@ -81,7 +81,8 @@ const PropertyDetails = () => {
   const [handleAddToCart] = useAddToCard();
   const [currentUserFromDB] = useSignedInUser();
 
-  const { _id: userId } = currentUserFromDB;
+  const { _id: userId, role: currentUserRole } = currentUserFromDB || {};
+  console.log(currentUserRole);
 
   const [coordinates, setCoordinates] = useState(null);
 
@@ -153,7 +154,7 @@ const PropertyDetails = () => {
 
         setTimeout(() => {
           setImgLoading(false);
-        }, 3000);
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
@@ -297,7 +298,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
         {/* Banner Image  */}
         <div className="lg:py-8 pt-8 lg:mb-10 ">
           {imgLoading ? (
-            <div className="flex justify-center ">
+            <div className="flex justify-center items-baseline border-b-2 border-C_LightGray/10 h-full -mb-12 pb-6">
               <HomeLoader />
             </div>
           ) : (
@@ -306,7 +307,6 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
         </div>
 
         {/* Breadcrumbs */}
-
         <Breadcrumb pageName={title} />
 
         {/* Rest  */}
@@ -359,6 +359,21 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     <IoShareSocialOutline />
                     Share
                   </span>
+                </div>
+
+                <div className="lg:hidden flex">
+                  <button
+                    // disabled={
+                    //   ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                    //     ? true
+                    //     : false
+                    // }
+                    onClick={() => handleAddToCart(_id)}
+                    className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 cursor-pointer"
+                  >
+                    <LiaCartPlusSolid className="text-[24px] -mt-1" />
+                    Add to Cart
+                  </button>
                 </div>
 
                 {/* Overview  */}
@@ -1427,8 +1442,13 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
           {/* Sidebar  */}
           <div className="lg:col-span-4 col-span-10 ">
-            <div className="flex justify-end -mt-[30px]">
+            <div className="lg:flex hidden justify-end -mt-[30px] ">
               <button
+                disabled={
+                  ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                    ? true
+                    : false
+                }
                 onClick={() => handleAddToCart(_id)}
                 className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
               >

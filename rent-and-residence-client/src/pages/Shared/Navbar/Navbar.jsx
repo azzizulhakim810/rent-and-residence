@@ -106,14 +106,14 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to="/allAgents"
+          to="/agents"
           className={({ isActive }) =>
             isActive
               ? "text-[#7854f6] font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
               : "nav-item  text-[#222222] hover:bg-transparent font-medium tracking-wide"
           }
         >
-          All Agents
+          Agents
         </NavLink>
       </li>
 
@@ -161,13 +161,14 @@ const Navbar = () => {
       </li>
 
       {/* Add Listing Button  */}
-      <li>
-        <Link
+      <li className="w-full">
+        <SignInAndUp />
+        {/* <Link
           to="/addProperty"
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md border-0 py-5 text-[16px] my-6 shadow-none"
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md border-0 py-5 text-[16px] my-3 mb-5 shadow-none"
         >
-          Add Listing
-        </Link>
+          Sign In
+        </Link> */}
       </li>
 
       {/* Add Nav Item  */}
@@ -201,26 +202,15 @@ const Navbar = () => {
 
       <li className="py-4  border-gray-600 border-b-1">
         <NavLink
-          onMouseEnter={() => setShowSubmenu(true)}
-          onMouseLeave={() => setShowSubmenu(false)}
-          to="#"
+          to="/agents"
+          className={({ isActive }) =>
+            isActive
+              ? " text-C_purple hover:text-C_purple gap-3"
+              : " nav-item text-white gap-3"
+          }
         >
           <BsPerson className="text-xl" />
           Agents
-          {showSubmenu ? (
-            <ul className="bg-white absolute w-[150px] shadow-sm right-0 top-10 z-10 sub-menu p-2">
-              <li>
-                <Link
-                  to="/allAgents"
-                  className="relative nav-item text-[#222222] hover:text-[#7854f6]  font-medium tracking-wide hover:bg-transparent border-t-[#7854f6] rounded-none"
-                >
-                  All Agents
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            " "
-          )}
         </NavLink>
       </li>
 
@@ -301,7 +291,7 @@ const Navbar = () => {
             >
               <span className="flex items-center gap-2 justify-start">
                 <GoHome />
-                All Properties
+                Property Listings
               </span>
             </NavLink>
           </li>
@@ -509,7 +499,7 @@ const Navbar = () => {
         transition: "background-color 0.8s ease, box-shadow 0.8s ease",
       }}
       transition={{ type: "spring" }}
-      className="bg-transparent absolute w-[100%]"
+      className="bg-transparent absolute lg:w-[100%] w-[98%]"
     >
       <div
         // initial={false}
@@ -622,8 +612,8 @@ const Navbar = () => {
                 ></label>
                 {cartItems?.length == 0 ? (
                   <ul className="menu bg-base-200 text-base-content/50 min-h-full w-90 p-3 ">
-                    <li>
-                      <span className="text-lg flex justify-between font-Nunito font-medium my-3 px-4 pt-4 hover:bg-transparent  focus:bg-transparent">
+                    <li className="flex justify-center items-center">
+                      <span className="text-lg flex justify-between font-Nunito font-medium my-3 pt-4 hover:bg-transparent  focus:bg-transparent text-[20px]">
                         Nothing Here
                       </span>
                     </li>
@@ -721,7 +711,7 @@ const Navbar = () => {
                 className="btn p-0 bg-transparent hover:bg-transparent border-none "
               >
                 <div className="avatar">
-                  <div className="md:w-10 w-8 rounded-full ">
+                  <div className="md:w-10 w-11 rounded-full ">
                     <img
                       className="w-full object-fill "
                       src={
@@ -751,8 +741,9 @@ const Navbar = () => {
           </Link> */}
 
           {/* Sign In Btn - Desktop  */}
-
-          <SignInAndUp />
+          <div className="lg:block hidden">
+            <SignInAndUp />
+          </div>
         </div>
       </div>
     </motion.div>

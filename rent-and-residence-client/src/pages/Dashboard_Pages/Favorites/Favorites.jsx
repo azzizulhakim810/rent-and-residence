@@ -38,10 +38,10 @@ const Favorites = () => {
         Dashboard - Favourites
       </h1>
 
-      <div className="grid grid-cols-12 gap-6 pt-10">
-        <div className="lg:col-span-12 col-span-10 flex flex-col gap-8">
+      <div className="grid grid-cols-12 gap-0 pt-10">
+        <div className="lg:col-span-12 col-span-12 flex flex-col gap-8">
           {/* Account Summary  */}
-          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] lg:p-8 p-4 w-full rounded-xl bg-white">
             {/* <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
               <SkeletonOfPropertyCard />
             </div> */}
@@ -52,7 +52,7 @@ const Favorites = () => {
                   <SkeletonOfPropertyCard value={value} />
                 </div>
               ) : (
-                <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 ">
+                <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-3 gap-6 ">
                   {favouriteProperties?.map((favProperty) => (
                     <FavouritePropCard
                       key={favProperty?.propertyItems._id}

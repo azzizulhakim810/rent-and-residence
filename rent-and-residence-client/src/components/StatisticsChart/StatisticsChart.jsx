@@ -39,7 +39,7 @@ const StatisticsChart = ({ chartData }) => {
         className="lg:hidden block -ms-6"
         width={320}
         height={250}
-        data={data}
+        data={chartData.map((d) => d)}
       >
         <CartesianGrid strokeDasharray="3 2" />
         <XAxis dataKey="name" />
