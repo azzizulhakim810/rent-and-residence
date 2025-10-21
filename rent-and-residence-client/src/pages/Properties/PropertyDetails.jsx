@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
@@ -62,6 +62,7 @@ import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import useAddToCard from "../../hooks/useAddToCard/useAddToCard";
 import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
+import HomeLoader from "../../components/HomeLoader/HomeLoader";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -73,8 +74,9 @@ const myStyles = {
 const PropertyDetails = () => {
   const [property, setProperty] = useState({});
   const [propertyOwner, setPropertyOwner] = useState([]);
-  const location = useLocation();
-  console.log(location);
+  const [imgLoading, setImgLoading] = useState(true);
+  // const location = useLocation();
+  // console.log(location);
 
   useScrollToTop();
   const [handleAddToCart] = useAddToCard();
@@ -145,9 +147,20 @@ const PropertyDetails = () => {
 
   // Fetch the Property
   useEffect(() => {
-    axiosPublic
-      .get(`/api/properties/${propertyId}`)
-      .then((res) => setProperty(res.data[0]));
+    const fetchProperty = async () => {
+      try {
+        const res = await axiosPublic.get(`/api/properties/${propertyId}`);
+        setProperty(res.data[0]);
+
+        setTimeout(() => {
+          setImgLoading(false);
+        }, 3000);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchProperty();
   }, [axiosPublic, propertyId]);
 
   // Destructure Details from Property
@@ -159,20 +172,11 @@ const PropertyDetails = () => {
     ownerId,
     images,
     propertyStatus,
-    // listedIn,
     afterPriceLabel,
     category,
     address,
-
     propertyDetails,
-
     amenities,
-
-    // neighborhood,
-
-    // energyClass,
-    // energyIndex,
-
     garages,
     garageSize,
   } = property || {};
@@ -189,19 +193,16 @@ const PropertyDetails = () => {
   // Destructure Details from Owner
   const {
     name,
-    // bio,
     profileImage,
     email,
     role,
     phone,
     facebookUrl,
-    // instagramUrl,
     linkedinUrl,
     pinterestUrl,
     twitterUrl,
     websiteUrl,
   } = propertyOwner || {};
-  // console.log(propertyOwner);
 
   // Check & validate URL
   const handleUrl = (url) => {
@@ -296,7 +297,13 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
       <div className="w-10/12 mx-auto">
         {/* Banner Image  */}
         <div className="lg:py-8 pt-8 lg:mb-10 ">
-          <PropertyGallery className="absolute" images={images} />
+          {imgLoading ? (
+            <div className="flex justify-center ">
+              <HomeLoader />
+            </div>
+          ) : (
+            <PropertyGallery className="absolute" images={images} />
+          )}
         </div>
 
         {/* Breadcrumbs */}
@@ -900,7 +907,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           <span className="block my-3"></span>
                           <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
                             {amenities?.mediaRoom ? (
-                              <td className="w-1/3">
+                              <td className="w-full">
                                 <p className="flex gap-3">
                                   <TfiLayoutMediaCenterAlt className="text-C_purple text-xl" />
                                   Media Room
@@ -1194,7 +1201,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       />
 
                       <div className="flex lg:flex-row flex-col gap-3">
-                        <div className="w-1/2">
+                        <div className="lg:w-1/2 w-full">
                           <input
                             type="text"
                             className="input font-Nunito_Sans font-[600] text-C_LightGray w-full focus:border-1 focus:border-C_purple focus:outline-0"
@@ -1209,7 +1216,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             </span>
                           )}
                         </div>
-                        <div className="w-1/2">
+                        <div className="lg:w-1/2 w-full">
                           <input
                             type="text"
                             className="input font-Nunito_Sans font-[600] text-C_LightGray w-full focus:border-1 focus:border-C_purple focus:outline-0"
@@ -1260,125 +1267,124 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   </div>
                 </div>
 
-                {/* Profile  */}
+                {/* Agent Profile  */}
                 <div className="shadow-sm lg:p-8 p-5 mb-5 w-full rounded-md bg-white">
                   <nav className="flex flex-col gap-2">
-                    <div className="flex lg:flex-row flex-col justify-start items-top gap-8 -mb-50">
-                      <div className=" lg:w-1/2 w-full ">
-                        <img
-                          className="rounded-md w-[100%] h-[60%]  mx-auto object-cover object-center"
-                          src={profileImage}
-                          alt=""
-                        />
-
-                        {/* Social Icons  */}
-                        <div className="bg-white w-10/12 z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1">
-                          <a
-                            href={formattedFacebookURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                              <FaFacebookF />
-                            </button>
-                          </a>
-                          <a
-                            href={formattedLinkedInURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                              <FaLinkedinIn />
-                            </button>
-                          </a>
-                          <a
-                            href={formattedTwitterURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                              <FaXTwitter />
-                            </button>
-                          </a>
-                          <a
-                            href={formattedPinterestURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
-                              <FaPinterest />
-                            </button>
-                          </a>
-                        </div>
+                    <div className="flex lg:flex-row flex-col justify-start items-center gap-8 ">
+                      <div className="lg:w-1/2 w-full bg-C_purple rounded-xl">
+                        <figure
+                          className="w-full h-[320px] bg-cover bg-center relative duration-400 rounded-xl"
+                          style={{
+                            backgroundImage: profileImage
+                              ? `url(${profileImage})`
+                              : "none",
+                            backgroundColor: profileImage
+                              ? undefined
+                              : `<div class="flex justify-center items-center ">
+                                      <span className=" loading loading-ring loading-xl text-C_purple"></span>
+                                    </div>`,
+                          }}
+                        >
+                          {/* Social Icons */}
+                          <div className="absolute bottom-0  -mb-10 flex flex-col gap-1 lg:translate-x-[10%]">
+                            <div className="bg-white w-full z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1 px-15">
+                              <a
+                                href={formattedFacebookURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                  <FaFacebookF />
+                                </button>
+                              </a>
+                              <a
+                                href={formattedLinkedInURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                  <FaLinkedinIn />
+                                </button>
+                              </a>
+                              <a
+                                href={formattedTwitterURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                  <FaXTwitter />
+                                </button>
+                              </a>
+                              <a
+                                href={formattedPinterestURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
+                                  <FaPinterest />
+                                </button>
+                              </a>
+                            </div>
+                          </div>
+                        </figure>
                       </div>
 
                       {/* Details  */}
-                      <span className="lg:w-1/2  w-auto flex flex-col gap-2 ps-3 pt-1 ">
-                        <div>
-                          <h4 className=" font-Nunito font-[600] text-C_gray text-[25px] leading-6 pb-2">
+                      <span className="lg:w-1/2 w-auto flex flex-col gap-2 lg:ps-3 ps-0 lg:pt-1 pt-15 ">
+                        <div className="mb-4">
+                          <h4 className="font-Nunito font-[600] text-C_gray text-[32px] leading-6 pb-3">
                             {name}
                           </h4>
-                          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px] leading-6 capitalize">
+                          <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[20px] leading-6 capitalize">
                             {role}
                           </p>
                         </div>
 
-                        <nav className="flex flex-col gap-3 text-gray-600 font-Nunito_Sans">
-                          <a href={`tel:${phone}`}>
-                            <span className="flex justify-start items-center hover:text-C_purple text-[16px] gap-3 pt-1 pointer-cursor">
-                              <FaPhoneAlt className="text-lg" />
+                        <nav className="flex flex-col gap-4 text-gray-600 font-Nunito_Sans">
+                          <span className="flex justify-start items-center text-[18px] gap-3 pt-1 pointer-cursor">
+                            <FaPhoneAlt className="text-lg" />
 
-                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6  me-5">
+                            <Link to={formattedWebsiteURL}>
+                              <p className=" text-C_gray hover:text-C_purple text-[18px] leading-6  me-5">
                                 {phone}
                               </p>
-                            </span>
-                          </a>
+                            </Link>
+                          </span>
 
-                          <a href={`tel:${phone}`}>
-                            <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple  text-[16px] pointer-cursor">
-                              <FaPrint className="text-lg" />
-                              <p className=" text-C_gray text-[16px] leading-6  me-5">
+                          <span className="flex justify-start items-center gap-3 pt-1  text-[18px] pointer-cursor">
+                            <FaPrint className="text-lg" />
+
+                            <Link to={formattedWebsiteURL}>
+                              <p className="hover:text-C_purple text-C_gray text-[18px] leading-6  me-5">
                                 {phone}
                               </p>
-                            </span>
-                          </a>
+                            </Link>
+                          </span>
 
-                          <a href={`mailto:${email}`}>
-                            <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
-                              <BsEnvelope className="text-lg" />
+                          <span className="flex justify-start items-center gap-3 pt-1 pointer-cursor">
+                            <BsEnvelope className="text-lg" />
 
-                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                            <Link to={formattedWebsiteURL}>
+                              <p className=" text-C_gray hover:text-C_purple text-[18px] leading-6">
                                 {email}
                               </p>
-                            </span>
-                          </a>
+                            </Link>
+                          </span>
 
-                          <a href={formattedWebsiteURL}>
-                            <span className="flex justify-start items-center gap-3 pt-1 hover:text-C_purple ">
-                              <FaGlobe className="text-lg" />
-
-                              <p className=" text-C_gray hover:text-C_purple text-[16px] leading-6">
+                          <span className=" flex justify-start items-center gap-3 pt-1  ">
+                            <FaGlobe className="text-lg" />
+                            <Link to={formattedWebsiteURL}>
+                              <p className="block text-C_gray hover:text-C_purple text-[18px] leading-6">
                                 {websiteUrl}
                               </p>
-                            </span>
-                          </a>
+                            </Link>
+                          </span>
                         </nav>
                       </span>
                     </div>
 
-                    {/* Bio  */}
-                    {/* <div>
-                      <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
-                        Bio
-                      </h4>
-
-                      <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[16px]  pt-2">
-                        {bio}
-                      </p>
-                    </div> */}
-
                     {/* Contact Me */}
-                    <div className="pt-30">
+                    <div className="pt-25">
                       <h4 className=" font-Nunito font-[600] text-C_gray text-[20px] leading-6 pb-2">
                         Contact Me
                       </h4>

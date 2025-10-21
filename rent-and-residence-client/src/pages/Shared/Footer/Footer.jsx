@@ -41,7 +41,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className=" bg-footer_color text-C_gray py-5">
+      <div className=" bg-footer_color text-C_gray py-5 border-t-1 border-t-C_DarkGray/10">
         <footer className=" relative footer sm:footer-horizontal py-10 w-11/12 mx-auto">
           <nav>
             <h6 className=" font-semibold text-lg text-C_gray">About Us</h6>

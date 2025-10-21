@@ -47,7 +47,7 @@ const AgentDetails = () => {
 
   // const { agentOwnedProperties } = agentAndHisListedProperties || [];
 
-  console.log(isSelected);
+  // console.log(isSelected);
 
   // Destructure Details from Agent
   const {

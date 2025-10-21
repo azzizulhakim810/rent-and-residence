@@ -1,23 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 const HomeLoader = () => {
-  const globalStyle = {
-    height: "80vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-  };
-
   const draw = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: (i) => {
-      const delay = i * 0.5;
+      const delay = i * 0.3;
       return {
         pathLength: 1,
         opacity: 1,
         transition: {
-          pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
+          pathLength: { delay, type: "spring", duration: 0.8, bounce: 0.5 },
           opacity: { delay, duration: 0.01 },
         },
       };
@@ -25,14 +17,14 @@ const HomeLoader = () => {
   };
 
   return (
-    <section style={globalStyle}>
+    <section>
       <motion.svg
-        width="600"
-        height="600"
+        width="200"
+        height="200"
         viewBox="0 0 600 600"
         initial="hidden"
         animate="visible"
-        style={{ maxWidth: "80vw" }}
+        style={{ maxWidth: "20vw" }}
       >
         {/* Ground line */}
         <motion.line

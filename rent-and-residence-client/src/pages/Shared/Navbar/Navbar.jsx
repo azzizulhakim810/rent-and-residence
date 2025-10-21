@@ -614,34 +614,45 @@ const Navbar = () => {
               </div>
 
               {/* Sidebar  */}
-              <div className="drawer-side z-50">
+              <div className="drawer-side z-1000">
                 <label
                   htmlFor="cart-drawer"
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
-                  {/* Sidebar content here */}
-                  <li>
-                    {cartProperties?.map((item) => (
-                      <div
-                        key={item._id}
-                        className=" bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
-                      >
-                        <OffCanvasCart
-                          item={item}
-                          handleDeleteItem={handleDeleteItem}
-                        />
-                      </div>
-                    ))}
-                  </li>
+                {cartItems?.length == 0 ? (
+                  <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
+                    {/* Sidebar content here */}
+                    <li>
+                      <span className="text-lg flex justify-between font-Nunito font-bold px-4 pt-10">
+                        Nothing Here
+                      </span>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
+                    {/* Sidebar content here */}
+                    <li>
+                      {cartProperties?.map((item) => (
+                        <div
+                          key={item._id}
+                          className=" bg-transparent border-none hover:bg-transparent active:bg-transparent focus:outline-none no-animation active:border-none"
+                        >
+                          <OffCanvasCart
+                            item={item}
+                            handleDeleteItem={handleDeleteItem}
+                          />
+                        </div>
+                      ))}
+                    </li>
 
-                  <div className="divider"></div>
-                  <div className="text-lg flex justify-between font-Nunito font-bold px-4 py-2">
-                    <h2>Total Price :</h2>
-                    <span>{totalPrice?.toFixed(2)} €</span>
-                  </div>
-                </ul>
+                    <div className="divider"></div>
+                    <div className="text-lg flex justify-between font-Nunito font-bold px-4 py-2">
+                      <h2>Total Price :</h2>
+                      <span>{totalPrice?.toFixed(2)} €</span>
+                    </div>
+                  </ul>
+                )}
 
                 <div className="absolute bottom-0 ">
                   <Link to="/checkout">
