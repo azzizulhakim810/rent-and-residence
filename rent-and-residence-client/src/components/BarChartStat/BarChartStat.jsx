@@ -10,7 +10,7 @@ import {
 
 const BarChartStat = ({ chartData }) => {
   // const {category, }
-  console.log(chartData);
+  // console.log(chartData);
 
   /*  const dynamicData = [
     {

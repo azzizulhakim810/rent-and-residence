@@ -83,7 +83,7 @@ const PieChartStat = ({ chartData }) => {
 
   // console.log(mappedData);
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer className="z-100" width="100%" height="100%">
       <PieChart width={400} height={400}>
         <Pie
           data={mappedData}
