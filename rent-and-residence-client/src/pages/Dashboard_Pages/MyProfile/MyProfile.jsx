@@ -5,8 +5,8 @@ import { toast } from "sonner";
 
 import { RxUpdate } from "react-icons/rx";
 
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const MyProfile = () => {
   // Custom hook to load the current user from DB
@@ -188,7 +188,7 @@ const MyProfile = () => {
 
                 {/* Title/Position  */}
                 <div className="flex gap-5 w-full">
-                  <div className="flex flex-col w-1/2">
+                  <div className="flex flex-col lg:w-1/2 w-full">
                     <label className="label mb-2 text-sm font-[600]">
                       Role
                     </label>
@@ -209,8 +209,8 @@ const MyProfile = () => {
                 </h1>
 
                 {/* Name  */}
-                <div className="flex gap-5 w-full">
-                  <div className=" w-1/2">
+                <div className="flex lg:flex-row flex-col gap-5 w-full">
+                  <div className="  lg:w-1/2 w-full">
                     <label className="label mb-2 text-sm font-[600]">
                       First Name
                     </label>
@@ -223,7 +223,7 @@ const MyProfile = () => {
                     />
                   </div>
 
-                  <div className=" w-1/2">
+                  <div className=" lg:w-1/2 w-full">
                     <label className="label  mb-2 text-sm font-[600]">
                       Last Name
                     </label>
