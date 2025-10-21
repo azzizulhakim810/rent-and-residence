@@ -1,9 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 
 import { BsBoundingBoxCircles, BsEnvelope } from "react-icons/bs";
@@ -56,13 +56,12 @@ import Map from "../Shared/Map/Map";
 import PropertySidebar from "./PropertySidebar";
 
 import "@smastrom/react-rating/style.css";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
-import UseCart from "../../hooks/UseCart/UseCart";
-import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
-import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import useAddToCard from "../../hooks/useAddToCard/useAddToCard";
-import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 import HomeLoader from "../../components/HomeLoader/HomeLoader";
+import useAddToCard from "../../hooks/useAddToCard/useAddToCard";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 // Declare it outside your component so it doesn't get re-created
 const myStyles = {
@@ -1127,7 +1126,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 {/* Video  */}
                 <div
                   tabIndex={0}
-                  className="collapse collapse-plus  bg-white w-full shadow-lg p-4 my-6  rounded-md "
+                  className="collapse collapse-open  bg-white w-full shadow-lg p-4 my-6  rounded-md "
                 >
                   <input type="checkbox" />
 

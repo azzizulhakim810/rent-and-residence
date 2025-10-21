@@ -148,7 +148,7 @@ const CheckoutForm = ({ totalPrice }) => {
       )}
 
       <button
-        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-6"
+        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-8"
         type="submit"
         disabled={!stripe || !clientSecret}
       >

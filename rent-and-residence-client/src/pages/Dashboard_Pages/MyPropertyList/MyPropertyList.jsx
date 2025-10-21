@@ -63,7 +63,7 @@ const MyPropertyList = () => {
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
                   ) : (
-                    agentOwnedProperties.map((property) => (
+                    agentOwnedProperties?.map((property) => (
                       <MyPropertyTable
                         key={property._id}
                         property={property}
