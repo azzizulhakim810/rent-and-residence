@@ -289,7 +289,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
   };
 
   return (
-    <div className="bg-C_LightGray/5 pb-6">
+    <div className="bg-C_LightGray/5 pb-6 pt-25">
       <Helmet>
         <title>R & R | properties</title>
       </Helmet>

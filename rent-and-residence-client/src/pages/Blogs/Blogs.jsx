@@ -1,8 +1,10 @@
-import { FaChevronRight } from "react-icons/fa6";
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { motion } from "motion/react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import { FaChevronRight } from "react-icons/fa6";
 
 const Blogs = () => {
   return (
@@ -22,7 +24,12 @@ const Blogs = () => {
 
             {/* All Agents  */}
             {/* First Row  */}
-            <div className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex lg:flex-row flex-col justify-start w-full gap-6 py-5"
+            >
               <Link className="lg:w-1/2 w-full" to="/blogDetails">
                 <div className=" bg-white  shadow-lg rounded-lg">
                   <div className=" p-3 mb-2 w-full rounded-md bg-white">
@@ -91,7 +98,7 @@ const Blogs = () => {
                   </div>
                 </div>
               </Link>
-            </div>
+            </motion.div>
           </div>
 
           {/* Sidebar  */}

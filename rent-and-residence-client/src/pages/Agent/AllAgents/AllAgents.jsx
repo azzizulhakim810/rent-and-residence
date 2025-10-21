@@ -1,5 +1,6 @@
-// import { useLoaderData } from "react-router-dom";
+/* eslint-disable no-unused-vars */
 import { Helmet } from "react-helmet";
+import { motion } from "motion/react";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import UserCard from "../../../components/AgentCard/AgentCard";
 import { useQuery } from "@tanstack/react-query";
@@ -48,11 +49,15 @@ const AllAgents = () => {
 
             {/* All Agents  */}
 
-            <div className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-4 py-5">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="grid lg:grid-cols-2 grid-cols-1 justify-start w-full gap-4 py-5"
+            >
               {allAgents?.map((agent) => (
                 <AgentCard key={agent._id} agent={agent} />
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Sidebar  */}

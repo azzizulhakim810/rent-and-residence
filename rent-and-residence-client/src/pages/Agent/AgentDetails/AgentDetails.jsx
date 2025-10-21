@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData, useParams, NavLink } from "react-router-dom";
+import { Link, useParams, NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { BsEnvelope } from "react-icons/bs";
@@ -36,7 +36,7 @@ const AgentDetails = () => {
     queryKey: ["agentAndHisListedProperties", selectedCategory],
     queryFn: async ({ queryKey }) => {
       const [_key, { category }] = queryKey;
-      console.log(category);
+      // console.log(category);
       const result = await axiosPublic.get(
         `/api/agentAndHisListedProperties/${id}?category=${category}`
       );
@@ -45,7 +45,7 @@ const AgentDetails = () => {
     keepPreviousData: true,
   });
 
-  const { agentOwnedProperties } = agentAndHisListedProperties || [];
+  // const { agentOwnedProperties } = agentAndHisListedProperties || [];
 
   console.log(isSelected);
 
@@ -96,7 +96,7 @@ const AgentDetails = () => {
       </Helmet>
       <div className="w-10/12 mx-auto ">
         {/* Breadcrumbs */}
-        <Breadcrumb pageName={"Michaela Roja"} />
+        <Breadcrumb pageName={name} />
         {/* Rest  */}
         <div className="grid grid-cols-12 gap-10">
           <div className="lg:col-span-8 col-span-10 ">
@@ -123,7 +123,7 @@ const AgentDetails = () => {
                         }}
                       >
                         {/* Social Icons */}
-                        <div className="absolute bottom-0  -mb-10 flex flex-col gap-1 translate-x-[10%]">
+                        <div className="absolute bottom-0  -mb-10 flex flex-col gap-1 lg:translate-x-[10%]">
                           <div className="bg-white w-full z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1 px-15">
                             <a
                               href={formattedFacebookURL}
@@ -167,9 +167,9 @@ const AgentDetails = () => {
                     </div>
 
                     {/* Details  */}
-                    <span className="lg:w-1/2 w-auto flex flex-col gap-2 ps-3 pt-1 ">
+                    <span className="lg:w-1/2 w-auto flex flex-col gap-2 lg:ps-3 ps-0 lg:pt-1 pt-15 ">
                       <div className="mb-4">
-                        <h4 className="font-Nunito font-[600] text-C_gray text-[32px] leading-6 pb-2">
+                        <h4 className="font-Nunito font-[600] text-C_gray text-[32px] leading-6 pb-3">
                           {name}
                         </h4>
                         <p className=" text-paragraph_colorTwo font-Nunito_Sans font-[500] text-[20px] leading-6 capitalize">
@@ -279,22 +279,30 @@ const AgentDetails = () => {
             {/* Filter  */}
             <div className="lg:flex-row flex flex-col lg:gap-0 gap-5 bg-white lg:px-0 px-8 lg:py-0 py-10 rounded-md shadow-sm mt-6 mb-3 ">
               <button
-                onClick={() => setSelectedCategory({ category: "" })}
-                className={`btn border-none
-               text-white bg-C_purple p-8 font-Nunito font-[700]`}
+                onClick={() => {
+                  setSelectedCategory({ category: "" });
+                  setIsSelected("");
+                }}
+                className={`btn border-b-0 p-8 font-Nunito font-[700] ${
+                  isSelected == "" &&
+                  "border-b-3 border-0 border-C_purple text-C_purple"
+                }`}
               >
                 All ({categories?.length})
               </button>
 
               {categories?.map((category, i) => (
                 <button
+                  value={isSelected}
                   onClick={(e) => {
                     setSelectedCategory({ category: category });
-                    setIsSelected(e.target.value);
+                    setIsSelected(e.target.textContent);
+                    console.log(e.target.textContent);
                   }}
                   key={i}
-                  className={`btn border-none hover:text-white hover:bg-C_purple p-8 font-Nunito font-[700] bg-transparent ${
-                    isSelected === category && "bg-C_purple"
+                  className={`btn border-b-0 p-8 font-Nunito font-[700] ${
+                    isSelected == category &&
+                    "border-b-3 border-0 border-C_purple text-C_purple"
                   }`}
                 >
                   {category}
