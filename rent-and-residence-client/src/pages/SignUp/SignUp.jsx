@@ -1,22 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { LoadCanvasTemplate } from "react-simple-captcha";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
-const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
+const SignUp = ({
+  setSwitchToSignIn,
+  switchToSignIn,
+  handleValidateBtn,
+  handleCaptcha,
+  disabled,
+  setDisabled,
+  disAllowCaptcha,
+}) => {
   const { createUser, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
 
@@ -24,8 +26,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
   // const location = useLocation();
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [disabled, setDisabled] = useState(true);
-  const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
   const [showPass, setShowPass] = useState(false);
 
   // Destructure props form Hook
@@ -74,11 +74,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
             .then((res) => {
               console.log(res.data);
 
-              // if (!res.ok) {
-              //     toast.error("There is having issues to POST");
-              //     return;
-              //   }
-
               toast.success("Signed In Successfully");
               console.log(res.data);
             })
@@ -86,31 +81,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
               toast.error(error);
               console.log(error);
             });
-
-          /* fetch("http://localhost:5123/api/auth/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((res) => {
-              if (!res.ok) {
-                toast.error("There is having issues to POST");
-                return;
-              }
-              // console.log(res);
-
-              res.json();
-            })
-            .then((data) => {
-              toast.success("Signed In Successfully");
-              console.log(data);
-            })
-            .catch((error) => {
-              toast.error(error);
-              console.log(error);
-            }); */
 
           // Close the modal
           document.getElementById("signUpAndInPopUp").close();
@@ -126,33 +96,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn }) => {
       setError("root", {
         message: error,
       });
-    }
-  };
-
-  const handleValidateBtn = (e) => {
-    e.preventDefault();
-    // console.log(validateCaptcha(e.target.value));
-    setDisAllowCaptcha(false);
-  };
-
-  // Captcha Added
-  useEffect(() => {
-    loadCaptchaEnginge(5);
-  }, []);
-
-  // Captcha Validation
-  const handleCaptcha = (e) => {
-    e.preventDefault;
-    let user_captcha_value =
-      document.getElementById("user_captcha_input").value;
-    // console.log(user_captcha_value);
-
-    if (validateCaptcha(user_captcha_value) == true) {
-      setDisabled(false);
-      setDisAllowCaptcha(true);
-      document.getElementById("user_captcha_input").value = " ";
-    } else {
-      setDisabled(true);
     }
   };
 

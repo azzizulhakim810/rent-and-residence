@@ -1,29 +1,29 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LoadCanvasTemplate } from "react-simple-captcha";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
-const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
+const SignIn = ({
+  setSwitchToSignIn,
+  switchToSignIn,
+  handleValidateBtn,
+  handleCaptcha,
+  disabled,
+  setDisabled,
+  disAllowCaptcha,
+}) => {
   const { signIn } = UseAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [disabled, setDisabled] = useState(true);
-  const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
 
@@ -80,42 +80,6 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn }) => {
       setErrorMessage(error.message);
     }
   };
-  // console.log(watch("email")); // watch input value by passing the name of it
-
-  const handleValidateBtn = (e) => {
-    e.preventDefault();
-    // console.log(validateCaptcha(e.target.value));
-    setDisAllowCaptcha(false);
-  };
-
-  // Captcha Added
-  useEffect(() => {
-    loadCaptchaEnginge(5);
-  }, []);
-
-  // Captcha Validation
-  const handleCaptcha = (e) => {
-    e.preventDefault;
-    let user_captcha_value =
-      document.getElementById("user_captcha_input").value;
-    // console.log(user_captcha_value);
-
-    if (validateCaptcha(user_captcha_value) == true) {
-      setDisabled(false);
-      setDisAllowCaptcha(true);
-      document.getElementById("user_captcha_input").value = " ";
-    } else {
-      setDisabled(true);
-    }
-  };
-
-  //  Toggle Password Visibility
-
-  /*  const handleShowPass = () => {
-
-    setShowPass(!showPass);
-    
-  }; */
 
   return (
     <div className="lg:flex block items-center w-full ">

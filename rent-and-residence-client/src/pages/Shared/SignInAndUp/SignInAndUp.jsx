@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
@@ -9,7 +14,37 @@ const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
   const { user, signOutUser, setLoading, setUser } = UseAuth();
 
+  const [disabled, setDisabled] = useState(true);
+  const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
+
   const navigate = useNavigate();
+
+  const handleValidateBtn = (e) => {
+    e.preventDefault();
+    // console.log(validateCaptcha(e.target.value));
+    setDisAllowCaptcha(false);
+  };
+
+  // Captcha Added
+  useEffect(() => {
+    loadCaptchaEnginge(5);
+  }, []);
+
+  // Captcha Validation
+  const handleCaptcha = (e) => {
+    e.preventDefault;
+    let user_captcha_value =
+      document.getElementById("user_captcha_input").value;
+    // console.log(user_captcha_value);
+
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisabled(false);
+      setDisAllowCaptcha(true);
+      document.getElementById("user_captcha_input").value = " ";
+    } else {
+      setDisabled(true);
+    }
+  };
 
   const handleSignOut = () => {
     signOutUser()
@@ -60,12 +95,24 @@ const SignInAndUp = () => {
             <SignIn
               setSwitchToSignIn={setSwitchToSignIn}
               switchToSignIn={switchToSignIn}
+              handleValidateBtn={handleValidateBtn}
+              handleCaptcha={handleCaptcha}
+              disabled={disabled}
+              setDisabled={setDisabled}
+              disAllowCaptcha={disAllowCaptcha}
+              setDisAllowCaptcha={setDisAllowCaptcha}
             />
           ) : (
             // {/* Body - Sign Up  */}
             <SignUp
               setSwitchToSignIn={setSwitchToSignIn}
               switchToSignIn={switchToSignIn}
+              handleValidateBtn={handleValidateBtn}
+              handleCaptcha={handleCaptcha}
+              disabled={disabled}
+              setDisabled={setDisabled}
+              disAllowCaptcha={disAllowCaptcha}
+              setDisAllowCaptcha={setDisAllowCaptcha}
             />
           )}
         </div>

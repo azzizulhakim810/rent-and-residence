@@ -163,7 +163,7 @@ const Navbar = () => {
 
       {/* Add Listing Button  */}
       <li className="w-full">
-        <SignInAndUp />
+        {/* <SignInAndUp /> */}
         {/* <Link
           to="/addProperty"
           className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md border-0 py-5 text-[16px] my-3 mb-5 shadow-none"
@@ -441,7 +441,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      {/* <li className="hover:bg-C_purple">
         <NavLink
           to="/"
           onClick={handleSignOut}
@@ -456,7 +456,7 @@ const Navbar = () => {
             Logout
           </span>
         </NavLink>
-      </li>
+      </li> */}
     </>
   );
 
@@ -606,7 +606,7 @@ const Navbar = () => {
                   className="drawer-overlay"
                 ></label>
                 {cartItems?.length == 0 || !user ? (
-                  <ul className="menu bg-base-200 text-base-content/50 min-h-full w-90 p-3 ">
+                  <ul className="menu bg-base-200 text-base-content/50 min-h-full lg:w-90 w-70 p-3 ">
                     <li className="flex justify-center items-center">
                       <span className="text-lg flex justify-between font-Nunito font-medium my-3 pt-4 hover:bg-transparent  focus:bg-transparent text-[20px]">
                         <PiEmptyThin /> Nothing Here
@@ -614,7 +614,7 @@ const Navbar = () => {
                     </li>
                   </ul>
                 ) : (
-                  <ul className="menu bg-base-200 text-base-content min-h-full w-90 p-3 ">
+                  <ul className="menu bg-base-200 text-base-content min-h-full lg:w-90 w-70 p-3 ">
                     {/* Sidebar content here */}
                     <li>
                       {cartProperties?.map((item) => (
@@ -646,7 +646,7 @@ const Navbar = () => {
                       }}
                       disabled={!cartItems?.length ? true : false}
                       // onClick={() => handleAddToCart(property)}
-                      className="border border-transparent outline-none focus:outline-none w-[360px] flex items-center justify-center gap-2 bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none py-4 cursor-pointer transition-colors
+                      className="border border-transparent outline-none focus:outline-none lg:w-[360px] w-[280px] flex items-center justify-center gap-2 bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded-none py-4 cursor-pointer transition-colors
     disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
                     >
                       <LiaCartPlusSolid className="text-2xl" />
