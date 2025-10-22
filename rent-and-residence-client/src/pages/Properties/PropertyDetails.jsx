@@ -363,16 +363,16 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
                 <div className="lg:hidden flex">
                   <button
-                    // disabled={
-                    //   ["Admin", "Agent"].includes(currentUserFromDB?.role)
-                    //     ? true
-                    //     : false
-                    // }
+                    disabled={
+                      ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                        ? true
+                        : false
+                    }
                     onClick={() => handleAddToCart(_id)}
                     className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 cursor-pointer"
                   >
                     <LiaCartPlusSolid className="text-[24px] -mt-1" />
-                    Add to Cart
+                    Book Now
                   </button>
                 </div>
 
@@ -1453,7 +1453,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
               >
                 <LiaCartPlusSolid className="text-[24px] -mt-1" />
-                Add to Cart
+                Book Now
               </button>
             </div>
 

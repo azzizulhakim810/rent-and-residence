@@ -29,7 +29,7 @@ const SignInAndUp = () => {
     <div>
       {user ? (
         <button
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex  border-0 lg:w-full w-[250px] shadow-none"
+          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
           onClick={handleSignOut}
         >
           Sign Out
@@ -47,7 +47,7 @@ const SignInAndUp = () => {
 
       {/* Form  */}
       <dialog id="signUpAndInPopUp" className="modal">
-        <div className="modal-box p-10 bg-white w-11/12 max-w-4xl">
+        <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

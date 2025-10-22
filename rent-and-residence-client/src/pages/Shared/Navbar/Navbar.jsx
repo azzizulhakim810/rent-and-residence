@@ -19,6 +19,7 @@ import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
 import { PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
+import { PiEmptyThin } from "react-icons/pi";
 
 import { motion, useScroll, useTransform } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
@@ -458,6 +459,8 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  // Transparent Header, Scroll, Sticky & Visible
   const { scrollY } = useScroll();
 
   const bgOpacity = useTransform(
@@ -496,20 +499,12 @@ const Navbar = () => {
       style={{
         backgroundColor: bgOpacity,
         boxShadow,
-        transition: "background-color 0.8s ease, box-shadow 0.8s ease",
+        transition: "background-color 0.8s ease, box-shadow 1s ease",
       }}
       transition={{ type: "spring" }}
       className="bg-transparent absolute lg:w-[100%] w-[98%]"
     >
-      <div
-        // initial={false}
-        // style={{
-        //   backgroundColor: bgOpacity,
-        //   boxShadow,
-        //   transition: "background-color 0.8s ease, box-shadow 0.8s ease",
-        // }}
-        className="navbar py-6 lg:w-11/12 w-auto mx-auto"
-      >
+      <div className="navbar py-6 lg:w-11/12 w-auto mx-auto">
         <div className="navbar-start">
           {/* Hamburger Mobile Menu  */}
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -597,7 +592,7 @@ const Navbar = () => {
                   >
                     <LuShoppingCart className="text-[#222222] text-2xl" />
                     <span className="badge badge-sm indicator-item">
-                      {cartItems?.length}
+                      {cartItems?.length ? cartItems?.length : 0}
                     </span>
                   </motion.div>
                 </label>
@@ -610,11 +605,11 @@ const Navbar = () => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                {cartItems?.length == 0 ? (
+                {cartItems?.length == 0 || !user ? (
                   <ul className="menu bg-base-200 text-base-content/50 min-h-full w-90 p-3 ">
                     <li className="flex justify-center items-center">
                       <span className="text-lg flex justify-between font-Nunito font-medium my-3 pt-4 hover:bg-transparent  focus:bg-transparent text-[20px]">
-                        Nothing Here
+                        <PiEmptyThin /> Nothing Here
                       </span>
                     </li>
                   </ul>
