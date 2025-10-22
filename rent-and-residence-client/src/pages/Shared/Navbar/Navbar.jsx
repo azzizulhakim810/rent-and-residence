@@ -26,7 +26,6 @@ import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import { useSignInAndUp } from "../../../providers/SignInAndUpProvider";
-// import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);

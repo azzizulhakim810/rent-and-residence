@@ -37,7 +37,7 @@ const SearchResults = () => {
   console.log(sort);
 
   return (
-    <div className="bg-C_LightGray/5 pb-6 ">
+    <div className="bg-C_LightGray/5 pb-6 pt-25">
       <Helmet>
         <title>R & R | Search Results</title>
       </Helmet>

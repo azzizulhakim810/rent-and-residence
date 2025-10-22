@@ -64,7 +64,9 @@ export const router = createBrowserRouter([
         ),
 
         loader: ({ params }) =>
-          fetch(`http://localhost:5123/api/users/${params.id}`),
+          fetch(
+            `https://rent-and-residence-server.vercel.app/api/users/${params.id}`
+          ),
       },
 
       {

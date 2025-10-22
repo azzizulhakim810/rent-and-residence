@@ -35,28 +35,6 @@ const SocialLogin = () => {
           createdAt: new Date(parseFloat(metadata.createdAt)),
         };
 
-        // Save the user to Database
-        /* fetch("http://localhost:5123/api/auth/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((res) => {
-              if (!res.ok) {
-                toast.error("There is having issues to POST");
-                return;
-              }
-              // console.log(res);
-  
-              res.json();
-            })
-            .then((data) => {
-              // toast.success("Signed In Successfully");
-              console.log(data);
-            }) */
-
         axiosPublic
           .post("/api/auth/register", newUser)
           .then((res) => {
