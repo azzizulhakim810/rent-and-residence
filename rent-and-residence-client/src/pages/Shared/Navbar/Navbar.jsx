@@ -555,7 +555,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               className="lg:w-[20%] w-full hidden lg:flex -mt-5 -mb-5"
-              src="../../../../public/Logo(updated).png"
+              src="https://ik.imagekit.io/jimfantasy/Logo(updated).png"
               alt="logo"
             />
           </Link>
@@ -570,7 +570,7 @@ const Navbar = () => {
             <div className="w-[120px] flex justify-center">
               <img
                 className="w-[50%] lg:hidden "
-                src="../../../../public/Short-Logo(updated).png"
+                src="https://ik.imagekit.io/jimfantasy/Short-Logo(updated).png"
                 alt="logo"
               />
             </div>
