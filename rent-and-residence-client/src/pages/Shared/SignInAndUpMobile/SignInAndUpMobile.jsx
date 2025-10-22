@@ -6,11 +6,9 @@ import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
 
-const SignInAndUp = ({ deviceLayout }) => {
+const SignInAndUpMobile = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
   const { user, signOutUser, setLoading, setUser } = UseAuth();
-
-  const uniqueId = `${deviceLayout}_user_captcha_input`;
 
   const navigate = useNavigate();
 
@@ -48,13 +46,6 @@ const SignInAndUp = ({ deviceLayout }) => {
         </button>
       )}
 
-      <button
-        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
-        onClick={() => document.getElementById("signUpAndInPopUp").showModal()}
-      >
-        Sign In
-      </button>
-
       {/* Form  */}
       <dialog id="signUpAndInPopUp" className="modal">
         <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
@@ -70,14 +61,12 @@ const SignInAndUp = ({ deviceLayout }) => {
             <SignIn
               setSwitchToSignIn={setSwitchToSignIn}
               switchToSignIn={switchToSignIn}
-              uniqueId={uniqueId}
             />
           ) : (
             // {/* Body - Sign Up  */}
             <SignUp
               setSwitchToSignIn={setSwitchToSignIn}
               switchToSignIn={switchToSignIn}
-              uniqueId={uniqueId}
             />
           )}
         </div>
@@ -86,4 +75,4 @@ const SignInAndUp = ({ deviceLayout }) => {
   );
 };
 
-export default SignInAndUp;
+export default SignInAndUpMobile;

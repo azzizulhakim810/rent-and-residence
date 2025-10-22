@@ -1,24 +1,23 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LoadCanvasTemplate } from "react-simple-captcha";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
+import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
-const SignUp = ({
-  setSwitchToSignIn,
-  switchToSignIn,
-  handleValidateBtn,
-  handleCaptcha,
-  disabled,
-  setDisabled,
-  disAllowCaptcha,
-}) => {
+const SignUp = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
+  console.log(uniqueId);
   const { createUser, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
 
@@ -26,6 +25,8 @@ const SignUp = ({
   // const location = useLocation();
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [disAllowCaptcha, setDisAllowCaptcha] = useState(true);
   const [showPass, setShowPass] = useState(false);
 
   // Destructure props form Hook
@@ -96,6 +97,32 @@ const SignUp = ({
       setError("root", {
         message: error,
       });
+    }
+  };
+
+  const handleValidateBtn = (e) => {
+    e.preventDefault();
+    // console.log(validateCaptcha(e.target.value));
+    setDisAllowCaptcha(false);
+  };
+
+  // Captcha Added
+  useEffect(() => {
+    loadCaptchaEnginge(5);
+  }, []);
+
+  // Captcha Validation
+  const handleCaptcha = (e) => {
+    e.preventDefault;
+    let user_captcha_value = document.getElementById(uniqueId).value;
+    // console.log(user_captcha_value);
+
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisabled(false);
+      setDisAllowCaptcha(true);
+      document.getElementById(uniqueId).value = " ";
+    } else {
+      setDisabled(true);
     }
   };
 
@@ -224,7 +251,8 @@ const SignUp = ({
             <LoadCanvasTemplate />
             <input
               onChange={handleValidateBtn}
-              id="user_captcha_input"
+              id={uniqueId}
+              // id={captchaCount}
               className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
               type="text"
               placeholder="Type the captcha value"

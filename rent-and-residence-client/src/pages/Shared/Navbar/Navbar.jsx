@@ -27,6 +27,7 @@ import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import SignInAndUpMobile from "../SignInAndUpMobile/SignInAndUpMobile";
 // import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
@@ -162,8 +163,9 @@ const Navbar = () => {
       </li>
 
       {/* Add Listing Button  */}
-      <li className="w-full">
-        {/* <SignInAndUp /> */}
+      <li className="w-full lg:hidden block">
+        <SignInAndUp deviceLayout="mobile" />
+        {/* <SignInAndUpMobile /> */}
         {/* <Link
           to="/addProperty"
           className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md border-0 py-5 text-[16px] my-3 mb-5 shadow-none"
@@ -737,7 +739,7 @@ const Navbar = () => {
 
           {/* Sign In Btn - Desktop  */}
           <div className="lg:block hidden">
-            <SignInAndUp />
+            <SignInAndUp deviceLayout="desktop" />
           </div>
         </div>
       </div>
