@@ -11,6 +11,7 @@ import { router } from "./Routes/Routes";
 import AuthProvider from "./providers/AuthProvider";
 import { PopupProvider } from "./providers/PopupProvider";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import SignInAndUp from "./pages/Shared/SignInAndUp/SignInAndUp";
 
 export const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <PopupProvider>
         {/* <ScrollToTop /> */}
+        <SignInAndUp />
         <QueryClientProvider client={queryClient}>
           <Toaster richColors position="top-center" />
           <RouterProvider router={router} />

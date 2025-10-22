@@ -5,10 +5,13 @@ import { toast } from "sonner";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
+import { usePopup } from "../../../providers/PopupProvider";
 
 const SignInAndUp = ({ deviceLayout }) => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
   const { user, signOutUser, setLoading, setUser } = UseAuth();
+
+  const [isShow, setIsShow] = usePopup();
 
   const uniqueId = `${deviceLayout}_user_captcha_input`;
 
@@ -28,9 +31,8 @@ const SignInAndUp = ({ deviceLayout }) => {
       });
   };
 
-  return (
-    <div>
-      {user ? (
+  {
+    /* {user ? (
         <button
           className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
           onClick={handleSignOut}
@@ -46,43 +48,37 @@ const SignInAndUp = ({ deviceLayout }) => {
         >
           Sign In
         </button>
-      )}
+      )} */
+  }
 
-      <button
-        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
-        onClick={() => document.getElementById("signUpAndInPopUp").showModal()}
-      >
-        Sign In
-      </button>
+  return (
+    <dialog id="signUpAndInPopUp" className="modal">
+      <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
+        {/* <form method="dialog">
+         
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
+        </form> */}
 
-      {/* Form  */}
-      <dialog id="signUpAndInPopUp" className="modal">
-        <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          {switchToSignIn ? (
-            // {/* Body - Sign In  */}
+        {switchToSignIn ? (
+          // {/* Body - Sign In  */}
 
-            <SignIn
-              setSwitchToSignIn={setSwitchToSignIn}
-              switchToSignIn={switchToSignIn}
-              uniqueId={uniqueId}
-            />
-          ) : (
-            // {/* Body - Sign Up  */}
-            <SignUp
-              setSwitchToSignIn={setSwitchToSignIn}
-              switchToSignIn={switchToSignIn}
-              uniqueId={uniqueId}
-            />
-          )}
-        </div>
-      </dialog>
-    </div>
+          <SignIn
+            setSwitchToSignIn={setSwitchToSignIn}
+            switchToSignIn={switchToSignIn}
+            uniqueId={uniqueId}
+          />
+        ) : (
+          // {/* Body - Sign Up  */}
+          <SignUp
+            setSwitchToSignIn={setSwitchToSignIn}
+            switchToSignIn={switchToSignIn}
+            uniqueId={uniqueId}
+          />
+        )}
+      </div>
+    </dialog>
   );
 };
 

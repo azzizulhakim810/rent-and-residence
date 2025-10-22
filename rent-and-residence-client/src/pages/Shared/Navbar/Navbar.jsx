@@ -164,7 +164,12 @@ const Navbar = () => {
 
       {/* Add Listing Button  */}
       <li className="w-full lg:hidden block">
-        <SignInAndUp deviceLayout="mobile" />
+        {window.innerWidth >= 1024 ? (
+          <SignInAndUp deviceLayout="mobile" />
+        ) : (
+          "Nothing"
+        )}
+        {/* <SignInAndUp deviceLayout="mobile" /> */}
         {/* <SignInAndUpMobile /> */}
         {/* <Link
           to="/addProperty"
@@ -739,7 +744,12 @@ const Navbar = () => {
 
           {/* Sign In Btn - Desktop  */}
           <div className="lg:block hidden">
-            <SignInAndUp deviceLayout="desktop" />
+            {window.innerWidth > 480 ? (
+              <SignInAndUp deviceLayout="desktop" />
+            ) : (
+              "Nothing"
+            )}
+            {/* <SignInAndUp deviceLayout="desktop" /> */}
           </div>
         </div>
       </div>
