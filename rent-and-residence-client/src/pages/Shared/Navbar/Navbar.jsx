@@ -578,7 +578,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Cart + Profile + Add Housing Btn  */}
+        {/* Cart + Profile + Sign In Btn  */}
         <div className="navbar-end flex items-center content-center gap-4">
           {/* Number  */}
           <div className="lg:flex hidden">
@@ -590,7 +590,7 @@ const Navbar = () => {
           </div>
 
           {/* Cart  */}
-          <div className="flex-none cursor-pointer">
+          <div className="flex-none cursor-pointer mt-2">
             <div className="drawer drawer-end">
               <input
                 id="cart-drawer"
@@ -684,7 +684,7 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-ghost btn-circle avatar "
             >
               <div className="w-10 rounded-full">
                 <img

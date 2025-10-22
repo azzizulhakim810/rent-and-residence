@@ -11,7 +11,6 @@ import { router } from "./Routes/Routes";
 import AuthProvider from "./providers/AuthProvider";
 import { ComparisonPopupProvider } from "./providers/ComparisonPopupContext";
 import { SignInAndUpProvider } from "./providers/SignInAndUpProvider";
-import SignInAndUp from "./pages/Shared/SignInAndUp/SignInAndUp";
 
 export const queryClient = new QueryClient();
 

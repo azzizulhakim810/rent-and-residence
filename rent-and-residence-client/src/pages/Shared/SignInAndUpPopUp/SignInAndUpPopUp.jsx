@@ -4,7 +4,7 @@ import { useSignInAndUp } from "../../../providers/SignInAndUpProvider";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
 
-const SignInAndUp = () => {
+const SignInAndUpPopUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
 
   const { isPopVisible, setIsPopVisible } = useSignInAndUp();
@@ -48,4 +48,4 @@ const SignInAndUp = () => {
   );
 };
 
-export default SignInAndUp;
+export default SignInAndUpPopUp;

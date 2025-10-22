@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../pages/Shared/Footer/Footer";
 import Navbar from "../pages/Shared/Navbar/Navbar";
-import SignInAndUp from "../pages/Shared/SignInAndUp/SignInAndUp";
+import SignInAndUpPopUp from "../pages/Shared/SignInAndUpPopUp/SignInAndUpPopUp";
 
 const Main = () => {
   return (
@@ -9,7 +9,7 @@ const Main = () => {
       <div className="sticky top-0 z-1000">
         <Navbar />
       </div>
-      <SignInAndUp />
+      <SignInAndUpPopUp />
       <Outlet />
       <Footer />
     </div>

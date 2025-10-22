@@ -135,15 +135,6 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
 
         {/* <Google Button  */}
         <div className="flex justify-center w-full pt-5">
-          {/* <button
-            onClick={handleGoogleSignIn}
-            className=" flex select-none items-center gap-3 rounded-md border border-C_LightGray py-3 w-full justify-center align-middle font-Nunito_Sans text-sm font-bold uppercase text-C_DarkGray hover:text-C_purple cursor-pointer transition-all hover:opacity-75 focus:ring focus:ring-text-C_purple active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            data-ripple-dark="true"
-          >
-            <FcGoogle></FcGoogle>
-            Continue with Google
-          </button> */}
-
           <SocialLogin />
         </div>
 
@@ -245,7 +236,7 @@ const SignUp = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
           </p>
 
           {/* Captcha  */}
-          <div className="grid grid-cols-3 items-center gap-4 my-3">
+          <div className="grid lg:grid-cols-3 grid-cols-1 items-center gap-4 my-3">
             <LoadCanvasTemplate />
             <input
               onChange={handleValidateBtn}
