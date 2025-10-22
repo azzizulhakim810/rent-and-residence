@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -11,8 +12,7 @@ import { toast } from "sonner";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import useComparison from "../../hooks/useComparison/useComparison";
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
-import { usePopup } from "../../providers/PopupProvider";
-import { motion } from "motion/react";
+import { usePopup } from "../../providers/ComparisonPopupContext";
 
 const PropertyCardSingleView = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);

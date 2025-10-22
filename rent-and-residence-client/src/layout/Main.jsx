@@ -8,9 +8,8 @@ const Main = () => {
     <div className="min-h-screen bg-white ">
       <div className="sticky top-0 z-1000">
         <Navbar />
-        {/* <SignInAndUp /> */}
       </div>
-
+      <SignInAndUp />
       <Outlet />
       <Footer />
     </div>

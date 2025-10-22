@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { usePopup } from "../../providers/ComparisonPopupContext";
 import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
-import { usePopup } from "../../providers/PopupProvider";
 
 const useComparison = () => {
   const [selectedComparePropIds, setSelectedComparePropIds] = useState(

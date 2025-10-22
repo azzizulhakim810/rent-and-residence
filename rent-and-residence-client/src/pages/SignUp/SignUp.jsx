@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -9,15 +9,13 @@ import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
-  console.log(uniqueId);
+  // console.log(uniqueId);
   const { createUser, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
 

@@ -78,7 +78,7 @@ const Comparison = () => {
   };
 
   return (
-    <div className="w-10/12 mx-auto pt-4 ">
+    <div className="w-10/12 mx-auto pt-29 ">
       {/* Breadcrumbs */}
 
       <Breadcrumb pageName={"Comparison"} />

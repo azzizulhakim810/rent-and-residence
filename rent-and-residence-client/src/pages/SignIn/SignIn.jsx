@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -9,15 +9,13 @@ import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { AuthContext } from "../../providers/AuthProvider";
 import UseAuth from "../../hooks/UseAuth/UseAuth";
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignIn = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
-  console.log(uniqueId);
+  // console.log(uniqueId);
   const { signIn } = UseAuth();
 
   const navigate = useNavigate();
@@ -185,7 +183,7 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
           </p>
 
           {/* Captcha  */}
-          <div className="grid grid-cols-3 items-center gap-4 my-3">
+          <div className="grid lg:grid-cols-3 grid-cols-1 items-center gap-4 my-3">
             <LoadCanvasTemplate />
             <input
               onChange={handleValidateBtn}

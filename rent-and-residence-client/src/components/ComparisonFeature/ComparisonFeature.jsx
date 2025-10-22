@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { usePopup } from "../../providers/PopupProvider";
 import useComparison from "../../hooks/useComparison/useComparison";
+import { usePopup } from "../../providers/ComparisonPopupContext";
 
 const ComparisonFeature = () => {
   const { isShow } = usePopup();

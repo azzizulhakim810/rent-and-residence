@@ -1,22 +1,18 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { BsBoundingBoxCircles } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
-import { FaHeart, FaRegHeart, FaArrowDown } from "react-icons/fa";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { PiCodesandboxLogoDuotone } from "react-icons/pi";
-import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtub } from "react-icons/pi";
-import { VscHome } from "react-icons/vsc";
-import { Link } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
-import UseAuth from "../../hooks/UseAuth/UseAuth";
-import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
-import useComparison from "../../hooks/useComparison/useComparison";
-import { usePopup } from "../../providers/PopupProvider";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { BsBoundingBoxCircles } from "react-icons/bs";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { LiaBedSolid } from "react-icons/lia";
+import { PiBathtub, PiCodesandboxLogoDuotone } from "react-icons/pi";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import useComparison from "../../hooks/useComparison/useComparison";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+import { usePopup } from "../../providers/ComparisonPopupContext";
 
 const PropertyCard = ({ property, favourites, refetch }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);

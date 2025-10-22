@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { toast } from "sonner";
-import SignInAndUp from "../SignInAndUp/SignInAndUp";
 
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { BsBuilding, BsPerson } from "react-icons/bs";
@@ -11,15 +10,14 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { TfiLayoutListThumb } from "react-icons/tfi";
 import { VscHistory } from "react-icons/vsc";
 
-import { CiHeart, CiInboxIn, CiLogout, CiUser } from "react-icons/ci";
+import { CiHeart, CiInboxIn, CiUser } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 import { LiaCartPlusSolid } from "react-icons/lia";
 import { LuLayoutDashboard, LuShoppingCart } from "react-icons/lu";
-import { PiNewspaperLight } from "react-icons/pi";
+import { PiEmptyThin, PiNewspaperLight } from "react-icons/pi";
 import { RiContactsLine, RiMenu2Line } from "react-icons/ri";
-import { PiEmptyThin } from "react-icons/pi";
 
 import { motion, useScroll, useTransform } from "motion/react";
 import OffCanvasCart from "../../../components/OffCanvasCart/OffCanvasCart";
@@ -27,17 +25,16 @@ import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart/UseCart";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
-import SignInAndUpMobile from "../SignInAndUpMobile/SignInAndUpMobile";
+import { useSignInAndUp } from "../../../providers/SignInAndUpProvider";
 // import useRole from "../../../hooks/useRole/useRole";
 
 const Navbar = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
-
-  const { user, signOutUser, loading } = UseAuth();
-  // console.log(user.email);
+  const { user, signOutUser, loading, setLoading, setUser } = UseAuth();
   const [{ _id, profileImage, role }] = useSignedInUser();
-  // const { _id, profileImage, role } = currentUserFromDB;
-  // console.log(role);
+
+  const { setIsPopVisible } = useSignInAndUp();
+  const navigate = useNavigate();
 
   const axiosSecure = UseAxiosSecure();
 
@@ -64,14 +61,15 @@ const Navbar = () => {
       });
   };
 
-  // console.log(totalPrice);
-
   // Sign Out
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
+        toast.success("Signed Out Successfully");
         console.log("Sign Out Successfully");
-        loading(false);
+        setUser(null);
+        navigate("/", { state: { showModal: true }, replace: true });
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.message);
@@ -164,11 +162,11 @@ const Navbar = () => {
 
       {/* Add Listing Button  */}
       <li className="w-full lg:hidden block">
-        {window.innerWidth >= 1024 ? (
+        {/* {window.innerWidth >= 1024 ? (
           <SignInAndUp deviceLayout="mobile" />
         ) : (
           "Nothing"
-        )}
+        )} */}
         {/* <SignInAndUp deviceLayout="mobile" /> */}
         {/* <SignInAndUpMobile /> */}
         {/* <Link
@@ -177,6 +175,22 @@ const Navbar = () => {
         >
           Sign In
         </Link> */}
+
+        {user ? (
+          <button
+            className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none my-2"
+            onClick={() => handleSignOut()}
+          >
+            Sign Out
+          </button>
+        ) : (
+          <button
+            className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none my-2"
+            onClick={() => setIsPopVisible(true)}
+          >
+            Sign In
+          </button>
+        )}
       </li>
 
       {/* Add Nav Item  */}
@@ -663,32 +677,6 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="dropdown dropdown-end mt-2">
-              
-              <div tabIndex={0} role="button" className="">
-                <div className="indicator">
-                  <LuShoppingCart className="text-[#222222] text-2xl" />
-                  <span className="badge badge-sm indicator-item">
-                    {cart.length}
-                  </span>
-                </div>
-              </div>
-              
-              <div
-                tabIndex={0}
-                className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-42 shadow-2xl"
-              >
-                <div className="card-body">
-                  <span className="text-lg font-bold">8 Items</span>
-                  <span className="text-info">Subtotal: $999</span>
-                  <div className="card-actions">
-                    <button className="btn bg-C_purple text-white">
-                      View cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {/* Profile  */}
@@ -734,22 +722,23 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Btn - Desktop  */}
-          {/* <Link
-            to="/addProperty"
-            className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md hidden lg:flex"
-          >
-            Add Housing
-          </Link> */}
-
           {/* Sign In Btn - Desktop  */}
           <div className="lg:block hidden">
-            {window.innerWidth > 480 ? (
-              <SignInAndUp deviceLayout="desktop" />
+            {user ? (
+              <button
+                className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
+                onClick={() => handleSignOut()}
+              >
+                Sign Out
+              </button>
             ) : (
-              "Nothing"
+              <button
+                className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
+                onClick={() => setIsPopVisible(true)}
+              >
+                Sign In
+              </button>
             )}
-            {/* <SignInAndUp deviceLayout="desktop" /> */}
           </div>
         </div>
       </div>

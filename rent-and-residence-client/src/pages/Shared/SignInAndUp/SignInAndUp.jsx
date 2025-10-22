@@ -1,69 +1,35 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
-import UseAuth from "../../../hooks/UseAuth/UseAuth";
+import { useSignInAndUp } from "../../../providers/SignInAndUpProvider";
 import SignIn from "../../SignIn/SignIn";
 import SignUp from "../../SignUp/SignUp";
-import { usePopup } from "../../../providers/PopupProvider";
 
-const SignInAndUp = ({ deviceLayout }) => {
+const SignInAndUp = () => {
   const [switchToSignIn, setSwitchToSignIn] = useState(true);
-  const { user, signOutUser, setLoading, setUser } = UseAuth();
 
-  const [isShow, setIsShow] = usePopup();
+  const { isPopVisible, setIsPopVisible } = useSignInAndUp();
 
-  const uniqueId = `${deviceLayout}_user_captcha_input`;
+  const uniqueId = `global_user_captcha_input`;
 
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    signOutUser()
-      .then(() => {
-        toast.success("Signed Out Successfully");
-        console.log("Sign Out Successfully");
-        setUser(null);
-        navigate("/", { state: { showModal: true }, replace: true });
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  {
-    /* {user ? (
-        <button
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
-          onClick={handleSignOut}
-        >
-          Sign Out
-        </button>
-      ) : (
-        <button
-          className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md flex border-0 lg:w-full w-[250px] shadow-none"
-          onClick={() =>
-            document.getElementById("signUpAndInPopUp").showModal()
-          }
-        >
-          Sign In
-        </button>
-      )} */
-  }
+  useEffect(() => {
+    const modal = document.getElementById("signUpAndInPopUp");
+    if (!modal) return;
+    if (isPopVisible) modal.showModal();
+    else modal.close();
+  }, [isPopVisible]);
 
   return (
     <dialog id="signUpAndInPopUp" className="modal">
       <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
-        {/* <form method="dialog">
-         
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
-        </form> */}
+        <button
+          className="btn btn-sm btn-circle btn-ghost absolute text-xl right-3 top-3 font-medium"
+          onClick={() => setIsPopVisible(false)}
+        >
+          X
+        </button>
 
         {switchToSignIn ? (
           // {/* Body - Sign In  */}
-
           <SignIn
             setSwitchToSignIn={setSwitchToSignIn}
             switchToSignIn={switchToSignIn}
