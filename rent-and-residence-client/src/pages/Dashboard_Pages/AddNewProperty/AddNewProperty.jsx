@@ -25,6 +25,8 @@ const AddNewProperty = () => {
   const [imageSize, setImageSize] = useState(null);
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -38,8 +40,6 @@ const AddNewProperty = () => {
     return () => picker.destroy();
   }, []);
 
-  // console.log(myDatepickerYearBuilt?.current?.value);
-
   const myDatepickerAvailableFrom = useRef(null);
   useEffect(() => {
     const picker = new Pikaday({
@@ -47,8 +47,6 @@ const AddNewProperty = () => {
     });
     return () => picker.destroy();
   }, []);
-
-  // console.log(myDatepickerAvailableFrom?.current?.value);
 
   const { _id } = currentUserFromDB;
 
@@ -214,6 +212,7 @@ const AddNewProperty = () => {
     setPreviews(updatedPreviews);
   };
 
+  console.log(title);
   const handleGenerateDescription = async () => {
     // if (!data.title) return;
   };
@@ -260,6 +259,7 @@ const AddNewProperty = () => {
                     *Title (mandatory)
                   </label>
                   <input
+                    onChange={(e) => setTitle(e.target.value)}
                     className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                     {...register("title", {
                       required: "This is required",
