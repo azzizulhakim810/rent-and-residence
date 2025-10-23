@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { WiStars } from "react-icons/wi";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -225,6 +226,10 @@ const AddNewProperty = () => {
     setPreviews(updatedPreviews);
   };
 
+  const handleGenerateAiContent = () => {
+    console.log("hello");
+  };
+
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -292,10 +297,12 @@ const AddNewProperty = () => {
                       })}
                     ></textarea>
                     <button
-                      // type="button"
-                      className="btn w-[100px] absolute top-0 right-0 "
+                      onClick={handleGenerateAiContent}
+                      type="button"
+                      className="w-auto flex items-center gap-1 px-4 py-2 bg-C_purple hover:bg-[#40384B] text-white font-[500] absolute top-0 right-0 rounded-bl-xl cursor-pointer transition-all duration-250"
                     >
-                      Generate with AI
+                      Generate with AI{" "}
+                      <WiStars className="text-[30px] -my-[4px]" />
                     </button>
                     {errors.description && (
                       <span className="w-1/2 text-red-500">
