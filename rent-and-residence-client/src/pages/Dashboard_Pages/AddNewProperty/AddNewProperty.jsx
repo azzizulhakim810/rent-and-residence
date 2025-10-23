@@ -8,8 +8,8 @@ import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const AddNewProperty = () => {
   // Custom hook to load the current user from DB
@@ -274,27 +274,35 @@ const AddNewProperty = () => {
                     *Description
                   </label>
 
-                  <textarea
-                    className="textarea  w-full h-40 text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                    {...register("description", {
-                      required: "This is required",
-                      maxLength: {
-                        value: 500,
-                        message:
-                          "Description should be less than 500 Characters",
-                      },
-                      minLength: {
-                        value: 50,
-                        message:
-                          "Description should be more than 50 Characters",
-                      },
-                    })}
-                  ></textarea>
-                  {errors.description && (
-                    <span className="w-1/2 text-red-500">
-                      {errors.description.message}
-                    </span>
-                  )}
+                  <div className="relative ">
+                    <textarea
+                      className="textarea field-sizing-content w-full min-h-40 text-C_LightGray/40 focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                      {...register("description", {
+                        required: "This is required",
+                        maxLength: {
+                          value: 500,
+                          message:
+                            "Description should be less than 500 Characters",
+                        },
+                        minLength: {
+                          value: 50,
+                          message:
+                            "Description should be more than 50 Characters",
+                        },
+                      })}
+                    ></textarea>
+                    <button
+                      // type="button"
+                      className="btn w-[100px] absolute top-0 right-0 "
+                    >
+                      Generate with AI
+                    </button>
+                    {errors.description && (
+                      <span className="w-1/2 text-red-500">
+                        {errors.description.message}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* ///////////////////////////////////// */}

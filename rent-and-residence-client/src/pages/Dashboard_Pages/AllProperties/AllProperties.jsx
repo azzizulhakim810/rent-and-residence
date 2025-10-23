@@ -22,8 +22,6 @@ const AllProperties = () => {
 
   const { allProperties = [] } = allPropertiesInfo || {};
 
-  // console.log(allProperties);
-
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -31,16 +29,11 @@ const AllProperties = () => {
         Dashboard – All Properties
       </h1>
 
-      <div className="grid  grid-cols-12 gap-6 pt-10">
-        <div className="lg:col-span-12 col-span-12 lg:order-1 order-2 flex flex-col gap-10">
-          {/*Contact Information  */}
-          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
-            {/*  <div className="font-Nunito_Sans text-C_LightGray w-full">
-              <PropertyCard property={agentOwnedProperty} />
-            </div> */}
-
+      <div className="grid  grid-cols-12 lg:gap-6 gap-3 pt-10">
+        <div className="lg:col-span-12 col-span-12 lg:order-1 order-2 flex flex-col lg:gap-10 gap-5">
+          <div className="shadow-[0px_4px_20px_rgba(0,0,0,0.1)] lg:p-8 p-4 w-full rounded-xl bg-white">
             {/* Property Table  */}
-            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
+            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start lg:w-full min-w-full gap-6 py-0 overflow-x-auto">
               <table className="table">
                 {/* head */}
                 <thead className="bg-C_purple rounded-5xl ">

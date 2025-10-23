@@ -175,7 +175,7 @@ const MyProfile = () => {
       <div className="grid  grid-cols-12 gap-6 pt-10">
         <div className="lg:col-span-8 col-span-12 lg:order-1 order-2 flex flex-col gap-10">
           {/*Contact Information  */}
-          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_4px_20px_rgba(0,0,0,0.1)] lg:p-8 p-4 w-full rounded-xl bg-white">
             <div className="font-Nunito_Sans text-C_LightGray w-full">
               <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -503,7 +503,7 @@ const MyProfile = () => {
         {/* Second Column */}
         <div className="lg:col-span-4 col-span-12 lg:order-2 order-1">
           {/* Photo */}
-          <div className="shadow-[0px_0px_20px_rgba(0,0,0,0.06)] p-8 w-full rounded-xl bg-white">
+          <div className="shadow-[0px_4px_20px_rgba(0,0,0,0.1)] lg:p-8 p-4 w-full rounded-xl bg-white">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-4">
               Photo
             </h1>

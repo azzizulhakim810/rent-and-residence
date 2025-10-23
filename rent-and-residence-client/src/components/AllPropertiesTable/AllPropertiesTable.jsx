@@ -20,8 +20,6 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     ownerId,
   } = property || {};
 
-  // console.log(approval);
-
   const { isPending, data: ownerInfo } = useQuery({
     queryKey: ["ownerInfo", ownerId],
     queryFn: async () => {
@@ -44,6 +42,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     axiosSecure
       .patch(`/api/property/approvalUpdate/${id}`, { approval: approvalStatus })
       .then((res) => {
+        console.log(res.data);
         toast.success(`This property is now ${approvalStatus}`);
         refetch();
       })

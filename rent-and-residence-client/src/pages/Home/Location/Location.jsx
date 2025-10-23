@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
+import { NavLink } from "react-router-dom";
+import { motion, useScroll } from "motion/react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCategoriesAndCities from "../../../hooks/useCategoriesAndCities/useCategoriesAndCities";
-import { motion, useScroll } from "motion/react";
 
 const Location = () => {
   const [categoriesAndCities, isPending] = useCategoriesAndCities();
@@ -49,6 +50,9 @@ const Location = () => {
                   key={i}
                   className="col-span-4 w-full shadow-md"
                 >
+                  {/* <NavLink
+                    to={`/search?city=${filters.city}&bedroom=0&room=0`}
+                  > */}
                   <figure
                     style={{
                       backgroundImage: `url(${
@@ -71,6 +75,7 @@ const Location = () => {
                       </h1>
                     </div>
                   </figure>
+                  {/* </NavLink> */}
                 </motion.div>
               );
             })

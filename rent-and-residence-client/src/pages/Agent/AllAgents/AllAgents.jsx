@@ -21,8 +21,6 @@ const AllAgents = () => {
     },
   });
 
-  // console.log(allAgents);
-
   return (
     <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>
