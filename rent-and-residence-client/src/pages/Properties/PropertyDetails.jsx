@@ -361,19 +361,28 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   </span>
                 </div>
 
-                <div className="lg:hidden flex">
-                  <button
-                    disabled={
-                      ["Admin", "Agent"].includes(currentUserFromDB?.role)
-                        ? true
-                        : false
-                    }
-                    onClick={() => handleAddToCart(_id)}
-                    className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 cursor-pointer"
+                <div className="relative pb-10 lg:hidden flex custom-tooltip">
+                  <div
+                    data-tip={`${
+                      currentUserFromDB?.role !== "User"
+                        ? "Admin/Agent can't book properties"
+                        : ""
+                    }`}
+                    className="tooltip absolute left-0"
                   >
-                    <LiaCartPlusSolid className="text-[24px] -mt-1" />
-                    Book Now
-                  </button>
+                    <button
+                      disabled={
+                        ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                          ? true
+                          : false
+                      }
+                      onClick={() => handleAddToCart(_id)}
+                      className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 cursor-pointer"
+                    >
+                      <LiaCartPlusSolid className="text-[24px] -mt-1" />
+                      Book Now
+                    </button>
+                  </div>
                 </div>
 
                 {/* Overview  */}
@@ -1441,8 +1450,15 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
           </div>
 
           {/* Sidebar  */}
-          <div className="lg:col-span-4 col-span-10 ">
-            <div className="lg:flex hidden justify-end -mt-[30px] ">
+          <div className="lg:col-span-4 col-span-10 relative">
+            <div
+              data-tip={`${
+                currentUserFromDB?.role !== "User"
+                  ? "Admin/Agent can't book properties"
+                  : ""
+              }`}
+              className="lg:flex hidden justify-end -mt-[35px] tooltip absolute right-0"
+            >
               <button
                 disabled={
                   ["Admin", "Agent"].includes(currentUserFromDB?.role)
@@ -1450,7 +1466,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                     : false
                 }
                 onClick={() => handleAddToCart(_id)}
-                className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer"
+                className="btn flex items-center gap-2  bg-C_purple text-white hover:bg-[#40384B] font-Nunito_Sans font-[700] shadow-sm text-[15px] rounded px-5 py-2 cursor-pointer "
               >
                 <LiaCartPlusSolid className="text-[24px] -mt-1" />
                 Book Now

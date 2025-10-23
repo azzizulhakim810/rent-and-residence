@@ -188,7 +188,6 @@ const SignIn = ({ setSwitchToSignIn, switchToSignIn, uniqueId }) => {
             <input
               onChange={handleValidateBtn}
               id={uniqueId}
-              // id={captchaCount}
               className="border-1 p-2 rounded border-gray-300 outline-0 font-Nunito_Sans"
               type="text"
               placeholder="Type the captcha value"

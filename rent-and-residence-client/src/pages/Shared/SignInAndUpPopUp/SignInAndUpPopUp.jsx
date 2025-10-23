@@ -23,7 +23,10 @@ const SignInAndUpPopUp = () => {
       <div className="modal-box lg:p-0 bg-white w-11/12 max-w-4xl">
         <button
           className="btn btn-sm btn-circle btn-ghost absolute text-xl right-3 top-3 font-medium"
-          onClick={() => setIsPopVisible(false)}
+          onClick={() => {
+            setIsPopVisible(false);
+            document.getElementById("signUpAndInPopUp").close();
+          }}
         >
           X
         </button>
