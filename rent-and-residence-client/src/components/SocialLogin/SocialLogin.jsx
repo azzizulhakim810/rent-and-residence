@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -38,7 +37,8 @@ const SocialLogin = () => {
         axiosPublic
           .post("/api/auth/register", newUser)
           .then((res) => {
-            if (res.statusText !== "OK") {
+            console.log(res);
+            if (res.status !== 200) {
               toast.error("There is having issues to POST");
               return;
             }

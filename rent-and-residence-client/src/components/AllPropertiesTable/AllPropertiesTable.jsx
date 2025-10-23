@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 const AllPropertiesTable = ({ property, refetch, idx }) => {
-  // const [owner, setOwner] = useState();
   const axiosSecure = UseAxiosSecure();
 
   // Destructure Details from Property
@@ -23,11 +22,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
 
   // console.log(approval);
 
-  const {
-    isPending,
-
-    data: ownerInfo,
-  } = useQuery({
+  const { isPending, data: ownerInfo } = useQuery({
     queryKey: ["ownerInfo", ownerId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/api/users/${ownerId}`);
@@ -49,7 +44,6 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     axiosSecure
       .patch(`/api/property/approvalUpdate/${id}`, { approval: approvalStatus })
       .then((res) => {
-        console.log(res.data);
         toast.success(`This property is now ${approvalStatus}`);
         refetch();
       })
@@ -87,7 +81,7 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     });
   };
 
-  console.log(property);
+  // console.log(property);
   return (
     <tr className="font-Nunito_Sans text-C_LightGray">
       <td className="text-center">{idx + 1}</td>

@@ -1,16 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-// import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+
 import AllPropertiesTable from "../../../components/AllPropertiesTable/AllPropertiesTable";
 
 const AllProperties = () => {
-  // const [currentUserFromDB] = useSignedInUser();
-  // const { user, loading } = AuthContext(AuthProvider);
-  // const { _id } = currentUserFromDB;
-  // const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
   const axiosSecure = UseAxiosSecure();
 
   const {
