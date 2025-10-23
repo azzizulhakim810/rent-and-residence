@@ -214,8 +214,8 @@ const AddNewProperty = () => {
     setPreviews(updatedPreviews);
   };
 
-  const handleGenerateAiContent = () => {
-    console.log("hello");
+  const handleGenerateDescription = async () => {
+    // if (!data.title) return;
   };
 
   useEffect(() => {
@@ -285,7 +285,7 @@ const AddNewProperty = () => {
                     ></div>
 
                     <button
-                      onClick={handleGenerateAiContent}
+                      onClick={handleGenerateDescription}
                       type="button"
                       className="w-auto flex items-center gap-1 px-4 py-2 bg-C_purple hover:bg-[#40384B] text-white font-[500] absolute -bottom-[41px] right-0 rounded-tl-xl cursor-pointer transition-all duration-250"
                     >

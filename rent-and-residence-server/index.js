@@ -18,6 +18,7 @@ import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 import fs from "fs";
 import multer from "multer";
 import ImageKit from "imagekit";
+import main from "./configs/gemini.js";
 
 const app = express();
 
@@ -1111,6 +1112,8 @@ async function run() {
       res.send(result);
     });
 
+    // Rest of the Api Calls ///////////////////////
+
     // Stripe
     app.post("/api/create-payment-intent", async (req, res) => {
       const { price } = req.body;
@@ -1224,6 +1227,16 @@ async function run() {
       res.send(result);
 
       // console.log(result);
+    });
+
+    // Generate Descriptions
+    app.post("/api/generateDescription", async (req, res) => {
+      const { prompt } = req.body;
+      const content =
+        await main(`You are a professional real estate copywriter. Write a 150–300 word engaging property description for the title:
+"${prompt}". Highlight its surroundings, natural features, and ideal buyer appeal. Tone: descriptive, warm, and persuasive. End with a short call-to-action.`);
+
+      res.send(content);
     });
   } finally {
     // Ensures that the client will close when you finish/error
