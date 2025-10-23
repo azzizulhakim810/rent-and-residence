@@ -5,6 +5,8 @@ import { createRoot } from "react-dom/client";
 import { Toaster } from "sonner";
 
 import "./index.css";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
 
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes/Routes";

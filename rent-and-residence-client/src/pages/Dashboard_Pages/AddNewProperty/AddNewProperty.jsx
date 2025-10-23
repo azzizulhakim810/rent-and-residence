@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Quill from "quill";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
@@ -17,6 +18,9 @@ const AddNewProperty = () => {
   const [currentUserFromDB] = useSignedInUser();
 
   const axiosSecure = UseAxiosSecure();
+
+  const editorRef = useRef(null);
+  const quillRef = useRef(null);
 
   // const [uploadedPropImages, setUploadedPropImages] = useState([]);
   const [imageSize, setImageSize] = useState(null);
@@ -230,6 +234,17 @@ const AddNewProperty = () => {
     console.log("hello");
   };
 
+  useEffect(() => {
+    //Initialize Quill only once
+    if (!quillRef.current && editorRef.current) {
+      const options = {
+        placeholder: "Write the description",
+        theme: "snow",
+      };
+      quillRef.current = new Quill(editorRef.current, options);
+    }
+  }, []);
+
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -280,6 +295,7 @@ const AddNewProperty = () => {
                   </label>
 
                   <div className="relative ">
+                    <div ref={editorRef}></div>
                     <textarea
                       className="textarea field-sizing-content w-full min-h-40 text-C_LightGray/40 focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                       {...register("description", {
