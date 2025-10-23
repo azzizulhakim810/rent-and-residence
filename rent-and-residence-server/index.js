@@ -1,16 +1,29 @@
-const express = require("express");
+// const express = require("express");
+
+// const cors = require("cors");
+// const jwt = require("jsonwebtoken");
+// require("dotenv").config();
+// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// const { MongoClient, ServerApiVersion } = require("mongodb");
+// const { ObjectId } = require("mongodb");
+// const { fs } = require("fs");
+// const multer = require("multer");
+// const imagekit = require("./configs/imageKit");
+import express from "express";
+import cors from "cors";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+import Stripe from "stripe";
+import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
+import fs from "fs";
+import multer from "multer";
+import ImageKit from "imagekit";
+
 const app = express();
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const { ObjectId } = require("mongodb");
-const { fs } = require("fs");
-const multer = require("multer");
-const imagekit = require("./configs/imageKit");
 
 const port = process.env.PORT || 5000;
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Middlewares
 app.use(
@@ -41,12 +54,12 @@ const upload = multer({ storage });
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    // await client.connect();
+    await client.connect();
     // Send a ping to confirm a successful connection
-    // await client.db("admin").command({ ping: 1 });
-    // console.log(
-    //   "Pinged your deployment. You successfully connected to MongoDB!"
-    // );
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
 
     // Property Related Api's
     const propertyCollection = client
@@ -126,15 +139,13 @@ async function run() {
     // Verify Admin whether he is Admin or not. If not then don't let him Admin controlled info
     const verifyAgent = async (req, res, next) => {
       const email = req.decoded.email;
-      // console.log("Verify Agent Email", email);
 
       const query = { email: email };
       const user = await userCollection.findOne(query);
-      // console.log(user);
 
-      const isAdmin = user?.role === "Agent";
+      const isAgent = user?.role === "Agent";
 
-      if (!isAdmin) {
+      if (!isAgent) {
         return res.status(403).send({ message: "forbidden access" });
       }
       // console.log("Verify Agent Email", email);
@@ -1023,11 +1034,23 @@ async function run() {
           const imgUpload = await imagekit.upload({
             file: file?.buffer,
             fileName: `user-${Date.now()}`,
+            folder: "/properties",
           });
           console.log(imgUpload.url);
 
+          // Optimization through imagekit URL Transformation
+          const optimizedImageUrl = imagekit.url({
+            path: imgUpload.url,
+            transformation: [
+              { quality: "auto" },
+              { format: "webp" },
+              { width: "1280" },
+            ],
+          });
+
           // Push the url inside updateProfile object
-          updateProfile.profileImage = imgUpload.url;
+          // updateProfile.profileImage = imgUpload.url;
+          updateProfile.profileImage = optimizedImageUrl;
         } else {
           console.log("Doesn't get the file");
         }

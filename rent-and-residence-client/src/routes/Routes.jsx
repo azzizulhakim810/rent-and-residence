@@ -63,10 +63,12 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
 
+        // loader: ({ params }) =>
+        //   fetch(
+        //     `https://rent-and-residence-server.vercel.app/api/users/${params.id}`
+        //   ),
         loader: ({ params }) =>
-          fetch(
-            `https://rent-and-residence-server.vercel.app/api/users/${params.id}`
-          ),
+          fetch(`http://localhost:5123/api/users/${params.id}`),
       },
 
       {

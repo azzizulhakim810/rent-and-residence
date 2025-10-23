@@ -1,9 +1,8 @@
 import Pikaday from "pikaday";
+import Quill from "quill";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import Quill from "quill";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
@@ -140,33 +139,18 @@ const AddNewProperty = () => {
       console.log(pair[0], pair[1]);  */
 
     console.log(Object.fromEntries(formData.entries()));
+    console.log(editorRef.current.value);
 
-    axiosSecure
-      .post(`/api/properties/${_id}`, formData)
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data.insertedId) {
-          reset();
-          toast.success("Profile Updated Successfully");
-          navigate("/properties");
-        }
-      })
-      .catch((error) => console.log("Error in fetching", error));
-
-    /* fetch(`http://localhost:5123/api/properties/${_id}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res)
-      .then((data) => {
-        // console.log(data);
-        if (data.ok) {
-          reset();
-          toast.success("Profile Updated Successfully");
-          navigate("/properties");
-        }
-      })
-      .catch((error) => console.log("Error in fetching", error)); */
+    // axiosSecure
+    //   .post(`/api/properties/${_id}`, formData)
+    //   .then((res) => {
+    //     if (res.data.insertedId) {
+    //       reset();
+    //       toast.success("Profile Updated Successfully");
+    //       navigate("/properties");
+    //     }
+    //   })
+    //   .catch((error) => console.log("Error in fetching", error));
   };
 
   const getImgsData = (e) => {
@@ -294,10 +278,23 @@ const AddNewProperty = () => {
                     *Description
                   </label>
 
-                  <div className="relative ">
-                    <div ref={editorRef}></div>
-                    <textarea
-                      className="textarea field-sizing-content w-full min-h-40 text-C_LightGray/40 focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                  <div className="relative rounded-t-md h-[128px] mb-[50px]">
+                    <div
+                      ref={editorRef}
+                      className="text-[14px] text-C_LightGray/20   focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-b-md border-none focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 "
+                    ></div>
+
+                    <button
+                      onClick={handleGenerateAiContent}
+                      type="button"
+                      className="w-auto flex items-center gap-1 px-4 py-2 bg-C_purple hover:bg-[#40384B] text-white font-[500] absolute -bottom-[41px] right-0 rounded-tl-xl cursor-pointer transition-all duration-250"
+                    >
+                      Generate with AI{" "}
+                      <WiStars className="text-[30px] -my-[4px]" />
+                    </button>
+
+                    {/* <textarea
+                      className="textarea field-sizing-content w-full min-h-40 text-C_LightGray/40 focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2 mt-5"
                       {...register("description", {
                         required: "This is required",
                         maxLength: {
@@ -311,15 +308,7 @@ const AddNewProperty = () => {
                             "Description should be more than 50 Characters",
                         },
                       })}
-                    ></textarea>
-                    <button
-                      onClick={handleGenerateAiContent}
-                      type="button"
-                      className="w-auto flex items-center gap-1 px-4 py-2 bg-C_purple hover:bg-[#40384B] text-white font-[500] absolute top-0 right-0 rounded-bl-xl cursor-pointer transition-all duration-250"
-                    >
-                      Generate with AI{" "}
-                      <WiStars className="text-[30px] -my-[4px]" />
-                    </button>
+                    ></textarea> */}
                     {errors.description && (
                       <span className="w-1/2 text-red-500">
                         {errors.description.message}
