@@ -41,7 +41,7 @@ const MyPropertyList = () => {
             </div> */}
 
             {/* Property Table  */}
-            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
+            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start lg:w-full min-w-full gap-6 py-0 overflow-x-auto">
               <table className="table">
                 {/* head */}
                 <thead className="bg-C_purple rounded-5xl ">

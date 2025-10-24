@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { parse } from "marked";
 import Pikaday from "pikaday";
 import Quill from "quill";

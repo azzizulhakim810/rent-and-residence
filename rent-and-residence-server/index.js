@@ -463,16 +463,16 @@ async function run() {
       });
     });
 
-    // Get each Agent Owned Property  - No need
-    // app.get("/api/agentOwnedProperty/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   console.log(id);
+    // Get each Agent Owned Property
+    app.get("/api/agentOwnedProperty/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
 
-    //   const query = { ownerId: id };
-    //   const result = await propertyCollection.find(query).toArray();
+      const query = { ownerId: id };
+      const result = await propertyCollection.find(query).toArray();
 
-    //   res.send(result);
-    // });
+      res.send(result);
+    });
 
     // Get all the blogs
     app.get("/api/blogs", async (req, res) => {
