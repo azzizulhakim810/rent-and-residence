@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
+import { motion } from "motion/react";
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { WiStars } from "react-icons/wi";
-import { motion } from "motion/react";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -76,7 +76,7 @@ const AddNewProperty = () => {
     files.forEach((file) => formData.append("images", file));
 
     formData.append("title", data.title);
-    formData.append("description", data.description);
+    formData.append("description", quillRef.current.root.innerHTML);
     formData.append("price", parseInt(data.price));
     formData.append("propertyStatus", data.propertyStatus);
     formData.append("listedIn", data.listedIn);
@@ -209,6 +209,7 @@ const AddNewProperty = () => {
     setPreviews(updatedPreviews);
   };
 
+  // Generate AI Description
   const handleGenerateDescription = async () => {
     if (!title) return toast.error("Please enter a title");
 
@@ -228,6 +229,7 @@ const AddNewProperty = () => {
       setLoading(false);
     }
   };
+
   //Initialize Quill only once
   useEffect(() => {
     if (!quillRef.current && editorRef.current) {
@@ -291,7 +293,7 @@ const AddNewProperty = () => {
                     *Description
                   </label>
 
-                  <div className="relative rounded-t-md h-[220px] mb-[50px]">
+                  <div className="relative rounded-t-md lg:h-[220px] h-[300px] mb-[50px]">
                     <div
                       ref={editorRef}
                       className="text-[14px] text-C_LightGray/70   focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-b-md border-none focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 "
@@ -317,7 +319,7 @@ const AddNewProperty = () => {
                       onClick={handleGenerateDescription}
                       disabled={loading}
                       type="button"
-                      className={`w-auto flex items-center gap-1 px-4 py-2 text-white font-[500] absolute -bottom-[41px] right-0 rounded-tl-xl transition-all duration-250 ${
+                      className={`w-auto flex items-center gap-1 px-4 py-2 text-white font-[500] absolute lg:-bottom-[41px] -bottom-[63px] right-0 rounded-tl-xl transition-all duration-250 ${
                         loading
                           ? "bg-[#40384B] hover:bg-[#40384B] cursor-not-allowed "
                           : "bg-C_purple hover:bg-[#40384B] cursor-pointer"
