@@ -1,13 +1,16 @@
+import { parse } from "marked";
 import Pikaday from "pikaday";
 import Quill from "quill";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 import { BsHouseAdd } from "react-icons/bs";
 import { IoIosCloudUpload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { WiStars } from "react-icons/wi";
+import { motion } from "motion/react";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -25,7 +28,7 @@ const AddNewProperty = () => {
   const [imageSize, setImageSize] = useState(null);
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
-  const [title, setTitle] = useState("");
+  // const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef(null);
@@ -53,18 +56,12 @@ const AddNewProperty = () => {
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  // files.map((f) => console.log(f));
-
-  // const chooseFiles2 = document.getElementById("choose-files");
-
-  // const files2 = chooseFiles2.files;
-  // const fileArray2 = Array.from(files2);
-  // console.log(fileArray2);
+  const title = watch("title");
 
   // Form Data
   const onSubmit = (data) => {
@@ -212,16 +209,30 @@ const AddNewProperty = () => {
     setPreviews(updatedPreviews);
   };
 
-  console.log(title);
   const handleGenerateDescription = async () => {
-    // if (!data.title) return;
-  };
+    if (!title) return toast.error("Please enter a title");
 
+    try {
+      setLoading(true);
+      const res = await axiosSecure.post("/api/generateDescription", {
+        prompt: title,
+      });
+      if (res.status === 200) {
+        quillRef.current.root.innerHTML = parse(res.data);
+      } else {
+        toast.error("Can't fetch properly");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  //Initialize Quill only once
   useEffect(() => {
-    //Initialize Quill only once
     if (!quillRef.current && editorRef.current) {
       const options = {
-        placeholder: "Write the description",
+        placeholder: "Write or Generate the description",
         theme: "snow",
       };
       quillRef.current = new Quill(editorRef.current, options);
@@ -259,7 +270,9 @@ const AddNewProperty = () => {
                     *Title (mandatory)
                   </label>
                   <input
-                    onChange={(e) => setTitle(e.target.value)}
+                    // type="text"
+                    // onChange={(e) => setTitle(e.target.value)}
+                    // value={title}
                     className="input w-full text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-7 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
                     {...register("title", {
                       required: "This is required",
@@ -278,16 +291,37 @@ const AddNewProperty = () => {
                     *Description
                   </label>
 
-                  <div className="relative rounded-t-md h-[128px] mb-[50px]">
+                  <div className="relative rounded-t-md h-[220px] mb-[50px]">
                     <div
                       ref={editorRef}
-                      className="text-[14px] text-C_LightGray/20   focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-b-md border-none focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 "
+                      className="text-[14px] text-C_LightGray/70   focus:text-C_LightGray/80 border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-b-md border-none focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 "
                     ></div>
+
+                    {loading && (
+                      <motion.div
+                        initial={{ opacity: 0.4 }}
+                        animate={{ opacity: [1] }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          ease: "easeInOut",
+                        }}
+                        className="absolute left-0 top-0 right-0 -bottom-[41px] rounded-b-md flex items-center justify-center bg-C_DarkGray/35 "
+                      >
+                        <div className="w-8 h-8 rounded-full border-2 border-t-white animate-spin"></div>
+                      </motion.div>
+                    )}
 
                     <button
                       onClick={handleGenerateDescription}
+                      disabled={loading}
                       type="button"
-                      className="w-auto flex items-center gap-1 px-4 py-2 bg-C_purple hover:bg-[#40384B] text-white font-[500] absolute -bottom-[41px] right-0 rounded-tl-xl cursor-pointer transition-all duration-250"
+                      className={`w-auto flex items-center gap-1 px-4 py-2 text-white font-[500] absolute -bottom-[41px] right-0 rounded-tl-xl transition-all duration-250 ${
+                        loading
+                          ? "bg-[#40384B] hover:bg-[#40384B] cursor-not-allowed "
+                          : "bg-C_purple hover:bg-[#40384B] cursor-pointer"
+                      }`}
                     >
                       Generate with AI{" "}
                       <WiStars className="text-[30px] -my-[4px]" />

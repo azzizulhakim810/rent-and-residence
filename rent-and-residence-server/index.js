@@ -1232,11 +1232,13 @@ async function run() {
     // Generate Descriptions
     app.post("/api/generateDescription", async (req, res) => {
       const { prompt } = req.body;
-      const content =
-        await main(`You are a professional real estate copywriter. Write a 150–300 word engaging property description for the title:
+      const description =
+        await main(`You are a professional real estate copywriter. Write a 100–120 word engaging property description for the title:
 "${prompt}". Highlight its surroundings, natural features, and ideal buyer appeal. Tone: descriptive, warm, and persuasive. End with a short call-to-action.`);
 
-      res.send(content);
+      // console.log(description);
+
+      res.send(description);
     });
   } finally {
     // Ensures that the client will close when you finish/error
