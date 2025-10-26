@@ -211,7 +211,7 @@ async function run() {
         .limit(limit)
         .toArray();
 
-      console.log({ filter, sortOption });
+      // console.log({ filter, sortOption });
 
       const totalCount = await propertyCollection.estimatedDocumentCount();
       // console.log(totalCount);

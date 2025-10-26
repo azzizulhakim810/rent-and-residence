@@ -63,7 +63,6 @@ const AllPropertiesTable = ({ property, refetch, idx }) => {
     toast.warning("Are you sure?", {
       action: {
         label: "Yes",
-
         onClick: () => {
           axiosSecure
             .delete(`/api/properties/${id}`)

@@ -21,6 +21,7 @@ const AllProperties = () => {
   });
 
   const { allProperties = [] } = allPropertiesInfo || {};
+  console.log(allProperties);
 
   return (
     <div className="py-10">
