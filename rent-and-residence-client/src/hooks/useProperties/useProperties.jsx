@@ -15,7 +15,7 @@ const useProperties = ({ currentPage, limit, filters }) => {
         queryKey;
 
       const result = await axiosPublic.get(
-        `/api/properties?page=${currentPage}&limit=${limit}&type=${type}&city=${city}&category=${category}&sort=${sort}`
+        `/api/properties?page=${currentPage}&limit=${limit}&type=${type}&city=${city}&category=${category}&sort=${sort}&&approval=true`
       );
 
       return result.data;

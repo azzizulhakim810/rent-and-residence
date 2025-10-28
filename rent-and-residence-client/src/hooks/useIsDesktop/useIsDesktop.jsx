@@ -1,7 +1,20 @@
-// export const UseIsDesktop = () => window.innerWidth >= 1024;
+import { useState, useEffect } from "react";
 
 const UseIsDesktop = () => {
-  return window.innerWidth >= 1024;
+  const [isDesktop, setIsDesktop] = useState();
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      setIsDesktop(true);
+    } else {
+      setIsDesktop(false);
+    }
+
+    //  return () => {
+    //    second
+    //  }
+  }, []);
+
+  return isDesktop;
 };
 
 export default UseIsDesktop;

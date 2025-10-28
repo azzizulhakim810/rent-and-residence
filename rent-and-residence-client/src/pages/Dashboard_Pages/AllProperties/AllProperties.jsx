@@ -16,7 +16,7 @@ const AllProperties = () => {
   } = useQuery({
     queryKey: ["allProperties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/properties?limit=0&approval=yes");
+      const res = await axiosSecure.get("/api/properties?limit=0");
       return res.data;
     },
     // enabled: !!_id,

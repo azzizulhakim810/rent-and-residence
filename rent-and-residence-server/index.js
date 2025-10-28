@@ -192,7 +192,9 @@ async function run() {
       if (city) filter["address.city"] = city;
       if (category) filter.category = category;
       if (type) filter.listedIn = type;
-      if (approval == "yes") filter.approval = "Approved";
+      if (approval == "true") filter.approval = "Approved";
+
+      console.log(filter);
 
       let sortOption = {};
       if (sort == "priceDesc") sortOption = { price: -1 };

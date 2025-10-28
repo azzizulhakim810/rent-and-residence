@@ -27,7 +27,7 @@ const SearchResults = () => {
     queryKey: ["searchResults", city, bedroom, room, sort],
     queryFn: async () => {
       const result = await axiosPublic.get(
-        `/api/search?city=${city}&bedroom=${bedroom}&room=${room}&sort=${sort}`
+        `/api/search?city=${city}&bedroom=${bedroom}&room=${room}&sort=${sort}&approval=true`
       );
       return result.data;
     },
