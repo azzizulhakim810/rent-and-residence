@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 
 import AllPropertiesTable from "../../../components/AllPropertiesTable/AllPropertiesTable";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const AllProperties = () => {
+  useScrollToTop();
   const axiosSecure = UseAxiosSecure();
 
   const {
@@ -14,7 +16,7 @@ const AllProperties = () => {
   } = useQuery({
     queryKey: ["allProperties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/properties?limit=0");
+      const res = await axiosSecure.get("/api/properties?limit=0&approval=yes");
       return res.data;
     },
     // enabled: !!_id,

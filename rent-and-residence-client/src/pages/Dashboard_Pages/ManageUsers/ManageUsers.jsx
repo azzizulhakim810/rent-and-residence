@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import ManageUsersTable from "../../../components/ManageUsersTable/ManageUsersTable";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const ManageUsers = () => {
+  useScrollToTop();
   const [currentUserFromDB] = useSignedInUser();
   // const { user, loading } = AuthContext(AuthProvider);
   const { _id } = currentUserFromDB;

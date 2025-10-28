@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import PaymentHistoryTable from "../../../components/PaymentHistoryTable/PaymentHistoryTable";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const PaymentHistory = () => {
+  useScrollToTop();
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 

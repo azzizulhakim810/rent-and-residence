@@ -4,8 +4,10 @@ import PaymentHistoryTable from "../../../components/PaymentHistoryTable/Payment
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import AllOrdersTable from "../../../components/AllOrdersTable/AllOrdersTable";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const AllOrders = () => {
+  useScrollToTop();
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 

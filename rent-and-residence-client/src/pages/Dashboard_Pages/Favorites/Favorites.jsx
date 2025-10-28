@@ -3,8 +3,10 @@ import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePr
 import SkeletonOfPropertyCard from "../../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const Favorites = () => {
+  useScrollToTop();
   // const [favouriteProperties, setFavouriteProperties] = useState();
   const value = "favourites";
 

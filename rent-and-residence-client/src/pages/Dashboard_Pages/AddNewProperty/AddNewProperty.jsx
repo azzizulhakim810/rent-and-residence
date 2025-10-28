@@ -15,8 +15,11 @@ import { WiStars } from "react-icons/wi";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const AddNewProperty = () => {
+  useScrollToTop();
+
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
 

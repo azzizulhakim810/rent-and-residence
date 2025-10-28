@@ -7,8 +7,10 @@ import { RxUpdate } from "react-icons/rx";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const MyProfile = () => {
+  useScrollToTop();
   // Custom hook to load the current user from DB
   const [currentUserFromDB] = useSignedInUser();
   const axiosSecure = UseAxiosSecure();

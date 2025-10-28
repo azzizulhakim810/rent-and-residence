@@ -9,15 +9,13 @@
 // const { fs } = require("fs");
 // const multer = require("multer");
 // const imagekit = require("./configs/imageKit");
-import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
 import "dotenv/config";
-import Stripe from "stripe";
-import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
-import fs from "fs";
+import express from "express";
+import jwt from "jsonwebtoken";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 import multer from "multer";
-import ImageKit from "imagekit";
+import Stripe from "stripe";
 import main from "./configs/gemini.js";
 
 const app = express();
@@ -186,16 +184,15 @@ async function run() {
       const limit = parseInt(req.query.limit) || 10;
       const skip = page * limit;
 
-      const { city, category, type, sort } = req.query;
-      // console.log(req.query);
+      const { city, category, type, sort, approval } = req.query;
+      // console.log(req.query.approval);
 
       const filter = {};
 
       if (city) filter["address.city"] = city;
       if (category) filter.category = category;
       if (type) filter.listedIn = type;
-
-      filter.approval: "Approved";
+      if (approval == "yes") filter.approval = "Approved";
 
       let sortOption = {};
       if (sort == "priceDesc") sortOption = { price: -1 };

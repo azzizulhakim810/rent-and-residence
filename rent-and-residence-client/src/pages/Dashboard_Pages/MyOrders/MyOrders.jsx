@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import MyOrdersTable from "../../../components/MyOrdersTable/MyOrdersTable";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const MyOrders = () => {
+  useScrollToTop();
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 

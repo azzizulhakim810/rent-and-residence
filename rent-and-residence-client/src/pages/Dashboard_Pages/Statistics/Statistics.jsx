@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import BarChartStat from "../../../components/BarChartStat/BarChartStat";
 import PieChartStat from "../../../components/PieChartStat/PieChartStat";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const Statistics = () => {
+  useScrollToTop();
   const axiosSecure = useAxiosSecure();
 
   const { data: stats } = useQuery({
