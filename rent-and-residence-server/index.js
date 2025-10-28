@@ -183,17 +183,19 @@ async function run() {
     // Get all the properties
     app.get("/api/properties", async (req, res) => {
       const page = parseInt(req.query.page) || 0;
-      const limit = parseInt(req.query.limit) || 4;
+      const limit = parseInt(req.query.limit) || 10;
       const skip = page * limit;
 
       const { city, category, type, sort } = req.query;
-      console.log(req.query);
+      // console.log(req.query);
 
       const filter = {};
 
       if (city) filter["address.city"] = city;
       if (category) filter.category = category;
       if (type) filter.listedIn = type;
+
+      filter.approval: "Approved";
 
       let sortOption = {};
       if (sort == "priceDesc") sortOption = { price: -1 };

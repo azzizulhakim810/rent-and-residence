@@ -14,14 +14,14 @@ const AllProperties = () => {
   } = useQuery({
     queryKey: ["allProperties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/properties");
+      const res = await axiosSecure.get("/api/properties?limit=0");
       return res.data;
     },
     // enabled: !!_id,
   });
 
   const { allProperties = [] } = allPropertiesInfo || {};
-  console.log(allProperties);
+  // console.log(allProperties);
 
   return (
     <div className="py-10">
