@@ -62,8 +62,8 @@ const Featured = () => {
           {/* Slider - Desktop */}
           <div className=" w-full h-[500px] flex">
             <Swiper
-              // cssMode={true}
-              // navigation={true}
+              cssMode={true}
+              navigation={true}
               // mousewheel={true}
               keyboard={true}
               slidesPerView={isDesktop ? 4 : 1}
