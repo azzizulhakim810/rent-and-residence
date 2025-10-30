@@ -64,7 +64,7 @@ const Featured = () => {
             <Swiper
               cssMode={true}
               navigation={true}
-              // mousewheel={true}
+              mousewheel={true}
               keyboard={true}
               slidesPerView={isDesktop ? 4 : 1}
               spaceBetween={20}
