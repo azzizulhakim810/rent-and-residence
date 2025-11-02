@@ -21,6 +21,8 @@ const useAgentOwnedProperties = () => {
     enabled: !!_id,
   });
 
+  // console.log(agentOwnedProperties);
+
   return [isPending, refetch, agentOwnedProperties];
 };
 

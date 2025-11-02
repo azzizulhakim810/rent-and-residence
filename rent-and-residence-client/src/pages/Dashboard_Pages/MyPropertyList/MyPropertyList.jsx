@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
@@ -29,7 +28,7 @@ const MyPropertyList = () => {
   // });
 
   const [isPending, refetch, agentOwnedProperties] = useAgentOwnedProperties();
-
+  // console.log(agentOwnedProperties);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>
@@ -68,7 +67,7 @@ const MyPropertyList = () => {
                       <span className="loading loading-dots loading-lg"></span>
                     </p>
                   ) : (
-                    agentOwnedProperties?.map((property) => (
+                    agentOwnedProperties?.allOwnedProps?.map((property) => (
                       <MyPropertyTable
                         key={property._id}
                         property={property}

@@ -364,7 +364,7 @@ async function run() {
 
       if (selectedCategory) filterCategory.category = selectedCategory;
 
-      console.log(selectedCategory, filterCategory);
+      // console.log(selectedCategory, filterCategory);
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
@@ -469,10 +469,13 @@ async function run() {
       const id = req.params.id;
       console.log(id);
 
-      const query = { ownerId: id };
-      const result = await propertyCollection.find(query).toArray();
+      const query = { ownerId: id, approval: "Approved" };
+      const approvedProps = await propertyCollection.find(query).toArray();
+      const allOwnedProps = await propertyCollection
+        .find({ ownerId: id })
+        .toArray();
 
-      res.send(result);
+      res.send({ approvedProps, allOwnedProps });
     });
 
     // Get all the blogs
