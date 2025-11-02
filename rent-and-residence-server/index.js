@@ -1150,85 +1150,100 @@ async function run() {
     });
 
     // Statistic for admin dashboard
-    app.get("/api/admin-stats", verifyToken, verifyAdmin, async (req, res) => {
-      const registeredUsers = await userCollection.estimatedDocumentCount();
-      const propertyItems = await propertyCollection.estimatedDocumentCount();
+    app.get(
+      "/api/admin-stats",
+      verifyToken,
+      // verifyAdmin,
+      async (req, res) => {
+        const registeredUsers = await userCollection.estimatedDocumentCount();
+        const propertyItems = await propertyCollection.estimatedDocumentCount();
 
-      const approvedProperties = await propertyCollection
-        .find({
-          approval: "Approved",
-        })
-        .toArray();
+        const approvedProperties = await propertyCollection
+          .find({
+            approval: "Approved",
+          })
+          .toArray();
 
-      /*  const totalPayment = await paymentCollection.find().toArray();
+        /*  const totalPayment = await paymentCollection.find().toArray();
       const revenue = totalPayment.reduce(
         (total, payment) => total + payment.price,
         0
       ); */
 
-      const result = await paymentCollection
-        .aggregate([
-          {
-            $group: {
-              _id: null,
-              totalRevenue: {
-                $sum: "$price",
+        const result = await paymentCollection
+          .aggregate([
+            {
+              $group: {
+                _id: null,
+                totalRevenue: {
+                  $sum: "$price",
+                },
               },
             },
-          },
-        ])
-        .toArray();
+          ])
+          .toArray();
 
-      const revenue = result.length > 0 ? result[0].totalRevenue : 0;
+        const revenue = result.length > 0 ? result[0].totalRevenue : 0;
 
-      res.send({ revenue, registeredUsers, propertyItems, approvedProperties });
-    });
+        res.send({
+          revenue,
+          registeredUsers,
+          propertyItems,
+          approvedProperties,
+        });
+      }
+    );
 
     // Order Statistics using aggregate pipeline
-    app.get("/api/order-stats", verifyToken, verifyAdmin, async (req, res) => {
-      const result = await paymentCollection
-        .aggregate([
-          {
-            $unwind: "$propertyIds",
-          },
-          {
-            $addFields: {
-              propertyIdObj: { $toObjectId: "$propertyIds" },
+    app.get(
+      "/api/order-stats",
+      verifyToken,
+      // verifyAdmin,
+      async (req, res) => {
+        const result = await paymentCollection
+          .aggregate([
+            {
+              $unwind: "$propertyIds",
             },
-          },
-          {
-            $lookup: {
-              from: "properties",
-              localField: "propertyIdObj",
-              foreignField: "_id",
-              as: "propertyItems",
+            {
+              $addFields: {
+                propertyIdObj: { $toObjectId: "$propertyIds" },
+              },
             },
-          },
-          {
-            $unwind: "$propertyItems",
-          },
-          {
-            $group: {
-              _id: "$propertyItems.category",
-              quantity: { $sum: 1 },
-              totalRevenue: { $sum: { $toDouble: "$propertyItems.price" } },
+            {
+              $lookup: {
+                from: "properties",
+                localField: "propertyIdObj",
+                foreignField: "_id",
+                as: "propertyItems",
+              },
             },
-          },
-          {
-            $project: {
-              _id: 0,
-              category: "$_id",
-              quantity: "$quantity",
-              revenue: "$totalRevenue",
+            {
+              $unwind: "$propertyItems",
             },
-          },
-        ])
-        .toArray();
+            {
+              $group: {
+                _id: "$propertyItems.category",
+                quantity: { $sum: 1 },
+                totalRevenue: { $sum: { $toDouble: "$propertyItems.price" } },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                category: "$_id",
+                quantity: "$quantity",
+                revenue: "$totalRevenue",
+              },
+            },
+          ])
+          .toArray();
 
-      res.send(result);
+        res.send(result);
 
-      // console.log(result);
-    });
+        // console.log(result);
+      }
+    );
 
     // Generate Descriptions
     app.post("/api/generateDescription", async (req, res) => {
