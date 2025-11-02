@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import BarChartStat from "../BarChartStat/BarChartStat";
 import PieChartStat from "../PieChartStat/PieChartStat";
+import useAgentOwnedProperties from "../../hooks/useAgentOwnedProperties/useAgentOwnedProperties";
 const AgentDashboard = () => {
   const axiosSecure = UseAxiosSecure();
+
+  const [isPending, refetch, agentOwnedProperties] = useAgentOwnedProperties();
 
   const { data: stats } = useQuery({
     queryKey: ["admin-stats"],
@@ -30,9 +33,9 @@ const AgentDashboard = () => {
           </h1>
 
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 font-Nunito_Sans text-C_LightGray">
-            <h3>Total Properties: {stats?.propertyItems}</h3>
-            <h3>Published Properties: {stats?.approvedProperties.length}</h3>
-            <h3>Registered Users: {stats?.registeredUsers}</h3>
+            <h3>Listed Properties: {agentOwnedProperties?.length}</h3>
+            <h3>Approved Properties: {stats?.approvedProperties.length}</h3>
+            {/* <h3>Registered Users: {stats?.registeredUsers}</h3> */}
             {/* <h3>Saved Searches: 0</h3> */}
             {/* <h3>Favorite Properties: 0</h3> */}
           </div>

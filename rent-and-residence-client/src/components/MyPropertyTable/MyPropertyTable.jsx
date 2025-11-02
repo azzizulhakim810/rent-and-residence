@@ -31,7 +31,7 @@ const MyPropertyTable = ({ property }) => {
       </td>
       <td className="capitalize text-C_LightGray/90">{category}</td>
 
-      <td className="text-C_LightGray/90  text-center">0</td>
+      {/* <td className="text-C_LightGray/90  text-center">0</td> */}
       <td className="text-C_LightGray/90  text-center">{price}€</td>
       {/* <td className="capitalize text-center text-black/70">
         <span className="bg-green-200 text-green-600 border-green-400 py-1 px-[13px] rounded-4xl">

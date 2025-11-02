@@ -3,6 +3,7 @@ import MyPropertyTable from "../../../components/MyPropertyTable/MyPropertyTable
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
+import useAgentOwnedProperties from "../../../hooks/useAgentOwnedProperties/useAgentOwnedProperties";
 
 const MyPropertyList = () => {
   useScrollToTop();
@@ -12,20 +13,22 @@ const MyPropertyList = () => {
   // const [agentOwnedProperty, setAgentOwnedProperty] = useState([]);
   // const [loading, setLoading] = useState(true);
 
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
 
-  const {
-    isPending,
-    refetch,
-    data: agentOwnedProperties,
-  } = useQuery({
-    queryKey: ["agentOwnedProperties", _id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/api/agentOwnedProperty/${_id}`);
-      return res.data;
-    },
-    enabled: !!_id,
-  });
+  // const {
+  //   isPending,
+  //   refetch,
+  //   data: agentOwnedProperties,
+  // } = useQuery({
+  //   queryKey: ["agentOwnedProperties", _id],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/api/agentOwnedProperty/${_id}`);
+  //     return res.data;
+  //   },
+  //   enabled: !!_id,
+  // });
+
+  const [isPending, refetch, agentOwnedProperties] = useAgentOwnedProperties();
 
   return (
     <div className="py-10">
@@ -51,7 +54,7 @@ const MyPropertyList = () => {
                     <th>Title</th>
                     <th>Category</th>
 
-                    <th className="text-center">Sell/Quantity</th>
+                    {/* <th className="text-center">Sell/Quantity</th> */}
                     <th className="text-center">Price</th>
                     <th className="text-center">Approval</th>
                     <th className="text-center">Details</th>
