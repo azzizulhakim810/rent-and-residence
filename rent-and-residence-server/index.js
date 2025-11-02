@@ -1152,7 +1152,7 @@ async function run() {
       res.send({ paymentResult, removeFromCart });
     });
 
-    // Statistic for admin dashboard
+    // Statistic for admin dashboard - Admin
     app.get(
       "/api/admin-stats",
       verifyToken,
@@ -1197,7 +1197,7 @@ async function run() {
       }
     );
 
-    // Order Statistics using aggregate pipeline
+    // Order Statistics using aggregate pipeline - Admin
     app.get(
       "/api/order-stats",
       verifyToken,
