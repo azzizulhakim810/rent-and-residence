@@ -3,18 +3,24 @@ import UseAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import BarChartStat from "../BarChartStat/BarChartStat";
 import PieChartStat from "../PieChartStat/PieChartStat";
 import useAgentOwnedProperties from "../../hooks/useAgentOwnedProperties/useAgentOwnedProperties";
+import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
+
 const AgentDashboard = () => {
   const axiosSecure = UseAxiosSecure();
+  const [currentUserFromDB] = useSignedInUser();
+  const { _id } = currentUserFromDB;
 
   const [isPending, refetch, agentOwnedProperties] = useAgentOwnedProperties();
   // console.log(agentOwnedProperties);
-  const { data: stats } = useQuery({
-    queryKey: ["admin-stats"],
+  const { data: agentRevenue } = useQuery({
+    queryKey: ["agentRevenue", _id],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/admin-stats");
+      const res = await axiosSecure.get(`/api/agentRevenue/${_id}`);
       return res.data;
     },
   });
+
+  console.log(agentRevenue);
 
   const { data: chartData = [] } = useQuery({
     queryKey: ["chartData"],
@@ -57,15 +63,11 @@ const AgentDashboard = () => {
             </h1>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 ">
-            <div>
-              <BarChartStat chartData={chartData} />
-            </div>
+            <div>{/* <BarChartStat chartData={chartData} /> */}</div>
             <h1 className="lg:hidden flex font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
               Revenue per Category
             </h1>
-            <div>
-              <PieChartStat chartData={chartData} />
-            </div>
+            <div>{/* <PieChartStat chartData={chartData} /> */}</div>
           </div>
         </div>
       </div>
@@ -79,7 +81,7 @@ const AgentDashboard = () => {
           </h1>
 
           <div className="font-Nunito_Sans text-C_LightGray">
-            <h3>Total Sell: {(stats?.revenue / 100).toFixed(2)}€</h3>
+            <h3>Total Sell: {(agentRevenue / 100).toFixed(2)}€</h3>
           </div>
         </div>
       </div>

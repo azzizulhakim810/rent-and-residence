@@ -1179,7 +1179,7 @@ async function run() {
               $group: {
                 _id: null,
                 totalRevenue: {
-                  $sum: "$price",
+                  $sum: { $toDouble: "$price" },
                 },
               },
             },
@@ -1247,6 +1247,65 @@ async function run() {
         // console.log(result);
       }
     );
+
+    // Revenue - Agent
+    app.get("/api/agentRevenue/:id", async (req, res) => {
+      const agentId = req.params.id;
+      console.log("AgentId", req.params);
+
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $unwind: "$propertyIds",
+          },
+
+          {
+            $addFields: {
+              propertyIdObj: { $toObjectId: "$propertyIds" },
+            },
+          },
+
+          {
+            $lookup: {
+              from: "properties",
+              localField: "propertyIdObj",
+              foreignField: "_id",
+              as: "propertyItems",
+            },
+          },
+
+          {
+            $unwind: "$propertyItems",
+          },
+
+          {
+            $match: { "propertyItems.ownerId": agentId, status: "paid" },
+          },
+
+          {
+            $group: {
+              _id: "$propertyItems.category",
+              quantity: { $sum: 1 },
+              totalRevenue: { $sum: { $toDouble: "$propertyItems.price" } },
+            },
+          },
+
+          // {
+          //   $project: {
+          //     _id: 0,
+          //     category: "$_id",
+          //     // quantity: "$quantity",
+          //     revenue: { $sum: "$totalRevenue" },
+          //   },
+          // },
+        ])
+        .toArray();
+
+      // const revenue = result.length > 0 ? result[0].revenue : 0;
+      // console.log(revenue, result.length, result);
+
+      res.send(result);
+    });
 
     // Generate Descriptions
     app.post("/api/generateDescription", async (req, res) => {
