@@ -445,7 +445,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-C_purple">
+      {/* <li className="hover:bg-C_purple">
         <NavLink
           to="/dashboard/inbox"
           className={({ isActive }) =>
@@ -459,7 +459,7 @@ const Navbar = () => {
             Inbox
           </span>
         </NavLink>
-      </li>
+      </li> */}
 
       {/* <li className="hover:bg-C_purple">
         <NavLink

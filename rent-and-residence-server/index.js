@@ -194,7 +194,7 @@ async function run() {
       if (type) filter.listedIn = type;
       if (approval == "true") filter.approval = "Approved";
 
-      console.log(filter);
+      // console.log(filter);
 
       let sortOption = {};
       if (sort == "priceDesc") sortOption = { price: -1 };

@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import FavouritePropCard from "../../../components/FavouritePropCard/FavouritePropCard";
 import SkeletonOfPropertyCard from "../../../components/SkeletonOfPropertyCard/SkeletonOfPropertyCard";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const Favorites = () => {
   useScrollToTop();
@@ -51,14 +51,28 @@ const Favorites = () => {
                 </div>
               ) : (
                 <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-3 gap-6 ">
-                  {favouriteProperties?.map((favProperty) => (
+                  {
+                    /* {favouriteProperties?.map((favProperty) => (
                     <FavouritePropCard
                       key={favProperty?.propertyItems._id}
-                      // property={property}
                       favProperty={favProperty?.propertyItems}
                       refetchFavProperty={refetchFavProperty}
                     />
-                  ))}
+                  ))} */
+                    favouriteProperties?.length == 0 ? (
+                      <span className="text-lg text-C_DarkGray">
+                        Sorry! Can't find any favourites
+                      </span>
+                    ) : (
+                      favouriteProperties?.map((favProperty) => (
+                        <FavouritePropCard
+                          key={favProperty?.propertyItems._id}
+                          favProperty={favProperty?.propertyItems}
+                          refetchFavProperty={refetchFavProperty}
+                        />
+                      ))
+                    )
+                  }
                 </div>
               )}
             </div>
