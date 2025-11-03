@@ -27,8 +27,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://rent-residence-3a842.web.app"],
+    origin: ["https://rent-residence-3a842.web.app"],
     credentials: true,
+    allowedHeaders: ["Authorization", "Content-Type"],
   })
 );
 app.use(express.json()); // for application/json
@@ -86,7 +87,7 @@ async function run() {
     // JWT Related API
     app.post("/jwt", async (req, res) => {
       const user = req.body;
-      console.log(user);
+      // console.log("Jwt", user);
 
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1h",
@@ -100,6 +101,8 @@ async function run() {
       const authHeader = req.headers["authorization"];
       // console.log("Inside verify Token", authHeader);
 
+      // console.log("AuthHeader:", req.headers.authorization);
+
       const token = authHeader && authHeader.split(" ")[1];
 
       // console.log(token);
@@ -112,6 +115,7 @@ async function run() {
         }
 
         req.decoded = decoded;
+        // console.log("Decoded Token", decoded);
 
         next();
       });
@@ -155,7 +159,8 @@ async function run() {
     app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
 
-      // console.log(email, req.decoded.email);
+      // console.log("Requested:", email);
+      // console.log("Token:", req.decoded.email);
 
       if (email !== req.decoded.email) {
         return res.status(403).send({ message: "forbidden access" });
