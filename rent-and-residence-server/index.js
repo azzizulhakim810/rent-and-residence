@@ -1249,7 +1249,7 @@ async function run() {
     );
 
     // Revenue - Agent
-    app.get("/api/agentRevenue/:id", async (req, res) => {
+    app.get("/api/agentRevenue/:id", verifyToken, async (req, res) => {
       const agentId = req.params.id;
       // console.log("AgentId", req.params);
 
@@ -1315,8 +1315,38 @@ async function run() {
       res.send({ result, totalRevenue });
     });
 
-    app.get("api/userRevenue/:email", async (req, res) => {
+    app.get("/api/userRevenue/:email", verifyToken, async (req, res) => {
       const userEmail = req.params.email;
+      console.log(userEmail);
+
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $match: {
+              email: userEmail,
+            },
+          },
+
+          {
+            $group: {
+              _id: "$status",
+              count: { $sum: 1 },
+              spending: { $sum: "$price" },
+            },
+          },
+
+          {
+            $project: {
+              _id: 0,
+              paymentStatus: "$_id",
+              count: "$count",
+              totalSpending: "$spending",
+            },
+          },
+        ])
+        .toArray();
+
+      res.send(result);
     });
 
     // Generate Descriptions

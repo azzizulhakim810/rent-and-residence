@@ -8,14 +8,15 @@ import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 const UserDashboard = () => {
   const axiosSecure = UseAxiosSecure();
   const [currentUserFromDB] = useSignedInUser();
-  const { _id } = currentUserFromDB;
+  const { _id, email } = currentUserFromDB;
+  console.log(email);
 
   const [, , agentOwnedProperties] = useAgentOwnedProperties();
   // console.log(agentOwnedProperties);
   const { data: agentRevenue } = useQuery({
     queryKey: ["agentRevenue", _id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/api/agentRevenue/${_id}`);
+      const res = await axiosSecure.get(`/api/agentRevenue/${email}`);
       return res.data;
     },
   });
