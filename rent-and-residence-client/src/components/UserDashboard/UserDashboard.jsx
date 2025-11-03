@@ -9,19 +9,18 @@ const UserDashboard = () => {
   const axiosSecure = UseAxiosSecure();
   const [currentUserFromDB] = useSignedInUser();
   const { _id, email } = currentUserFromDB;
-  console.log(email);
 
   const [, , agentOwnedProperties] = useAgentOwnedProperties();
   // console.log(agentOwnedProperties);
-  const { data: agentRevenue } = useQuery({
-    queryKey: ["agentRevenue", _id],
+  const { data: userSpending } = useQuery({
+    queryKey: ["userSpending", email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/api/agentRevenue/${email}`);
+      const res = await axiosSecure.get(`/api/userSpending/${email}`);
       return res.data;
     },
   });
 
-  console.log(agentRevenue);
+  console.log(userSpending?.result);
 
   const { data: chartData = [] } = useQuery({
     queryKey: ["chartData"],
@@ -31,7 +30,7 @@ const UserDashboard = () => {
     },
   });
 
-  console.log(chartData);
+  // console.log(chartData);
   return (
     <div className="grid grid-cols-12 gap-6 pt-10">
       <div className="lg:col-span-8 col-span-12 flex flex-col gap-8 lg:order-1 order-2">
@@ -43,10 +42,16 @@ const UserDashboard = () => {
 
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 font-Nunito_Sans text-C_LightGray">
             <h3>
-              Listed Properties: {agentOwnedProperties?.allOwnedProps?.length}
+              Paid Properties:{" "}
+              {userSpending?.result?.map(
+                (each) => each.paymentStatus == "paid" && each.count
+              )}
             </h3>
             <h3>
-              Approved Properties: {agentOwnedProperties?.approvedProps?.length}
+              Pending Properties:{" "}
+              {userSpending?.result?.map(
+                (each) => each.paymentStatus == "onHold" && each.count
+              )}
             </h3>
             {/* <h3>Registered Users: {stats?.registeredUsers}</h3> */}
             {/* <h3>Saved Searches: 0</h3> */}
@@ -66,15 +71,11 @@ const UserDashboard = () => {
             </h1>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 ">
-            <div>
-              <BarChartStat chartData={agentRevenue?.result} />
-            </div>
+            <div>{/* <BarChartStat chartData={agentRevenue?.result} /> */}</div>
             <h1 className="lg:hidden flex font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
               Revenue per Category
             </h1>
-            <div>
-              <PieChartStat chartData={agentRevenue?.result} />
-            </div>
+            <div>{/* <PieChartStat chartData={agentRevenue?.result} /> */}</div>
           </div>
         </div>
       </div>
@@ -88,7 +89,7 @@ const UserDashboard = () => {
           </h1>
 
           <div className="font-Nunito_Sans text-C_LightGray">
-            <h3>Total Sell: {agentRevenue?.totalRevenue.toFixed(2)}€</h3>
+            <h3>Total Spending: {userSpending?.totalSpending.toFixed(2)}€</h3>
           </div>
         </div>
       </div>

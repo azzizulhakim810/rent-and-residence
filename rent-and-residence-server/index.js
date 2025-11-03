@@ -1315,9 +1315,8 @@ async function run() {
       res.send({ result, totalRevenue });
     });
 
-    app.get("/api/userRevenue/:email", verifyToken, async (req, res) => {
+    app.get("/api/userSpending/:email", verifyToken, async (req, res) => {
       const userEmail = req.params.email;
-      console.log(userEmail);
 
       const result = await paymentCollection
         .aggregate([
@@ -1340,13 +1339,18 @@ async function run() {
               _id: 0,
               paymentStatus: "$_id",
               count: "$count",
-              totalSpending: "$spending",
+              spending: "$spending",
             },
           },
         ])
         .toArray();
 
-      res.send(result);
+      const totalSpending = await result?.reduce(
+        (sum, each) => sum + each.spending,
+        0
+      );
+
+      res.send({ result, totalSpending });
     });
 
     // Generate Descriptions
