@@ -33,17 +33,11 @@ const UserDashboard = () => {
 
   console.log(chartData);
 
-  // const [userData, setUserData] = useState({
-  //   category: "",
-  //   quantity: 0,
-  //   revenue: 0,
-  // });
-
-  // useEffect(() => {
-  //   userSpending?.result?.map(
-  //     (each) => (setUserData.category = each.paymentStatus)
-  //   );
-  // }, [userData, userSpending?.result]);
+  const userData = userSpending?.result?.map((each) => ({
+    category: each?.paymentStatus,
+    quantity: each?.count,
+    revenue: each?.spending,
+  }));
 
   // console.log(userData);
 
@@ -79,21 +73,23 @@ const UserDashboard = () => {
         <div className="shadow-[0px_4px_20px_rgba(0,0,0,0.1)] px-2 py-8 w-full rounded-xl bg-white">
           <div className="grid lg:grid-cols-2 grid-cols-1 text-center">
             <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
-              Sales per Category
+              Clearance per Quantity
             </h1>
 
             <h1 className="lg:block hidden font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mb-8">
-              Revenue per Category
+              Spending Status
             </h1>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 ">
             <div>
-              <BarChartStat chartData={userSpending?.result} />
+              <BarChartStat chartData={userData} />
             </div>
-            <h1 className="lg:hidden flex font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
-              Revenue per Category
+            <h1 className="lg:hidden flex justify-center text-center font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
+              Spending Status
             </h1>
-            <div>{/* <PieChartStat chartData={agentRevenue?.result} /> */}</div>
+            <div>
+              <PieChartStat chartData={userData} />
+            </div>
           </div>
         </div>
       </div>
