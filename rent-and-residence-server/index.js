@@ -1251,7 +1251,7 @@ async function run() {
     // Revenue - Agent
     app.get("/api/agentRevenue/:id", async (req, res) => {
       const agentId = req.params.id;
-      console.log("AgentId", req.params);
+      // console.log("AgentId", req.params);
 
       const result = await paymentCollection
         .aggregate([
@@ -1286,25 +1286,40 @@ async function run() {
             $group: {
               _id: "$propertyItems.category",
               quantity: { $sum: 1 },
-              totalRevenue: { $sum: { $toDouble: "$propertyItems.price" } },
+              totalRevenue: { $sum: "$propertyItems.price" },
             },
           },
 
-          // {
-          //   $project: {
-          //     _id: 0,
-          //     category: "$_id",
-          //     // quantity: "$quantity",
-          //     revenue: { $sum: "$totalRevenue" },
-          //   },
-          // },
+          {
+            $project: {
+              _id: 0,
+              category: "$_id",
+              quantity: "$quantity",
+              revenue: "$totalRevenue",
+              // revenue: {
+              //   $map: {
+              //     input: "$totalRevenue",
+              //     as: "rev",
+              //     in: { $sum: "$totalRevenue" },
+              //   },
+              // },
+            },
+          },
         ])
         .toArray();
+
+      // console.log(result);
+
+      const totalRevenue = result?.reduce(
+        (sum, each) => sum + each?.revenue,
+        0
+      );
+      // console.log(totalRevenue, result);
 
       // const revenue = result.length > 0 ? result[0].revenue : 0;
       // console.log(revenue, result.length, result);
 
-      res.send(result);
+      res.send({ result, totalRevenue });
     });
 
     // Generate Descriptions

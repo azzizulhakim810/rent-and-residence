@@ -29,6 +29,8 @@ const AgentDashboard = () => {
       return res.data;
     },
   });
+
+  console.log(chartData);
   return (
     <div className="grid grid-cols-12 gap-6 pt-10">
       <div className="lg:col-span-8 col-span-12 flex flex-col gap-8 lg:order-1 order-2">
@@ -81,7 +83,7 @@ const AgentDashboard = () => {
           </h1>
 
           <div className="font-Nunito_Sans text-C_LightGray">
-            <h3>Total Sell: {(agentRevenue / 100).toFixed(2)}€</h3>
+            <h3>Total Sell: {agentRevenue?.totalRevenue.toFixed(2)}€</h3>
           </div>
         </div>
       </div>
