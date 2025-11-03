@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import BarChartStat from "../BarChartStat/BarChartStat";
 import PieChartStat from "../PieChartStat/PieChartStat";
-import useAgentOwnedProperties from "../../hooks/useAgentOwnedProperties/useAgentOwnedProperties";
+
 import useSignedInUser from "../../hooks/useSignedInUser/useSignedInUser";
 
 const UserDashboard = () => {
@@ -10,8 +10,6 @@ const UserDashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id, email } = currentUserFromDB;
 
-  const [, , agentOwnedProperties] = useAgentOwnedProperties();
-  // console.log(agentOwnedProperties);
   const { data: userSpending } = useQuery({
     queryKey: ["userSpending", email],
     queryFn: async () => {

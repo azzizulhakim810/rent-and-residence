@@ -1140,7 +1140,7 @@ const AddNewProperty = () => {
                   <h1 className=" font-Nunito text-[16px] font-[600] tracking-wider text-gray-700  mb-3">
                     Interior Details
                   </h1>
-                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                  <div className="fieldset grid lg:grid-cols-3 grid-cols-1  gap-x-10">
                     <label className="label mb-2 text-sm font-[600]">
                       <input
                         {...register("equippedKitchen")}
@@ -1180,7 +1180,7 @@ const AddNewProperty = () => {
                     Outdoor Details
                   </h1>
 
-                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                  <div className="fieldset grid lg:grid-cols-3 grid-cols-1  gap-x-10">
                     <label className="label mb-2 text-sm font-[600]">
                       <input
                         {...register("backYard")}
@@ -1228,7 +1228,7 @@ const AddNewProperty = () => {
                     Utilities
                   </h1>
 
-                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                  <div className="fieldset grid lg:grid-cols-3 grid-cols-1  gap-x-10">
                     <label className="label mb-2 text-sm font-[600]">
                       <input
                         {...register("centralAir")}
@@ -1284,7 +1284,7 @@ const AddNewProperty = () => {
                     Other Features
                   </h1>
 
-                  <div className="fieldset grid grid-cols-3  gap-x-10">
+                  <div className="fieldset grid lg:grid-cols-3 grid-cols-1  gap-x-10">
                     <label className="label mb-2 text-sm font-[600]">
                       <input
                         {...register("chairAccessible")}
@@ -1325,7 +1325,7 @@ const AddNewProperty = () => {
                       />
                       Washer and dryer
                     </label>
-                    <label className="label mb-2 text-sm font-[600]">
+                    <label className="label  mb-2 text-sm font-[600]">
                       <input
                         {...register("wifi")}
                         type="checkbox"
