@@ -35,7 +35,7 @@ const PaymentHistory = () => {
           {/*Contact Information  */}
           <div className="shadow-[0px_4px_20px_rgba(0,0,0,0.1)] lg:p-8 p-4 w-full rounded-xl bg-white">
             {/* My Orders Table  */}
-            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start w-full gap-6 py-0">
+            <div className="grid lg:grid-cols-1 grid-cols-1 justify-start lg:w-full min-w-full gap-6 py-0 overflow-x-auto">
               <table className="table rounded-8xl">
                 {/* head */}
                 <thead className="bg-C_purple rounded-5xl ">
