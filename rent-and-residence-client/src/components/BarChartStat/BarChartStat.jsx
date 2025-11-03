@@ -23,7 +23,7 @@ const BarChartStat = ({ chartData }) => {
     <>
       <BarChart
         className="lg:flex hidden"
-        width={250}
+        width={300}
         height={250}
         data={chartData?.map((d) => d)}
       >

@@ -65,11 +65,15 @@ const AgentDashboard = () => {
             </h1>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 ">
-            <div>{/* <BarChartStat chartData={chartData} /> */}</div>
+            <div>
+              <BarChartStat chartData={agentRevenue?.result} />
+            </div>
             <h1 className="lg:hidden flex font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
               Revenue per Category
             </h1>
-            <div>{/* <PieChartStat chartData={chartData} /> */}</div>
+            <div>
+              <PieChartStat chartData={agentRevenue?.result} />
+            </div>
           </div>
         </div>
       </div>

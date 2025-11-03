@@ -77,7 +77,7 @@ const renderCustomizedLabel = ({
 };
 
 const PieChartStat = ({ chartData }) => {
-  const mappedData = chartData.map((item) => {
+  const mappedData = chartData?.map((item) => {
     return { name: item.category, value: item.revenue };
   });
 
@@ -96,7 +96,7 @@ const PieChartStat = ({ chartData }) => {
           dataKey="value"
           // label
         >
-          {mappedData.map((entry, index) => (
+          {mappedData?.map((entry, index) => (
             <Cell
               key={`cell-${entry.name}`}
               fill={COLORS[index % COLORS.length]}
