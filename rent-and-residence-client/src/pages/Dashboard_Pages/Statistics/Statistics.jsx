@@ -1,5 +1,6 @@
 import AdminDashboard from "../../../components/AdminDashboard/AdminDashboard";
 import AgentDashboard from "../../../components/AgentDashboard/AgentDashboard";
+import UserDashboard from "../../../components/UserDashboard/UserDashboard";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
@@ -15,6 +16,7 @@ const Statistics = () => {
 
       {role?.toLowerCase() === "admin" && <AdminDashboard />}
       {role?.toLowerCase() === "agent" && <AgentDashboard />}
+      {role?.toLowerCase() === "user" && <UserDashboard />}
     </div>
   );
 };

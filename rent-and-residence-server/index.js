@@ -1296,13 +1296,6 @@ async function run() {
               category: "$_id",
               quantity: "$quantity",
               revenue: "$totalRevenue",
-              // revenue: {
-              //   $map: {
-              //     input: "$totalRevenue",
-              //     as: "rev",
-              //     in: { $sum: "$totalRevenue" },
-              //   },
-              // },
             },
           },
         ])
@@ -1320,6 +1313,10 @@ async function run() {
       // console.log(revenue, result.length, result);
 
       res.send({ result, totalRevenue });
+    });
+
+    app.get("api/userRevenue/:email", async (req, res) => {
+      const userEmail = req.params.email;
     });
 
     // Generate Descriptions
