@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure/UseAxiosSecure";
 
-const MyOrdersTable = ({ order }) => {
+const MyOrdersTable = ({ order, i }) => {
   // const [propertyId, setPropertyId] = useState();
   const axiosSecure = UseAxiosSecure();
 
@@ -13,12 +13,13 @@ const MyOrdersTable = ({ order }) => {
 
   // Click here - https://chatgpt.com/share/68afe875-ad24-8003-9ddf-8d7fee2f8174
   // To see what nothing worked except promise.all
+  console.log(order);
 
   useEffect(() => {
     Promise.all(
-      order.propertyIds.map((id) => axiosSecure.get(`/api/properties/${id}`))
+      order.propertyIds?.map((id) => axiosSecure.get(`/api/properties/${id}`))
     )
-      .then((responses) => setProperties(responses.map((r) => r.data)))
+      .then((responses) => setProperties(responses?.map((res) => res.data)))
       .catch((err) => console.error(err));
   }, [order.propertyIds, axiosSecure]);
 
@@ -124,9 +125,9 @@ const MyOrdersTable = ({ order }) => {
 
   return (
     <>
-      {properties.map((prop, idx) => (
+      {properties?.map((prop, idx) => (
         <tr key={prop[0]?._id}>
-          <td className="text-center">{idx + 1}</td>
+          <td className="text-center">{i + 1}</td>
           <td>
             <div className="flex items-center gap-3">
               <div className="avatar">

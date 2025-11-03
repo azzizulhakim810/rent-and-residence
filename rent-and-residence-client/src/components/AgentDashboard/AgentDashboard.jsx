@@ -10,7 +10,7 @@ const AgentDashboard = () => {
   const [currentUserFromDB] = useSignedInUser();
   const { _id } = currentUserFromDB;
 
-  const [isPending, refetch, agentOwnedProperties] = useAgentOwnedProperties();
+  const [, , agentOwnedProperties] = useAgentOwnedProperties();
   // console.log(agentOwnedProperties);
   const { data: agentRevenue } = useQuery({
     queryKey: ["agentRevenue", _id],

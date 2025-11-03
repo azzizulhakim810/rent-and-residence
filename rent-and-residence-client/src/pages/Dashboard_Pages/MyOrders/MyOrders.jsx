@@ -65,33 +65,17 @@ const MyOrders = () => {
                       </td>
                     </tr>
                   ) : myOrders?.length !== 0 ? (
-                    myOrders.map((order, i) => (
-                      <>
-                        {order.status === "paid" ? (
+                    myOrders?.map(
+                      (order, i) =>
+                        order.status === "paid" && (
                           <MyOrdersTable
                             order={order}
+                            key={i}
                             i={i}
                             refetch={refetch}
                           />
-                        ) : order.status === "cancelled" ? (
-                          <tr>
-                            <td colSpan={6} className=" py-4">
-                              <span className="text-lg text-red-400 font-Nunito_Sans">
-                                Your payment is cancelled. Contact Support!
-                              </span>
-                            </td>
-                          </tr>
-                        ) : (
-                          <tr>
-                            <td colSpan={6} className=" py-4">
-                              <span className="text-lg text-yellow-400 font-Nunito_Sans">
-                                Your payment is still pending. Please Wait!
-                              </span>
-                            </td>
-                          </tr>
-                        )}
-                      </>
-                    ))
+                        )
+                    )
                   ) : (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
