@@ -8,9 +8,11 @@ import HomeProperties from "./HomeProperties/HomeProperties";
 import Location from "./Location/Location";
 import Services from "./Services/Services";
 import Testimonials from "./Testimonials/Testimonials";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 // import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Home = () => {
+  useScrollToTop();
   const locationHook = useLocation();
 
   useEffect(() => {

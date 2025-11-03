@@ -7,9 +7,10 @@ import { useQuery } from "@tanstack/react-query";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import AgentCard from "../../../components/AgentCard/AgentCard";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
+import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const AllAgents = () => {
-  // const agents = useLoaderData([]);
+  useScrollToTop();
   const axiosSecure = UseAxiosSecure();
   // console.log(users);
 

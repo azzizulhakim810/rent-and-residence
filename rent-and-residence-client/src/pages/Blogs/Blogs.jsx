@@ -5,8 +5,10 @@ import { motion } from "motion/react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Sidebar from "../Shared/Sidebar/Sidebar";
 import { FaChevronRight } from "react-icons/fa6";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 
 const Blogs = () => {
+  useScrollToTop();
   return (
     <div className="bg-C_LightGray/5 py-6 pt-25">
       <Helmet>

@@ -6,8 +6,11 @@ import { Helmet } from "react-helmet";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Map from "../Shared/Map/Map";
 import Sidebar from "../Shared/Sidebar/Sidebar";
+import useScrollToTop from "../../hooks/useScrollToTop/useScrollToTop";
 
 const Contact = () => {
+  useScrollToTop();
+
   // Default Contact Info(Hard Info)
   const homeLat = 23.921683;
   const homeLng = 90.258871;

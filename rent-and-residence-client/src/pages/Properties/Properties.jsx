@@ -176,7 +176,7 @@ const Properties = () => {
                 )}
               </div>
 
-              <div className=" flex items-center gap-3 w-[10%] pr-4">
+              <div className="lg:flex hidden items-center gap-3 w-[10%] pr-4">
                 <button
                   onClick={() => setDoubleColumnView(true)}
                   className="btn p-0 bg-transparent border-none text-[18px] text-C_DarkGray/60 hover:text-C_purple "
