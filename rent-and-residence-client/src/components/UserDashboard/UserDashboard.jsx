@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import BarChartStat from "../BarChartStat/BarChartStat";
@@ -30,7 +31,22 @@ const UserDashboard = () => {
     },
   });
 
-  // console.log(chartData);
+  console.log(chartData);
+
+  // const [userData, setUserData] = useState({
+  //   category: "",
+  //   quantity: 0,
+  //   revenue: 0,
+  // });
+
+  // useEffect(() => {
+  //   userSpending?.result?.map(
+  //     (each) => (setUserData.category = each.paymentStatus)
+  //   );
+  // }, [userData, userSpending?.result]);
+
+  // console.log(userData);
+
   return (
     <div className="grid grid-cols-12 gap-6 pt-10">
       <div className="lg:col-span-8 col-span-12 flex flex-col gap-8 lg:order-1 order-2">
@@ -71,7 +87,9 @@ const UserDashboard = () => {
             </h1>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 ">
-            <div>{/* <BarChartStat chartData={agentRevenue?.result} /> */}</div>
+            <div>
+              <BarChartStat chartData={userSpending?.result} />
+            </div>
             <h1 className="lg:hidden flex font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-6">
               Revenue per Category
             </h1>
