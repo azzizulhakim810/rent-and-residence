@@ -25,7 +25,7 @@ const AllOrders = () => {
 
   // console.log(paymentHistory.map((item) => item.cartIds));
 
-  console.log(allOrders);
+  // console.log(allOrders);
   return (
     <div className="py-10">
       <h1 className="font-Nunito text-2xl font-[600] pb-2">Welcome</h1>

@@ -20,17 +20,8 @@ const AgentDashboard = () => {
     },
   });
 
-  console.log(agentRevenue);
+  // console.log(agentRevenue);
 
-  const { data: chartData = [] } = useQuery({
-    queryKey: ["chartData"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/api/order-stats");
-      return res.data;
-    },
-  });
-
-  console.log(chartData);
   return (
     <div className="grid grid-cols-12 gap-6 pt-10">
       <div className="lg:col-span-8 col-span-12 flex flex-col gap-8 lg:order-1 order-2">

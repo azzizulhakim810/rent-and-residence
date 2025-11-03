@@ -53,12 +53,12 @@ const upload = multer({ storage });
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
+    // await client.db("admin").command({ ping: 1 });
+    // console.log(
+    //   "Pinged your deployment. You successfully connected to MongoDB!"
+    // );
 
     // Property Related Api's
     const propertyCollection = client
@@ -155,7 +155,7 @@ async function run() {
     app.get("/api/user/role/:email", verifyToken, async (req, res) => {
       const email = req.params.email;
 
-      console.log(email, req.decoded.email);
+      // console.log(email, req.decoded.email);
 
       if (email !== req.decoded.email) {
         return res.status(403).send({ message: "forbidden access" });
@@ -169,9 +169,9 @@ async function run() {
 
       let role;
 
-      if (user?.role === "Admin") {
+      if (user?.role.toLowerCase() === "admin") {
         res.send({ role: "Admin" });
-      } else if (user?.role === "Agent") {
+      } else if (user?.role.toLowerCase() === "agent") {
         res.send({ role: "Agent" });
       } else {
         res.send({ role: "User" });

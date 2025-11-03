@@ -18,17 +18,7 @@ const UserDashboard = () => {
     },
   });
 
-  console.log(userSpending?.result);
-
-  const { data: chartData = [] } = useQuery({
-    queryKey: ["chartData"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/api/order-stats");
-      return res.data;
-    },
-  });
-
-  console.log(chartData);
+  // console.log(userSpending?.result);
 
   const userData = userSpending?.result?.map((each) => ({
     category: each?.paymentStatus,

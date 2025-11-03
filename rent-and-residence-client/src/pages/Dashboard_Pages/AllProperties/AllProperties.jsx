@@ -54,10 +54,10 @@ const AllProperties = () => {
                 </thead>
                 <tbody>
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                    <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
                       Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
+                      <td className="loading loading-dots loading-lg"></td>
+                    </tr>
                   ) : (
                     allProperties?.map((property, idx) => (
                       <AllPropertiesTable

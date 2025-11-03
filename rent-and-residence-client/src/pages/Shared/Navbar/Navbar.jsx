@@ -40,10 +40,6 @@ const Navbar = () => {
   // Load the cart items from useCart Hook
   const [cart, refetch] = UseCart();
   const { cartProperties, cartItems } = cart;
-  // const [isRole, isRolePending] = useRole();
-  // console.log(isRole);
-
-  // console.log(cart.cartProperties, cart.cartItems);
 
   const totalPrice = cartProperties?.reduce((total, item) => {
     return total + parseInt(item.price);

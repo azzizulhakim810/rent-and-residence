@@ -58,7 +58,7 @@ const MyOrders = () => {
                   {isPending ? (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
-                        <p className="text-lg text-C_purple flex items-center justify-center gap-4">
+                        <p className="text-lg text-C_purple flex items-center justify-start gap-4">
                           Loading{" "}
                           <span className="loading loading-dots loading-lg"></span>
                         </p>
