@@ -28,8 +28,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(
   cors({
     origin: ["https://rent-residence-3a842.web.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["authorization", "Content-Type"],
     credentials: true,
-    allowedHeaders: ["authorization", "Authorization", "Content-Type"],
   })
 );
 app.use(express.json()); // for application/json
@@ -168,15 +169,15 @@ async function run() {
     };
 
     // Check what is user's role
-    app.get("/api/user/role/:email", verifyToken, async (req, res) => {
+    app.get("/api/user/role/:email", async (req, res) => {
       const email = req.params.email;
 
       // console.log("Requested:", email);
       // console.log("Token:", req.decoded.email);
 
-      if (email !== req.decoded.email) {
-        return res.status(403).send({ message: "forbidden access" });
-      }
+      // if (email !== req.decoded.email) {
+      //   return res.status(403).send({ message: "forbidden access" });
+      // }
 
       const query = { email: email };
 
