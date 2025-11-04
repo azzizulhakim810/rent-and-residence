@@ -27,9 +27,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // Middlewares
 app.use(
   cors({
-    origin: ["https://rent-residence-3a842.web.app"],
+    origin: ["https://rent-residence-3a842.web.app", "http://localhost:5173"],
     credentials: true,
-    allowedHeaders: ["Authorization", "Content-Type"],
+    allowedHeaders: ["authorization", "Authorization", "Content-Type"],
   })
 );
 app.use(express.json()); // for application/json
@@ -89,6 +89,12 @@ async function run() {
       const user = req.body;
       // console.log("Jwt", user);
 
+      console.log("JWT Secret present:", !!process.env.ACCESS_TOKEN_SECRET);
+      console.log(
+        "JWT Secret length:",
+        process.env.ACCESS_TOKEN_SECRET?.length
+      );
+
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1h",
       });
@@ -99,9 +105,12 @@ async function run() {
     // middlewares
     const verifyToken = (req, res, next) => {
       const authHeader = req.headers["authorization"];
-      // console.log("Inside verify Token", authHeader);
+      console.log("Inside verify Token", authHeader);
 
-      // console.log("AuthHeader:", req.headers.authorization);
+      if (!authHeader)
+        return res.status(401).send({ message: "Missing Header" });
+
+      // console.log("Auth Header:", req.headers.authorization);
 
       const token = authHeader && authHeader.split(" ")[1];
 
@@ -111,7 +120,10 @@ async function run() {
 
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
-          return res.status(403).send({ message: "forbidden access" });
+          console.log("JWT Verify Error:", err.message);
+          return res
+            .status(401)
+            .send({ message: "Unauthorized", error: err.message });
         }
 
         req.decoded = decoded;

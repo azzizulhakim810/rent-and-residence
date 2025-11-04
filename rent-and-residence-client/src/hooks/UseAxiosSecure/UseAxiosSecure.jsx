@@ -5,8 +5,6 @@ import UseAuth from "../useAuth/useAuth";
 const axiosSecure = axios.create({
   baseURL: "https://rent-and-residence-server.vercel.app",
   // baseURL: "http://localhost:5123",
-  // headers: { "Content-Type": "application/json" },
-  // withCredentials: true,
 });
 
 const UseAxiosSecure = () => {
@@ -21,6 +19,7 @@ const UseAxiosSecure = () => {
 
       if (token) {
         config.headers.authorization = `Bearer ${token}`;
+        console.log("Token being sent:", config.headers.authorization);
       } else {
         delete config.headers.authorization;
       }
@@ -39,7 +38,7 @@ const UseAxiosSecure = () => {
     },
     async (err) => {
       const status = err.response?.status;
-      // console.log("Status error", status);
+      console.log("Status error", status);
 
       // For 401 & 403 user to logOut
 
