@@ -124,14 +124,15 @@ const PropertyDetails = () => {
     formData.append("comment", data.comment);
     formData.append("propertyId", propertyId);
     formData.append("userId", userId);
+    formData.append("createdAt", new Date());
 
     console.log(Object.fromEntries(formData.entries()));
 
-    axiosPublic
+    axiosSecure
       .post("/api/reviews", formData)
       .then((res) => {
         console.log(res.data);
-        if (res.data.ok) {
+        if (res.data.insertedId) {
           toast.success("Successfully submitted review");
           reset();
           refetchReviews();
@@ -634,7 +635,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                         <tbody className=" font-Nunito_Sans text-[16px] tracking-wide">
                           {/* row 1  */}
                           <tr className="block mt-3 mb-3 font-Nunito font-[700] text-C_gray">
-                            Interior Details
+                            <td>Interior Details</td>
                           </tr>
                           <tr className="text-C_gray">
                             {amenities?.equippedKitchen ? (
@@ -718,7 +719,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <td className="block my-3"></td>
                           <tr className=" text-C_gray">
                             {amenities?.hotBath ? (
                               <td className="w-1/3">
@@ -943,7 +944,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
                           {/* row 2  */}
                           <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
-                            Outdoor Details
+                            <td>Outdoor Details</td>
                           </tr>
 
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
@@ -1004,7 +1005,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
                           {/* row 3  */}
                           <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
-                            Utilities
+                            <td>Utilities</td>
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             {amenities?.centralAir ? (
@@ -1074,7 +1075,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
 
                           {/* row 4 */}
                           <tr className="block mt-5 mb-3 font-Nunito font-[700] text-C_gray">
-                            Other Features
+                            <td>Other Features</td>
                           </tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             {amenities?.chairAccessible ? (
@@ -1164,10 +1165,10 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       height="400"
                       src="https://www.youtube.com/embed/wkGoES-V5Ys?si=UJHxcjwokWRqtonK"
                       title="YouTube video player"
-                      frameborder="0"
+                      frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerpolicy="strict-origin-when-cross-origin"
-                      allowfullscreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
                     ></iframe>
                   </div>
                 </div>
@@ -1190,7 +1191,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                       propImg={propImg}
                     />
                   ) : (
-                    <div class="flex justify-center items-center ">
+                    <div className="flex justify-center items-center ">
                       <p className="font-Nunito_Sans text-C_purple pe-2">
                         Don't see the map? Please Reload
                       </p>
@@ -1263,9 +1264,9 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {...register("comment", {
                             required: "This is required",
                             maxLength: {
-                              value: 50,
+                              value: 100,
                               message:
-                                "Comment should be less than 50 Characters",
+                                "Comment should be less than 100 Characters",
                             },
                             minLength: {
                               value: 10,
@@ -1303,7 +1304,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               : "none",
                             backgroundColor: profileImage
                               ? undefined
-                              : `<div class="flex justify-center items-center ">
+                              : `<div className="flex justify-center items-center ">
                                       <span className=" loading loading-ring loading-xl text-C_purple"></span>
                                     </div>`,
                           }}
@@ -1311,42 +1312,42 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* Social Icons */}
                           <div className="absolute bottom-0  -mb-10 flex flex-col gap-1 lg:translate-x-[10%]">
                             <div className="bg-white w-full z-10 shadow-xl text-C_LightGray mx-auto rounded flex justify-center align-middle items-center gap-3 py-1 px-15">
-                              <a
-                                href={formattedFacebookURL}
+                              <Link
+                                to={formattedFacebookURL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                                   <FaFacebookF />
                                 </button>
-                              </a>
-                              <a
-                                href={formattedLinkedInURL}
+                              </Link>
+                              <Link
+                                to={formattedLinkedInURL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                                   <FaLinkedinIn />
                                 </button>
-                              </a>
-                              <a
-                                href={formattedTwitterURL}
+                              </Link>
+                              <Link
+                                to={formattedTwitterURL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                                   <FaXTwitter />
                                 </button>
-                              </a>
-                              <a
-                                href={formattedPinterestURL}
+                              </Link>
+                              <Link
+                                to={formattedPinterestURL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <button className=" text-C_gray bg-transparent text-[16px] p-3 rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                                   <FaPinterest />
                                 </button>
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         </figure>

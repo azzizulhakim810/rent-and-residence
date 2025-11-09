@@ -563,7 +563,17 @@ async function run() {
 
     // Get all the reviews
     app.get("/api/reviews", async (req, res) => {
-      const result = await reviewCollection.find().limit(6).toArray();
+      // const result = await reviewCollection.find().limit(6).toArray();
+      const result = await reviewCollection
+        .aggregate([
+          {
+            $limit: 6,
+          },
+          {
+            $sort: { createdAt: -1 },
+          },
+        ])
+        .toArray();
       res.send(result);
     });
 
@@ -810,7 +820,7 @@ async function run() {
     app.post("/api/reviews", verifyToken, upload.none(), async (req, res) => {
       const reviewText = req.body;
 
-      // console.log(req.body);
+      console.log(req.body);
 
       const result = await reviewCollection.insertOne(reviewText);
 

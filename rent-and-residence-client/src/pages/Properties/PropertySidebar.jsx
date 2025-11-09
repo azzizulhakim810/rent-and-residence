@@ -9,7 +9,7 @@ const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const axiosSecure = UseAxiosSecure();
 
-  // console.log(reviews);
+  console.log(ownerId, reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
