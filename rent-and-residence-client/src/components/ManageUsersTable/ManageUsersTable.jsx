@@ -17,7 +17,7 @@ const ManageUsersTable = ({ user, i, refetch }) => {
     console.log(updatedRole);
 
     axiosSecure
-      .put(`/api/updateUserRole/${id}`, {
+      .patch(`/api/updateUserRole/${id}`, {
         role: updatedRole,
       })
       .then((res) => {

@@ -6,8 +6,8 @@ import { toast } from "sonner";
 import { RxUpdate } from "react-icons/rx";
 
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
+import useSignedInUser from "../../../hooks/useSignedInUser/useSignedInUser";
 
 const MyProfile = () => {
   useScrollToTop();
@@ -189,22 +189,28 @@ const MyProfile = () => {
                 </h1>
 
                 {/* Title/Position  */}
-                <div className="flex gap-5 w-full">
-                  <div className="flex flex-col lg:w-1/2 w-full">
-                    <label className="label mb-2 text-sm font-[600]">
-                      Role
-                    </label>
+                {role.toLowerCase() === "admin" ? (
+                  <button className="text-[16px] bg-C_purple text-white py-1 px-4 w-[150px] text-center rounded">
+                    You're an Admin
+                  </button>
+                ) : (
+                  <div className="flex gap-5 w-full">
+                    <div className="flex flex-col lg:w-1/2 w-full">
+                      <label className="label mb-2 text-sm font-[600]">
+                        Role
+                      </label>
 
-                    <select
-                      className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      defaultValue={role}
-                      {...register("role", { required: role ? false : true })}
-                    >
-                      <option value="user">User</option>
-                      <option value="agent">Agent</option>
-                    </select>
+                      <select
+                        className=" text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-3 px-3 me-3 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
+                        defaultValue={role}
+                        {...register("role", { required: role ? false : true })}
+                      >
+                        <option value="user">User</option>
+                        <option value="agent">Agent</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-5">
                   Contact Information

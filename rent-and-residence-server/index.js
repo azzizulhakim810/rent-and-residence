@@ -29,7 +29,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(
   cors({
     origin: ["https://rent-residence-3a842.web.app", "http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["authorization", "Content-Type"],
     credentials: true,
   })
@@ -924,7 +924,7 @@ async function run() {
     });
 
     // update an user to agent/admin/user
-    app.put(
+    app.patch(
       "/api/updateUserRole/:id",
       verifyToken,
       verifyAdmin,

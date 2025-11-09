@@ -57,10 +57,10 @@ const AllOrders = () => {
                 </thead>
                 <tbody>
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
+                    <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                      <td>Loading </td>
+                      <td className="loading loading-dots loading-lg"></td>
+                    </tr>
                   ) : allOrders?.length !== 0 ? (
                     allOrders?.map((order, i) => (
                       <AllOrdersTable
@@ -73,7 +73,7 @@ const AllOrders = () => {
                     ))
                   ) : (
                     <tr className="text-lg font-Nunito_Sans block mt-4">
-                      You don't make any payment!
+                      <td>You don't make any payment!</td>
                     </tr>
                   )}
                 </tbody>
