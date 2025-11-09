@@ -20,7 +20,7 @@ const AgentRoute = ({ children }) => {
   }
 
   // If user is logged in
-  if (user && isRole === "Agent") {
+  if (user && isRole === "agent") {
     console.log("Hurrah! You're an Agent");
     return children;
   }

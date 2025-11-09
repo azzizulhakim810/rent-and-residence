@@ -205,8 +205,8 @@ const MyProfile = () => {
                         defaultValue={role}
                         {...register("role", { required: role ? false : true })}
                       >
-                        <option value="User">User</option>
-                        <option value="Agent">Agent</option>
+                        <option value="user">User</option>
+                        <option value="agent">Agent</option>
                       </select>
                     </div>
                   </div>

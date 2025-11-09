@@ -364,7 +364,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                 <div className="relative pb-10 lg:hidden flex custom-tooltip">
                   <div
                     data-tip={`${
-                      currentUserFromDB?.role !== "User"
+                      currentUserFromDB?.role !== "user"
                         ? "Admin/Agent can't book properties"
                         : ""
                     }`}
@@ -372,7 +372,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                   >
                     <button
                       disabled={
-                        ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                        ["admin", "agent"].includes(currentUserFromDB?.role)
                           ? true
                           : false
                       }
@@ -1453,7 +1453,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
           <div className="lg:col-span-4 col-span-10 relative">
             <div
               data-tip={`${
-                currentUserFromDB?.role !== "User"
+                currentUserFromDB?.role !== "user"
                   ? "Admin/Agent can't book properties"
                   : ""
               }`}
@@ -1461,7 +1461,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
             >
               <button
                 disabled={
-                  ["Admin", "Agent"].includes(currentUserFromDB?.role)
+                  ["admin", "agent"].includes(currentUserFromDB?.role)
                     ? true
                     : false
                 }

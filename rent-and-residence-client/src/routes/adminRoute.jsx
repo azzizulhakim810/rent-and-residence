@@ -20,7 +20,7 @@ const AdminRoute = ({ children }) => {
   }
 
   // If user is logged in
-  if (user && isRole === "Admin") {
+  if (user && isRole === "admin") {
     console.log("Hurrah! You're Admin");
     return children;
   }

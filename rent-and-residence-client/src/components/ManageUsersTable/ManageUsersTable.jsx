@@ -77,9 +77,9 @@ const ManageUsersTable = ({ user, i, refetch }) => {
           onChange={(e) => handleRoleChange(e, _id)}
           defaultValue={role}
         >
-          <option value="User">User</option>
-          <option value="Agent">Agent</option>
-          <option value="Admin">Admin</option>
+          <option value="user">User</option>
+          <option value="agent">Agent</option>
+          <option value="admin">Admin</option>
         </select>
       </td>
 

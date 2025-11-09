@@ -73,7 +73,7 @@ const AllOrders = () => {
                     ))
                   ) : (
                     <tr className="text-lg font-Nunito_Sans block mt-4">
-                      <td>You don't make any payment!</td>
+                      <td>You haven't made any payments yet!</td>
                     </tr>
                   )}
                 </tbody>

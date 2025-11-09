@@ -144,7 +144,7 @@ async function run() {
       const user = await userCollection.findOne(query);
       // console.log(user);
 
-      const isAdmin = user?.role === "Admin";
+      const isAdmin = user?.role === "admin";
 
       if (!isAdmin) {
         return res.status(403).send({ message: "forbidden access" });
@@ -160,7 +160,7 @@ async function run() {
       const query = { email: email };
       const user = await userCollection.findOne(query);
 
-      const isAgent = user?.role === "Agent";
+      const isAgent = user?.role === "agent";
 
       if (!isAgent) {
         return res.status(403).send({ message: "forbidden access" });
@@ -189,11 +189,11 @@ async function run() {
       let role;
 
       if (user?.role.toLowerCase() === "admin") {
-        res.send({ role: "Admin" });
+        res.send({ role: "admin" });
       } else if (user?.role.toLowerCase() === "agent") {
-        res.send({ role: "Agent" });
+        res.send({ role: "agent" });
       } else {
-        res.send({ role: "User" });
+        res.send({ role: "user" });
       }
     });
 
