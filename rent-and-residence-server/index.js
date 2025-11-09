@@ -107,7 +107,7 @@ async function run() {
     // middlewares
     const verifyToken = (req, res, next) => {
       const authHeader = req.headers["authorization"];
-      console.log("Inside verify Token", authHeader);
+      // console.log("Inside verify Token", authHeader);
 
       if (!authHeader)
         return res.status(401).send({ message: "Missing Header" });
@@ -924,7 +924,7 @@ async function run() {
     });
 
     // update an user to agent/admin/user
-    app.patch(
+    app.put(
       "/api/updateUserRole/:id",
       verifyToken,
       verifyAdmin,

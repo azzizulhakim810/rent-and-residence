@@ -20,7 +20,7 @@ const UseAxiosSecure = () => {
 
       if (token) {
         config.headers.authorization = `Bearer ${token}`;
-        console.log("Token being sent:", config.headers.authorization);
+        // console.log("Token being sent:", config.headers.authorization);
       } else {
         delete config.headers.authorization;
       }

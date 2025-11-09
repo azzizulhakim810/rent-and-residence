@@ -53,10 +53,10 @@ const ManageUsers = () => {
                 <tbody>
                   {}
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
+                    <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                      <td>Loading </td>
+                      <td className="loading loading-dots loading-lg"></td>
+                    </tr>
                   ) : allUser?.length !== 0 ? (
                     allUser?.map((user, i) => (
                       <ManageUsersTable
@@ -68,9 +68,9 @@ const ManageUsers = () => {
                       />
                     ))
                   ) : (
-                    <span className="text-lg font-Nunito_Sans block mt-4">
-                      There is no user!
-                    </span>
+                    <tr className="text-lg font-Nunito_Sans block mt-4">
+                      <td>There is no user!</td>
+                    </tr>
                   )}
                 </tbody>
               </table>

@@ -14,8 +14,10 @@ const ManageUsersTable = ({ user, i, refetch }) => {
     const updatedRole = e.target.value;
     // setSelectedRole(updatedRole);
 
+    console.log(updatedRole);
+
     axiosSecure
-      .patch(`/api/updateUserRole/${id}`, {
+      .put(`/api/updateUserRole/${id}`, {
         role: updatedRole,
       })
       .then((res) => {
