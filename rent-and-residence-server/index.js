@@ -17,6 +17,7 @@ import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 import multer from "multer";
 import Stripe from "stripe";
 import main from "./configs/gemini.js";
+import imagekit from "./configs/imageKit.js";
 
 const app = express();
 
@@ -1061,19 +1062,17 @@ async function run() {
           });
           console.log(imgUpload.url);
 
-          // Optimization through imagekit URL Transformation
-          const optimizedImageUrl = imagekit.url({
-            path: imgUpload.url,
-            transformation: [
-              { quality: "auto" },
-              { format: "webp" },
-              { width: "1280" },
-            ],
-          });
+          // Optimization through imagekit URL Transformation - Couldn't work
+          // const optimizedImageUrl = imagekit.url({
+          //   path: imgUpload.url,
+          //   transformation: [
+          //     { quality: "auto", format: "webp", width: "1280" },
+          //   ],
+          // });
 
           // Push the url inside updateProfile object
-          // updateProfile.profileImage = imgUpload.url;
-          updateProfile.profileImage = optimizedImageUrl;
+          updateProfile.profileImage = imgUpload.url;
+          // updateProfile.profileImage = optimizedImageUrl;
         } else {
           console.log("Doesn't get the file");
         }

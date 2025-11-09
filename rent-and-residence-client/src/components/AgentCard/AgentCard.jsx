@@ -26,7 +26,7 @@ const AgentCard = ({ agent }) => {
     twitterUrl,
     // websiteUrl,
   } = agent || {};
-  // console.log(agent);
+  console.log(profileImage);
 
   const handleUrl = (url) => {
     if (!url) return "#";
