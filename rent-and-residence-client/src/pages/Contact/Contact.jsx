@@ -14,7 +14,7 @@ const Contact = () => {
   // Default Contact Info(Hard Info)
   const homeLat = 23.921683;
   const homeLng = 90.258871;
-  const title = "OUR ARENA IS HERE 😎";
+  const title = "OUR ARENA IS HERE";
   const officeImg = "https://i.ibb.co/dDmcr52/Apple.jpg";
   const price = "";
 

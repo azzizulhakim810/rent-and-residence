@@ -106,7 +106,7 @@ const Banner = () => {
                 value={filters.city}
                 className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Choose a city
                 </option>
 
@@ -133,7 +133,7 @@ const Banner = () => {
                 value={filters.bedroom}
                 className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Bedrooms
                 </option>
                 {bedrooms.map((bedroom) => (
@@ -159,7 +159,7 @@ const Banner = () => {
                 value={filters.room}
                 className="select join-item block w-full px-4 py-2 bg-white border border-none rounded-full shadow-sm focus:outline-none focus:ring-1 focus:ring-C_purple focus:border-none text-[16px] text-gray-400 "
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Rooms
                 </option>
                 {rooms.map((room) => (

@@ -122,7 +122,7 @@ const MyProfile = () => {
           toast.success("Profile Updated Successfully");
           reset();
           // navigate("/dashboard/stat");
-          navigate("/allAgents");
+          navigate("/agents");
           window.scrollTo({
             top: 0,
             behavior: "auto",
@@ -241,14 +241,15 @@ const MyProfile = () => {
 
                 {/* Email + Phone  */}
                 <div className="flex lg:flex-row flex-col  gap-5 w-full">
-                  <div className=" lg:w-1/2">
+                  <div className="lg:w-1/2">
                     <label className="label mb-2 text-sm font-[600]">
                       Email
                     </label>
                     <input
                       disabled
                       className="input text-C_LightGray/40 focus:text-C_LightGray/80  border-2  focus:border-2 bg-[#F1F1F1] focus:bg-[#ffffff] rounded-md py-6 border-[#F1F1F1] focus:border-C_purple focus:outline-0 font-Nunito_Sans font-[500] duration-300 mb-2"
-                      value={email}
+                      // value={email}
+                      defaultValue={email}
                       {...register(
                         "email"
                         //   {
