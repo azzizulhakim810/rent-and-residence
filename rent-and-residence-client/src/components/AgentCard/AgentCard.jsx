@@ -88,29 +88,29 @@ const AgentCard = ({ agent }) => {
               <div className="flex justify-between items-center pt-1">
                 {/* Social Icons  */}
                 <div className=" flex gap-3 ">
-                  <a href={formattedFacebookURL}>
+                  <Link to={formattedFacebookURL}>
                     <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                       <FaFacebookF />
                     </button>
-                  </a>
+                  </Link>
 
-                  <a href={formattedLinkedInURL}>
+                  <Link to={formattedLinkedInURL}>
                     <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                       <FaLinkedinIn />
                     </button>
-                  </a>
+                  </Link>
 
-                  <a href={formattedTwitterURL}>
+                  <Link to={formattedTwitterURL}>
                     <button className=" text-C_gray bg-transparent text-[16px] rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                       <FaXTwitter />
                     </button>
-                  </a>
+                  </Link>
 
-                  <a href={formattedPinterestURL}>
+                  <Link to={formattedPinterestURL}>
                     <button className=" text-C_gray bg-transparent text-[16px]  rounded-none hover:text-C_purple text-C_LightGray cursor-pointer">
                       <FaPinterest />
                     </button>
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Contact Info  */}
