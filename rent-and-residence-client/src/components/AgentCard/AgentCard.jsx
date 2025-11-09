@@ -26,7 +26,7 @@ const AgentCard = ({ agent }) => {
     twitterUrl,
     // websiteUrl,
   } = agent || {};
-  console.log(profileImage);
+  // console.log(profileImage);
 
   const handleUrl = (url) => {
     if (!url) return "#";
@@ -55,7 +55,9 @@ const AgentCard = ({ agent }) => {
             <div
               className="w-full h-[280px] bg-cover bg-no-repeat bg-center relative bg-black/0 hover:bg-white/10  overflow-hidden duration-400 bg-blend-overlay cursor-pointer rounded-lg"
               style={{
-                backgroundImage: profileImage ? `url(${profileImage})` : "none",
+                backgroundImage: profileImage
+                  ? `url(${profileImage})`
+                  : "https://i.ibb.co/jkGkX8fs/default-user.png",
                 backgroundColor: profileImage
                   ? undefined
                   : `<div class="flex justify-center items-center ">
@@ -76,7 +78,7 @@ const AgentCard = ({ agent }) => {
                 <h4 className=" font-Nunito font-[600] text-C_gray text-[25px]">
                   {name}
                 </h4>
-                <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] ">
+                <p className=" text-C_LightGray font-Nunito_Sans font-[500] text-[16px] capitalize">
                   {role}
                 </p>
 

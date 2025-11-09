@@ -62,11 +62,11 @@ const MyPropertyList = () => {
                 <tbody>
                   {}
                   {isPending ? (
-                    <p className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
-                      <span className="loading loading-dots loading-lg"></span>
-                    </p>
-                  ) : (
+                    <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
+                      <td> Loading </td>
+                      <td className="loading loading-dots loading-lg"></td>
+                    </tr>
+                  ) : agentOwnedProperties?.allOwnedProps?.length !== 0 ? (
                     agentOwnedProperties?.allOwnedProps?.map((property) => (
                       <MyPropertyTable
                         key={property._id}
@@ -74,6 +74,10 @@ const MyPropertyList = () => {
                         refetch={refetch}
                       />
                     ))
+                  ) : (
+                    <tr className="text-lg font-Nunito_Sans block mt-4">
+                      <td>You haven't listed any properties yet!</td>
+                    </tr>
                   )}
                 </tbody>
               </table>

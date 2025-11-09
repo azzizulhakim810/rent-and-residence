@@ -189,7 +189,7 @@ const MyProfile = () => {
                 </h1>
 
                 {/* Title/Position  */}
-                {role.toLowerCase() === "admin" ? (
+                {role?.toLowerCase() === "admin" ? (
                   <button className="text-[16px] bg-C_purple text-white py-1 px-4 w-[150px] text-center rounded">
                     You're an Admin
                   </button>
@@ -205,8 +205,8 @@ const MyProfile = () => {
                         defaultValue={role}
                         {...register("role", { required: role ? false : true })}
                       >
-                        <option value="user">User</option>
-                        <option value="agent">Agent</option>
+                        <option value="User">User</option>
+                        <option value="Agent">Agent</option>
                       </select>
                     </div>
                   </div>

@@ -262,8 +262,9 @@ const AddNewProperty = () => {
                 className="fieldset flex flex-col gap-5 bg-white w-full "
               >
                 <div className="p-4 font-Nunito_Sans text-sm bg-red-400 text-white rounded-md">
-                  These fields are mandatory. Title, Property Category Submit,
-                  Property Action Category, Property Media
+                  Many fields are mandatory to publish your listing. Be careful
+                  & keep patience. Once done, hit upload. Then you'll see your
+                  beautiful listing under properties page.
                 </div>
 
                 <h1 className=" font-Nunito text-[20px] font-[600] tracking-wider text-gray-700 mt-3">
