@@ -52,7 +52,7 @@ const PaymentHistory = () => {
                 <tbody>
                   {isPending ? (
                     <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                     <td> Loading{" "}</td>
+                      <td> Loading </td>
                       <td className="loading loading-dots loading-lg"></td>
                     </tr>
                   ) : paymentHistory?.length !== 0 ? (
@@ -66,8 +66,12 @@ const PaymentHistory = () => {
                       />
                     ))
                   ) : (
-                    <tr className="text-lg font-Nunito_Sans block mt-4">
-                      <td>You don't make any payment!</td>
+                    <tr>
+                      <td colSpan={6} className=" pt-6">
+                        <span className="text-lg font-Nunito_Sans text-C_DarkGray/50">
+                          You haven't made any payments yet!
+                        </span>
+                      </td>
                     </tr>
                   )}
                 </tbody>

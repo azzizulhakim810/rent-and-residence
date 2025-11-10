@@ -53,7 +53,7 @@ const AgentCard = ({ agent }) => {
         <div className=" p-2 mb-1 w-full rounded-md bg-white">
           <nav className="flex flex-col  gap-2">
             <div
-              className="w-full h-[280px] bg-cover bg-no-repeat bg-center relative bg-black/0 hover:bg-white/10  overflow-hidden duration-400 bg-blend-overlay cursor-pointer rounded-lg"
+              className="w-full h-[350px] bg-cover bg-no-repeat bg-center relative bg-black/0 hover:bg-white/10  overflow-hidden duration-400 bg-blend-overlay cursor-pointer rounded-lg"
               style={{
                 backgroundImage: profileImage
                   ? `url(${profileImage})`
@@ -64,13 +64,14 @@ const AgentCard = ({ agent }) => {
                       <span className=" loading loading-ring loading-xl text-C_purple"></span>
                     </div>`,
               }}
-            >
-              {/*  <img
-                className="rounded-md w-full h-[250px] object-cover"
+            ></div>
+            {/* <div>
+              <img
+                className="rounded-md w-full  object-cover"
                 src={profileImage}
                 alt=""
-              /> */}
-            </div>
+              />
+            </div> */}
 
             {/* Details  */}
             <div className=" w-auto flex flex-col gap-2 p-2 mt-2">

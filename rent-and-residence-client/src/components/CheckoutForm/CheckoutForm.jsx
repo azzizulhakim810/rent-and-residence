@@ -112,7 +112,7 @@ const CheckoutForm = ({ totalPrice }) => {
         className="w-full text-[16px] text-[#424770]  border-1 border-C_LightGray/10 p-3 rounded-lg placeholder:text-[#aab7c4] focus:border-1 focus:outline-1 outline-C_LightGray/10 mb-4"
         type="email"
         name="Email"
-        value={user.email}
+        defaultValue={user.email}
         placeholder="Your Email"
       />
       <input
@@ -149,11 +149,11 @@ const CheckoutForm = ({ totalPrice }) => {
       )}
 
       <button
-        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-8"
+        className="btn bg-C_purple text-white hover:bg-[#40384B] rounded-md px-8 py-3"
         type="submit"
         disabled={!stripe || !clientSecret}
       >
-        <TbCreditCardPay class="text-lg" />
+        <TbCreditCardPay className="text-lg" />
         Pay
       </button>
 

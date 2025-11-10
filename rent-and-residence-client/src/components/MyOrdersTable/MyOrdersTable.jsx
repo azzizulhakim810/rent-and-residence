@@ -23,7 +23,7 @@ const MyOrdersTable = ({ order, i }) => {
       .catch((err) => console.error(err));
   }, [order.propertyIds, axiosSecure]);
 
-  // console.log(properties);
+  console.log(properties);
 
   /*   useEffect(() => {
     // order.propertyIds.map((propId) => setPropertyId(propId));

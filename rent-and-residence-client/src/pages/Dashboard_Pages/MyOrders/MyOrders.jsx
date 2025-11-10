@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
+import MyOrdersTable from "../../../components/MyOrdersTable/MyOrdersTable";
 import UseAuth from "../../../hooks/UseAuth/UseAuth";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure/UseAxiosSecure";
-import MyOrdersTable from "../../../components/MyOrdersTable/MyOrdersTable";
 import useScrollToTop from "../../../hooks/useScrollToTop/useScrollToTop";
 
 const MyOrders = () => {
@@ -21,6 +21,8 @@ const MyOrders = () => {
       return res.data;
     },
   });
+
+  console.log(myOrders);
 
   // myOrders?.map((order) => console.log(order.status));
 
@@ -58,10 +60,10 @@ const MyOrders = () => {
                   {isPending ? (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
-                        <td className="text-lg text-C_purple flex items-center justify-start gap-4">
-                          <span>Loading{" "}</span>
+                        <p className="text-lg text-C_purple flex items-center justify-start gap-4">
+                          <span>Loading </span>
                           <span className="loading loading-dots loading-lg"></span>
-                        </td>
+                        </p>
                       </td>
                     </tr>
                   ) : myOrders?.length !== 0 ? (
@@ -78,8 +80,8 @@ const MyOrders = () => {
                     )
                   ) : (
                     <tr>
-                      <td colSpan={6} className="text-center py-4">
-                        <span className="text-lg font-Nunito_Sans">
+                      <td colSpan={6} className=" pt-6">
+                        <span className="text-lg font-Nunito_Sans text-C_DarkGray/50">
                           There is no property!
                         </span>
                       </td>

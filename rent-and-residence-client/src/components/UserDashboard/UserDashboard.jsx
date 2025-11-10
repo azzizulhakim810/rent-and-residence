@@ -26,7 +26,7 @@ const UserDashboard = () => {
     revenue: each?.spending,
   }));
 
-  // console.log(userData);
+  console.log(userSpending);
 
   return (
     <div className="grid grid-cols-12 gap-6 pt-10">
@@ -40,15 +40,19 @@ const UserDashboard = () => {
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 font-Nunito_Sans text-C_LightGray">
             <h3>
               Paid Properties:{" "}
-              {userSpending?.result?.map(
-                (each) => each.paymentStatus == "paid" && each.count
-              )}
+              {userSpending?.result?.length !== 0
+                ? userSpending?.result?.map(
+                    (each) => each.paymentStatus == "paid" && each.count
+                  )
+                : 0}
             </h3>
             <h3>
               Pending Properties:{" "}
-              {userSpending?.result?.map(
-                (each) => each.paymentStatus == "onHold" && each.count
-              )}
+              {userSpending?.result?.length !== 0
+                ? userSpending?.result?.map(
+                    (each) => each.paymentStatus == "onHold" && each.count
+                  )
+                : 0}
             </h3>
             {/* <h3>Registered Users: {stats?.registeredUsers}</h3> */}
             {/* <h3>Saved Searches: 0</h3> */}
