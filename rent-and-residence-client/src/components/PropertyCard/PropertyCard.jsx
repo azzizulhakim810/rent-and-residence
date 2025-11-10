@@ -36,16 +36,16 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     // category,
     propertyStatus,
     propertyDetails,
-  } = property || {};
+  } = property;
 
   // console.log(property);
 
   // Fetch the owner of each Property
   useEffect(() => {
-    axiosPublic.get(`/api/users/${ownerId}`).then((res) => {
+    axiosPublic.get(`/api/users/${property?.ownerId}`).then((res) => {
       setPropertyOwner(res.data);
     });
-  }, [ownerId, axiosPublic]);
+  }, [property.ownerId, axiosPublic]);
 
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};

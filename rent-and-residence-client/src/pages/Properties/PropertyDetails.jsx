@@ -188,10 +188,11 @@ const PropertyDetails = () => {
   useEffect(() => {
     const fetchPropertyOwner = async () => {
       try {
-        setTimeout(async () => {
-          const res = await axiosPublic.get(`/api/users/${ownerId}`);
-          setPropertyOwner(res.data);
-        }, 2000);
+        const res = await axiosPublic.get(`/api/users/${ownerId}`);
+        setPropertyOwner(res.data);
+        // setTimeout(async () => {
+
+        // }, 1000);
       } catch (error) {
         console.log(error);
       }

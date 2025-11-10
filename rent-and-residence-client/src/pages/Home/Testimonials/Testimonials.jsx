@@ -10,6 +10,8 @@ const Testimonials = () => {
     axiosPublic.get("/api/reviews").then((res) => setReviews(res.data));
   }, [axiosPublic]);
 
+  console.log(reviews);
+
   return (
     <div className="grid grid-cols-12 lg:py-20 py-20 relative ">
       {/* Section Title Desktop | Hidden on Mobile */}
@@ -23,7 +25,7 @@ const Testimonials = () => {
         {/* First Row  */}
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-5">
           {reviews &&
-            reviews.map((review) => (
+            reviews?.map((review) => (
               <TestimonialCard key={review._id} review={review} />
             ))}
         </div>

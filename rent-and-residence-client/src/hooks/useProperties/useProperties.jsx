@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
 
-const useProperties = ({ currentPage, limit, filters }) => {
+const useProperties = ({ currentPage = 1, limit, filters }) => {
   const axiosPublic = useAxiosPublic();
 
   const {

@@ -15,10 +15,11 @@ const PropertySidebar = ({ ownerId, reviews }) => {
   useEffect(() => {
     const fetchPropertyOwner = async () => {
       try {
-        setTimeout(async () => {
-          const res = await axiosSecure.get(`/api/users/${ownerId}`);
-          setPropertyOwner(res.data);
-        }, 2000);
+        const res = await axiosSecure.get(`/api/users/${ownerId}`);
+        setPropertyOwner(res.data);
+        // setTimeout(async () => {
+
+        // }, 1000);
       } catch (error) {
         console.log(error);
       }
