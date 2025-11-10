@@ -186,10 +186,21 @@ const PropertyDetails = () => {
 
   // Fetch the owner of each Property
   useEffect(() => {
-    axiosPublic
-      .get(`/api/users/${ownerId}`)
-      .then((res) => setPropertyOwner(res.data));
+    const fetchPropertyOwner = async () => {
+      try {
+        setTimeout(async () => {
+          const res = await axiosPublic.get(`/api/users/${ownerId}`);
+          setPropertyOwner(res.data);
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPropertyOwner();
   }, [axiosPublic, ownerId]);
+
+  // console.log(ownerId);
 
   // Destructure Details from Owner
   const {
@@ -460,18 +471,19 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 1  */}
                           <tr className="text-C_gray">
                             <td>
-                              <strong>Property Id:</strong>{" "}
+                              <strong>Property Id:</strong>
                               {/* {parseInt(_id?.slice(-8))} */}
                               <span className="uppercase">
-                                {propertyId?.slice(-5)}
+                                {" " + propertyId?.slice(-5)}
                               </span>
                             </td>
                             <td>
-                              <strong>Price:</strong> {price} €{" "}
-                              {afterPriceLabel}
+                              <strong>Price: </strong>
+                              {/* {price} €{afterPriceLabel} */}
+                              {price + " " + "€" + " " + afterPriceLabel}
                             </td>
                             <td>
-                              <strong>Property Size:</strong>{" "}
+                              <strong>Property Size: </strong>
                               {propertyDetails?.sizeInMeter} m2
                             </td>
                           </tr>
@@ -479,14 +491,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 2  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Property Lot Size:</strong>{" "}
+                              <strong>Property Lot Size: </strong>
                               {propertyDetails?.lotInInch} m2
                             </td>
                             <td>
                               <strong>Rooms: </strong> {propertyDetails?.rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong>{" "}
+                              <strong>Bedrooms: </strong>
                               {propertyDetails?.bedrooms}
                             </td>
                           </tr>
@@ -494,7 +506,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 3  */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>Bathrooms:</strong>{" "}
+                              <strong>Bathrooms: </strong>
                               {propertyDetails?.bathrooms}
                             </td>
                             <td>
@@ -511,11 +523,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               <strong>Garage Size:</strong> {garageSize} cars
                             </td>
                             <td>
-                              <strong>Available from: </strong>{" "}
+                              <strong>Available from: </strong>
                               {updatedAvailableFromFormat}
                             </td>
                             <td>
-                              <strong>Basement: </strong>{" "}
+                              <strong>Basement: </strong>
                               {propertyDetails?.basement}
                             </td>
                           </tr>
@@ -523,11 +535,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 5 */}
                           <tr className=" text-C_gray  ">
                             <td>
-                              <strong>External construction:</strong>{" "}
+                              <strong>External construction: </strong>
                               {propertyDetails?.externalConstruction}
                             </td>
                             <td>
-                              <strong>Roofing: </strong>{" "}
+                              <strong>Roofing: </strong>
                               {propertyDetails?.roofing}
                             </td>
                             <td></td>
@@ -543,18 +555,18 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 1  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Property Id:</strong>{" "}
+                              <strong>Property Id: </strong>
                               {/* {parseInt(_id?.slice(-8))} */}
                               <span className="uppercase">
                                 {propertyId?.slice(-5)}
                               </span>
                             </td>
                             <td>
-                              <strong>Price:</strong> {price} €{" "}
-                              {afterPriceLabel}
+                              <strong>Price: </strong> {price} €
+                              {" " + afterPriceLabel}
                             </td>
                             <td>
-                              <strong>Property Size:</strong>{" "}
+                              <strong>Property Size: </strong>
                               {propertyDetails?.sizeInMeter} m2
                             </td>
                           </tr>
@@ -562,14 +574,14 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 2  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Property Lot Size:</strong>{" "}
+                              <strong>Property Lot Size: </strong>
                               {propertyDetails?.lotInInch} m2
                             </td>
                             <td>
                               <strong>Rooms: </strong> {propertyDetails?.rooms}
                             </td>
                             <td>
-                              <strong>Bedrooms: </strong>{" "}
+                              <strong>Bedrooms: </strong>
                               {propertyDetails?.bedrooms}
                             </td>
                           </tr>
@@ -577,7 +589,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 3  */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>Bathrooms:</strong>{" "}
+                              <strong>Bathrooms: </strong>
                               {propertyDetails?.bathrooms}
                             </td>
                             <td>
@@ -594,11 +606,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               <strong>Garage Size:</strong> {garageSize} cars
                             </td>
                             <td>
-                              <strong>Available from: </strong>{" "}
+                              <strong>Available from: </strong>
                               {updatedAvailableFromFormat}
                             </td>
                             <td>
-                              <strong>Basement: </strong>{" "}
+                              <strong>Basement: </strong>
                               {propertyDetails?.basement}
                             </td>
                           </tr>
@@ -606,11 +618,11 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                           {/* row 5 */}
                           <tr className="flex flex-col gap-3  w-[100%] text-C_gray mb-3">
                             <td>
-                              <strong>External construction:</strong>{" "}
+                              <strong>External construction: </strong>
                               {propertyDetails?.externalConstruction}
                             </td>
                             <td>
-                              <strong>Roofing: </strong>{" "}
+                              <strong>Roofing: </strong>
                               {propertyDetails?.roofing}
                             </td>
                             <td></td>
@@ -669,7 +681,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <p className="block my-3"></p>
+                          <tr className="block my-3"></tr>
                           <tr className="text-C_gray">
                             {amenities?.mediaRoom ? (
                               <td className="w-1/3">
@@ -719,7 +731,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <td className="block my-3"></td>
+                          <tr className="block my-3"></tr>
                           <tr className=" text-C_gray">
                             {amenities?.hotBath ? (
                               <td className="w-1/3">
@@ -780,7 +792,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                             )}
                           </tr>
 
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
 
                           <tr className=" text-C_gray">
                             {amenities?.naturalGas ? (
@@ -851,7 +863,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
                           <tr className=" text-C_gray">
                             {amenities?.smokeDetector ? (
                               <td className="w-1/3">
@@ -928,7 +940,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
                           <tr className="flex flex-col flex-wrap gap-3 w-full text-C_gray">
                             {amenities?.mediaRoom ? (
                               <td className="w-full">
@@ -979,7 +991,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             {amenities?.hotBath ? (
                               <td className="w-1/3">
@@ -1039,7 +1051,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
                           <tr className="flex flex-col gap-3 w-full text-C_gray">
                             {amenities?.naturalGas ? (
                               <td className="w-full">
@@ -1109,7 +1121,7 @@ console.log(coords.lat); // ❌ undefined because it's a Promise */
                               " "
                             )}
                           </tr>
-                          <span className="block my-3"></span>
+                          <tr className="block my-3"></tr>
                           <tr className="flex flex-col gap-3 w-full  text-C_gray">
                             {amenities?.smokeDetector ? (
                               <td className="w-full">

@@ -56,10 +56,10 @@ const AllOrdersTrash = () => {
                   {isPending ? (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
-                        <p className="text-lg text-C_purple flex items-center justify-center gap-4">
+                        <td className="text-lg text-C_purple flex items-center justify-center gap-4">
                           Loading{" "}
-                          <span className="loading loading-dots loading-lg"></span>
-                        </p>
+                          <td className="loading loading-dots loading-lg"></td>
+                        </td>
                       </td>
                     </tr>
                   ) : allOrders?.length !== 0 ? (
@@ -74,9 +74,9 @@ const AllOrdersTrash = () => {
                   ) : (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
-                        <span className="text-lg font-Nunito_Sans">
+                        <td className="text-lg font-Nunito_Sans">
                           There is no property!
-                        </span>
+                        </td>
                       </td>
                     </tr>
                   )}

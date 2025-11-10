@@ -55,7 +55,7 @@ const AllProperties = () => {
                 <tbody>
                   {isPending ? (
                     <tr className="text-lg text-C_purple flex items-center mt-5 gap-4">
-                      Loading{" "}
+                      <td>Loading{" "}</td>
                       <td className="loading loading-dots loading-lg"></td>
                     </tr>
                   ) : (

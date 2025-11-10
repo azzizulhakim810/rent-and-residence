@@ -9,17 +9,22 @@ const PropertySidebar = ({ ownerId, reviews }) => {
   const [propertyOwner, setPropertyOwner] = useState([]);
   const axiosSecure = UseAxiosSecure();
 
-  console.log(ownerId, reviews);
+  // console.log(ownerId, reviews);
 
   // Fetch the owner of each Property
   useEffect(() => {
-    axiosSecure
-      .get(`/api/users/${ownerId}`)
-      .then((res) => setPropertyOwner(res.data));
+    const fetchPropertyOwner = async () => {
+      try {
+        setTimeout(async () => {
+          const res = await axiosSecure.get(`/api/users/${ownerId}`);
+          setPropertyOwner(res.data);
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    /* fetch(`http://localhost:5123/api/users/${ownerId}`)
-      .then((res) => res.json())
-      .then((data) => setPropertyOwner(data)); */
+    fetchPropertyOwner();
   }, [axiosSecure, ownerId]);
 
   // console.log(reviews);

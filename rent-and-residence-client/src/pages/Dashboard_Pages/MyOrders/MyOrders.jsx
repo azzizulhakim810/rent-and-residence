@@ -58,10 +58,10 @@ const MyOrders = () => {
                   {isPending ? (
                     <tr>
                       <td colSpan={6} className="text-center py-4">
-                        <p className="text-lg text-C_purple flex items-center justify-start gap-4">
-                          Loading{" "}
+                        <td className="text-lg text-C_purple flex items-center justify-start gap-4">
+                          <span>Loading{" "}</span>
                           <span className="loading loading-dots loading-lg"></span>
-                        </p>
+                        </td>
                       </td>
                     </tr>
                   ) : myOrders?.length !== 0 ? (
