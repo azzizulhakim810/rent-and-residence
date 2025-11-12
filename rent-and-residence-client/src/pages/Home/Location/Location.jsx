@@ -6,8 +6,8 @@ import useCategoriesAndCities from "../../../hooks/useCategoriesAndCities/useCat
 
 const Location = () => {
   const [categoriesAndCities, isPending] = useCategoriesAndCities();
-  const { allCities } = categoriesAndCities || [];
-  // console.log(allCities);
+  const { allCities } = categoriesAndCities || {};
+  // console.log(categoriesAndCities);
 
   const { scrollY } = useScroll();
   return (

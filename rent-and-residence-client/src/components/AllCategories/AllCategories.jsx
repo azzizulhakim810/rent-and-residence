@@ -2,7 +2,7 @@ import useCategoriesAndCities from "../../hooks/useCategoriesAndCities/useCatego
 
 const AllCategories = () => {
   const [categoriesAndCities] = useCategoriesAndCities();
-  const { allCategories } = categoriesAndCities || [];
+  const { allCategories } = categoriesAndCities || {};
 
   return (
     <ul className="list bg-base-100 rounded-box">
