@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useState } from "react";
 import { FaAnglesDown } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
+import { WiStars } from "react-icons/wi";
 import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
@@ -67,20 +68,26 @@ const Banner = () => {
     <div className="min-h-[80vh]">
       <div className=" bg-[#EFF4FF] lg:grid lg:grid-cols-12 grid-col-1 justify-between items-center">
         <div className="col-span-7 h-full lg:w-8/12 w-10/12 mx-auto flex flex-col justify-center items-start lg:text-left lg:pb-0 pb-30 lg:pt-0 pt-30">
-          <motion.div
+          <div
             // style={{ y }}
             className="lg:text-left text-center"
           >
+            <div className="inline-block">
+              <button className="flex justify-center items-center text-[14px] tracking-wide font-[500] font-Nunito border-[1px] rounded-full px-2 py-1 mb-2 text-C_purple border-C_purple">
+                AI POWERED <WiStars className="text-[28px] -my-2" />
+              </button>
+            </div>
+
             <h1 className="text-C_gray lg:text-6xl text-5xl lg:leading-16 leading-13 font-[700] lg:-me-15 font-Nunito">
               Find your next <br />
               Perfect home in UK
             </h1>
             <p className=" py-6 font-Nunito_Sans font-normal text-xl text-[#9b9b9b]">
-              Through our proprietary platform, WpResidence is changing how
+              Through our proprietary platform, Rent & Residence is changing how
               agents and clients navigate the process of finding or selling a
               home.
             </p>
-          </motion.div>
+          </div>
 
           {/* Search Field  */}
           <motion.form

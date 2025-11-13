@@ -36,9 +36,7 @@ const PropertyCard = ({ property, favourites, refetch }) => {
     // category,
     propertyStatus,
     propertyDetails,
-  } = property;
-
-  // console.log(property);
+  } = property || {};
 
   // Fetch the owner of each Property
   useEffect(() => {
@@ -49,6 +47,8 @@ const PropertyCard = ({ property, favourites, refetch }) => {
 
   // Destructure Details from Owner
   const { name, profileImage } = propertyOwner || {};
+
+  // console.log(property);
 
   // Add To Favourites
   const handleAddToFavourites = (propertyId) => {
@@ -176,9 +176,9 @@ const PropertyCard = ({ property, favourites, refetch }) => {
       <div className="px-5 py-4 flex justify-between">
         <div className="avatar flex items-center gap-4">
           <div className="w-8 rounded-full">
-            <img src={profileImage} />
+            <img src={propertyOwner?.profileImage} />
           </div>
-          <p className="font-bold">{name}</p>
+          <p className="font-bold">{propertyOwner?.name}</p>
         </div>
 
         <div className="flex gap-1">

@@ -24,10 +24,9 @@ const Testimonials = () => {
 
         {/* First Row  */}
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-5 pb-5">
-          {reviews &&
-            reviews?.map((review) => (
-              <TestimonialCard key={review._id} review={review} />
-            ))}
+          {reviews?.map((review) => (
+            <TestimonialCard key={review._id} review={review} />
+          ))}
         </div>
 
         {/* Second Row  */}

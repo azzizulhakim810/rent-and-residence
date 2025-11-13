@@ -24,7 +24,7 @@ const Location = () => {
           {isPending ? (
             <span>Loading.......</span>
           ) : (
-            allCities?.map((city, i) => {
+            categoriesAndCities?.allCities?.map((city, i) => {
               // const leftToRight = i < 3;
 
               return (

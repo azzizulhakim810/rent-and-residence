@@ -360,7 +360,6 @@ async function run() {
     // Get an individual user
     app.get("/api/users/:id", async (req, res) => {
       const id = req.params.id;
-      // console.log(id);
 
       // Validate the id
       if (!ObjectId.isValid(id)) {
@@ -563,8 +562,8 @@ async function run() {
 
     // Get all the reviews
     app.get("/api/reviews", async (req, res) => {
-      // const result = await reviewCollection.find().limit(6).toArray();
-      const result = await reviewCollection
+      const result1 = await reviewCollection.find().limit(6).toArray();
+      const result2 = await reviewCollection
         .aggregate([
           {
             $limit: 6,
@@ -574,7 +573,7 @@ async function run() {
           },
         ])
         .toArray();
-      res.send(result);
+      res.send(result1);
     });
 
     // Fetch specific property reviews
