@@ -42,13 +42,13 @@ const Footer = () => {
   return (
     <>
       <div className=" bg-footer_color text-C_gray py-5 border-t-1 border-t-C_DarkGray/10">
-        <footer className=" relative footer sm:footer-horizontal py-10 w-11/12 mx-auto">
-          <nav>
+        <footer className=" relative footer sm:footer-horizontal py-10 w-11/12 grid grid-cols-3 mx-auto">
+          <nav className="col-span-1">
             <h6 className=" font-semibold text-lg text-C_gray">About Us</h6>
             <p className="w-5/6 text-C_gray text-[16px] leading-6 pt-2">
-              WpResidence is committed to delivering a high level of expertise,
-              customer service, and attention to detail to the marketing and
-              sales of luxury real estate, and rental properties.
+              Rent & Residence is committed to delivering a high level of
+              expertise, customer service, and attention to detail to the
+              marketing and sales of luxury real estate, and rental properties.
             </p>
             <div className="flex justify-between align-middle items-center gap-4 pt-5">
               <button className=" text-C_gray bg-white text-[16px] p-3 rounded hover:bg-C_purple hover:text-white cursor-pointer transition-colors duration-500">
@@ -67,13 +67,13 @@ const Footer = () => {
           </nav>
 
           {/* Contact Us  */}
-          <nav className="flex flex-col ">
+          <nav className="col-span-1 flex flex-col ">
             <h6 className=" font-semibold text-lg text-C_gray">Contact Us</h6>
             <span className="flex justify-between items-center gap-3">
               <FaBuilding className="text-lg" />
               <p className=" text-C_gray text-[16px] leading-6 pt-2 me-8">
-                Spain Pro Real Estate Group, Viaje Solo, Park Center Office,
-                Madrid, 78741
+                Spain Pro Real Estate Group, Viaje Solo, <br />
+                Park Center Office, Madrid, 78741
               </p>
             </span>
             <span className="flex justify-between items-center gap-3  pt-1">
@@ -101,7 +101,7 @@ const Footer = () => {
           </nav>
 
           {/* Latest Properties  */}
-          <nav>
+          <nav className="col-span-1">
             <h6 className=" font-semibold text-lg text-C_gray">
               Latest Properties
             </h6>
@@ -113,9 +113,9 @@ const Footer = () => {
       {/* Absolute Footer  */}
 
       <footer className="footer bg-[#F7F4FB] border-base-300 border-t py-6 ">
-        <aside className="text-center w-10/12 mx-auto flex justify-between items-center">
+        <aside className=" w-11/12 mx-auto flex justify-between items-center">
           <p className=" text-C_gray text-[16px] leading-6">
-            Copyright WP Estate. All Rights Reserved.
+            Copyright @2025 Rent & Residence. All Rights Reserved.
           </p>
 
           {isVisible && (
