@@ -9,7 +9,7 @@
 <h2>🌐 Live Preview</h2>
 <ul>
   <li>🔗 <a href="https://rent-residence-3a842.web.app">Preview Website</a></li>
-  <li>🔗 <a href="https://documenter.getpostman.com/view/32501990/2sB3WvNJGq">API Documentation</a></li>
+  <li>📑 <a href="https://documenter.getpostman.com/view/32501990/2sB3WvNJGq">API Documentation</a></li>
   <li>💻 <a href="https://github.com/azzizulhakim810/rent-and-residence/tree/main/rent-and-residence-client">Frontend Repo</a></li>
   <li>🖥️ <a href="https://github.com/azzizulhakim810/rent-and-residence/tree/main/rent-and-residence-server">Backend Repo</a></li>
 </ul>
