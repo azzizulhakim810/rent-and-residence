@@ -32,6 +32,9 @@
 <h2>👥 User Roles & Functionalities</h2>
 
 <h3>🔰 Admin</h3>
+
+<p><code><strong>User:</strong> admin@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>admin12345</code></p>
+
 <ul>
   <li><strong>Dashboard:</strong> View total users, total revenue, listed & approved properties</li>
   <li>Charts:  Bar (Sales per Category) |  Pie (Revenue per Category)</li>
@@ -44,6 +47,9 @@
 </ul>
 
 <h3>🔰 Agent</h3>
+
+<p><code><strong>User:</strong> agent@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>agent12345</code></p>
+
 <ul>
   <li><strong>Dashboard:</strong> See own properties, revenue, and category-wise charts</li>
   <li><strong>Profile:</strong> Update profile details</li>
@@ -54,6 +60,9 @@
 </ul>
 
 <h3>🔰 User</h3>
+
+<p><code><strong>User:</strong> user@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>user12345</code></p>
+
 <ul>
   <li><strong>Dashboard:</strong> See all paid & pending properties and spending overview</li>
   <li><strong>Profile:</strong> Update profile info and links</li>
@@ -107,5 +116,5 @@
 <p>
   👨‍💻 <strong>Developer:</strong> A.H. Jim<br>
   📧 <strong>Email:</strong> <a href="mailto:azzizul.hakim202@gmail.com">azzizul.hakim710@gmail.com</a><br>
-  🌐 <strong>Portfolio:</strong> <a href="https://azzizul-hakim.netlify.app">YourPortfolioLinkHere</a>
+  🌐 <strong>Portfolio:</strong> <a href="https://azzizul-hakim.netlify.app">Azzizul Hakim</a>
 </p>
