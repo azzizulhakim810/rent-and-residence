@@ -33,7 +33,7 @@
 
 <h3>🔰 Admin</h3>
 
-<p><code><strong>User:</strong> admin@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>admin12345</code></p>
+<p><code><strong>User: </strong>admin@rent.com &nbsp; | &nbsp; <strong>Pass: </strong>admin12345</code></p>
 
 <ul>
   <li><strong>Dashboard:</strong> View total users, total revenue, listed & approved properties</li>
@@ -48,7 +48,7 @@
 
 <h3>🔰 Agent</h3>
 
-<p><code><strong>User:</strong> agent@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>agent12345</code></p>
+<p><code><strong>User: </strong>agent@rent.com &nbsp; | &nbsp; <strong>Pass: </strong>agent12345</code></p>
 
 <ul>
   <li><strong>Dashboard:</strong> See own properties, revenue, and category-wise charts</li>
@@ -61,7 +61,7 @@
 
 <h3>🔰 User</h3>
 
-<p><code><strong>User:</strong> user@rent.com &nbsp; | &nbsp; <strong>Pass:</strong>user12345</code></p>
+<p><code><strong>User: </strong>user@rent.com &nbsp; | &nbsp; <strong>Pass: </strong>user12345</code></p>
 
 <ul>
   <li><strong>Dashboard:</strong> See all paid & pending properties and spending overview</li>
