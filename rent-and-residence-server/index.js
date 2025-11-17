@@ -573,7 +573,7 @@ async function run() {
           },
         ])
         .toArray();
-      res.send(result1);
+      res.send(result2);
     });
 
     // Fetch specific property reviews
