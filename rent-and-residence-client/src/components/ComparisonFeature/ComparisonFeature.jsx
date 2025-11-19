@@ -11,7 +11,7 @@ const ComparisonFeature = () => {
       {isShow ? (
         <div
           id="comparisonPopUp"
-          className="fixed bottom-0 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
+          className="fixed lg:bottom-0 bottom-4 w-auto shadow-[0px_0px_20px_rgba(0,0,0,0.25)] px-8 py-2 rounded-xl bg-white z-100"
         >
           <div className="flex align-middle items-center">
             <h1 className=" w-full pt-8 pb-2 text-[18px] font-[600] font-Nunito text-title_color lg:text-left text-center">
