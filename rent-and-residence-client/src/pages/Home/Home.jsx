@@ -44,7 +44,7 @@ const Home = () => {
 
       <div className="w-10/12 mx-auto ">
         <Location />
-        <Testimonials />
+        {/* <Testimonials /> */}
       </div>
 
       {/* Comparison Popup  */}
