@@ -48,7 +48,7 @@ const Home = () => {
       </div>
 
       {/* Comparison Popup  */}
-      {/* <ComparisonFeature /> */}
+      <ComparisonFeature />
     </div>
   );
 };
